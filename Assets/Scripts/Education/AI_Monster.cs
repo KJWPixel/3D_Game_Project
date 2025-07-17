@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
+using UnityEditor;
 using UnityEngine;
 
 public class AI_Monster : MonoBehaviour
 {
+    public Transform[] TRPATH;
+
+    public int Index;
+
     protected AI AI = AI.AI_CREATE;
 
     public Monster Monster;
@@ -14,7 +18,7 @@ public class AI_Monster : MonoBehaviour
         Monster = _Character;
     }
 
-    public void Stat()
+    public void State()
     {
         switch (AI)
         {
@@ -39,7 +43,14 @@ public class AI_Monster : MonoBehaviour
     }
     protected virtual void Search()
     {
+        float dis = Vector3.Distance(Monster.transform.position, TRPATH[Index].position);//길찾기
+
+        if (dis < 1f)
+            Index++;
+
         AI = AI.AI_MOVE;
+        //적찾기
+        //방황하기
     }
     protected virtual void Move()
     {

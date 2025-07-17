@@ -1,22 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
-//Rotate 회전
-//X축 위 아래, Y축 좌 우, Z 좌 우 
-public class PlayerController : MonoBehaviour
+public class PlayerMove : MonoBehaviour
 {
-    [Header("플레이어 카메라 위치")]
-    [SerializeField] Transform Head;
-
     [Header("플레이어 이동")]
     [SerializeField] float MoveSpeed = 0f;
     [SerializeField] float JumpForce = 0f;
 
     [Header("플레이어 마우스 회전 감도")]
-    [SerializeField] float lookSensitivity = 2f;
-    private float rotX = 0f;
+    [SerializeField] float MouseSensitivity = 2f;
 
+    [Header("마우스 위치 값")]
+    [SerializeField] float MouseX = 0f;
+    [SerializeField] float MouseY = 0f;
+    float rotX = 0f;
     Rigidbody rigid;
 
     private void Awake()
@@ -25,29 +24,23 @@ public class PlayerController : MonoBehaviour
     }
     void Start()
     {
+        
     }
 
-
+    // Update is called once per frame
     void Update()
     {
-        Look();
+        Rotate();
         Move();
         Jump();
     }
 
-    private void Look()
+    private void Rotate()
     {
-        //Mouse X,Y: 매 프레임마다 마우스의 움직임 정도
-        float mouseX = Input.GetAxis("Mouse X") * lookSensitivity;
-        float mouseY = Input.GetAxis("Mouse Y") * lookSensitivity;
+        MouseX += Input.GetAxis("Mouse X");//* MouseSensitivity;
+        MouseY += Input.GetAxis("Mouse Y");// * MouseSensitivity;
 
-        // 플레이어 전체를 좌우 회전 (Y축)
-        transform.Rotate(Vector3.up * mouseX);
-
-        // Head만 상하 회전 (X축)
-        rotX -= mouseY;
-        rotX = Mathf.Clamp(rotX, -90f, 90f);
-        Head.localRotation = Quaternion.Euler(rotX, 0f, 0f);
+        transform.localEulerAngles = new Vector3(-MouseY, MouseX, 0);
     }
 
     private void Move()
@@ -61,13 +54,12 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             float VerticalVelocity = 0f;
             VerticalVelocity += JumpForce;
-            rigid.velocity = new Vector3 (0f, VerticalVelocity, 0f);
+            rigid.velocity = new Vector3(0f, VerticalVelocity, 0f);
         }
     }
-
 
 }
