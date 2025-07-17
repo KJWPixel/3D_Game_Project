@@ -487,8 +487,8 @@ RectTransform:
   m_Children:
   - {fileID: 1711577129}
   - {fileID: 723829104}
-  - {fileID: 929397919}
   - {fileID: 2134509253}
+  - {fileID: 929397919}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -510,7 +510,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FadeImage: {fileID: 929397920}
   FadeTime: 3
-  FadeCheck: 0
+  FadeCheck: 1
 --- !u!114 &561897068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -949,7 +949,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &929397919
 RectTransform:
   m_ObjectHideFlags: 0
@@ -983,7 +983,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1528,6 +1528,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4af6c7a48295de428e8dd3e589d3a6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Scene: 0
 --- !u!4 &1635432818
 Transform:
   m_ObjectHideFlags: 0

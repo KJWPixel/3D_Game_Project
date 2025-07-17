@@ -29,7 +29,8 @@ public class UI_Title : MonoBehaviour
 
     public void TitleStartButton()
     {
-       //SceneManager.LoadScene(1);//추후 SceneManager클래스로 관리 현재는 임시적
+        //SceneManager.LoadScene(1);//추후 SceneManager클래스로 관리 현재는 임시적
+        Shared.SceneManager.ChangeScene(SCENE.LOBBY);
     }
 
     public void TitleLoadButton()

@@ -1,11 +1,15 @@
 public enum SCENE
 {
-    
+    TITLE,
+    LOBBY,
+    MAIN,
+    LOADING,
+    ENG,
 }
 
 public enum MENU
 {
-    Option,
+    OPTION,
 }
 
 public enum SKILL
