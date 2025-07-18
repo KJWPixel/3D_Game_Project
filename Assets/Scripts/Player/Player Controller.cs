@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
     [Header("플레이어 이동속도 값")]
     [SerializeField] float MoveSpeed = 0f;
     [SerializeField] float JumpForce = 0f;
+    [SerializeField] int  BaseJumpCount = 0;
+    [SerializeField] int JumpCount = 0;
 
     [Header("플레이어 속도")]
     [SerializeField] Vector3 VelocityValue = Vector3.zero;
@@ -24,16 +26,17 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-
+        //인스펙터에서 CursorLockMode 제어
+        Cursor.lockState = CursorLockMode.Locked;
     }
     void Start()
     {
+        
     }
     
 
     void Update()
     {
-        //Look();
         Move();
         Jump();
     }
@@ -58,14 +61,17 @@ public class PlayerController : MonoBehaviour
         if(CharController.isGrounded)//캐릭터 컨트롤러가 지면에 닿았다면
         {
             //방향축 입력
-            float x = Input.GetAxis("Horizontal");
-            float z = Input.GetAxis("Vertical");
+            float x = Input.GetAxisRaw("Horizontal");
+            float z = Input.GetAxisRaw("Vertical");
 
             //Vector3 move = transform.right * x + transform.forward * z;
             //입력값을 기반으로 xz평면에서의 속도 결정
             Vector3 velocity = new Vector3(x, 0f, z);
             velocity = CharController.transform.TransformDirection(velocity);
             VelocityValue = velocity.normalized * MoveSpeed;
+
+            //점프카운터 다시 리셋
+            JumpCount = BaseJumpCount;
         }
         else//캐릭터 컨트롤러가 지면에 닿지 않았다면(공중이라면)
         {
@@ -78,10 +84,10 @@ public class PlayerController : MonoBehaviour
 
 
         //카메라가 바라보는 방향으로 선회
-        Vector3 tDir = Camera.main.transform.forward;
-        tDir.y = 0f;
+        Vector3 Dir = Camera.main.transform.forward;
+        Dir.y = 0f;
         //카메라 전방 방향의 임의의 지점을 구한다.
-        Vector3 tLookAtPosition = this.transform.position + tDir;
+        Vector3 tLookAtPosition = this.transform.position + Dir;
         //카메라 전방 방향의 임의의 지점을 바라보게 한다.
         this.transform.LookAt(tLookAtPosition);
 
@@ -89,11 +95,10 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.Space) && JumpCount > 0)
         {
+            JumpCount--;
             VelocityValue.y = JumpForce;
         }
     }
-
-
 }

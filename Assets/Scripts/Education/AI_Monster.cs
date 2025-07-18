@@ -7,12 +7,14 @@ public class AI_Monster : MonoBehaviour
 {
     public Transform[] TRPATH;
 
-    public int Index;
-
     protected AI AI = AI.AI_CREATE;
 
     public Monster Monster;
+    public Character Character;
 
+    bool CharacterMove = false;
+
+    int Index = 0;
     public void Init(Monster _Character)
     {
         Monster = _Character;
@@ -43,10 +45,31 @@ public class AI_Monster : MonoBehaviour
     }
     protected virtual void Search()
     {
-        float dis = Vector3.Distance(Monster.transform.position, TRPATH[Index].position);//길찾기
+        float dis = Vector3.Distance(Monster.transform.position, TRPATH[Index].position);
+        //길찾기
 
-        if (dis < 1f)
-            Index++;
+        if (dis > 3f)
+        {
+            CharacterMove = true;
+        }
+        else
+        {
+            CharacterMove = false;
+        }
+
+        if (!CharacterMove)
+        {
+            dis = Vector3.Distance(Monster.transform.position, TRPATH[Index].position);
+            //길찾기
+
+            if (dis < 0.1f)
+            {
+                if (TRPATH.Length - 1 > Index)
+                    Index++;
+                else
+                    Index = 0;
+            }
+        }
 
         AI = AI.AI_MOVE;
         //적찾기
@@ -54,6 +77,15 @@ public class AI_Monster : MonoBehaviour
     }
     protected virtual void Move()
     {
+        if (!CharacterMove)
+        {
+            Monster.Move(TRPATH[Index].position);//목표지점 이동
+        }
+        else
+        {
+            Monster.Move(Character.transform.position);
+        }
+
         AI = AI.AI_SEARCH;
     }
     protected virtual void Reset()
