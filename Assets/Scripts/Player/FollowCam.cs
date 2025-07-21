@@ -13,7 +13,11 @@ public class FollowCam : MonoBehaviour
     [SerializeField] Vector3 Offset = Vector3.zero;
 
     [Header("카메라 감도")]
-    [SerializeField] float LookSensitivity = 0f;
+    [SerializeField] float LookSensitivity = 1f;//기본 1
+
+    [SerializeField] Transform Head;//Player Head Transform
+    [SerializeField] Transform Body;//Player Body Tarnsform
+    [SerializeField] Transform ShotTrs;
 
     float MouseXValue = 0f;
     float MouseYValue = 0f;
@@ -38,12 +42,20 @@ public class FollowCam : MonoBehaviour
         float MouseY = Input.GetAxisRaw("Mouse Y");
 
         MouseXValue = MouseXValue + MouseX;
-        MouseYValue = MouseYValue + MouseY * (-1.0f);
+        MouseYValue = MouseYValue + MouseY * (-1.0f);//반전
         //화면에서 회전을 반전시키기 위해 -1.0f을 곱함
 
         //화면의 각도 제한 
         MouseYValue = Mathf.Clamp(MouseYValue, -80f, 80f);
-        this.transform.rotation = Quaternion.Euler(MouseYValue, MouseXValue, 0f);
+
+        //MouseXValue의 값을 Head.rotaion x값에 대입, 정면을 바라보는 기준으로 위,아래로  회전
+        Head.localRotation = Quaternion.Euler(MouseYValue, 0f, 0f);
+        //MouseXValue의 값을 Body.rotaion y값에 대입, 정면을 바라보는 기준으로 왼쪽,오른쪽으로 회전
+        Body.localRotation = Quaternion.Euler(0f, MouseXValue, 0f);
+        //
+        ShotTrs.localRotation = Quaternion.Euler(MouseYValue, 0f, 0f);
+        
+        this.transform.rotation = Quaternion.Euler(MouseYValue * LookSensitivity, MouseXValue * LookSensitivity, 0f);
     }
 
 

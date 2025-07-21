@@ -21,7 +21,7 @@ public class BulletTest : BaseProjectile
     {
         rigid.useGravity = true;
         rigid.velocity = transform.forward * BulletSpeed;
-        //Destroy(gameObject, 5f);
+        Destroy(gameObject, 5f);
     }
 
     private void TekeDamage()

@@ -88,7 +88,9 @@ public class PlayerController : MonoBehaviour
         Dir.y = 0f;
         //카메라 전방 방향의 임의의 지점을 구한다.
         Vector3 tLookAtPosition = this.transform.position + Dir;
-        //카메라 전방 방향의 임의의 지점을 바라보게 한다.
+
+        //카메라의 방향대로 움직이게 한다.
+        //주석처리할 경우 WASD에 맞쳐서 Trasnform.position만 움직임, 4방향으로 밖에 움직이지 않음
         this.transform.LookAt(tLookAtPosition);
 
     }

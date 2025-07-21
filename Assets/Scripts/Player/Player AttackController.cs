@@ -9,7 +9,7 @@ public class PlayerAttackController : MonoBehaviour
     [SerializeField] Transform FirePosition;
 
     [Header("공격 쿨타임")]
-    [SerializeField] float AttackCoolTime = 0f;
+    [SerializeField] float AttackDelayTime= 1f;
     [SerializeField] float AttackCollTimer = 0f;
     
     void Start()
@@ -20,17 +20,25 @@ public class PlayerAttackController : MonoBehaviour
     
     void Update()
     {
-        if (Input.GetKey(KeyCode.Mouse0))
-        {
-            Debug.Log("Attack함수: 총알 발사");
-            Attack();
-        }
-        
+        Attack();
+
+
     }
 
     private void Attack()
     {
-        GameObject Bullet = Instantiate(BulletObject, FirePosition.position, FirePosition.rotation);
-        
+        AttackCollTimer -= Time.deltaTime;
+
+        if (Input.GetKey(KeyCode.Mouse0))
+        {
+            if (AttackCollTimer <= 0f)
+            {
+                Debug.Log("Attack함수: 총알 발사");
+
+                GameObject Bullet = Instantiate(BulletObject, FirePosition.position, FirePosition.rotation);
+                AttackCollTimer = AttackDelayTime;
+            }
+        }
+           
     }
 }
