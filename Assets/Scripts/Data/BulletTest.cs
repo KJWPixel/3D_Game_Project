@@ -8,6 +8,14 @@ public class BulletTest : BaseProjectile
     [SerializeField] float BulletSpeed;
 
     Rigidbody rigid;
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Ground"))
+        {
+            Destroy(gameObject);
+        }
+    }
     private void Awake()
     {
         rigid = GetComponent<Rigidbody>();

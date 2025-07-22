@@ -9,9 +9,6 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] float MoveSpeed = 0f;
     [SerializeField] float JumpForce = 0f;
 
-    [Header("플레이어 마우스 회전 감도")]
-    [SerializeField] float MouseSensitivity = 2f;
-
     [Header("마우스 위치 값")]
     [SerializeField] float MouseX = 0f;
     [SerializeField] float MouseY = 0f;
