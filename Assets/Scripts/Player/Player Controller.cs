@@ -9,11 +9,14 @@ public class PlayerController : MonoBehaviour
     //ChracterController 컴포넌트 사용
     [SerializeField] CharacterController CharController = null;
 
-    [Header("플레이어 이동속도 값")]
+    [Header("플레이어 이동")]
     [SerializeField] float MoveSpeed = 0f;
+    [SerializeField] float DashSpeed = 0f;
     [SerializeField] float JumpForce = 0f;
-    [SerializeField] int  BaseJumpCount = 0;
+    [SerializeField] int BaseJumpCount = 0;
     [SerializeField] int JumpCount = 0;
+
+    [SerializeField] bool Dashing = false;
 
     [Header("플레이어 속도")]
     [SerializeField] Vector3 VelocityValue = Vector3.zero;
@@ -31,9 +34,9 @@ public class PlayerController : MonoBehaviour
     }
     void Start()
     {
-        
+
     }
-    
+
 
     void Update()
     {
@@ -58,7 +61,7 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
-        if(CharController.isGrounded)//캐릭터 컨트롤러가 지면에 닿았다면
+        if (CharController.isGrounded)//캐릭터 컨트롤러가 지면에 닿았다면
         {
             //방향축 입력
             float x = Input.GetAxisRaw("Horizontal");
@@ -95,12 +98,22 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    private void Dash()
+    {
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            Dashing = true;
+        }
+
+    }
+
     private void Jump()
     {
-        if(Input.GetKeyDown(KeyCode.Space) && JumpCount > 0)
+        if (Input.GetKeyDown(KeyCode.Space) && JumpCount > 0)
         {
             JumpCount--;
             VelocityValue.y = JumpForce;
+
         }
     }
 }

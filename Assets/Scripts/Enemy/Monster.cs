@@ -75,6 +75,11 @@ public class Monster : MonoBehaviour
         Debug.Log("OnAnimationStart : " + _Ani);
     }
 
+    public void OnAnimationIng(string _Ani)
+    {
+        Debug.Log("OnAnimationIng : " + _Ani);
+    }
+
     public void OnAnimationEnd(string _Ani)
     {
         Debug.Log("OnAnimationEnd : " + _Ani);

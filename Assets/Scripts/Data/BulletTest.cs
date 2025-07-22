@@ -13,9 +13,10 @@ public class BulletTest : BaseProjectile
     {
         if(other.CompareTag("Ground"))
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
+
     private void Awake()
     {
         rigid = GetComponent<Rigidbody>();
