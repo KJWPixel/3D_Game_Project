@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] int JumpCount = 0;
 
     [SerializeField] bool Dashing = false;
+    [SerializeField] bool IsGround = false;
 
     [Header("플레이어 속도")]
     [SerializeField] Vector3 VelocityValue = Vector3.zero;
@@ -27,10 +28,13 @@ public class PlayerController : MonoBehaviour
     [Header("플레이어 마우스 커서 제어")]
     [SerializeField] CursorLockMode CoursorLock = CursorLockMode.None;
 
+    Animator Anim;
+
     private void Awake()
     {
         //인스펙터에서 CursorLockMode 제어
         Cursor.lockState = CursorLockMode.Locked;
+        Anim = GetComponent<Animator>();
     }
     void Start()
     {
@@ -61,26 +65,34 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
-        if (CharController.isGrounded)//캐릭터 컨트롤러가 지면에 닿았다면
-        {
-            //방향축 입력
-            float x = Input.GetAxisRaw("Horizontal");
-            float z = Input.GetAxisRaw("Vertical");
+        //if (CharController.isGrounded)//캐릭터 컨트롤러가 지면에 닿았다면
 
-            //Vector3 move = transform.right * x + transform.forward * z;
-            //입력값을 기반으로 xz평면에서의 속도 결정
-            Vector3 velocity = new Vector3(x, 0f, z);
-            velocity = CharController.transform.TransformDirection(velocity);
-            VelocityValue = velocity.normalized * MoveSpeed;
+        IsGround = true;
+        //방향축 입력
+        float x = Input.GetAxisRaw("Horizontal");
+        float z = Input.GetAxisRaw("Vertical");
 
-            //점프카운터 다시 리셋
-            JumpCount = BaseJumpCount;
-        }
-        else//캐릭터 컨트롤러가 지면에 닿지 않았다면(공중이라면)
-        {
-            //현재 속도 = 이전속도 + 가속도 * 간격
-            VelocityValue.y = VelocityValue.y + Gravity * Time.deltaTime;
-        }
+        Anim.SetFloat("Horizontal", x);
+        Anim.SetFloat("Vertical", z);
+
+
+
+
+        //Vector3 move = transform.right * x + transform.forward * z;
+        //입력값을 기반으로 xz평면에서의 속도 결정
+        Vector3 velocity = new Vector3(x, 0f, z);
+        velocity = CharController.transform.TransformDirection(velocity);
+        VelocityValue = velocity.normalized * MoveSpeed;
+
+        //점프카운터 다시 리셋
+        //JumpCount = BaseJumpCount;
+
+        //else//캐릭터 컨트롤러가 지면에 닿지 않았다면(공중이라면)
+        //{
+        //    //현재 속도 = 이전속도 + 가속도 * 간격
+        //    VelocityValue.y = VelocityValue.y + Gravity * Time.deltaTime;
+        //    IsGround = false;
+        //}
 
         //CharacterController에서 제공하는 Move함수를 사용
         CharController.Move(VelocityValue * Time.deltaTime);
@@ -95,6 +107,7 @@ public class PlayerController : MonoBehaviour
         //카메라의 방향대로 움직이게 한다.
         //주석처리할 경우 WASD에 맞쳐서 Trasnform.position만 움직임, 4방향으로 밖에 움직이지 않음
         this.transform.LookAt(tLookAtPosition);
+       
 
     }
 
