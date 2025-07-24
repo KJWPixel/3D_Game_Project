@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float JumpForce = 0f;
     [SerializeField] int BaseJumpCount = 0;
     [SerializeField] int JumpCount = 0;
+    private float VerticalVelocity = 0f;
 
     [Header("플레이어 동작 체크")]
     [SerializeField] bool Dashing = false;
@@ -92,6 +93,17 @@ public class PlayerController : MonoBehaviour
         velocity = CharController.transform.TransformDirection(velocity);
         VelocityValue = velocity.normalized * MoveSpeed;
 
+        //중력 적용 및 y축에 속도 대입
+        VerticalVelocity += Gravity * Time.deltaTime;
+        VelocityValue.y = VerticalVelocity;
+
+        //Ground에 닿았을 떄 점프, VerticlaVelocity 초기화
+        if (IsGround)
+        {
+            VerticalVelocity = 0f;
+            JumpCount = BaseJumpCount;          
+        }
+
         CharController.Move(VelocityValue * Time.deltaTime);
         
         //카메라가 바라보는 방향으로 선회
@@ -104,12 +116,14 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && JumpCount > 0)
+        if (Input.GetKeyDown(KeyCode.Space) && JumpCount > 0 )
         {
             JumpCount--;
-            VelocityValue.y = JumpForce;
+            VerticalVelocity = JumpForce;
 
         }
+
+        
     }
 
     private void GroundCheck()
@@ -118,21 +132,27 @@ public class PlayerController : MonoBehaviour
         RaycastHit RayHit = new RaycastHit();
         Vector3 RayOrigin = transform.position;
 
-        //구조적문제
-        if(Physics.Raycast(RayOrigin, Vector3.down, out RayHit, GroundCheckDistance))
+        bool Hit = Physics.Raycast(RayOrigin, Vector3.down, out RayHit, GroundCheckDistance);
+
+        if(Hit)
         {
-            if (RayHit.collider.gameObject.layer == LayerMask.NameToLayer("Ground")) 
+            if(RayHit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
             {
                 IsGround = true;
-                Debug.Log("IsGround!!! Ground 위에 있음");
+                //Debug.Log("Ray Layer Ground Hit");
             }
             else
             {
-                IsGround = false;
-                Debug.Log("IsGroundNot!!! Ground에 있지 않음");
+                IsGround= false;
+                //Debug.Log("Ray Not Layer Ground");
             }
         }
-        
+        else
+        {
+            IsGround = false;
+            //Debug.Log("Ray 아무것도 맞지 않음");
+        }
+
         if (GizmoOnOffCheck == true)
         {
             //Gizmo 거리확인용
