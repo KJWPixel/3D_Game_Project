@@ -58,7 +58,7 @@ public class FollowCam : MonoBehaviour
         this.transform.rotation = Quaternion.Euler(MouseYValue * LookSensitivity, MouseXValue * LookSensitivity, 0f);
     }
 
-
+    #region
     private void Look()
     {
         //Mouse X,Y: 매 프레임마다 마우스의 움직임 정도
@@ -73,6 +73,7 @@ public class FollowCam : MonoBehaviour
         rotX = Mathf.Clamp(rotX, -90f, 90f);
         transform.localRotation = Quaternion.Euler(rotX, 0f, 0f);
     }
+    #endregion
     private void LateUpdate()
     {
         //transform.position = LookTransform.position + Offset;

@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2238596040098140570
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 682262152104290685}
+  m_Layer: 0
+  m_Name: Head
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &682262152104290685
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2238596040098140570}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3847750202455308771}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7660709803018730439
 GameObject:
   m_ObjectHideFlags: 0
@@ -49,7 +80,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 566ce73f00c61ca4eb3dc5a453aff012, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 2.22
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 566ce73f00c61ca4eb3dc5a453aff012, type: 3}
       propertyPath: m_LocalRotation.w
@@ -90,23 +121,30 @@ PrefabInstance:
     - target: {fileID: 5866666021909216657, guid: 566ce73f00c61ca4eb3dc5a453aff012, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 7aeb601cc0b9ed74098912637bce12bd, type: 2}
+      objectReference: {fileID: 9100000, guid: 529ab3922486df842aede92b56063636, type: 2}
+    - target: {fileID: 5866666021909216657, guid: 566ce73f00c61ca4eb3dc5a453aff012, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 566ce73f00c61ca4eb3dc5a453aff012, type: 3}
+      insertIndex: 0
+      addedObject: {fileID: 682262152104290685}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 566ce73f00c61ca4eb3dc5a453aff012, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7908908322615525153}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 566ce73f00c61ca4eb3dc5a453aff012, type: 3}
       insertIndex: 1
-      addedObject: {fileID: 8947885081575699572}
+      addedObject: {fileID: 3100470916046592263}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 566ce73f00c61ca4eb3dc5a453aff012, type: 3}
       insertIndex: 2
-      addedObject: {fileID: 2131481209376794196}
+      addedObject: {fileID: -6964885986883653741}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 566ce73f00c61ca4eb3dc5a453aff012, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1622698780071157555}
+      insertIndex: 3
+      addedObject: {fileID: 1329308599674757215}
   m_SourcePrefab: {fileID: 100100000, guid: 566ce73f00c61ca4eb3dc5a453aff012, type: 3}
 --- !u!4 &3847750202455308771 stripped
 Transform:
@@ -118,7 +156,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 566ce73f00c61ca4eb3dc5a453aff012, type: 3}
   m_PrefabInstance: {fileID: 3670236957804617224}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8947885081575699572
+--- !u!114 &3100470916046592263
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -130,18 +168,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d12dc1ad2d4e6240bcd6df79b2d56ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CharController: {fileID: 1622698780071157555}
   MoveSpeed: 10
-  DashSpeed: 1
+  DashSpeed: 15
   JumpForce: 5
-  BaseJumpCount: 1
-  JumpCount: 1
-  Dashing: 0
+  BaseJumpCount: 2
+  JumpCount: 0
   IsGround: 0
   VelocityValue: {x: 0, y: 0, z: 0}
-  Gravity: -9.81
+  GroundCheckDistance: 0.3
+  GizmoOnOffCheck: 1
   CoursorLock: 0
---- !u!114 &2131481209376794196
+--- !u!114 &-6964885986883653741
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -158,7 +195,7 @@ MonoBehaviour:
   FirePosition: {fileID: 7908908322615525153}
   AttackDelayTime: 1
   AttackCollTimer: 0
---- !u!143 &1622698780071157555
+--- !u!143 &1329308599674757215
 CharacterController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -177,7 +214,7 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 1.9
+  m_Height: 1.8
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
