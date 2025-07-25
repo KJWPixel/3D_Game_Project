@@ -48,10 +48,11 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        Move();
-        Jump();
         GroundCheck();
+        Jump();
         GravityCheck();
+        Move();
+        
     }
 
     #region
@@ -77,20 +78,19 @@ public class PlayerController : MonoBehaviour
         float x = Input.GetAxisRaw("Horizontal");
         float z = Input.GetAxisRaw("Vertical");
 
-        //x, z값이 0이 아니면 True    
+        //x, z값이 0이 아니면 True, 해당 xDir,yDir값을 Animator에 전달 
         Animator.SetBool("IsMove", x != 0 || z != 0);
-        //해당 xDir,yDir값을 Animator에 전달
         Animator.SetFloat("xDir", x);
         Animator.SetFloat("zDir", z);
-        MoveDir = new Vector3(x, 0f, z);
+        Animator.SetFloat("yDir", VerticalVelocity);
 
+        MoveDir = new Vector3(x, 0f, z);
         MoveDir = CharacterController.transform.TransformDirection(MoveDir);
+
         VelocityValue = MoveDir.normalized * MoveSpeed;
         VelocityValue.y += VerticalVelocity;
 
         CharacterController.Move(VelocityValue * Time.deltaTime);
-
-
 
         //카메라가 바라보는 방향으로 선회
         Vector3 Dir = Camera.main.transform.forward;
@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour
         {
             VerticalVelocity = 0f;
             VerticalVelocity = JumpForce;
-            Animator.SetFloat("yDir", VerticalVelocity);
+            
             JumpCount--;
 
         }
@@ -155,6 +155,10 @@ public class PlayerController : MonoBehaviour
         if (!IsGround)
         {
             VerticalVelocity += Physics.gravity.y * Time.deltaTime;
+        }
+        else if(VerticalVelocity < 0)
+        {
+            VerticalVelocity = 0f;
         }
     }
 

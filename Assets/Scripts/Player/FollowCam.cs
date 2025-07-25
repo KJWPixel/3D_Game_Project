@@ -17,7 +17,6 @@ public class FollowCam : MonoBehaviour
 
     [SerializeField] Transform Head;//Player Head Transform
     [SerializeField] Transform Body;//Player Body Tarnsform
-    [SerializeField] Transform ShotTrs;
 
     float MouseXValue = 0f;
     float MouseYValue = 0f;
@@ -38,8 +37,8 @@ public class FollowCam : MonoBehaviour
 
     private void LookCamera()
     {
-        float MouseX = Input.GetAxisRaw("Mouse X");
-        float MouseY = Input.GetAxisRaw("Mouse Y");
+        float MouseX = Input.GetAxisRaw("Mouse X") * LookSensitivity;
+        float MouseY = Input.GetAxisRaw("Mouse Y") * LookSensitivity;
 
         MouseXValue = MouseXValue + MouseX;
         MouseYValue = MouseYValue + MouseY * (-1.0f);//반전
@@ -52,10 +51,8 @@ public class FollowCam : MonoBehaviour
         Head.localRotation = Quaternion.Euler(MouseYValue, 0f, 0f);
         //MouseXValue의 값을 Body.rotaion y값에 대입, 정면을 바라보는 기준으로 왼쪽,오른쪽으로 회전
         Body.localRotation = Quaternion.Euler(0f, MouseXValue, 0f);
-        //
-        ShotTrs.localRotation = Quaternion.Euler(MouseYValue, 0f, 0f);
         
-        this.transform.rotation = Quaternion.Euler(MouseYValue * LookSensitivity, MouseXValue * LookSensitivity, 0f);
+        this.transform.rotation = Quaternion.Euler(MouseYValue, MouseXValue, 0f);
     }
 
     #region
@@ -79,7 +76,9 @@ public class FollowCam : MonoBehaviour
         //transform.position = LookTransform.position + Offset;
         //transform.rotation = LookTransform.rotation;
 
-        this.transform.position = LookTransform.transform.position + this.transform.rotation * Offset;
+        //this.transform.position = LookTransform.transform.position + this.transform.rotation * Offset;
+        this.transform.position = LookTransform.transform.position + Offset;
+        this.transform.rotation = Head.rotation;
     }
 }
 
