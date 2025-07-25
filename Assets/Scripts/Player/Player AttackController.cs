@@ -9,12 +9,16 @@ public class PlayerAttackController : MonoBehaviour
     [SerializeField] GameObject BulletEffect;
     [SerializeField] Transform FirePosition;
 
+    [SerializeField] Light FlashLight;
+
     ParticleSystem psBullet;
     AudioSource asBullet;
 
     [Header("°ø°Ý ÄðÅ¸ÀÓ")]
     [SerializeField] float AttackDelayTime = 1f;
     [SerializeField] float AttackCollTimer = 0f;
+
+    RaycastHit TestRay;
 
     void Start()
     {
@@ -103,7 +107,11 @@ public class PlayerAttackController : MonoBehaviour
         }
     }
 
-    RaycastHit TestRay;
+    private void FlashControll()
+    {
+
+    }
+
     private void SeeRay()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

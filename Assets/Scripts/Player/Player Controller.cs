@@ -103,11 +103,9 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && JumpCount > 0)
         {
-            VerticalVelocity = 0f;
-            VerticalVelocity = JumpForce;
-            
             JumpCount--;
-
+            VerticalVelocity = 0f;
+            VerticalVelocity = JumpForce;                    
         }
         if (IsGround)
         {

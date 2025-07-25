@@ -1,37 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 //1인칭, 3인칭 스위칭하는 기능 및 Offset값을 가지고 세부조정가능 
 public class FollowCam : MonoBehaviour
 {
-    [Header("카메라 위치, 후방거리 ")]
-    [SerializeField] GameObject LookTransform = null;
-    [SerializeField] float RearBackDistance = 0f;
-
     [Header("카메라 위치 오프셋")]
     [SerializeField] Vector3 Offset = Vector3.zero;
 
     [Header("카메라 감도")]
     [SerializeField] float LookSensitivity = 1f;//기본 1
 
-    [SerializeField] Transform Head;//Player Head Transform
-    [SerializeField] Transform Body;//Player Body Tarnsform
+    [SerializeField] Transform Spin;//Player Body_Spin Tarnsform
 
     float MouseXValue = 0f;
     float MouseYValue = 0f;
-    float rotX;
+    float rotX = 0f;
 
     void Start()
     {
-        //Offset = new Vector3(0f, 0f, -1f * RearBackDistance);
 
     }
 
     private void Update()
     {
         LookCamera();
-        //Look();
     }
         
 
@@ -41,17 +35,15 @@ public class FollowCam : MonoBehaviour
         float MouseY = Input.GetAxisRaw("Mouse Y") * LookSensitivity;
 
         MouseXValue = MouseXValue + MouseX;
-        MouseYValue = MouseYValue + MouseY * (-1.0f);//반전
-        //화면에서 회전을 반전시키기 위해 -1.0f을 곱함
+        MouseYValue = MouseYValue + MouseY * (-1.0f);//반전, 화면에서 회전을 반전시키기 위해 -1.0f을 곱함
 
         //화면의 각도 제한 
         MouseYValue = Mathf.Clamp(MouseYValue, -80f, 80f);
-
-        //MouseXValue의 값을 Head.rotaion x값에 대입, 정면을 바라보는 기준으로 위,아래로  회전
-        Head.localRotation = Quaternion.Euler(MouseYValue, 0f, 0f);
-        //MouseXValue의 값을 Body.rotaion y값에 대입, 정면을 바라보는 기준으로 왼쪽,오른쪽으로 회전
-        Body.localRotation = Quaternion.Euler(0f, MouseXValue, 0f);
         
+        //Character Body 마우스 움직임에 따라 위아래 회전
+        Spin.localRotation = Quaternion.Euler(MouseYValue, 0f, 0f);      
+
+        //마우스 움직에 따라 Camera회전
         this.transform.rotation = Quaternion.Euler(MouseYValue, MouseXValue, 0f);
     }
 
@@ -73,12 +65,8 @@ public class FollowCam : MonoBehaviour
     #endregion
     private void LateUpdate()
     {
-        //transform.position = LookTransform.position + Offset;
-        //transform.rotation = LookTransform.rotation;
-
-        //this.transform.position = LookTransform.transform.position + this.transform.rotation * Offset;
-        this.transform.position = LookTransform.transform.position + Offset;
-        this.transform.rotation = Head.rotation;
+        //this.transform.position = LookTransform.transform.position + this.transform.position + Offset;
+        this.transform.localPosition = Offset;
     }
 }
 
