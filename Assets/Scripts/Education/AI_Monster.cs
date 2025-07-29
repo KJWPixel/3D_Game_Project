@@ -96,10 +96,7 @@ public class AI_Monster : MonoBehaviour
             else
             {
                 Attack();
-            }
-
-
-            
+            }       
         }
 
         AI = AI.AI_SEARCH;

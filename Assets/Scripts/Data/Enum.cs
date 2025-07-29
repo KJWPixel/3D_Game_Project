@@ -30,6 +30,7 @@ public enum AI
     AI_CREATE,
     AI_SEARCH,
     AI_MOVE,
+    AI_ATTACK,
     AI_RESET,
 }
 

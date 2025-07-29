@@ -9,9 +9,10 @@ public class PlayerAttackController : MonoBehaviour
     [SerializeField] GameObject BulletEffect;
     [SerializeField] Transform FirePosition;
 
-    [SerializeField] GameObject FlashLight;
+    [Header("FlashLight")]
     [SerializeField] bool FlashOn = false;
-    private AudioSource FlashAudio;
+    [SerializeField] Light FlashLight;
+    [SerializeField] AudioSource FlashAudio;
 
     ParticleSystem psBullet;
     AudioSource asBullet;
@@ -22,6 +23,16 @@ public class PlayerAttackController : MonoBehaviour
 
     RaycastHit TestRay;
 
+    private void Awake()
+    {
+
+    }
+
+    private void Init()
+    {
+        FlashOn = false;
+    }
+
     void Start()
     {
         FlashAudio = FlashLight.GetComponent<AudioSource>();
@@ -31,7 +42,7 @@ public class PlayerAttackController : MonoBehaviour
     void Update()
     {
         ShotBullet();
-        
+
 
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
@@ -81,7 +92,7 @@ public class PlayerAttackController : MonoBehaviour
             EffectInstance.transform.position = RayHit.point;
             EffectInstance.transform.forward = RayHit.normal;
 
-            
+
             ParticleSystem psBulletInstance = EffectInstance.GetComponent<ParticleSystem>();
             AudioSource asBulletInstance = EffectInstance.GetComponent<AudioSource>();
 
@@ -114,22 +125,16 @@ public class PlayerAttackController : MonoBehaviour
 
     private void FlashControll()
     {
-        if(Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F) && !FlashOn)
         {
-            FlashOn = !FlashOn;
-            FlashLight.SetActive(FlashOn);
-
-            if (FlashAudio != null)
-            {
-                Debug.Log("Flash Audio Play Check!!!!");
-                FlashAudio.Play();
-
-                //if(FlashOn)
-                //    FlashAudio.PlayOneShot(onClip);
-                //else
-                //    FlashAudio.PlayOneShot(offClip);
-            }
-        }         
+            FlashOn = true;
+            FlashLight.intensity = 1.5f;
+        }
+        else if (Input.GetKeyDown(KeyCode.F) && FlashOn)
+        {
+            FlashOn = false;
+            FlashLight.intensity = 0f;
+        }
     }
 
     private void SeeRay()
@@ -140,7 +145,7 @@ public class PlayerAttackController : MonoBehaviour
 
         bool RayHitCollision = Physics.Raycast(ray, out RayHit);
 
-        if(RayHitCollision)
+        if (RayHitCollision)
         {
             Debug.Log("ShotCollision");
 
@@ -158,4 +163,6 @@ public class PlayerAttackController : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(TestRay.point, 1f);
     }
+
+
 }
