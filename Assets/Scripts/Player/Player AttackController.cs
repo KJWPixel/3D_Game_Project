@@ -9,7 +9,9 @@ public class PlayerAttackController : MonoBehaviour
     [SerializeField] GameObject BulletEffect;
     [SerializeField] Transform FirePosition;
 
-    [SerializeField] Light FlashLight;
+    [SerializeField] GameObject FlashLight;
+    [SerializeField] bool FlashOn = false;
+    private AudioSource FlashAudio;
 
     ParticleSystem psBullet;
     AudioSource asBullet;
@@ -22,13 +24,14 @@ public class PlayerAttackController : MonoBehaviour
 
     void Start()
     {
-
+        FlashAudio = FlashLight.GetComponent<AudioSource>();
     }
 
 
     void Update()
     {
         ShotBullet();
+        
 
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
@@ -36,6 +39,8 @@ public class PlayerAttackController : MonoBehaviour
             ShotRayBullet();
             SeeRay();
         }
+
+        FlashControll();
 
     }
 
@@ -109,7 +114,22 @@ public class PlayerAttackController : MonoBehaviour
 
     private void FlashControll()
     {
+        if(Input.GetKeyDown(KeyCode.F))
+        {
+            FlashOn = !FlashOn;
+            FlashLight.SetActive(FlashOn);
 
+            if (FlashAudio != null)
+            {
+                Debug.Log("Flash Audio Play Check!!!!");
+                FlashAudio.Play();
+
+                //if(FlashOn)
+                //    FlashAudio.PlayOneShot(onClip);
+                //else
+                //    FlashAudio.PlayOneShot(offClip);
+            }
+        }         
     }
 
     private void SeeRay()
