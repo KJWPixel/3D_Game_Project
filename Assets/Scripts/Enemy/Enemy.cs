@@ -15,10 +15,13 @@ public class Enemy : BaseEnemy
     [SerializeField] AI_Enemy AI_Enemy;
     [SerializeField] Character Character;
 
-    Animator Animator;
+    [Header("공격력")]
+    [SerializeField] float AttackDamage = 0f;
 
     [Header("이동속도")]
     [SerializeField] float MoveSpeed = 0f;
+
+    Animator Animator;
 
     private void Awake()
     {
@@ -33,14 +36,60 @@ public class Enemy : BaseEnemy
     
     void Update()
     {
-        Chase();
+        AnimationControll();
     }
 
-    private void Chase()
+    private void AnimationControll()
     {
+        if (AI_Enemy != null)
+        {
+            if(AI_Enemy.CurrentAI == AI.AI_CREATE)
+            {
+                Animator.SetBool("Search", false);
+                Animator.SetBool("Chase", false);
+                Animator.SetBool("Attack", false);
+            }
+            else if(AI_Enemy.CurrentAI == AI.AI_SEARCH)
+            {
+                Animator.SetBool("Search", true);
+                Animator.SetBool("Chase", false);
+                Animator.SetBool("Attack", false);
+            }
+            else if (AI_Enemy.CurrentAI == AI.AI_CHASE)
+            {
+                Animator.SetBool("Search", false);
+                Animator.SetBool("Chase", true);
+                Animator.SetBool("Attack", false);
+            }
+            else if(AI_Enemy.CurrentAI == AI.AI_ATTACK)
+            {
+                Animator.SetBool("Search", false);
+                Animator.SetBool("Chase", false);
+                Animator.SetBool("Attack", true);
+            }
+        }
+    }
+
+    public void Idle()
+    {
+        Debug.Log("Enemy Idle");
+    }
+
+    public void Search()
+    {
+        Debug.Log("Enemy Search");
+    }
+
+    public void Chase()
+    {
+        if(AI_Enemy.CurrentAI == AI.AI_ATTACK)
+        {
+            return;
+        }
+    
         if (AI_Enemy.PlayerChese)
         {
-            Animator.SetBool("PlayerChase", true);
+            Debug.Log("Enemy Chase");
             Vector3 Dir = Character.transform.position - transform.position;
             transform.position += Dir.normalized * MoveSpeed * Time.deltaTime;
 
@@ -50,12 +99,21 @@ public class Enemy : BaseEnemy
                 transform.rotation = Quaternion.Slerp(transform.rotation, TargetRotation, 5f * Time.deltaTime);
             }
         }
-        else
-        {
-            Animator.SetBool("PlayerChase", false);
-        }
-
+        //Magnitude, sqrMagnitude에 대한 설명
+        #region
         //magnitude: 벡터의 길이 (예시:Vector3(3,0,4) = 5) 루트 제곱하여 25에서 5로
-        //sqrMagnitude: 벡터의 길이의 제곱 (예시:Vector3(3,0,4) = 25) 제곱만하여 25 
+        //sqrMagnitude: 벡터의 길이의 제곱 (예시:Vector3(3,0,4) = 25) 제곱만하여 25
+        #endregion//
+    }
+
+    public void Attack()
+    {
+        Debug.Log("Enemy Attack");
+             
+    }
+
+    public void Reset()
+    {
+            
     }
 }

@@ -30,7 +30,7 @@ public class AI_Monster : MonoBehaviour
             case AI.AI_SEARCH:
                 Search();
                 break;
-            case AI.AI_MOVE:
+            case AI.AI_CHASE:
                 Move();
                 break;
             case AI.AI_RESET:
@@ -71,7 +71,7 @@ public class AI_Monster : MonoBehaviour
             }
         }
 
-        AI = AI.AI_MOVE;
+        AI = AI.AI_CHASE;
         //적찾기
         //방황하기
     }

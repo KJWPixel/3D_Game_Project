@@ -27,9 +27,9 @@ public enum ITEM
 
 public enum AI
 {
-    AI_CREATE,
-    AI_SEARCH,
-    AI_MOVE,
+    AI_CREATE,//생성
+    AI_SEARCH,//패트롤 
+    AI_CHASE,
     AI_ATTACK,
     AI_RESET,
 }

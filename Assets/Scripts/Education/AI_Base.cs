@@ -20,7 +20,7 @@ public class AI_Base
             case AI.AI_SEARCH:
                 Search();
                 break;
-            case AI.AI_MOVE:
+            case AI.AI_CHASE:
                 Move();
                 break;
             case AI.AI_RESET:
@@ -37,7 +37,7 @@ public class AI_Base
     protected virtual void Search()
     {
         //길찾기, 적찾기, 방황 등등
-        AI = AI.AI_MOVE;
+        AI = AI.AI_CHASE;
     }
     protected virtual void Move()
     {

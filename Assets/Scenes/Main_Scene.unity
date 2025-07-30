@@ -143,7 +143,8 @@ MonoBehaviour:
   Character: {fileID: 1156315812}
   TRPATH: []
   PlayerChese: 0
-  SeachRange: 5
+  PlayerAttack: 0
+  SeachRange: 7
 --- !u!114 &55172948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,6 +159,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AI_Enemy: {fileID: 55172947}
   Character: {fileID: 1156315812}
+  AttackDamage: 0
   MoveSpeed: 3
 --- !u!135 &55172950
 SphereCollider:
@@ -1037,19 +1039,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4f04fb1fac3682a44935c486d36f72ad, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.15165326
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4f04fb1fac3682a44935c486d36f72ad, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4f04fb1fac3682a44935c486d36f72ad, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.98843384
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4f04fb1fac3682a44935c486d36f72ad, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4f04fb1fac3682a44935c486d36f72ad, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1057,7 +1059,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4f04fb1fac3682a44935c486d36f72ad, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 197.445
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4f04fb1fac3682a44935c486d36f72ad, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -1071,6 +1073,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Monster
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 4f04fb1fac3682a44935c486d36f72ad, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: 4f04fb1fac3682a44935c486d36f72ad, type: 3}
     - target: {fileID: 5866666021909216657, guid: 4f04fb1fac3682a44935c486d36f72ad, type: 3}
       propertyPath: m_Controller
       value: 
