@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
 
+/// <summary>
+/// AI 상태(STATE)관리, AI 로직
+/// 상태 변경, 이동 + 공격 결정
+/// 
+/// 현재 상태에 다라 뭘 할지 판단
+/// 필요 시 Enemy.cs의 기능 호출 (Move, Attack, Animation)
+/// </summary>
 public class AI_Enemy : MonoBehaviour
 {
     [SerializeField] Enemy Enemy;
