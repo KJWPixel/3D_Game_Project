@@ -1370,7 +1370,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BulletObject: {fileID: 36046776337118992, guid: 1fa3fecbd00d5834b98fc6694271b158, type: 3}
-  BulletEffect: {fileID: 8410884697574978021, guid: 77ab1b2f0a9afa7409733d8a62daafb9, type: 3}
+  BulletEffect: {fileID: 179232, guid: cbd6f473682097f4fa75b9984d27805b, type: 3}
   FirePosition: {fileID: 1457026584419952068}
   FlashOn: 0
   FlashLight: {fileID: 4801813805197430372}

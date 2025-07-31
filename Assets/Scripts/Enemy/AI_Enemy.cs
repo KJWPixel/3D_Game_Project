@@ -59,7 +59,6 @@ public class AI_Enemy : MonoBehaviour
                 Enemy.Chase();
                 break;
             case AI.AI_ATTACK:
-                Enemy.Attack();
                 break;
             case AI.AI_RESET:
                 Enemy.Reset();  

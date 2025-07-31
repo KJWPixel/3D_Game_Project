@@ -41,7 +41,7 @@ public class PlayerAttackController : MonoBehaviour
 
     void Update()
     {
-        ShotBullet();
+        //ShotBullet();
 
 
         if (Input.GetKeyDown(KeyCode.Mouse1))

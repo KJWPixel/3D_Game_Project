@@ -99,6 +99,14 @@ public class PlayerController : MonoBehaviour
         this.transform.LookAt(tLookAtPosition);
     }
 
+    private void MoveDash()
+    {
+        if(Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W))
+        {
+
+        }
+    }
+
     private void Jump()
     {
         if (Input.GetKeyDown(KeyCode.Space) && JumpCount > 0)

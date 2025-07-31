@@ -14,6 +14,7 @@ public class Enemy : BaseEnemy
 {
     [SerializeField] AI_Enemy AI_Enemy;
     [SerializeField] Character Character;
+    [SerializeField] GameObject Player;
 
     [Header("°ø°Ý·Â")]
     [SerializeField] float AttackDamage = 0f;
@@ -30,10 +31,15 @@ public class Enemy : BaseEnemy
 
     void Start()
     {
-        
+        Player = GameObject.FindWithTag("Player");
+
+        if(Player == null)
+        {
+            Debug.Log("Player °´Ã¼ Null");
+        }
     }
 
-    
+
     void Update()
     {
         AnimationControll();
@@ -43,13 +49,13 @@ public class Enemy : BaseEnemy
     {
         if (AI_Enemy != null)
         {
-            if(AI_Enemy.CurrentAI == AI.AI_CREATE)
+            if (AI_Enemy.CurrentAI == AI.AI_CREATE)
             {
                 Animator.SetBool("Search", false);
                 Animator.SetBool("Chase", false);
                 Animator.SetBool("Attack", false);
             }
-            else if(AI_Enemy.CurrentAI == AI.AI_SEARCH)
+            else if (AI_Enemy.CurrentAI == AI.AI_SEARCH)
             {
                 Animator.SetBool("Search", true);
                 Animator.SetBool("Chase", false);
@@ -61,7 +67,7 @@ public class Enemy : BaseEnemy
                 Animator.SetBool("Chase", true);
                 Animator.SetBool("Attack", false);
             }
-            else if(AI_Enemy.CurrentAI == AI.AI_ATTACK)
+            else if (AI_Enemy.CurrentAI == AI.AI_ATTACK)
             {
                 Animator.SetBool("Search", false);
                 Animator.SetBool("Chase", false);
@@ -82,11 +88,11 @@ public class Enemy : BaseEnemy
 
     public void Chase()
     {
-        if(AI_Enemy.CurrentAI == AI.AI_ATTACK)
+        if (AI_Enemy.CurrentAI == AI.AI_ATTACK)
         {
             return;
         }
-    
+
         if (AI_Enemy.PlayerChese)
         {
             Debug.Log("Enemy Chase");
@@ -109,11 +115,16 @@ public class Enemy : BaseEnemy
     public void Attack()
     {
         Debug.Log("Enemy Attack");
-             
+
+        PlayerStat PlayerStat = Player.GetComponent<PlayerStat>();
+        if(PlayerStat != null)
+        {
+            PlayerStat.TakeDamage(AttackDamage);
+        }
     }
 
     public void Reset()
     {
-            
+
     }
 }

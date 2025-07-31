@@ -7,7 +7,8 @@ using UnityEngine;
 public class FollowCam : MonoBehaviour
 {
     [Header("카메라 위치 오프셋")]
-    [SerializeField] Vector3 Offset = Vector3.zero;
+    [SerializeField] Vector3 PositionOffset = Vector3.zero;
+    [SerializeField] Vector3 RotationOffset = Vector3.zero;
 
     [Header("카메라 감도")]
     [SerializeField] float LookSensitivity = 1f;//기본 1
@@ -66,7 +67,8 @@ public class FollowCam : MonoBehaviour
     private void LateUpdate()
     {
         //this.transform.position = LookTransform.transform.position + this.transform.position + Offset;
-        this.transform.localPosition = Offset;
+        this.transform.localPosition = PositionOffset;
+        this.transform.localRotation = Quaternion.Euler(RotationOffset);
     }
 }
 
