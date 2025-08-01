@@ -9,11 +9,6 @@ public class PlayerAttackController : MonoBehaviour
     [SerializeField] GameObject BulletEffect;
     [SerializeField] Transform FirePosition;
 
-    [Header("FlashLight")]
-    [SerializeField] bool FlashOn = false;
-    [SerializeField] Light FlashLight;
-    [SerializeField] AudioSource FlashAudio;
-
     ParticleSystem psBullet;
     AudioSource asBullet;
 
@@ -28,14 +23,9 @@ public class PlayerAttackController : MonoBehaviour
 
     }
 
-    private void Init()
-    {
-        FlashOn = false;
-    }
-
     void Start()
     {
-        FlashAudio = FlashLight.GetComponent<AudioSource>();
+        
     }
 
 
@@ -50,8 +40,6 @@ public class PlayerAttackController : MonoBehaviour
             ShotRayBullet();
             SeeRay();
         }
-
-        FlashControll();
 
     }
 
@@ -120,20 +108,6 @@ public class PlayerAttackController : MonoBehaviour
                 Debug.Log("asBullet AudioSource Null!!!");
             }
 
-        }
-    }
-
-    private void FlashControll()
-    {
-        if (Input.GetKeyDown(KeyCode.F) && !FlashOn)
-        {
-            FlashOn = true;
-            FlashLight.intensity = 1.5f;
-        }
-        else if (Input.GetKeyDown(KeyCode.F) && FlashOn)
-        {
-            FlashOn = false;
-            FlashLight.intensity = 0f;
         }
     }
 

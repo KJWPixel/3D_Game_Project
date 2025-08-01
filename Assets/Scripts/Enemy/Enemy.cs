@@ -114,13 +114,21 @@ public class Enemy : BaseEnemy
 
     public void Attack()
     {
-        Debug.Log("Enemy Attack");
+        float Distance = Vector3.Distance(transform.position, Character.transform.position);
 
-        PlayerStat PlayerStat = Player.GetComponent<PlayerStat>();
-        if(PlayerStat != null)
+        if(Distance <= 3)
         {
-            PlayerStat.TakeDamage(AttackDamage);
-        }
+            PlayerStat PlayerStat = Player.GetComponent<PlayerStat>();
+            if (PlayerStat != null)
+            {
+                PlayerStat.TakeDamage(AttackDamage);
+            }
+        }       
+    }
+
+    private void AttackDistanceGizmo()
+    {
+        Gizmos.DrawWireSphere(transform.position, 3);
     }
 
     public void Reset()

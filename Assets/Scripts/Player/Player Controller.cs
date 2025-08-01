@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -12,6 +13,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("플레이어 이동")]
     [SerializeField] float MoveSpeed = 0f;
+    [SerializeField] float WalkSpeed = 0f;
     [SerializeField] float DashSpeed = 0f;
     [SerializeField] float JumpForce = 0f;
     [SerializeField] int BaseJumpCount = 0;
@@ -20,6 +22,7 @@ public class PlayerController : MonoBehaviour
     private float VerticalVelocity = 0f;
 
     [Header("플레이어 동작 체크")]
+    [SerializeField] bool IsDash = false;   
     [SerializeField] bool IsGround = false;
 
     [Header("플레이어 현재 속도측정")]
@@ -32,12 +35,14 @@ public class PlayerController : MonoBehaviour
     [Header("플레이어 마우스 커서 제어")]
     [SerializeField] CursorLockMode CoursorLock = CursorLockMode.None;
 
+    PlayerStat PlayerStat;
     Animator Animator;
 
     private void Awake()
     {
         //인스펙터에서 CursorLockMode 제어
         Cursor.lockState = CursorLockMode.Locked;
+        PlayerStat = GetComponent<PlayerStat>();
         Animator = GetComponent<Animator>();
     }
     void Start()
@@ -52,7 +57,9 @@ public class PlayerController : MonoBehaviour
         Jump();
         GravityCheck();
         Move();
-        
+        MoveDash();
+
+
     }
 
     #region
@@ -79,13 +86,15 @@ public class PlayerController : MonoBehaviour
         float z = Input.GetAxisRaw("Vertical");
 
         //x, z값이 0이 아니면 True, 해당 xDir,yDir값을 Animator에 전달 
-        Animator.SetBool("IsMove", x != 0 || z != 0);
+        Animator.SetBool("IsWalk", x != 0 || z != 0);
         Animator.SetFloat("xDir", x);
         Animator.SetFloat("zDir", z);
         Animator.SetFloat("yDir", VerticalVelocity);
 
         MoveDir = new Vector3(x, 0f, z);
         MoveDir = CharacterController.transform.TransformDirection(MoveDir);
+
+        MoveSpeed = IsDash ? DashSpeed : WalkSpeed;//IsDash에 따라 Dash : Walk Speed 결정
 
         VelocityValue = MoveDir.normalized * MoveSpeed;
         VelocityValue.y += VerticalVelocity;
@@ -101,9 +110,16 @@ public class PlayerController : MonoBehaviour
 
     private void MoveDash()
     {
-        if(Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W))
+        if(Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W) && PlayerStat.CurrentStamina > 10)
         {
-
+            Animator.SetBool("IsDash", true);
+            IsDash = true;
+            //감소하는 함수를 PlayerStat에서 가져와서 실행
+        }
+        else
+        {
+            Animator.SetBool("IsDash", false);
+            IsDash = false;
         }
     }
 

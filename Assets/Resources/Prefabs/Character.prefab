@@ -757,11 +757,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CharacterController: {fileID: 7948766997149762892}
-  MoveSpeed: 5
-  DashSpeed: 15
+  MoveSpeed: 0
+  WalkSpeed: 5
+  DashSpeed: 10
   JumpForce: 5
-  BaseJumpCount: 2
+  BaseJumpCount: 1
   JumpCount: 0
+  IsDash: 0
   IsGround: 0
   VelocityValue: {x: 0, y: 0, z: 0}
   GroundCheckDistance: 0.1
@@ -1761,7 +1763,7 @@ Transform:
   m_GameObject: {fileID: 6336007839352210641}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: 0.2}
+  m_LocalPosition: {x: 0, y: 2.1, z: -1.505}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1780,7 +1782,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 109e594f27f348c4cbe56f3987d6ca96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Offset: {x: 0, y: 1.4, z: 0.3}
+  PositionOffset: {x: 0, y: 2, z: -2}
+  RotationOffset: {x: 15, y: 0, z: 0}
   LookSensitivity: 1
   Spin: {fileID: 5118829454153197035}
 --- !u!20 &3506453497957689811

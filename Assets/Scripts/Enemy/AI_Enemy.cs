@@ -28,25 +28,25 @@ public class AI_Enemy : MonoBehaviour
 
     SphereCollider SphereCollider;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.CompareTag("Player"))
-        {
-            PlayerChese = true;
-            AI = AI.AI_CHASE;
-            Debug.Log("Player Chase");
-        }
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if(other.CompareTag("Player"))
+    //    {
+    //        PlayerChese = true;
+    //        AI = AI.AI_CHASE;
+    //        Debug.Log("Player Chase");
+    //    }
+    //}
 
-    private void OnTriggerExit(Collider other)
-    {
-        if(other.CompareTag("Player"))
-        {
-            PlayerChese = false;
-            AI = AI.AI_SEARCH;
-            Debug.Log("Not Player Chase");
-        }
-    }
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if(other.CompareTag("Player"))
+    //    {
+    //        PlayerChese = false;
+    //        AI = AI.AI_SEARCH;
+    //        Debug.Log("Not Player Chase");
+    //    }
+    //}
 
     public void State()
     {
@@ -88,7 +88,26 @@ public class AI_Enemy : MonoBehaviour
 
         State();
         GetAIState();
+        ChaseDistance();
         AttackDistance();
+    }
+
+    private void ChaseDistance()
+    {
+        float ChaseDistacne = Vector3.Distance(transform.position, Character.transform.position);
+
+        if (ChaseDistacne <= 5)
+        {
+            AI = AI.AI_CHASE;
+            PlayerChese = true;
+            Debug.Log("Player Chase");
+        }
+        else
+        {
+            AI = AI.AI_SEARCH;
+            PlayerChese = false;
+            Debug.Log("Not Player Chase");
+        }
     }
 
     private void AttackDistance()
