@@ -16,15 +16,14 @@ public class AI_Enemy : MonoBehaviour
     [SerializeField] Enemy Enemy;
     [SerializeField] Character Character;
 
-    [SerializeField] Transform[] TRPATH;
-
     protected AI AI = AI.AI_CREATE;
     public AI CurrentAI => AI;
 
     [Header("Enemy")]
     [SerializeField] public bool PlayerChese = false;
     [SerializeField] public bool PlayerAttack = false;
-    [SerializeField] float SeachRange = 0f;
+    [SerializeField] float ChaseRange = 0f;
+    [SerializeField] float AttackRange = 0f;
 
     SphereCollider SphereCollider;
 
@@ -79,7 +78,7 @@ public class AI_Enemy : MonoBehaviour
 
     void Start()
     {
-        SphereCollider.radius = SeachRange;
+        
     }
 
     void Update()
@@ -96,7 +95,7 @@ public class AI_Enemy : MonoBehaviour
     {
         float ChaseDistacne = Vector3.Distance(transform.position, Character.transform.position);
 
-        if (ChaseDistacne <= 5)
+        if (ChaseDistacne <= ChaseRange)
         {
             AI = AI.AI_CHASE;
             PlayerChese = true;
@@ -117,7 +116,7 @@ public class AI_Enemy : MonoBehaviour
             //Enemy의 거리가 플레이어의 거리의 차이가 2보다 작게 난다면 공격
             float TargetDir = Vector3.Distance(transform.position, Character.transform.position);
 
-            if (TargetDir <= 1f)
+            if (TargetDir <= AttackRange)
             {
                 AI = AI.AI_ATTACK;
             }
@@ -127,6 +126,4 @@ public class AI_Enemy : MonoBehaviour
             }
         }      
     }
-
-    
 }

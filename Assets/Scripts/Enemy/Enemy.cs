@@ -16,6 +16,11 @@ public class Enemy : BaseEnemy
     [SerializeField] Character Character;
     [SerializeField] GameObject Player;
 
+    [SerializeField] Transform[] TRPATH;
+
+    [Header("체력")]
+    [SerializeField] public float Health = 0f;
+
     [Header("공격력")]
     [SerializeField] float AttackDamage = 0f;
 
@@ -83,7 +88,11 @@ public class Enemy : BaseEnemy
 
     public void Search()
     {
-        Debug.Log("Enemy Search");
+        if(AI_Enemy.CurrentAI == AI.AI_SEARCH)
+        {
+            Debug.Log("Enemy Search");
+            
+        }
     }
 
     public void Chase()
@@ -93,7 +102,7 @@ public class Enemy : BaseEnemy
             return;
         }
 
-        if (AI_Enemy.PlayerChese)
+        if (AI_Enemy.CurrentAI == AI.AI_CHASE)
         {
             Debug.Log("Enemy Chase");
             Vector3 Dir = Character.transform.position - transform.position;
@@ -114,8 +123,9 @@ public class Enemy : BaseEnemy
 
     public void Attack()
     {
+        Debug.Log("Enemy Attack Start");
         float Distance = Vector3.Distance(transform.position, Character.transform.position);
-
+        
         if(Distance <= 3)
         {
             PlayerStat PlayerStat = Player.GetComponent<PlayerStat>();
