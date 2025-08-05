@@ -17,6 +17,9 @@ public class Enemy : BaseEnemy
     [SerializeField] GameObject Player;
 
     [SerializeField] Transform[] TRPATH;
+    [SerializeField] int CurrentPathIndex = 0;
+    [SerializeField] float PatrolWaitTime = 0f;
+    float WaitTime = 0f;
 
     [Header("체력")]
     [SerializeField] public float Health = 0f;
@@ -25,7 +28,8 @@ public class Enemy : BaseEnemy
     [SerializeField] float AttackDamage = 0f;
 
     [Header("이동속도")]
-    [SerializeField] float MoveSpeed = 0f;
+    [SerializeField] float WalkSpeed = 0f;
+    [SerializeField] float ChaseSpeed = 0f;
 
     Animator Animator;
 
@@ -38,7 +42,7 @@ public class Enemy : BaseEnemy
     {
         Player = GameObject.FindWithTag("Player");
 
-        if(Player == null)
+        if (Player == null)
         {
             Debug.Log("Player 객체 Null");
         }
@@ -62,9 +66,7 @@ public class Enemy : BaseEnemy
             }
             else if (AI_Enemy.CurrentAI == AI.AI_SEARCH)
             {
-                Animator.SetBool("Search", true);
-                Animator.SetBool("Chase", false);
-                Animator.SetBool("Attack", false);
+                //Search함수에서 애니메이터 동작
             }
             else if (AI_Enemy.CurrentAI == AI.AI_CHASE)
             {
@@ -88,11 +90,47 @@ public class Enemy : BaseEnemy
 
     public void Search()
     {
-        if(AI_Enemy.CurrentAI == AI.AI_SEARCH)
+        if (AI_Enemy.CurrentAI != AI.AI_SEARCH || TRPATH.Length == 0)
         {
-            Debug.Log("Enemy Search");
-            
+            //AI=Search Not or TRPATH Index 0
+            return;
         }
+
+        Debug.Log("Enemy Search");
+
+        Transform PathPoint = TRPATH[CurrentPathIndex];
+        Vector3 Dir = PathPoint.position - transform.position;//목표지점 - 현재위치: 목표로 향하는 방향벡터
+
+        //이동
+        float Distance = Dir.magnitude;//벡터의 길이를 의미
+
+        if(Distance > 0.2f)
+        {
+            transform.position += Dir.normalized * WalkSpeed * Time.deltaTime;
+
+            if(Dir != Vector3.zero)
+            {
+                //방향 벡터Dir를 정면 방향으로 하는 회전을 만든다.
+                Quaternion PathRotation = Quaternion.LookRotation(Dir);
+
+                //구면 선형 보간(Slerp)(현재 회전, 목표 회전, 보간 속도)
+                transform.rotation = Quaternion.Slerp(transform.rotation, PathRotation, 5f * Time.deltaTime);
+            }
+
+            WaitTime = 0f;
+            Animator.SetBool("Search", true);
+        }
+        else
+        {
+            WaitTime += Time.deltaTime;
+            Animator.SetBool("Search", false);
+            if(WaitTime >= PatrolWaitTime)
+            {
+                CurrentPathIndex = (CurrentPathIndex + 1) % TRPATH.Length;
+                WaitTime = 0f;
+            }
+        }
+
     }
 
     public void Chase()
@@ -106,7 +144,7 @@ public class Enemy : BaseEnemy
         {
             Debug.Log("Enemy Chase");
             Vector3 Dir = Character.transform.position - transform.position;
-            transform.position += Dir.normalized * MoveSpeed * Time.deltaTime;
+            transform.position += Dir.normalized * ChaseSpeed * Time.deltaTime;
 
             if (Dir != Vector3.zero)//(Dir.sqrMagnitude > 0.0001f) dir 이 Vector3.zero 일 때 (즉, 길이가 0일 때) Quaternion.LookRotation(dir)을 하면 경고가 나옴
             {
@@ -125,15 +163,15 @@ public class Enemy : BaseEnemy
     {
         Debug.Log("Enemy Attack Start");
         float Distance = Vector3.Distance(transform.position, Character.transform.position);
-        
-        if(Distance <= 3)
+
+        if (Distance <= 3)
         {
             PlayerStat PlayerStat = Player.GetComponent<PlayerStat>();
             if (PlayerStat != null)
             {
                 PlayerStat.TakeDamage(AttackDamage);
             }
-        }       
+        }
     }
 
     private void AttackDistanceGizmo()

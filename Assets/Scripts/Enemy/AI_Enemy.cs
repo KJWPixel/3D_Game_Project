@@ -105,7 +105,7 @@ public class AI_Enemy : MonoBehaviour
         {
             AI = AI.AI_SEARCH;
             PlayerChese = false;
-            Debug.Log("Not Player Chase");
+            //Debug.Log("Not Player Chase");
         }
     }
 
