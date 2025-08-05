@@ -54,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 4f04fb1fac3682a44935c486d36f72ad, type: 3}
       propertyPath: m_TagString
-      value: Monster
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 4f04fb1fac3682a44935c486d36f72ad, type: 3}
       propertyPath: m_Avatar
@@ -76,7 +76,7 @@ PrefabInstance:
       addedObject: {fileID: 2140632953747801830}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4f04fb1fac3682a44935c486d36f72ad, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1410190470594015584}
+      addedObject: {fileID: 6211856887523919235}
   m_SourcePrefab: {fileID: 100100000, guid: 4f04fb1fac3682a44935c486d36f72ad, type: 3}
 --- !u!1 &268273594554477654 stripped
 GameObject:
@@ -98,8 +98,18 @@ MonoBehaviour:
   AI_Enemy: {fileID: 2140632953747801830}
   Character: {fileID: 0}
   Player: {fileID: 0}
-  AttackDamage: 5
-  MoveSpeed: 3
+  TRPATH:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  CurrentPathIndex: 0
+  PatrolWaitTime: 2
+  MaxHp: 100
+  CurHp: 100
+  AttackDamage: 10
+  WalkSpeed: 5
+  ChaseSpeed: 10
+  IsDie: 0
 --- !u!114 &2140632953747801830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,12 +124,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Enemy: {fileID: 8267418403231946193}
   Character: {fileID: 0}
-  TRPATH: []
   PlayerChese: 0
   PlayerAttack: 0
-  SeachRange: 7
---- !u!135 &1410190470594015584
-SphereCollider:
+  ChaseRange: 5
+  AttackRange: 2
+--- !u!136 &6211856887523919235
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -136,6 +146,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 5
-  m_Center: {x: 0, y: 0, z: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1.7
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.9, z: 0}

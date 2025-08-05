@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerStat : MonoBehaviour
-{
+{    
     [SerializeField] float MaxHp = 0f;
     [SerializeField] public float CurrentHp = 0f;
     [SerializeField] float MaxMp = 0f;
     [SerializeField] public float CurrentMp = 0f;
     [SerializeField] float MaxStamina = 0f;
     [SerializeField] public float CurrentStamina = 0f;
+
+    [SerializeField] public float AttackDamage = 0f;
 
     void Update()
     {

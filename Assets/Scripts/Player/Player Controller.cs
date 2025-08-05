@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour
 
     PlayerStat PlayerStat;
     Animator Animator;
+    PlayerAnimationController Anim;
 
     private void Awake()
     {
@@ -44,6 +45,7 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         PlayerStat = GetComponent<PlayerStat>();
         Animator = GetComponent<Animator>();
+        Anim = GetComponent<PlayerAnimationController>();
     }
     void Start()
     {
@@ -85,12 +87,6 @@ public class PlayerController : MonoBehaviour
         float x = Input.GetAxisRaw("Horizontal");
         float z = Input.GetAxisRaw("Vertical");
 
-        //x, z값이 0이 아니면 True, 해당 xDir,yDir값을 Animator에 전달 
-        Animator.SetBool("IsWalk", x != 0 || z != 0);
-        Animator.SetFloat("xDir", x);
-        Animator.SetFloat("zDir", z);
-        Animator.SetFloat("yDir", VerticalVelocity);
-
         MoveDir = new Vector3(x, 0f, z);
         MoveDir = CharacterController.transform.TransformDirection(MoveDir);
 
@@ -106,20 +102,21 @@ public class PlayerController : MonoBehaviour
         Dir.y = 0f;
         Vector3 tLookAtPosition = this.transform.position + Dir;
         this.transform.LookAt(tLookAtPosition);
+
+        Anim.AnimationUpdate(x, z, VerticalVelocity);
     }
 
     private void MoveDash()
     {
         if(Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W) && PlayerStat.CurrentStamina > 10)
         {
-            Animator.SetBool("IsDash", true);
             IsDash = true;
-            //감소하는 함수를 PlayerStat에서 가져와서 실행
+            Anim.SetDash(IsDash);
         }
         else
         {
-            Animator.SetBool("IsDash", false);
             IsDash = false;
+            Anim.SetDash(IsDash);
         }
     }
 

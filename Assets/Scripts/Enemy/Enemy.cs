@@ -22,7 +22,8 @@ public class Enemy : BaseEnemy
     float WaitTime = 0f;
 
     [Header("체력")]
-    [SerializeField] public float Health = 0f;
+    [SerializeField] public float MaxHp = 0f;
+    [SerializeField] public float CurHp = 0f;
 
     [Header("공격력")]
     [SerializeField] float AttackDamage = 0f;
@@ -30,6 +31,9 @@ public class Enemy : BaseEnemy
     [Header("이동속도")]
     [SerializeField] float WalkSpeed = 0f;
     [SerializeField] float ChaseSpeed = 0f;
+
+    [Header("상태 체크")]
+    [SerializeField] bool IsDie = false;    
 
     Animator Animator;
 
@@ -177,6 +181,19 @@ public class Enemy : BaseEnemy
     private void AttackDistanceGizmo()
     {
         Gizmos.DrawWireSphere(transform.position, 3);
+    }
+
+    public void TakeDamage(float _Damage)
+    {
+        if(CurHp > 0)
+        {
+            CurHp -= _Damage;
+        }
+        else
+        {
+            IsDie = true;
+        }
+
     }
 
     public void Reset()
