@@ -193,7 +193,6 @@ public class Enemy : BaseEnemy
         {
             IsDie = true;
         }
-
     }
 
     public void Reset()

@@ -4,38 +4,27 @@ using UnityEngine;
 
 public class PlayerAttackController : MonoBehaviour
 {
-    [Header("공격 체크")]
-    [SerializeField] bool IsAttack = false;
+    [SerializeField] private Weapon_Sword WeaponSword;
 
-    [Header("공격 오브젝트")]
-    [SerializeField] BoxCollider SowrdBoxCollider;
+    [Header("공격 체크")]
+    [SerializeField] public bool IsAttack = false;
     [SerializeField] float AttackCollTimer = 0f;
 
     PlayerStat PlayerStat;
     PlayerAnimationController Anim;
     RaycastHit TestRay;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.CompareTag("Enemy"))
-        {
-            Enemy Enemy = other.GetComponent<Enemy>();
-            Enemy.TakeDamage(PlayerStat.AttackDamage);
-        }
-    }
-
     private void Awake()
     {
         PlayerStat = GetComponent<PlayerStat>();
         Anim = GetComponent<PlayerAnimationController>();
+        if(WeaponSword == null)
+        {
+            //인스펙터에서 할당하지 않았다면 자식에서 할당
+            WeaponSword = GetComponentInChildren<Weapon_Sword>();
+        }
         
     }
-
-    void Start()
-    {
-        SowrdBoxCollider.enabled = false;
-    }
-
 
     void Update()
     {
@@ -57,13 +46,15 @@ public class PlayerAttackController : MonoBehaviour
         }
     }
 
-    public void EnabledAttackCollider()
+    public void OnAttackEnable()
     {
-        SowrdBoxCollider.enabled = true;    
+        if (WeaponSword != null) WeaponSword.SwordEnableCollider();
     }
-    public void DisableAttackCollider()
+
+    // Animation Event에서 호출
+    public void OnAttackDisable()
     {
-        SowrdBoxCollider.enabled = false;
+        if (WeaponSword != null) WeaponSword.SwordDisableCollider();
     }
 
     #region
