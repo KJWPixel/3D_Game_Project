@@ -42,6 +42,7 @@ public class PlayerAttackController : MonoBehaviour
         else
         {
             IsAttack = false;
+            IsAttack = false;
             Anim.SetAttack(IsAttack);
         }
     }
