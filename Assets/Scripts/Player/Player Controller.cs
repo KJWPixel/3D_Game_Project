@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         //인스펙터에서 CursorLockMode 제어
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
         PlayerStat = GetComponent<PlayerStat>();
         Animator = GetComponent<Animator>();
         Anim = GetComponent<PlayerAnimationController>();
