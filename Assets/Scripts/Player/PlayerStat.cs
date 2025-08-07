@@ -14,6 +14,17 @@ public class PlayerStat : MonoBehaviour
 
     [SerializeField] public float Atk = 0f;
 
+    UI_Status status;
+
+    private void Start()
+    {
+        UI_Status Ui = FindAnyObjectByType<UI_Status>();
+        if (Ui != null)
+        {
+            Ui.SetStatus(this);
+        }
+    }
+
     void Update()
     {
         StatInit();
@@ -48,8 +59,6 @@ public class PlayerStat : MonoBehaviour
             CurrentStamina += 0.1f * Time.deltaTime;
         }
     }
-
-    
 
     public void TakeDamage(float _Damage)
     {

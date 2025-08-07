@@ -2229,6 +2229,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1378704353}
     - target: {fileID: 3950160788474616310, guid: b9b586fd7d66e3a418cc13d90c415091, type: 3}
+      propertyPath: EffectTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3950160788474616310, guid: b9b586fd7d66e3a418cc13d90c415091, type: 3}
       propertyPath: PlayerStat
       value: 
       objectReference: {fileID: 1378704364}
