@@ -27,7 +27,7 @@ public class UI_Manager : MonoBehaviour
 
     private void Update()
     {
-        ClosePopup();
+        
     }
 
     public void ShowPopupUI()

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Search;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 /// <summary>
 /// 데이터 및 행동: HP, 공격력, 애니메이션 트리거 등
@@ -15,6 +17,7 @@ public class Enemy : BaseEnemy
     [SerializeField] AI_Enemy AI_Enemy;
     [SerializeField] Character Character;
     [SerializeField] GameObject Player;
+    [SerializeField] GameObject DamageText;
 
     [SerializeField] Transform[] TRPATH;
     [SerializeField] int CurrentPathIndex = 0;
@@ -28,12 +31,17 @@ public class Enemy : BaseEnemy
     [Header("공격력")]
     [SerializeField] float AttackDamage = 0f;
 
+    [Header("방어력")]
+    [SerializeField] float Def = 0f;
+
     [Header("이동속도")]
     [SerializeField] float WalkSpeed = 0f;
     [SerializeField] float ChaseSpeed = 0f;
 
     [Header("상태 체크")]
-    [SerializeField] bool IsDie = false;    
+    [SerializeField] bool IsDie = false;
+
+    
 
     Animator Animator;
 
@@ -50,9 +58,9 @@ public class Enemy : BaseEnemy
         {
             Debug.Log("Player 객체 Null");
         }
+
+        
     }
-
-
     void Update()
     {
         AnimationControll();
@@ -86,12 +94,10 @@ public class Enemy : BaseEnemy
             }
         }
     }
-
     public void Idle()
     {
         Debug.Log("Enemy Idle");
     }
-
     public void Search()
     {
         if (AI_Enemy.CurrentAI != AI.AI_SEARCH || TRPATH.Length == 0)
@@ -136,7 +142,6 @@ public class Enemy : BaseEnemy
         }
 
     }
-
     public void Chase()
     {
         if (AI_Enemy.CurrentAI == AI.AI_ATTACK)
@@ -162,7 +167,6 @@ public class Enemy : BaseEnemy
         //sqrMagnitude: 벡터의 길이의 제곱 (예시:Vector3(3,0,4) = 25) 제곱만하여 25
         #endregion//
     }
-
     public void Attack()
     {
         Debug.Log("Enemy Attack Start");
@@ -183,6 +187,11 @@ public class Enemy : BaseEnemy
         Gizmos.DrawWireSphere(transform.position, 3);
     }
 
+    public void ShowDamageText()
+    {
+        
+    }
+
     public void TakeDamage(float _Damage)
     {
         if(CurHp > 0)
@@ -199,4 +208,6 @@ public class Enemy : BaseEnemy
     {
 
     }
+
+    
 }

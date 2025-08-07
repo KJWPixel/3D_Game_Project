@@ -74,6 +74,7 @@ MonoBehaviour:
   MpImage: {fileID: 0}
   MpEffect: {fileID: 0}
   SteminaImage: {fileID: 0}
+  EffectTime: 0
 --- !u!223 &5488286456904880643
 Canvas:
   m_ObjectHideFlags: 0
