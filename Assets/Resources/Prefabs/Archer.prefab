@@ -1,5 +1,37 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4382837284066439405
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6273887103118301590}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6273887103118301590
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4382837284066439405}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2151500069772840827}
+  m_Father: {fileID: 6834805392992688727}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4569067587281873572
 GameObject:
   m_ObjectHideFlags: 0
@@ -32,7 +64,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6834805392992688727}
+  m_Father: {fileID: 6273887103118301590}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7650662591984283708
 MonoBehaviour:
@@ -208,7 +240,7 @@ PrefabInstance:
       addedObject: {fileID: 8776200142933078929}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0c25c38b9e0e76c48906a125b1551ea3, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2151500069772840827}
+      addedObject: {fileID: 6273887103118301590}
     - targetCorrespondingSourceObject: {fileID: 2563496969622287784, guid: 0c25c38b9e0e76c48906a125b1551ea3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7295823352948437969}
@@ -254,13 +286,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f62487b165418c43afce00d2abebe41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Level: 0
   MaxHp: 100
   CurrentHp: 100
   MaxMp: 100
   CurrentMp: 100
   MaxStamina: 100
   CurrentStamina: 100
-  AttackDamage: 15
+  Atk: 0
 --- !u!114 &3339896118214070976
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,10 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerStat : MonoBehaviour
 {
-    [SerializeField] public int Level = 0;
+    [Header("Status")]
+    [SerializeField] public int Level = 1;
+    [SerializeField] public float MaxExp = 0f;
+    [SerializeField] public float CurrentExp = 0f;
+
     [SerializeField] public float MaxHp = 0f;
     [SerializeField] public float CurrentHp = 0f;
     [SerializeField] public float MaxMp = 0f;
@@ -13,7 +18,10 @@ public class PlayerStat : MonoBehaviour
     [SerializeField] public float CurrentStamina = 0f;
 
     [SerializeField] public float Atk = 0f;
+    [SerializeField] public float Def = 0f;
+    [SerializeField] public float Critical = 0f;
 
+    PlayerController PlayerController;
     UI_Status status;
 
     private void Start()
@@ -23,6 +31,8 @@ public class PlayerStat : MonoBehaviour
         {
             Ui.SetStatus(this);
         }
+
+        PlayerController = FindAnyObjectByType<PlayerController>();
     }
 
     void Update()
@@ -33,6 +43,7 @@ public class PlayerStat : MonoBehaviour
 
     private void StatInit()
     {
+        //현재 스탯이 Max스탯보다 크면 Max스탯으로 변경
         if (CurrentHp > MaxHp)
         {
             CurrentHp = MaxHp;           
@@ -49,6 +60,7 @@ public class PlayerStat : MonoBehaviour
 
     private void NaturalRecovery()
     {
+        //HP, MP, Stemina 자동회복
         if(CurrentMp < MaxHp)
         {
             CurrentMp += 0.1f * Time.deltaTime;
@@ -56,12 +68,39 @@ public class PlayerStat : MonoBehaviour
 
         if (CurrentStamina < MaxStamina)
         {
-            CurrentStamina += 0.1f * Time.deltaTime;
+            CurrentStamina += 2 * Time.deltaTime;
         }
+    }
+
+    public void ReduceStamina(float _Amount)
+    {
+        CurrentStamina -= _Amount;
+        CurrentStamina = Mathf.Clamp(CurrentStamina, 0, MaxStamina);
     }
 
     public void TakeDamage(float _Damage)
     {
         CurrentHp -= _Damage;
+    }
+
+    public void AddExp(float _Exp)
+    {
+        CurrentExp += _Exp;
+
+        if(CurrentExp > MaxExp)
+        {
+            float overExp = CurrentHp - MaxExp;
+            CurrentHp = overExp;
+            LevelUp();
+        }
+    }
+
+    private void LevelUp()
+    {
+        Level++;
+        MaxExp *= 1.2f;
+        MaxHp++;
+        Atk++;
+        Def++;
     }
 }

@@ -13,7 +13,7 @@ public class FollowCam : MonoBehaviour
     [Header("카메라 감도")]
     [SerializeField] float LookSensitivity = 1f;//기본 1
 
-    [SerializeField] Transform Spin;//Player Body_Spin Tarnsform
+    [SerializeField] Transform Target;//Player Body_Spin Tarnsform
 
     float MouseXValue = 0f;
     float MouseYValue = 0f;
@@ -42,10 +42,12 @@ public class FollowCam : MonoBehaviour
         MouseYValue = Mathf.Clamp(MouseYValue, -80f, 80f);
         
         //Character Body 마우스 움직임에 따라 위아래 회전
-        Spin.localRotation = Quaternion.Euler(MouseYValue, 0f, 0f);      
+        //Spin.localRotation = Quaternion.Euler(MouseYValue, 0f, 0f);      
 
         //마우스 움직에 따라 Camera회전
-        this.transform.rotation = Quaternion.Euler(MouseYValue, MouseXValue, 0f);
+        //this.transform.rotation = Quaternion.Euler(MouseYValue, MouseXValue, 0f);
+
+        UpdateCameraPosition();
     }
 
     #region
@@ -64,11 +66,22 @@ public class FollowCam : MonoBehaviour
         transform.localRotation = Quaternion.Euler(rotX, 0f, 0f);
     }
     #endregion
+
+    private void UpdateCameraPosition()
+    {
+        Quaternion CameraRotation = Quaternion.Euler(MouseYValue, MouseXValue, 0f);
+
+        Vector3 CameraPosition = Target.position + CameraRotation * PositionOffset;
+
+        transform.position = CameraPosition;
+        transform.LookAt(Target.position + Vector3.up);
+    }
+
     private void LateUpdate()
     {
         //this.transform.position = LookTransform.transform.position + this.transform.position + Offset;
-        this.transform.localPosition = PositionOffset;
-        this.transform.localRotation = Quaternion.Euler(RotationOffset);
+        //this.transform.localPosition = PositionOffset;
+        //this.transform.localRotation = Quaternion.Euler(RotationOffset);
     }
 }
 

@@ -10,8 +10,6 @@ public class UI_Manager : MonoBehaviour
     Stack<GameObject> panelStack = new Stack<GameObject>();
     [SerializeField] public GameObject Panel;
     [SerializeField] public Transform Parent;
-    [SerializeField] public int PanelConunt = 0;
-
     private void Awake()
     {
         if(Instance == null)

@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float MoveSpeed = 0f;
     [SerializeField] float WalkSpeed = 0f;
     [SerializeField] float DashSpeed = 0f;
+    [SerializeField] float DashReductionAmount = 0f;
     [SerializeField] float JumpForce = 0f;
     [SerializeField] int BaseJumpCount = 0;
     [SerializeField] int JumpCount = 0;
@@ -22,7 +23,7 @@ public class PlayerController : MonoBehaviour
     private float VerticalVelocity = 0f;
 
     [Header("플레이어 동작 체크")]
-    [SerializeField] bool IsDash = false;   
+    [SerializeField] bool IsDash = false;
     [SerializeField] bool IsGround = false;
 
     [Header("플레이어 현재 속도측정")]
@@ -42,7 +43,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         //인스펙터에서 CursorLockMode 제어
-        //Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;
         PlayerStat = GetComponent<PlayerStat>();
         Animator = GetComponent<Animator>();
         Anim = GetComponent<PlayerAnimationController>();
@@ -97,11 +98,14 @@ public class PlayerController : MonoBehaviour
 
         CharacterController.Move(VelocityValue * Time.deltaTime);
 
-        //카메라가 바라보는 방향으로 선회
-        Vector3 Dir = Camera.main.transform.forward;
-        Dir.y = 0f;
-        Vector3 tLookAtPosition = this.transform.position + Dir;
-        this.transform.LookAt(tLookAtPosition);
+        //카메라가 바라보는 방향으로 선회 코드
+        #region
+
+        //Vector3 Dir = Camera.main.transform.forward;
+        //Dir.y = 0f;
+        //Vector3 tLookAtPosition = this.transform.position + Dir;
+        //this.transform.LookAt(tLookAtPosition);
+        #endregion
 
         Anim.AnimationUpdate(x, z, VerticalVelocity);
     }
@@ -112,6 +116,7 @@ public class PlayerController : MonoBehaviour
         {
             IsDash = true;
             Anim.SetDash(IsDash);
+            PlayerStat.ReduceStamina(DashReductionAmount * Time.deltaTime);
         }
         else
         {

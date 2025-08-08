@@ -1,0 +1,9 @@
+Inventory -> 매니저역할
+
+Item(데이터)
+
+인게임 오브젝트(드랍)-프리팹
+-Item(데이터)
+
+-ui-프리팹(Element)
+-Item(데이터)

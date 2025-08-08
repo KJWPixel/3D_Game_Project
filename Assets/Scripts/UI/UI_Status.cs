@@ -81,6 +81,10 @@ public class UI_Status : MonoBehaviour
         {
             MpEffect.fillAmount = MpFill;
         }
+
+        //스테미너 바
+
+        //경험치 바 
     }
 
 

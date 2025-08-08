@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEditor.Search;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -17,7 +18,7 @@ public class Enemy : BaseEnemy
     [SerializeField] AI_Enemy AI_Enemy;
     [SerializeField] Character Character;
     [SerializeField] GameObject Player;
-    [SerializeField] GameObject DamageText;
+    [SerializeField] GameObject DamageTextPrefab;
 
     [SerializeField] Transform[] TRPATH;
     [SerializeField] int CurrentPathIndex = 0;
@@ -38,11 +39,14 @@ public class Enemy : BaseEnemy
     [SerializeField] float WalkSpeed = 0f;
     [SerializeField] float ChaseSpeed = 0f;
 
+    [Header("경험치")]
+    [SerializeField] float GainExp = 0f;
+
     [Header("상태 체크")]
     [SerializeField] bool IsDie = false;
 
-    
 
+    PlayerStat PlayerStat;
     Animator Animator;
 
     private void Awake()
@@ -52,14 +56,13 @@ public class Enemy : BaseEnemy
 
     void Start()
     {
-        Player = GameObject.FindWithTag("Player");
-
         if (Player == null)
         {
-            Debug.Log("Player 객체 Null");
+            Player = GameObject.FindWithTag("Player");
         }
 
-        
+        PlayerStat = Player.GetComponent<PlayerStat>();
+
     }
     void Update()
     {
@@ -114,11 +117,11 @@ public class Enemy : BaseEnemy
         //이동
         float Distance = Dir.magnitude;//벡터의 길이를 의미
 
-        if(Distance > 0.2f)
+        if (Distance > 0.2f)
         {
             transform.position += Dir.normalized * WalkSpeed * Time.deltaTime;
 
-            if(Dir != Vector3.zero)
+            if (Dir != Vector3.zero)
             {
                 //방향 벡터Dir를 정면 방향으로 하는 회전을 만든다.
                 Quaternion PathRotation = Quaternion.LookRotation(Dir);
@@ -134,7 +137,7 @@ public class Enemy : BaseEnemy
         {
             WaitTime += Time.deltaTime;
             Animator.SetBool("Search", false);
-            if(WaitTime >= PatrolWaitTime)
+            if (WaitTime >= PatrolWaitTime)
             {
                 CurrentPathIndex = (CurrentPathIndex + 1) % TRPATH.Length;
                 WaitTime = 0f;
@@ -174,7 +177,6 @@ public class Enemy : BaseEnemy
 
         if (Distance <= 3)
         {
-            PlayerStat PlayerStat = Player.GetComponent<PlayerStat>();
             if (PlayerStat != null)
             {
                 PlayerStat.TakeDamage(AttackDamage);
@@ -187,21 +189,41 @@ public class Enemy : BaseEnemy
         Gizmos.DrawWireSphere(transform.position, 3);
     }
 
-    public void ShowDamageText()
-    {
-        
-    }
-
     public void TakeDamage(float _Damage)
     {
-        if(CurHp > 0)
+        ShowDamageText(_Damage);
+
+        if (CurHp >= 0)
         {
             CurHp -= _Damage;
         }
         else
         {
             IsDie = true;
+            Die();
         }
+    }
+
+    public void ShowDamageText(float _Damage)
+    {
+        Vector3 spawnPosition = transform.position + Vector3.up * 2f;
+
+        GameObject DamageTextInstance = Instantiate(DamageTextPrefab, spawnPosition, Quaternion.identity);
+
+        DamageText DamageText = DamageTextInstance.GetComponent<DamageText>();
+
+        if (DamageText != null)
+        {
+            DamageText.SetDamageText(_Damage, false);
+        }
+    }
+
+    public void Die()
+    {
+
+        PlayerStat.AddExp(GainExp);
+        Destroy(gameObject);
+
     }
 
     public void Reset()
@@ -209,5 +231,5 @@ public class Enemy : BaseEnemy
 
     }
 
-    
+
 }
