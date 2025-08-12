@@ -88,11 +88,20 @@ public class PlayerController : MonoBehaviour
         float x = Input.GetAxisRaw("Horizontal");
         float z = Input.GetAxisRaw("Vertical");
 
-        MoveDir = new Vector3(x, 0f, z);
-        MoveDir = CharacterController.transform.TransformDirection(MoveDir);
+        //MoveDir = new Vector3(x, 0f, z);
+        //MoveDir = CharacterController.transform.TransformDirection(MoveDir);
+
+        Vector3 CamForward = Camera.main.transform.forward;
+        CamForward.y = 0f; // 상하 기울기 제거
+        CamForward.Normalize();
+
+        Vector3 CamRight = Camera.main.transform.right;
+        CamRight.y = 0f;
+        CamRight.Normalize();
+
+        MoveDir = (CamForward * z + CamRight * x).normalized;
 
         MoveSpeed = IsDash ? DashSpeed : WalkSpeed;//IsDash에 따라 Dash : Walk Speed 결정
-
         VelocityValue = MoveDir.normalized * MoveSpeed;
         VelocityValue.y += VerticalVelocity;
 
@@ -106,8 +115,16 @@ public class PlayerController : MonoBehaviour
         //Vector3 tLookAtPosition = this.transform.position + Dir;
         //this.transform.LookAt(tLookAtPosition);
         #endregion
+        if (MoveDir.sqrMagnitude > 0.01f)
+        {
+            Quaternion targetRot = Quaternion.LookRotation(MoveDir);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * 10f);
+        }
+     
+        Vector3 localMove = transform.InverseTransformDirection(MoveDir);
+        Anim.AnimationUpdate(localMove.x, localMove.z, VelocityValue.y);
 
-        Anim.AnimationUpdate(x, z, VerticalVelocity);
+        //Anim.AnimationUpdate(x, z, VerticalVelocity);
     }
 
     private void MoveDash()

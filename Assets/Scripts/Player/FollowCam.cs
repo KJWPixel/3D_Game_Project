@@ -19,14 +19,9 @@ public class FollowCam : MonoBehaviour
     float MouseYValue = 0f;
     float rotX = 0f;
 
-    void Start()
-    {
-
-    }
-
     private void Update()
     {
-        LookCamera();
+       
     }
         
 
@@ -82,6 +77,7 @@ public class FollowCam : MonoBehaviour
         //this.transform.position = LookTransform.transform.position + this.transform.position + Offset;
         //this.transform.localPosition = PositionOffset;
         //this.transform.localRotation = Quaternion.Euler(RotationOffset);
+        LookCamera();
     }
 }
 
