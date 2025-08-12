@@ -1,5 +1,31 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1102 &-8686838441753133772
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Skill_Heal
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: 2bafd46b796b9f4489be2ae9f8bc2b1b, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1102 &-7911655639148680452
 AnimatorState:
   serializedVersion: 6
@@ -41,24 +67,27 @@ AnimatorStateMachine:
     m_Position: {x: 190, y: 50, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2280453440334926098}
-    m_Position: {x: 60, y: -40, z: 0}
+    m_Position: {x: 60, y: -80, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7911655639148680452}
-    m_Position: {x: 450, y: 50, z: 0}
+    m_Position: {x: -160, y: -80, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4710669897047589601}
-    m_Position: {x: 330, y: -40, z: 0}
+    m_Position: {x: 290, y: -80, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4397191539796488062}
-    m_Position: {x: 190, y: 150, z: 0}
+    m_Position: {x: 500, y: -80, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -8686838441753133772}
+    m_Position: {x: 500, y: 50, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: -140, y: -30, z: 0}
-  m_EntryPosition: {x: -130, y: 60, z: 0}
-  m_ExitPosition: {x: -130, y: 120, z: 0}
+  m_AnyStatePosition: {x: -380, y: 10, z: 0}
+  m_EntryPosition: {x: -380, y: 60, z: 0}
+  m_ExitPosition: {x: -370, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: -4312787278078747589}
 --- !u!1101 &-4753850919961935151
@@ -415,6 +444,12 @@ AnimatorController:
     m_Controller: {fileID: 9100000}
   - m_Name: IsAttack
     m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: New Trigger
+    m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0

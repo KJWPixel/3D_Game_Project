@@ -22,6 +22,7 @@ public class SkillData : ScriptableObject
     public float Range;
     public float CastTime;
     public GameObject EffectPrefab;
+    public Animation Animation;
     public SkillType type;
     public int Power;
 }

@@ -1,9 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SkillManager : MonoBehaviour
 {
+    PlayerStat PlayerStat;
+    PlayerAnimationController PlayerAnimationController;
+
     /* 스킬 동작 SkillManger
      * 스킬을 사용할 떄 실행되는 로직
      * 쿨타임 체크
@@ -13,15 +17,32 @@ public class SkillManager : MonoBehaviour
      * 이펙트 생성
      * 데미지/효과 적용
     */
-    
+
+    private void Awake()
+    {
+        PlayerStat = GetComponent<PlayerStat>();
+        PlayerAnimationController = GetComponent<PlayerAnimationController>();
+    }
+
     public void UseSkill(SkillData _Skill, Transform _Target)
     {
-        
+        if (!CanUse(_Skill)) return;
+        StartCoroutine(Cast(_Skill, _Target));
     }
 
     private bool CanUse(SkillData _Skill)
     {
         //쿨타임, MP 체크
+        if(_Skill.Cooldown > 0)
+        {
+            return false;
+        }
+
+        if(!PlayerStat.DecreaseMp(_Skill.Cost))
+        {
+            return false;
+        }
+        
         return true;
     }
 
@@ -34,8 +55,6 @@ public class SkillManager : MonoBehaviour
 
         //데미지, 회복, 버프 적용
     }
-
-
 
 
     /* 

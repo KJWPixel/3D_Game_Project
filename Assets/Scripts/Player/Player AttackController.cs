@@ -12,23 +12,28 @@ public class PlayerAttackController : MonoBehaviour
 
     PlayerStat PlayerStat;
     PlayerAnimationController Anim;
+    SkillManager SkillManager;
     RaycastHit TestRay;
 
     private void Awake()
     {
         PlayerStat = GetComponent<PlayerStat>();
+
         Anim = GetComponent<PlayerAnimationController>();
         if(WeaponSword == null)
         {
             //인스펙터에서 할당하지 않았다면 자식에서 할당
             WeaponSword = GetComponentInChildren<Weapon_Sword>();
         }
+
+        SkillManager = GetComponent<SkillManager>();
         
     }
 
     void Update()
     {
         Attack();
+        SkillInput();
     }
 
     private void Attack()
@@ -56,6 +61,12 @@ public class PlayerAttackController : MonoBehaviour
     {
         if (WeaponSword != null) WeaponSword.SwordDisableCollider();
     }
+
+    private void SkillInput()
+    {
+        
+    }
+
 
     #region
     //private void ShotRayBullet()

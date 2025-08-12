@@ -22,7 +22,14 @@ public class PlayerStat : MonoBehaviour
     [SerializeField] public float Critical = 0f;
 
     PlayerController PlayerController;
+    SkillManager SkillManager;
     UI_Status status;
+
+    private void Awake()
+    {
+        PlayerController = GetComponent<PlayerController>();
+        SkillManager = GetComponent<SkillManager>();
+    }
 
     private void Start()
     {
@@ -32,7 +39,7 @@ public class PlayerStat : MonoBehaviour
             Ui.SetStatus(this);
         }
 
-        PlayerController = FindAnyObjectByType<PlayerController>();
+        
     }
 
     void Update()
@@ -78,10 +85,29 @@ public class PlayerStat : MonoBehaviour
         CurrentStamina = Mathf.Clamp(CurrentStamina, 0, MaxStamina);
     }
 
+    public bool DecreaseMp(float _Amount)
+    {
+        if(CurrentMp < _Amount)
+        {
+            return false;
+        }
+
+        CurrentMp -= _Amount;
+        return true;
+    }
+
+
     public void TakeDamage(float _Damage)
     {
-        CurrentHp -= _Damage;
+        if(_Damage <= Def)
+        {
+            return;
+        }
+
+        CurrentHp -= (_Damage - Def);
     }
+
+
 
     public void AddExp(float _Exp)
     {
