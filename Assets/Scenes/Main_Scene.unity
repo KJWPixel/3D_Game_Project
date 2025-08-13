@@ -566,11 +566,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6737606860802330000, guid: c4348391fd2d761499b481e85a9e6877, type: 3}
   m_PrefabInstance: {fileID: 4710278874392090433}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &927833141 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6273887103118301590, guid: ebc7dbcc83e685b4f980da4e52d37b15, type: 3}
-  m_PrefabInstance: {fileID: 5597022218211122707}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &939689054
 GameObject:
   m_ObjectHideFlags: 0
@@ -1141,22 +1136,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fc09dcb9ac43d84999be8efc7bcd51d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1378704367
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1378704353}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5aab3770a3fc2494986aebbc9debb41d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Skill1: {fileID: 11400000, guid: eba925e120925554686555515c51dfee, type: 2}
-  Skill2: {fileID: 0}
-  Skill3: {fileID: 0}
-  Skill4: {fileID: 0}
 --- !u!1 &1529112066
 GameObject:
   m_ObjectHideFlags: 0
@@ -1616,26 +1595,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3339896118214070976, guid: ebc7dbcc83e685b4f980da4e52d37b15, type: 3}
-      propertyPath: DashReduce
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3339896118214070976, guid: ebc7dbcc83e685b4f980da4e52d37b15, type: 3}
-      propertyPath: DashReductionAmount
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3594906044060683530, guid: ebc7dbcc83e685b4f980da4e52d37b15, type: 3}
-      propertyPath: CurrentStamina
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4382837284066439405, guid: ebc7dbcc83e685b4f980da4e52d37b15, type: 3}
-      propertyPath: m_Name
-      value: CameraRig
-      objectReference: {fileID: 0}
     - target: {fileID: 6165933555645972717, guid: ebc7dbcc83e685b4f980da4e52d37b15, type: 3}
       propertyPath: m_Name
       value: Archer
       objectReference: {fileID: 0}
+    - target: {fileID: 6661988746604800494, guid: ebc7dbcc83e685b4f980da4e52d37b15, type: 3}
+      propertyPath: HealSkill
+      value: 
+      objectReference: {fileID: 11400000, guid: eba925e120925554686555515c51dfee, type: 2}
     - target: {fileID: 6834805392992688727, guid: ebc7dbcc83e685b4f980da4e52d37b15, type: 3}
       propertyPath: m_LocalPosition.x
       value: -51.64
@@ -1676,17 +1643,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7650662591984283708, guid: ebc7dbcc83e685b4f980da4e52d37b15, type: 3}
-      propertyPath: Target
-      value: 
-      objectReference: {fileID: 927833141}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6165933555645972717, guid: ebc7dbcc83e685b4f980da4e52d37b15, type: 3}
-      insertIndex: 6
-      addedObject: {fileID: 1378704367}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ebc7dbcc83e685b4f980da4e52d37b15, type: 3}
 --- !u!1001 &8061024996635953825
 PrefabInstance:

@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class SkillManager : MonoBehaviour
 {
+    private bool IsOnCoolDown = false;
+
     PlayerStat PlayerStat;
     PlayerAnimationController PlayerAnimationController;
 
@@ -24,36 +26,56 @@ public class SkillManager : MonoBehaviour
         PlayerAnimationController = GetComponent<PlayerAnimationController>();
     }
 
-    public void UseSkill(SkillData _Skill, Transform _Target)
+    public void UseSkill(SkillData _Skill, Transform _Target = null)
     {
         if (!CanUse(_Skill)) return;
-        StartCoroutine(Cast(_Skill, _Target));
+        StartCoroutine(CastSkill(_Skill, _Target));
     }
 
     private bool CanUse(SkillData _Skill)
     {
-        //쿨타임, MP 체크
-        if(_Skill.Cooldown > 0)
-        {
-            return false;
-        }
-
-        if(!PlayerStat.DecreaseMp(_Skill.Cost))
-        {
-            return false;
-        }
+        //쿨타임, 스탯, 마나 체크
+        if (IsOnCoolDown) return false;
+        if (PlayerStat == null) return false;
+        if(PlayerStat.CurrentMp < _Skill.Cost) return false;
         
         return true;
     }
 
-    private IEnumerator Cast(SkillData _Skill, Transform _Target)
+    private IEnumerator CastSkill(SkillData _Skill, Transform _Target)
     {
+        if(!PlayerStat.ConsumeMp(_Skill.Cost))
+        {
+            //MP부족 시 false 코루틴 중지
+            yield break;
+        }
+
+        IsOnCoolDown = true;
+
         yield return new WaitForSeconds(_Skill.CastTime);
 
-        if (_Skill.EffectPrefab)
-            Instantiate(_Skill.EffectPrefab, _Target.position, Quaternion.identity);
+        //효과에 대한 처리 부분(데미지, 회복, 버프 적용)
 
-        //데미지, 회복, 버프 적용
+        if(_Skill.type == SkillType.Heal)//매개변수 스킬타입이 Heal이면 
+        {
+            PlayerStat.Heal(_Skill.Power);
+        }
+
+        //스킬이펙트 Prefab 생성 
+        if(_Skill.EffectPrefab != null)
+        {
+            if(_Skill.type == SkillType.Heal)
+            {
+                Instantiate(_Skill.EffectPrefab, PlayerStat.transform.position, Quaternion.identity);
+            }
+            else if(_Target != null)
+            {
+                Instantiate(_Skill.EffectPrefab, _Target.transform.position, Quaternion.identity);
+            }
+        }
+
+        yield return new WaitForSeconds(_Skill.Cooldown);
+        IsOnCoolDown = false;
     }
 
 

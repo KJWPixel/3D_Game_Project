@@ -61,8 +61,6 @@ public class PlayerController : MonoBehaviour
         GravityCheck();
         Move();
         MoveDash();
-
-
     }
 
     #region

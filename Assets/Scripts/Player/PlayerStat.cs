@@ -85,15 +85,16 @@ public class PlayerStat : MonoBehaviour
         CurrentStamina = Mathf.Clamp(CurrentStamina, 0, MaxStamina);
     }
 
-    public bool DecreaseMp(float _Amount)
+    public bool ConsumeMp(float _Amount)
     {
-        if(CurrentMp < _Amount)
-        {
-            return false;
-        }
-
+        if(CurrentMp < _Amount) return false;
         CurrentMp -= _Amount;
         return true;
+    }
+
+    public void Heal(float _Amount)
+    {
+        CurrentHp = Mathf.Min(CurrentHp + _Amount, MaxHp);
     }
 
 

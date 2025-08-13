@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerAttackController : MonoBehaviour
 {
-    [SerializeField] private Weapon_Sword WeaponSword;
+    [SerializeField] Weapon_Sword WeaponSword;
+    [SerializeField] SkillData HealSkill;
 
     [Header("공격 체크")]
     [SerializeField] public bool IsAttack = false;
@@ -33,7 +34,13 @@ public class PlayerAttackController : MonoBehaviour
     void Update()
     {
         Attack();
-        SkillInput();
+
+        //스킬 테스트
+        if(Input.GetKey(KeyCode.Alpha1))
+        {
+            Debug.Log("Heal스킬");
+            SkillManager.UseSkill(HealSkill);
+        }
     }
 
     private void Attack()
@@ -60,11 +67,6 @@ public class PlayerAttackController : MonoBehaviour
     public void OnAttackDisable()
     {
         if (WeaponSword != null) WeaponSword.SwordDisableCollider();
-    }
-
-    private void SkillInput()
-    {
-        
     }
 
 
