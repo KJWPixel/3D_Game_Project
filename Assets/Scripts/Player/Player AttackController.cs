@@ -36,10 +36,10 @@ public class PlayerAttackController : MonoBehaviour
         Attack();
 
         //스킬 테스트
-        if(Input.GetKey(KeyCode.Alpha1))
+        if(Input.GetKeyDown(KeyCode.Alpha1))
         {
             Debug.Log("Heal스킬");
-            SkillManager.UseSkill(HealSkill);
+            SkillManager.UseSkill(HealSkill, null);
         }
     }
 

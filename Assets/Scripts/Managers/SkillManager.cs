@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +8,9 @@ public class SkillManager : MonoBehaviour
 
     PlayerStat PlayerStat;
     PlayerAnimationController PlayerAnimationController;
+
+    //스킬별 쿨타임 시간 
+    private Dictionary<SkillData, float> SkillCoolDownTimers = new Dictionary<SkillData, float>();
 
     /* 스킬 동작 SkillManger
      * 스킬을 사용할 떄 실행되는 로직
@@ -34,10 +36,16 @@ public class SkillManager : MonoBehaviour
 
     private bool CanUse(SkillData _Skill)
     {
-        //쿨타임, 스탯, 마나 체크
-        if (IsOnCoolDown) return false;
         if (PlayerStat == null) return false;
+
+        //MP 체크
         if(PlayerStat.CurrentMp < _Skill.Cost) return false;
+
+        //쿨타임 체크
+        if(SkillCoolDownTimers.ContainsKey(_Skill))
+        {
+            if(Time.time < SkillCoolDownTimers[_Skill]) return false;
+        }
         
         return true;
     }
@@ -49,16 +57,26 @@ public class SkillManager : MonoBehaviour
             //MP부족 시 false 코루틴 중지
             yield break;
         }
+        //애니메이션 재생 
 
-        IsOnCoolDown = true;
 
+        //캐스팅 시간
         yield return new WaitForSeconds(_Skill.CastTime);
 
         //효과에 대한 처리 부분(데미지, 회복, 버프 적용)
+        if(_Skill.type == SkillType.Damage)//스킬타입이 Damage면 
+        {
+            //Skill.Type Damage 처리 
+        }
 
-        if(_Skill.type == SkillType.Heal)//매개변수 스킬타입이 Heal이면 
+        if(_Skill.type == SkillType.Heal)//스킬타입이 Heal이면 
         {
             PlayerStat.Heal(_Skill.Power);
+        }
+
+        if(_Skill.type == SkillType.Buff)
+        {
+            //SKill.Type Buff 처리
         }
 
         //스킬이펙트 Prefab 생성 
@@ -71,11 +89,11 @@ public class SkillManager : MonoBehaviour
             else if(_Target != null)
             {
                 Instantiate(_Skill.EffectPrefab, _Target.transform.position, Quaternion.identity);
+                Debug.Log($"스킬 실행: {_Skill.name}, 타겟: {_Target?.name}");
             }
         }
 
-        yield return new WaitForSeconds(_Skill.Cooldown);
-        IsOnCoolDown = false;
+        SkillCoolDownTimers[_Skill] = Time.time + _Skill.Cooldown;
     }
 
 
