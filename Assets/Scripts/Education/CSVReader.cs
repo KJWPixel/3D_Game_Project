@@ -147,7 +147,8 @@ public class CSVReader
             return;
         }
 
-        _Val = ((int)System.Convert.ToInt32(s));
+        //_Val = ((int)System.Convert.ToInt32(s));
+        int.TryParse(s, out _Val);
     }
 
 
@@ -159,11 +160,12 @@ public class CSVReader
 
         if ((s == null) || (s == ""))
         {
-            _Val = 0;
+            _Val = 0f;
             return;
         }
 
         _Val = ((int)System.Convert.ToInt32(s));
+        
     }
 
     public void Get(int _Row, ref long _Val)

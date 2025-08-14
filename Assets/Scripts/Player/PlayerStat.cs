@@ -38,8 +38,6 @@ public class PlayerStat : MonoBehaviour
         {
             Ui.SetStatus(this);
         }
-
-        
     }
 
     void Update()

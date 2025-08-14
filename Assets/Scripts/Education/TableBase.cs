@@ -1,9 +1,8 @@
 using UnityEngine;
-
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
-public class TableBase : MonoBehaviour
+public class TableBase //: MonoBehaviour
 {
     string GetTablePath()
     {

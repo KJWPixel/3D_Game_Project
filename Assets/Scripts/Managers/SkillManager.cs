@@ -89,7 +89,6 @@ public class SkillManager : MonoBehaviour
             else if(_Target != null)
             {
                 Instantiate(_Skill.EffectPrefab, _Target.transform.position, Quaternion.identity);
-                Debug.Log($"스킬 실행: {_Skill.name}, 타겟: {_Target?.name}");
             }
         }
 
