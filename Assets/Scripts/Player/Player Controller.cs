@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     [Header("플레이어 동작 체크")]
     [SerializeField] bool IsDash = false;
     [SerializeField] bool IsGround = false;
+    [SerializeField] public bool CanMove = true;
 
     [Header("플레이어 현재 속도측정")]
     [SerializeField] Vector3 VelocityValue = Vector3.zero;
@@ -36,22 +37,16 @@ public class PlayerController : MonoBehaviour
     [Header("플레이어 마우스 커서 제어")]
     [SerializeField] CursorLockMode CoursorLock = CursorLockMode.None;
 
-    PlayerStat PlayerStat;
-    Animator Animator;
+    PlayerStat PlayerStat;  
     PlayerAnimationController Anim;
+    public PlayerState CurrentState { get; private set; } = PlayerState.Idle;
 
     private void Awake()
     {
         //인스펙터에서 CursorLockMode 제어        
         PlayerStat = GetComponent<PlayerStat>();
-        Animator = GetComponent<Animator>();
         Anim = GetComponent<PlayerAnimationController>();
     }
-    void Start()
-    {
-
-    }
-
 
     void Update()
     {
@@ -79,8 +74,19 @@ public class PlayerController : MonoBehaviour
     //}
     #endregion
 
+    public void SetState(PlayerState _State)
+    {
+        CurrentState = _State;
+        Debug.Log("Player State 상태 전환:" + _State);
+    }
+
     private void Move()
     {
+        if (CurrentState != PlayerState.Idle && CurrentState != PlayerState.Walking)
+        {
+            return;
+        }
+
         //WASD에 입력하여 값을 받음
         float x = Input.GetAxisRaw("Horizontal");
         float z = Input.GetAxisRaw("Vertical");
@@ -198,6 +204,11 @@ public class PlayerController : MonoBehaviour
         {
             VerticalVelocity = 0f;
         }
+    }
+
+    public void LockMove()
+    {
+
     }
 
     //이전 문제가되는 Move()함수 Backup

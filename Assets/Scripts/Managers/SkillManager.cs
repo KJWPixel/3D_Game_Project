@@ -1,16 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SkillManager : MonoBehaviour
 {
-    private bool IsOnCoolDown = false;
+    public static SkillManager instance;    
 
     PlayerStat PlayerStat;
-    PlayerAnimationController PlayerAnimationController;
+    PlayerController PlayerController;
+    PlayerAnimationController Anim;
+
+
 
     //스킬별 쿨타임 시간 
     private Dictionary<SkillData, float> SkillCoolDownTimers = new Dictionary<SkillData, float>();
+
 
     /* 스킬 동작 SkillManger
      * 스킬을 사용할 떄 실행되는 로직
@@ -24,8 +29,9 @@ public class SkillManager : MonoBehaviour
 
     private void Awake()
     {
-        PlayerStat = GetComponent<PlayerStat>();
-        PlayerAnimationController = GetComponent<PlayerAnimationController>();
+        PlayerStat = GetComponent<PlayerStat>();      
+        Anim = GetComponent<PlayerAnimationController>();
+        PlayerController = GetComponent<PlayerController>();
     }
 
     public void UseSkill(SkillData _Skill, Transform _Target = null)
@@ -34,17 +40,27 @@ public class SkillManager : MonoBehaviour
         StartCoroutine(CastSkill(_Skill, _Target));
     }
 
+
     private bool CanUse(SkillData _Skill)
     {
-        if (PlayerStat == null) return false;
+        if (PlayerStat == null)
+        {
+            return false;
+        }
 
         //MP 체크
-        if(PlayerStat.CurrentMp < _Skill.Cost) return false;
+        if(PlayerStat.CurrentMp < _Skill.Cost)
+        {
+            return false;
+        }
 
         //쿨타임 체크
         if(SkillCoolDownTimers.ContainsKey(_Skill))
         {
-            if(Time.time < SkillCoolDownTimers[_Skill]) return false;
+            if(Time.time < SkillCoolDownTimers[_Skill])
+            {
+                return false;
+            }
         }
         
         return true;
@@ -57,9 +73,13 @@ public class SkillManager : MonoBehaviour
             //MP부족 시 false 코루틴 중지
             yield break;
         }
+
+        //이동 잠금 
+        PlayerController.SetState(PlayerState.Casting);
+
         //애니메이션 재생 
-
-
+        Anim.PlayerSkillAnimation(_Skill.type, true);
+        
         //캐스팅 시간
         yield return new WaitForSeconds(_Skill.CastTime);
 
@@ -84,13 +104,19 @@ public class SkillManager : MonoBehaviour
         {
             if(_Skill.type == SkillType.Heal)
             {
-                Instantiate(_Skill.EffectPrefab, PlayerStat.transform.position, Quaternion.identity);
+                GameObject EffectInstance = Instantiate(_Skill.EffectPrefab, PlayerStat.transform.position, Quaternion.identity);
+                Destroy(EffectInstance, 2f);
             }
             else if(_Target != null)
             {
-                Instantiate(_Skill.EffectPrefab, _Target.transform.position, Quaternion.identity);
+                GameObject EffectInstance = Instantiate(_Skill.EffectPrefab, _Target.transform.position, Quaternion.identity);
             }
         }
+
+        //
+        PlayerController.SetState(PlayerState.Idle);
+        //애니메이션 종료
+        Anim.PlayerSkillAnimation(_Skill.type, false);
 
         SkillCoolDownTimers[_Skill] = Time.time + _Skill.Cooldown;
     }

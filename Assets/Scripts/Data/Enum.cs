@@ -21,8 +21,19 @@ public enum SKILL
 
 public enum ITEM
 {
-    
+
 }
+
+public enum PlayerState
+{
+    Idle,
+    Walking,
+    Dashing,
+    Attacking,
+    Casting,
+    Stunned,
+}
+
 
 
 public enum AI

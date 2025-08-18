@@ -5,13 +5,14 @@ using UnityEngine;
 public class PlayerAttackController : MonoBehaviour
 {
     [SerializeField] Weapon_Sword WeaponSword;
-    [SerializeField] SkillData HealSkill;
+    [SerializeField] List<SkillData> OwnedSkill = new List<SkillData>();
 
     [Header("공격 체크")]
     [SerializeField] public bool IsAttack = false;
     [SerializeField] float AttackCollTimer = 0f;
 
     PlayerStat PlayerStat;
+    PlayerController PlayerController;
     PlayerAnimationController Anim;
     SkillManager SkillManager;
     RaycastHit TestRay;
@@ -19,6 +20,7 @@ public class PlayerAttackController : MonoBehaviour
     private void Awake()
     {
         PlayerStat = GetComponent<PlayerStat>();
+        PlayerController = GetComponent<PlayerController>();
 
         Anim = GetComponent<PlayerAnimationController>();
         if(WeaponSword == null)
@@ -39,7 +41,7 @@ public class PlayerAttackController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Alpha1))
         {
             Debug.Log("Heal스킬");
-            SkillManager.UseSkill(HealSkill, null);
+            SkillManager.UseSkill(OwnedSkill[0], null);
         }
     }
 
@@ -49,11 +51,13 @@ public class PlayerAttackController : MonoBehaviour
         {
             Debug.Log("Player Attack");
             IsAttack = true;
+            PlayerController.CanMove = false;
             Anim.SetAttack(IsAttack);
         }
         else
         {
             IsAttack = false;
+            PlayerController.CanMove = true;
             Anim.SetAttack(IsAttack);
         }
     }
