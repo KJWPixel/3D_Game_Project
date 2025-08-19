@@ -8,7 +8,7 @@ public class UI_Manager : MonoBehaviour
     public static UI_Manager Instance;
 
     [SerializeField] GameObject SkillWindow;
-    [SerializeField] bool IsActiveCursor = false;
+    [SerializeField] public bool IsActiveCursor = false;
 
 
     Stack<GameObject> panelStack = new Stack<GameObject>();
@@ -54,6 +54,16 @@ public class UI_Manager : MonoBehaviour
         {
             IsActiveCursor = !IsActiveCursor;
             
+            if(IsActiveCursor)
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false; 
+            }
         }
     }
 

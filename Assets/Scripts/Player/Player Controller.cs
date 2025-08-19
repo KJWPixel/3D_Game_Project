@@ -25,7 +25,6 @@ public class PlayerController : MonoBehaviour
     [Header("플레이어 동작 체크")]
     [SerializeField] bool IsDash = false;
     [SerializeField] bool IsGround = false;
-    [SerializeField] public bool CanMove = true;
 
     [Header("플레이어 현재 속도측정")]
     [SerializeField] Vector3 VelocityValue = Vector3.zero;
@@ -34,12 +33,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float GroundCheckDistance = 0f;
     [SerializeField] bool GizmoOnOffCheck = false;
 
-    [Header("플레이어 마우스 커서 제어")]
-    [SerializeField] CursorLockMode CoursorLock = CursorLockMode.None;
-
     PlayerStat PlayerStat;  
     PlayerAnimationController Anim;
-    public PlayerState CurrentState { get; private set; } = PlayerState.Idle;
+    [SerializeField] public PlayerState CurrentState { get; set; } = PlayerState.Idle;
 
     private void Awake()
     {

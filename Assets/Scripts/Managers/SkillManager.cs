@@ -105,7 +105,7 @@ public class SkillManager : MonoBehaviour
             if(_Skill.type == SkillType.Heal)
             {
                 GameObject EffectInstance = Instantiate(_Skill.EffectPrefab, PlayerStat.transform.position, Quaternion.identity);
-                Destroy(EffectInstance, 2f);
+                Destroy(EffectInstance, 1f);
             }
             else if(_Target != null)
             {

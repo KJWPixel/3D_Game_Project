@@ -8,8 +8,13 @@ public class PlayerAttackController : MonoBehaviour
     [SerializeField] List<SkillData> OwnedSkill = new List<SkillData>();
 
     [Header("공격 체크")]
-    [SerializeField] public bool IsAttack = false;
-    [SerializeField] float AttackCollTimer = 0f;
+    [SerializeField] float AttackTimer = 0f;
+    [SerializeField] float AttackDuration = 0f;
+
+    [Header("공격 카운트")]
+    [SerializeField] int ComboCount = 0;
+    [SerializeField] float ComboTimer = 0f;
+    [SerializeField] float ComboMaxTime = 1f;
 
     PlayerStat PlayerStat;
     PlayerController PlayerController;
@@ -47,18 +52,16 @@ public class PlayerAttackController : MonoBehaviour
 
     private void Attack()
     {
-        if(Input.GetKey(KeyCode.Mouse0))
+        if(Input.GetKey(KeyCode.Mouse0) && PlayerController.CurrentState != PlayerState.Attacking)
         {
             Debug.Log("Player Attack");
-            IsAttack = true;
-            PlayerController.CanMove = false;
-            Anim.SetAttack(IsAttack);
+            PlayerController.SetState(PlayerState.Attacking);
+            Anim.SetAttack(true);//애니메이션 재생 
         }
         else
         {
-            IsAttack = false;
-            PlayerController.CanMove = true;
-            Anim.SetAttack(IsAttack);
+            PlayerController.SetState(PlayerState.Idle);
+            Anim.SetAttack(false);//애니메이션 종료 
         }
     }
 

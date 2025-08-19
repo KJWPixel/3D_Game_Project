@@ -25,15 +25,15 @@ public class PlayerAnimationController : MonoBehaviour
 
     public void AnimationUpdate(float _x, float _z, float _VerticalVelocity)
     {
-        if(PlayerController.CanMove == false)
-        {
-            Debug.Log("Animation 함수 Return");
-            Animator.SetBool("IsWalk", false);
-            Animator.SetFloat("xDir", 0f);
-            Animator.SetFloat("yDir", 0f);
-            Animator.SetFloat("zDir", 0f);
-            return;
-        }
+        //if(PlayerController.CanMove == false)
+        //{
+        //    Debug.Log("Animation 함수 Return");
+        //    Animator.SetBool("IsWalk", false);
+        //    Animator.SetFloat("xDir", 0f);
+        //    Animator.SetFloat("yDir", 0f);
+        //    Animator.SetFloat("zDir", 0f);
+        //    return;
+        //}
 
         bool IsWaking = _x != 0 || _z != 0;
         Animator.SetBool("IsWalk", IsWaking);

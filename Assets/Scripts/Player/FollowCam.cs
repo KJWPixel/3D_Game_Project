@@ -19,6 +19,13 @@ public class FollowCam : MonoBehaviour
     float MouseYValue = 0f;
     float rotX = 0f;
 
+    UI_Manager UI_Manager;
+
+    private void Start()
+    {
+        UI_Manager = UI_Manager.Instance;
+    }
+
     private void Update()
     {
        
@@ -27,6 +34,11 @@ public class FollowCam : MonoBehaviour
 
     private void LookCamera()
     {
+        if(UI_Manager.IsActiveCursor)
+        {
+            return;
+        }
+ 
         float MouseX = Input.GetAxisRaw("Mouse X") * LookSensitivity;
         float MouseY = Input.GetAxisRaw("Mouse Y") * LookSensitivity;
 
