@@ -1,0 +1,58 @@
+2025-07-15 화요일
+3D 이론
+
+렌더링 파이프라인
+
+1-1. 파이프 라인 구성
+-응용, 기하, 래스터화 단계의3단계로 구성
+
+랜더링 파이프라인 처리 과정
+Vetex(점)/IndexBuffer > Input assembler > Vetex shader(색, 위치, 크기) > Tessellation(면적) > 
+Geometry shader(유무 따라 다름) > 
+Rasterization(물체의 색을 어떻게 입히는) > Fragment shader > Color blending > Freabuffer
+
+행렬(matrix)
+1.Concept of matrix
+-2차원으로 배열된 순서쌍
+-가로로 된 숫자 나열을 행(row)
+-세로로 된 숫자 나열을 열(column)
+단위행렬
+
+벡터(Vector)
+
+단위 벡터
+-벡터의 크기는 1이며 방향만을 나타냄
+크기가 1이 아닌 벡터를 단위 벡터로 만들어 주는 것을 벡터의 정규화(Normalization)라고 한다.
+크기 + 방향 + 이동 : SRT 규칙
+
+벡터의 내적
+내적의 정의
+-벡터의 곱셈은 내적과 외적으로 정의
+-벡터의 내적은 결과값이 스칼라이므로 스칼라 곱이라고도 하며 점곱이라고도 한다.
+-내적은 벡터의 방향 관계를 얻는 도구로 사용
+
+벡터의 외적
+-벡터의 외적은 벡터 곱셈의 또 다른 형태
+-두 벡터에 모두 수직한 벡터를 결과값으로 갖음
+-크로스곱(Cross Product)또는 벡터 곱(Vector Product)이라고도 함
+-벡터와 벡터의 각을 구하는데 사용(방향을 알 수 있음)
+
+Vector3 vector = new Vector3();
+
+Vector3.Distance();
+Vector3.Dot();
+Vector3.Cross();
+
+컴퓨터학 실수의 경우 근사값으로 표현하여 실제로 같지 않음
+
+Matrix4x4 matrix = Matrix4x4.identity;
+
+Quaternion 사원수
+회전에서 짐벌락으로 인해 쿼터니언 사용 사원수 x,y,z, 나머지 하나값은 허수값
+
+발사체
+발사체의 자유 물체도 
+
+발사체에 작용하는 외력 = 중력 + 항력
+중력 = 질량 * 중력 가속도
+항력 = 항력계수 * 속도

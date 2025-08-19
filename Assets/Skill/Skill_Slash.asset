@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1aabd643963f6347b205db3c9ff671b, type: 3}
+  m_Name: Skill_Slash
+  m_EditorClassIdentifier: 
+  SkillName: Slash
+  Icon: {fileID: 21300000, guid: 32695f1744f4a7f419b32569a46faa4e, type: 3}
+  Cooldown: 5
+  Cost: 15
+  Range: 15
+  CastTime: 1.5
+  EffectPrefab: {fileID: 7647375919561907788, guid: 035ce8c9cfc34104991ce416daf8aebe, type: 3}
+  type: 0
+  Power: 30

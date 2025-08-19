@@ -7,9 +7,7 @@ public class UI_Manager : MonoBehaviour
 {
     public static UI_Manager Instance;
 
-    [SerializeField] GameObject SkillWindow;
     [SerializeField] public bool IsActiveCursor = false;
-
 
     Stack<GameObject> panelStack = new Stack<GameObject>();
 
@@ -39,13 +37,13 @@ public class UI_Manager : MonoBehaviour
 
     private void UI_Initial()
     {
-        SkillWindow.SetActive(false);
+
     }
 
     private void Update()
     {
         CursorActive();
-        UI_SKillWIndow();
+
     }
 
     private void CursorActive()
@@ -82,20 +80,6 @@ public class UI_Manager : MonoBehaviour
         
     }
 
-    private void UI_SKillWIndow()
-    {
-        if(Input.GetKeyDown(KeyCode.K))
-        {
-            if(SkillWindow.activeSelf)
-            {
-                SkillWindow.SetActive(false);
-            }
-            else
-            {
-                SkillWindow.SetActive(true);
-            }
-        }
-    }
 
     
 

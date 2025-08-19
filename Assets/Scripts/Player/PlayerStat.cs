@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -9,6 +10,7 @@ public class PlayerStat : MonoBehaviour
     [SerializeField] public int Level = 1;
     [SerializeField] public float MaxExp = 0f;
     [SerializeField] public float CurrentExp = 0f;
+    [SerializeField] public int SkillPoint = 0;
 
     [SerializeField] public float MaxHp = 0f;
     [SerializeField] public float CurrentHp = 0f;

@@ -17,6 +17,7 @@ public class UI_Status : MonoBehaviour
     [SerializeField] Image MpImage;
     [SerializeField] Image MpEffect;
     [SerializeField] Image SteminaImage;
+    [SerializeField] GameObject SteminaBackGround;
     [SerializeField] float EffectTime = 0f;
 
     private void Awake()
@@ -31,6 +32,8 @@ public class UI_Status : MonoBehaviour
     void Update()
     {
         UIStatsUpdate();
+        HideStemina();
+    
     }
 
     private void InitializedFillAmount()
@@ -85,6 +88,18 @@ public class UI_Status : MonoBehaviour
         //스테미너 바
 
         //경험치 바 
+    }
+
+    private void HideStemina()
+    {
+        if(PlayerStat.CurrentStamina == PlayerStat.MaxStamina)
+        {
+            SteminaBackGround.SetActive(false);
+        }
+        else
+        {
+            SteminaBackGround.SetActive(true);
+        }
     }
 
 
