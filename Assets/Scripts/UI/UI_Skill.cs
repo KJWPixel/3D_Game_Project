@@ -14,19 +14,22 @@ public class UI_Skill : MonoBehaviour
 
     private void Awake()
     {
-        
+        InitSkillWindow();
     }
     void Start()
     {
         PlayerStat = FindAnyObjectByType<PlayerStat>();
         
     }
-
     
     void Update()
     {
         ActiveUI();
         SkillPointUpdate();
+    }
+    private void InitSkillWindow()
+    {
+        SkillWindow.SetActive(false);
     }
 
     private void ActiveUI()
@@ -48,6 +51,5 @@ public class UI_Skill : MonoBehaviour
     private void SkillPointUpdate()
     {
         SkillPointText.text = PlayerStat.SkillPoint.ToString();
-
     }
 }
