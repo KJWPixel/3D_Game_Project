@@ -20,4 +20,5 @@ MonoBehaviour:
   CastTime: 2
   EffectPrefab: {fileID: 9017484664307500583, guid: 1245b8d2997d5b34fb1637be70a7eb05, type: 3}
   type: 1
+  SkillPoint: 5
   Power: 15

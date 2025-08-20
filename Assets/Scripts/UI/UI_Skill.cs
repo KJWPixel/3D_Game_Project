@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UI_Skill : MonoBehaviour
 {
     [SerializeField] GameObject SkillWindow;
     [SerializeField] TextMeshProUGUI SkillPointText;
+    [SerializeField] GameObject AcquisitionImage;
 
     bool IsActive = false;
 
@@ -18,8 +20,7 @@ public class UI_Skill : MonoBehaviour
     }
     void Start()
     {
-        PlayerStat = FindAnyObjectByType<PlayerStat>();
-        
+        PlayerStat = FindAnyObjectByType<PlayerStat>();     
     }
     
     void Update()
@@ -30,6 +31,7 @@ public class UI_Skill : MonoBehaviour
     private void InitSkillWindow()
     {
         SkillWindow.SetActive(false);
+        AcquisitionImage.SetActive(false);
     }
 
     private void ActiveUI()
@@ -51,5 +53,11 @@ public class UI_Skill : MonoBehaviour
     private void SkillPointUpdate()
     {
         SkillPointText.text = PlayerStat.SkillPoint.ToString();
+    }
+
+    public void SkillButton()
+    {
+        Debug.Log("½ºÅ³ ½Àµæ");
+        AcquisitionImage.SetActive(true);
     }
 }

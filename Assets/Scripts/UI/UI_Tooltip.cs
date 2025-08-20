@@ -11,7 +11,7 @@ public class UI_Tooltip : MonoBehaviour
     [SerializeField] private GameObject TooltipPanel;
     [SerializeField] private TMP_Text TooltipName;
     [SerializeField] private TMP_Text TooltipDesc;
-    [SerializeField] private TMP_Text TooltipExtra; // 쿨타임, 소모자원 등
+    [SerializeField] private TMP_Text TooltipExtra; 
     [SerializeField] private Image TooltipIcon;
 
     private void Awake()
@@ -23,18 +23,14 @@ public class UI_Tooltip : MonoBehaviour
     public void ShowTooltip(SkillData _Data, Vector3 _Position)
     {
         TooltipPanel.SetActive(true);
-        TooltipPanel.transform.position = _Position + new Vector3(0, -350, 0); // 아이콘 오른쪽
+        TooltipPanel.transform.position = _Position + new Vector3(0, 0, 0); 
         TooltipIcon.sprite = _Data.Icon;
 
         TooltipName.text = $"{_Data.SkillName}";
         TooltipDesc.text = GetDescriptionByType(_Data);
 
-        TooltipExtra.text =
-            $"쿨타임: {_Data.Cooldown:F1}s\n" +
-            $"소모: {_Data.Cost}\n" +
-            $"사거리: {_Data.Range}\n" +
-            $"시전시간: {_Data.CastTime}s\n" +
-            $"위력: {_Data.Power}";
+        TooltipExtra.text = $"요구 레벨:{_Data.RequireLevel}\n요구 스킬포인트  :{_Data.RequireSP}\n재사용 대기시간  :{_Data.Cooldown}\n스킬데미지 :{_Data.Power}";
+
     }
 
     public void HideTooltip()

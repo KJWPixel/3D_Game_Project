@@ -92,6 +92,13 @@ public class PlayerStat : MonoBehaviour
         return true;
     }
 
+    public bool ConsumeSp(int _Amount)
+    {
+        if (SkillPoint < _Amount) return false;
+        SkillPoint -= _Amount;
+        return true;
+    }
+
     public void Heal(float _Amount)
     {
         CurrentHp = Mathf.Min(CurrentHp + _Amount, MaxHp);

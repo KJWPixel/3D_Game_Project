@@ -24,6 +24,9 @@ public class SkillData : ScriptableObject
     public GameObject EffectPrefab;
     public SkillType type;
     public float Power;
+    public int RequireLevel;
+    public int RequireSP;
+    
 }
 
 public enum SkillType
