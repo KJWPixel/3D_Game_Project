@@ -8,10 +8,9 @@ public class SkillManager : MonoBehaviour
     public static SkillManager instance;    
 
     PlayerStat PlayerStat;
+    PlayerSkillBook PlayerSkillBook;
     PlayerController PlayerController;
     PlayerAnimationController Anim;
-
-
 
     //스킬별 쿨타임 시간 
     private Dictionary<SkillData, float> SkillCoolDownTimers = new Dictionary<SkillData, float>();
@@ -31,6 +30,7 @@ public class SkillManager : MonoBehaviour
     {
         PlayerStat = GetComponent<PlayerStat>();      
         Anim = GetComponent<PlayerAnimationController>();
+        PlayerSkillBook = GetComponent<PlayerSkillBook>();
         PlayerController = GetComponent<PlayerController>();
     }
 
@@ -45,6 +45,13 @@ public class SkillManager : MonoBehaviour
     {
         if (PlayerStat == null)
         {
+            return false;
+        }
+
+        //배운스킬 체크
+        if (PlayerSkillBook.HasSkill(_Skill))
+        {
+            Debug.Log("배우지 않은 스킬입니다.");
             return false;
         }
 

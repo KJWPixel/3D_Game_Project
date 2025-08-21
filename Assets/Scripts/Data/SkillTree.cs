@@ -6,34 +6,48 @@ public class SkillTree : MonoBehaviour
 {
     //스킬의 습득 조건 검사 및 습득여부 확인
     //스킬클릭 > 해당 스킬의 SP 차감 여부 확인, Level 확인 > 습득이 가능하면 SP 차감 > BackGround변화(습득연출)
-    
-    [SerializeField] List<SkillData> AllSkillData;
-    private Dictionary<SkillData, string> SkillName = new Dictionary<SkillData, string>();
-    private Dictionary<SkillData, int> RequireSkill = new Dictionary<SkillData, int>();
 
-    PlayerStat PlayerStat;
-    UI_Skill UI_Skill;
+    [SerializeField] PlayerStat PlayerStat;
+    [SerializeField] PlayerSkillBook PlayerSkillBook; 
 
-    private void Start()
+    public bool LearnSkill(SkillData _Skill)
     {
-        PlayerStat = FindAnyObjectByType<PlayerStat>();
-    }
+        //이미 배운 레벨
+        int CurrentLevel = PlayerSkillBook.GetSkillLevel(_Skill);
 
-
-    public void CanLearnSkill(SkillData _SkillData)
-    {
-        //습득 조건을 확인
-        if (PlayerStat.Level < _SkillData.RequireLevel)
+        //최대 레벨 체크
+        if(CurrentLevel >= _Skill.MaxLevel)
         {
-            return;
-        }       
-        if (PlayerStat.SkillPoint < _SkillData.RequireSP)
-        {
-            return;
+            Debug.Log($"{_Skill.SkillName} 이미 최대 레벨입니다.");
+            return false;
         }
 
-        return;
+        //선행 스킬 체크
+        foreach(var PreSkill in _Skill.PrerequisiteSkills)
+        {
+            if(!PlayerSkillBook.HasSkill(PreSkill))
+            {
+                Debug.Log($"{PreSkill.SkillName}를 먼저 배워야 합니다.");
+                return false;
+            }
+        }
+
+        //레벨 조건 체크
+        if(PlayerStat.Level < _Skill.RequireLevel)
+        {
+            Debug.Log("플레이어 레벨이 부족합니다.");
+        }
+
+        //SP 조건 체크
+        if(!PlayerStat.ConsumeSp(_Skill.RequireSP))
+        {
+            Debug.Log("SP가 부족합니다.");
+            return false;
+        }
+
+        //습득 처리
+        PlayerSkillBook.LearnSkill(_Skill);
+        Debug.Log($"{_Skill.SkillName} 습득완료! (현재 Lv.{PlayerSkillBook.GetSkillLevel(_Skill)})");
+        return true;
     }
-
-
 }

@@ -9,13 +9,23 @@ public class UI_SkillIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     //스킬창 아이콘에 부착하여 마우스 커서에 닿았을 시 스킬툴팁 활성화
     [SerializeField] public SkillData SkillData;
     [SerializeField] private Image IconImage;
+    [SerializeField] SkillTree SkillTree;
+    [SerializeField] GameObject LearnSkillBackGround;
+    private Button Button;
 
+    private void Awake()
+    {
+        Button = GetComponent<Button>();
+        Button.onClick.AddListener(OnClick);
+
+    }
     private void Start()
     {
         if (SkillData != null && IconImage != null)
         {
             IconImage.sprite = SkillData.Icon;
-        }         
+        }
+        LearnSkillBackGround.SetActive(false);
     }
 
     public void OnPointerEnter(PointerEventData _EventData)
@@ -29,5 +39,13 @@ public class UI_SkillIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     public void OnPointerExit(PointerEventData _EventData)
     {
         UI_Tooltip.Instance.HideTooltip();
+    }
+
+    private void OnClick()
+    {
+        SkillTree.LearnSkill(SkillData);
+
+        LearnSkillBackGround.SetActive(true);
+
     }
 }
