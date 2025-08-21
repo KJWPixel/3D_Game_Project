@@ -8,8 +8,8 @@ public class UI_Manager : MonoBehaviour
     public static UI_Manager Instance;
 
     [SerializeField] public bool IsActiveCursor = false;
-
-    Stack<GameObject> panelStack = new Stack<GameObject>();
+    [SerializeField] UI_SkillSlot[] UI_SkillSlots;
+    
 
     //[SerializeField] public GameObject Panel;
     //[SerializeField] public Transform Parent;
@@ -25,9 +25,7 @@ public class UI_Manager : MonoBehaviour
         else
         {
             Destroy(gameObject);
-        }
-
-        
+        }    
     }
 
     private void Start()
@@ -43,7 +41,6 @@ public class UI_Manager : MonoBehaviour
     private void Update()
     {
         CursorActive();
-
     }
 
     private void CursorActive()
@@ -65,24 +62,9 @@ public class UI_Manager : MonoBehaviour
         }
     }
 
-    public void ShowPopupUI()
-    {
-        
-    }
-
-    public void ClosePopupUI()
-    {
-        
-    }
-
-    public void UI_Option()
-    {
-        
-    }
 
 
-    
-
+  
     //Stack을 이용한 Pop
     #region
     //public void OpnePopup()

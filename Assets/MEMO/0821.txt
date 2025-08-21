@@ -1,0 +1,10 @@
+포톤라이브러리 Photon_Lip
+
+PhtonMnanger Object 생성
+Photon View Component 
+
+Photon View 연결
+인덱스를 1~999까지 
+
+PhotonManager 스크립트 생성
+using Photon.Pun; , using Photon.Realtime;
