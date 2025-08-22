@@ -14,8 +14,7 @@ public class UI_SkillIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     [SerializeField] PlayerSkillBook PlayerSkillBook;
     [SerializeField] GameObject LearnSkillEffectImage;
     private Button Button;
-    private UI_Manager UI_Manager;
-
+    
     private void Awake()
     {
         Button = GetComponent<Button>();
@@ -23,13 +22,11 @@ public class UI_SkillIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         LearnSkillEffectImage.SetActive(false);
     }
     private void Start()
-    {
+    {      
         if (SkillData != null && IconImage != null)
         {
             IconImage.sprite = SkillData.Icon;
-        }
-
-        UI_Manager.Instance = GetComponent<UI_Manager>();   
+        }    
     }
 
     public void OnPointerEnter(PointerEventData _EventData)
@@ -47,28 +44,27 @@ public class UI_SkillIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public void OnPointerClick(PointerEventData _EventData)
     {
+        //우클릭 시 해당 스킬을 습득여부확인(유/무) 후 스킬이 있다면 UI_Manager에 참조된 슬롯(List)에 비어 있다면 해당 스킬아이콘을 참조
+        //스킬 사용에 따른 쿨타임을 연출
+        //스킬슬롯에 들어간 스킬을 다시 우클릭하면 Remove함
         if (_EventData.button == PointerEventData.InputButton.Right)
         {
             if(PlayerSkillBook.LearnedSkills.Contains(SkillData))
             {
                 Debug.Log("스킬이 슬롯에 들어갑니다.");
-                //스킬을 배웠고 우클릭으로 슬롯에 들어가는 로직
-                //우클릭 시 UI_Manager 호출, UI_Manager가 해당 슬롯을 관리하고 있으므로 5개 슬롯의 인덱스 순서에 따라 비어있다면 해당 스킬아이콘 이미지를 넣어주면서
-                //인덱스에도 해당 스킬을 저장
+                UI_Manager.Instance.SetSkillSlot(SkillData);
             }
             else if(!PlayerSkillBook.LearnedSkills.Contains(SkillData))
             {
                 Debug.Log("해당 스킬은 배우지 않았습니다.");
-                //스킬을 배우지 않았다면
             }
             else
-            {
+            {            
+                Debug.Log("스킬슬롯에 스킬을 해제합니다.");
+                UI_Manager.Instance.RemoveSkillSlot(SkillData);
                 //스킬을 배웠고 다시한번 우클릭 시 슬롯에 해당 스킬을 뻄 Romove(SkillData)
             }
-
-          
-        }
-        
+        }     
     }
 
     private void OnClick()
@@ -85,7 +81,5 @@ public class UI_SkillIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         {
             LearnSkillEffectImage.SetActive(true);
         }
-    }
-
-    
+    } 
 }

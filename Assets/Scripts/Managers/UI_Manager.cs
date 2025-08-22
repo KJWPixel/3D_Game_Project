@@ -1,18 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class UI_Manager : MonoBehaviour
 {
     public static UI_Manager Instance;
 
+    [Header("마우스커서 제어 체크")]
     [SerializeField] public bool IsActiveCursor = false;
-    [SerializeField] UI_SkillSlot[] UI_SkillSlots;
-    
 
-    //[SerializeField] public GameObject Panel;
-    //[SerializeField] public Transform Parent;
+    [SerializeField] PlayerSkillBook PlayerSkillBook;
+    [SerializeField] SkillTree SkillTree;
+
+    [SerializeField] List<UI_SkillSlot> UI_SkillSlots;
 
 
     private void Awake()
@@ -26,16 +28,6 @@ public class UI_Manager : MonoBehaviour
         {
             Destroy(gameObject);
         }    
-    }
-
-    private void Start()
-    {
-        UI_Initial();
-    }
-
-    private void UI_Initial()
-    {
-
     }
 
     private void Update()
@@ -62,9 +54,31 @@ public class UI_Manager : MonoBehaviour
         }
     }
 
+    public void SetSkillSlot(SkillData _SkillData)
+    {
+        for(int Index = 0; Index < UI_SkillSlots.Count; Index++)
+        {
+            if (UI_SkillSlots[Index].SkillData == null)
+            {
+                UI_SkillSlots[Index].SkillData = _SkillData;
+                break;
+            }
+        }
+    }
+
+    public void RemoveSkillSlot(SkillData _SkillData)
+    {
+        for(int Index = 0; Index < UI_SkillSlots.Count; Index++)
+        {
+            if (UI_SkillSlots[Index].SkillData == _SkillData)
+            {
+                UI_SkillSlots.RemoveAt(Index);
+                break;
+            }
+        }
+    }
 
 
-  
     //Stack을 이용한 Pop
     #region
     //public void OpnePopup()
