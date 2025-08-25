@@ -38,15 +38,49 @@ public class UI_Tooltip : MonoBehaviour
         TooltipPanel.SetActive(false);
     }
 
-    private string GetDescriptionByType(SkillData _Data)
+    private string GetDescriptionByType(SkillData _SkillData)
     {
-        switch (_Data.type)
+        if(_SkillData == null || _SkillData.Effects.Count == 0)
         {
-            case SkillType.Damage: return "대상을 공격하는 스킬입니다.";
-            case SkillType.Heal: return "체력을 회복하는 스킬입니다.";
-            case SkillType.Buff: return "능력을 강화하는 버프 스킬입니다.";
-            case SkillType.Debuff: return "적을 약화시키는 디버프 스킬입니다.";
-            default: return "설명 없음";
+            return "설명없음";
         }
+
+        string Description = "";
+
+        foreach(var Effect in _SkillData.Effects)
+        {
+            switch (Effect.EffectType)
+            {
+                case SkillEffectType.Damage:
+                    Description += $"대상을 공격하여 {Effect.Power} 데미지를 입힙니다.\n";
+                    break;
+                case SkillEffectType.Heal:
+                    Description += $"대상을 회복하여 {Effect.Power} 체력을 회복합니다.\n";
+                    break;
+                case SkillEffectType.Buff:
+                    Description += $"능력을 {Effect.Power} 만큼 강화하는 버프를 적용합니다.\n";
+                    break;
+                case SkillEffectType.Debuff:
+                    Description += $"적에게 {Effect.Power} 만큼 약화 효과를 {Effect.Duration}초 동안 적용합니다.\n";
+                    break;
+                case SkillEffectType.CC:
+                    Description += $"적에게 상태이상 효과 {Effect.Duration}초 동안 적용합니다.\n";
+                    break;
+                case SkillEffectType.Resource:
+                    Description += $"자원을 {Effect.Power}을 만큼 회복합니당.\n";
+                    break;
+            }
+
+        }
+
+        return Description.TrimEnd();
+        //switch (_Data.Type)
+        //{
+        //    case SkillType.Damage: return "대상을 공격하는 스킬입니다.";
+        //    case SkillType.Heal: return "체력을 회복하는 스킬입니다.";
+        //    case SkillType.Buff: return "능력을 강화하는 버프 스킬입니다.";
+        //    case SkillType.Debuff: return "적을 약화시키는 디버프 스킬입니다.";
+        //    default: return "설명 없음";
+        //}
     }
 }

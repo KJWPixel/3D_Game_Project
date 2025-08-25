@@ -47,24 +47,24 @@ public class UI_SkillIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         //우클릭 시 해당 스킬을 습득여부확인(유/무) 후 스킬이 있다면 UI_Manager에 참조된 슬롯(List)에 비어 있다면 해당 스킬아이콘을 참조
         //스킬 사용에 따른 쿨타임을 연출
         //스킬슬롯에 들어간 스킬을 다시 우클릭하면 Remove함
-        if (_EventData.button == PointerEventData.InputButton.Right)
+
+        if(_EventData.button != PointerEventData.InputButton.Right)
         {
-            if(PlayerSkillBook.LearnedSkills.Contains(SkillData))
-            {
-                Debug.Log("스킬이 슬롯에 들어갑니다.");
-                UI_Manager.Instance.SetSkillSlot(SkillData);
-            }
-            else if(!PlayerSkillBook.LearnedSkills.Contains(SkillData))
-            {
-                Debug.Log("해당 스킬은 배우지 않았습니다.");
-            }
-            else
-            {            
-                Debug.Log("스킬슬롯에 스킬을 해제합니다.");
-                UI_Manager.Instance.RemoveSkillSlot(SkillData);
-                //스킬을 배웠고 다시한번 우클릭 시 슬롯에 해당 스킬을 뻄 Romove(SkillData)
-            }
-        }     
+            return;//우클릭 아니면 리턴
+        }
+
+        if(UI_Manager.Instance.DuplicationSkillSlot(SkillData)) //중복체크
+        {
+            //중복있으면 Remove
+            UI_Manager.Instance.RemoveSkillSlot(SkillData);
+            Debug.Log("스킬슬롯에 스킬을 해제합니다.");
+        }
+        else
+        {
+            //중복없으면 Set
+            UI_Manager.Instance.SetSkillSlot(SkillData);
+            Debug.Log("스킬슬롯에 스킬을 등록합니다.");
+        }
     }
 
     private void OnClick()

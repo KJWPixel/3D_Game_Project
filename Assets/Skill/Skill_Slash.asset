@@ -14,11 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SkillName: Slash
   Icon: {fileID: 21300000, guid: 1a862a305a44ca64e939c2b35b24e829, type: 3}
-  Cooldown: 5
   Cost: 15
   Range: 15
   CastTime: 1.5
-  EffectPrefab: {fileID: 7647375919561907788, guid: 035ce8c9cfc34104991ce416daf8aebe, type: 3}
-  type: 0
-  SkillPoint: 5
+  Cooldown: 5
   Power: 30
+  EffectPrefab: {fileID: 7647375919561907788, guid: 035ce8c9cfc34104991ce416daf8aebe, type: 3}
+  Effects:
+  - EffectType: 0
+    Power: 25
+    Duration: 0
+    Radius: 0
+  RequireLevel: 0
+  RequireSP: 0
+  PrerequisiteSkills: []
+  MaxLevel: 1

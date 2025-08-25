@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Skill/New Skill")]
 public class SkillData : ScriptableObject
 {
+    #region
     /*  스킬데이터 SkillData
      *  스킬의 정보(파라미터)만 담고, 실행로직 X
      *  스킬이름, 아이콘, 설명
@@ -12,16 +13,20 @@ public class SkillData : ScriptableObject
      *  효과 타입(피해, 회복, 버프, 디버프 등)
      *  애니메이션/이펙트 프리팹 참조
     */
+    #endregion
+
     [Header("기본 정보")]
     public string SkillName;
     public Sprite Icon;
-    public float Cooldown;
     public float Cost;
     public float Range;
     public float CastTime;
-    public GameObject EffectPrefab;
-    public SkillType type;
+    public float Cooldown;
     public float Power;
+    public GameObject EffectPrefab;
+
+    [Header("효과들 (여러 개 가능)")]
+    public List<SkillEffect> Effects = new List<SkillEffect>();
 
     [Header("습득 조건")]
     public int RequireLevel;
@@ -30,12 +35,27 @@ public class SkillData : ScriptableObject
 
     [Header("스킬 레벨")]
     public int MaxLevel = 1; //최대 레벨
+
+    //[Header("애니메이션")]
+    //public string AnimationName; 
+    //추후 수정 예정 
 }
 
-public enum SkillType
+[System.Serializable]
+public class SkillEffect
+{
+    public SkillEffectType EffectType;
+    public float Power;    //데미지, 회복 수치
+    public float Duration; //버프, 디버프, CC기 지속시간
+    public float Radius;   //범위 공격 반경
+}
+
+public enum SkillEffectType
 {
     Damage,
     Heal,
     Buff,
-    Debuff
+    Debuff,
+    CC,
+    Resource
 }

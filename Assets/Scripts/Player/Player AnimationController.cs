@@ -52,25 +52,36 @@ public class PlayerAnimationController : MonoBehaviour
         Animator.SetBool("IsAttack", _IsAttack);
     }
 
-    public void PlayerSkillAnimation(SkillType _SkillType, bool _IsPlayering)
+    public void PlayerSkillAnimation(List<SkillEffect> _Effects, bool _IsPlayering)
     {
-        switch (_SkillType)
+        foreach (var Effect in _Effects)
         {
-            case SkillType.Damage:
-                Animator.SetBool("IsDamage", _IsPlayering);
-                break;
-            case SkillType.Heal:
-                Animator.SetBool("IsHeal", _IsPlayering);
-                break;
-            case SkillType.Buff:
-                Animator.SetBool("IsBuff", _IsPlayering);
-                break;
-            case SkillType.Debuff:
-                Animator.SetBool("IsDebuff", _IsPlayering);
-                break;
-            default:
-                Debug.Log("Skill Has No Type!");
-                break;
+            switch (Effect.EffectType)
+            {
+                case SkillEffectType.Damage:
+                    Animator.SetBool("IsDamage", _IsPlayering);
+                    break;
+                case SkillEffectType.Heal:
+                    Animator.SetBool("IsHeal", _IsPlayering);
+                    break;
+                case SkillEffectType.Buff:
+                    Animator.SetBool("IsBuff", _IsPlayering);
+                    break;
+                case SkillEffectType.Debuff:
+                    Animator.SetBool("IsDebuff", _IsPlayering);
+                    break;
+                case SkillEffectType.CC:
+                    Animator.SetBool("IsCC", _IsPlayering);
+                    break;
+                default:
+                    Debug.LogWarning("Unknown SkillEffectType: " + Effect.EffectType);
+                    break;
+            }
         }
+    }
+
+    public void PlayerSkillAnimation(string _AnimationName, bool _IsPlayering)
+    {
+        Animator.SetBool(_AnimationName, _IsPlayering);
     }
 }

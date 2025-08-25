@@ -54,28 +54,48 @@ public class UI_Manager : MonoBehaviour
         }
     }
 
+    //스킬 슬롯 Set,Remove, 중복확인
     public void SetSkillSlot(SkillData _SkillData)
     {
         for(int Index = 0; Index < UI_SkillSlots.Count; Index++)
         {
             if (UI_SkillSlots[Index].SkillData == null)
             {
-                UI_SkillSlots[Index].SkillData = _SkillData;
+                UI_SkillSlots[Index].SetIcon(_SkillData);
                 break;
             }
         }
     }
-
     public void RemoveSkillSlot(SkillData _SkillData)
     {
         for(int Index = 0; Index < UI_SkillSlots.Count; Index++)
         {
             if (UI_SkillSlots[Index].SkillData == _SkillData)
             {
-                UI_SkillSlots.RemoveAt(Index);
+                UI_SkillSlots[Index].SetIcon(null);
                 break;
             }
         }
+    }
+    public bool DuplicationSkillSlot(SkillData _SkillData)
+    {
+        for(int Index = 0; Index < UI_SkillSlots.Count; Index++)
+        {
+            if (UI_SkillSlots[Index].SkillData == _SkillData)
+            {
+                return true;//중복 확인
+            }
+        }
+        return false;//중복 없음
+    }
+
+    public SkillData GetSkillFromSlot(int _Index)
+    {
+        if (_Index >= 0 && _Index < UI_SkillSlots.Count)
+        {
+            return UI_SkillSlots[_Index].SkillData;
+        }
+        return null;
     }
 
 

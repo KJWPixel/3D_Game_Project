@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SkillManager : MonoBehaviour
 {
-    public static SkillManager instance;    
+    public static SkillManager Instance;    
 
     PlayerStat PlayerStat;
     PlayerSkillBook PlayerSkillBook;
@@ -13,7 +13,7 @@ public class SkillManager : MonoBehaviour
     PlayerAnimationController Anim;
 
     //스킬별 쿨타임 시간 
-    private Dictionary<SkillData, float> SkillCoolDownTimers = new Dictionary<SkillData, float>();
+    public Dictionary<SkillData, float> SkillCoolDownTimers = new Dictionary<SkillData, float>();
 
 
     /* 스킬 동작 SkillManger
@@ -28,6 +28,15 @@ public class SkillManager : MonoBehaviour
 
     private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
         PlayerStat = GetComponent<PlayerStat>();      
         Anim = GetComponent<PlayerAnimationController>();
         PlayerSkillBook = GetComponent<PlayerSkillBook>();
@@ -40,7 +49,6 @@ public class SkillManager : MonoBehaviour
         StartCoroutine(CastSkill(_Skill, _Target));
     }
 
-
     private bool CanUse(SkillData _Skill)
     {
         if (PlayerStat == null)
@@ -49,7 +57,7 @@ public class SkillManager : MonoBehaviour
         }
 
         //배운스킬 체크
-        if (PlayerSkillBook.HasSkill(_Skill))
+        if (!PlayerSkillBook.HasSkill(_Skill))
         {
             Debug.Log("배우지 않은 스킬입니다.");
             return false;
@@ -68,8 +76,7 @@ public class SkillManager : MonoBehaviour
             {
                 return false;
             }
-        }
-        
+        }   
         return true;
     }
 
@@ -85,45 +92,64 @@ public class SkillManager : MonoBehaviour
         PlayerController.SetState(PlayerState.Casting);
 
         //애니메이션 재생 
-        Anim.PlayerSkillAnimation(_Skill.type, true);
+        Anim.PlayerSkillAnimation(_Skill.Effects, true);
         
         //캐스팅 시간
         yield return new WaitForSeconds(_Skill.CastTime);
 
-        //효과에 대한 처리 부분(데미지, 회복, 버프 적용)
-        if(_Skill.type == SkillType.Damage)//스킬타입이 Damage면 
+        if(_Skill.Effects != null)
         {
-            //Skill.Type Damage 처리 
-        }
-
-        if(_Skill.type == SkillType.Heal)//스킬타입이 Heal이면 
-        {
-            PlayerStat.Heal(_Skill.Power);
-        }
-
-        if(_Skill.type == SkillType.Buff)
-        {
-            //SKill.Type Buff 처리
+            foreach(var Effect in _Skill.Effects)
+            {
+                switch (Effect.EffectType)
+                {
+                    case SkillEffectType.Damage:
+                        if (_Target != null)
+                        {
+                            Enemy Enemy = _Target.GetComponent<Enemy>();
+                            if (Enemy != null) Enemy.TakeDamage(Effect.Power);
+                        }
+                        else if (Effect.Radius > 0)
+                        {
+                            Collider[] hits = Physics.OverlapSphere(PlayerStat.transform.position, Effect.Radius);
+                            foreach (var hit in hits)
+                            {
+                                Enemy Enemy = hit.GetComponent<Enemy>();
+                                if (Enemy != null) Enemy.TakeDamage(Effect.Power);
+                            }
+                        }
+                        break;
+                    case SkillEffectType.Heal:
+                        PlayerStat.Heal(Effect.Power);
+                        break;
+                    case SkillEffectType.Buff:
+                        //PlayerStat.ApplyBuff(Effect); Player 함수 정의 필요
+                        break;
+                    case SkillEffectType.Debuff:
+                        //if (_Target != null) _Target.GetComponent<Enemy>()?.ApplyDebuff(Effect); Enemy 함수 정의 필요
+                        break;
+                    case SkillEffectType.CC:
+                        //if (_Target != null) _Target.GetComponent<Enemy>()?.ApplyCC(Effect); Enemy 함수 정의 필요
+                        break;
+                    case SkillEffectType.Resource:
+                        //PlayerStat.RestoreResource(effect.Power); 플레이어 함수정의 필요 
+                        break;
+                }
+            }
         }
 
         //스킬이펙트 Prefab 생성 
         if(_Skill.EffectPrefab != null)
         {
-            if(_Skill.type == SkillType.Heal)
-            {
-                GameObject EffectInstance = Instantiate(_Skill.EffectPrefab, PlayerStat.transform.position, Quaternion.identity);
-                Destroy(EffectInstance, 1f);
-            }
-            else if(_Target != null)
-            {
-                GameObject EffectInstance = Instantiate(_Skill.EffectPrefab, _Target.transform.position, Quaternion.identity);
-            }
+            Vector3 pos = _Target != null ? _Target.position : PlayerStat.transform.position;
+            GameObject fx = Instantiate(_Skill.EffectPrefab, pos, Quaternion.identity);
+            Destroy(fx, 2f);
         }
 
-        //
+        //플레이어 State제어
         PlayerController.SetState(PlayerState.Idle);
         //애니메이션 종료
-        Anim.PlayerSkillAnimation(_Skill.type, false);
+        Anim.PlayerSkillAnimation(_Skill.Effects, false);
 
         SkillCoolDownTimers[_Skill] = Time.time + _Skill.Cooldown;
     }

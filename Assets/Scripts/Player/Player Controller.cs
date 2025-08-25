@@ -51,6 +51,8 @@ public class PlayerController : MonoBehaviour
         GravityCheck();
         Move();
         MoveDash();
+
+        HandleSkillInput();
     }
 
     #region
@@ -206,6 +208,41 @@ public class PlayerController : MonoBehaviour
     {
 
     }
+
+    private void HandleSkillInput()//스킬슬롯 입력
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            UseSkillFormSlot(0);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            UseSkillFormSlot(1);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            UseSkillFormSlot(2);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            UseSkillFormSlot(3);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            UseSkillFormSlot(4);
+        }
+
+    }
+
+    private void UseSkillFormSlot(int _SlotIndex)
+    {
+        SkillData SkillData = UI_Manager.Instance.GetSkillFromSlot(_SlotIndex);
+        if(SkillData != null)
+        {
+            SkillManager.Instance.UseSkill(SkillData, null);
+        }
+    }
+
 
     //이전 문제가되는 Move()함수 Backup
     #region
