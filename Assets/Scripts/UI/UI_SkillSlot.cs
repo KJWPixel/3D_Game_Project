@@ -37,7 +37,7 @@ public class UI_SkillSlot : MonoBehaviour
             if (BackGround != null)
             {
                 BackGround.sprite = null;
-            }            
+            }
         }
     }
 

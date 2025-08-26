@@ -22,7 +22,6 @@ public class SkillData : ScriptableObject
     public float Range;
     public float CastTime;
     public float Cooldown;
-    public float Power;
     public GameObject EffectPrefab;
 
     [Header("효과들 (여러 개 가능)")]

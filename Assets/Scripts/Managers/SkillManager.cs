@@ -97,6 +97,7 @@ public class SkillManager : MonoBehaviour
         //캐스팅 시간
         yield return new WaitForSeconds(_Skill.CastTime);
 
+        //효과 처리
         if(_Skill.Effects != null)
         {
             foreach(var Effect in _Skill.Effects)
@@ -104,20 +105,7 @@ public class SkillManager : MonoBehaviour
                 switch (Effect.EffectType)
                 {
                     case SkillEffectType.Damage:
-                        if (_Target != null)
-                        {
-                            Enemy Enemy = _Target.GetComponent<Enemy>();
-                            if (Enemy != null) Enemy.TakeDamage(Effect.Power);
-                        }
-                        else if (Effect.Radius > 0)
-                        {
-                            Collider[] hits = Physics.OverlapSphere(PlayerStat.transform.position, Effect.Radius);
-                            foreach (var hit in hits)
-                            {
-                                Enemy Enemy = hit.GetComponent<Enemy>();
-                                if (Enemy != null) Enemy.TakeDamage(Effect.Power);
-                            }
-                        }
+                        //Damage 처리
                         break;
                     case SkillEffectType.Heal:
                         PlayerStat.Heal(Effect.Power);
@@ -136,10 +124,26 @@ public class SkillManager : MonoBehaviour
                         break;
                 }
             }
-        }
+        }      
+       #region
+        //if (_Target != null)
+        //{
+        //    Enemy Enemy = _Target.GetComponent<Enemy>();
+        //    if (Enemy != null) Enemy.TakeDamage(Effect.Power);
+        //}
+        //else if (Effect.Radius > 0)
+        //{
+        //    Collider[] hits = Physics.OverlapSphere(PlayerStat.transform.position, Effect.Radius);
+        //    foreach (var hit in hits)
+        //    {
+        //        Enemy Enemy = hit.GetComponent<Enemy>();
+        //        if (Enemy != null) Enemy.TakeDamage(Effect.Power);
+        //    }
+        //}
+        #endregion
 
         //스킬이펙트 Prefab 생성 
-        if(_Skill.EffectPrefab != null)
+        if (_Skill.EffectPrefab != null)
         {
             Vector3 pos = _Target != null ? _Target.position : PlayerStat.transform.position;
             GameObject fx = Instantiate(_Skill.EffectPrefab, pos, Quaternion.identity);
