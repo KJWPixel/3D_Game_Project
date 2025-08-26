@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
-using JetBrains.Annotations;
 using UnityEngine;
-using UnityEngine.UIElements;
+using System.IO;
 
 public class PlayerStat : MonoBehaviour
 {
     [Header("Status")]
+    [SerializeField] public string UserName;
     [SerializeField] public int Level = 1;
     [SerializeField] public float MaxExp = 0f;
     [SerializeField] public float CurrentExp = 0f;
@@ -27,8 +27,11 @@ public class PlayerStat : MonoBehaviour
     SkillManager SkillManager;
     UI_Status status;
 
+    private string FilePath;
+
     private void Awake()
     {
+        
         PlayerController = GetComponent<PlayerController>();
         SkillManager = GetComponent<SkillManager>();
     }
@@ -53,9 +56,9 @@ public class PlayerStat : MonoBehaviour
         //현재 스탯이 Max스탯보다 크면 Max스탯으로 변경
         if (CurrentHp > MaxHp)
         {
-            CurrentHp = MaxHp;           
+            CurrentHp = MaxHp;
         }
-        if(CurrentMp > MaxMp)
+        if (CurrentMp > MaxMp)
         {
             CurrentMp = MaxMp;
         }
@@ -68,7 +71,7 @@ public class PlayerStat : MonoBehaviour
     private void NaturalRecovery()
     {
         //HP, MP, Stemina 자동회복
-        if(CurrentMp < MaxHp)
+        if (CurrentMp < MaxHp)
         {
             CurrentMp += 0.1f * Time.deltaTime;
         }
@@ -87,7 +90,7 @@ public class PlayerStat : MonoBehaviour
 
     public bool ConsumeMp(float _Amount)
     {
-        if(CurrentMp < _Amount) return false;
+        if (CurrentMp < _Amount) return false;
         CurrentMp -= _Amount;
         return true;
     }
@@ -99,15 +102,42 @@ public class PlayerStat : MonoBehaviour
         return true;
     }
 
-    public void Heal(float _Amount)
+    public void Heal(float _Power)
     {
-        CurrentHp = Mathf.Min(CurrentHp + _Amount, MaxHp);
+        CurrentHp = Mathf.Min(CurrentHp + _Power, MaxHp);
     }
+
+    public void Buff(SkillData _SkillData)
+    {
+        float CurrentAtk = Atk;
+        float CurrentDef = Def;
+        float CurrentCri = Critical;
+
+        foreach(var Effect in _SkillData.Effects)
+        {
+            switch (Effect.EffectType)
+            {
+                case SkillEffectType.AtkBuff:
+                    Atk += Effect.Power;
+                    break;
+                case SkillEffectType.Debuff:
+                    Def += Effect.Power;
+                    break;
+                case SkillEffectType.CriBuff:
+                    Critical += Effect.Power;
+                    break;
+                case SkillEffectType.TotalBuff:
+
+                    break;
+            }
+        }
+    }
+
 
 
     public void TakeDamage(float _Damage)
     {
-        if(_Damage <= Def)
+        if (_Damage <= Def)
         {
             return;
         }
@@ -121,7 +151,7 @@ public class PlayerStat : MonoBehaviour
     {
         CurrentExp += _Exp;
 
-        if(CurrentExp > MaxExp)
+        if (CurrentExp > MaxExp)
         {
             float overExp = CurrentHp - MaxExp;
             CurrentHp = overExp;

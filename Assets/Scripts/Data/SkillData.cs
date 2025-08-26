@@ -18,6 +18,7 @@ public class SkillData : ScriptableObject
     [Header("기본 정보")]
     public string SkillName;
     public Sprite Icon;
+    public float Power;
     public float Cost;
     public float Range;
     public float CastTime;
@@ -26,6 +27,7 @@ public class SkillData : ScriptableObject
 
     [Header("효과들 (여러 개 가능)")]
     public List<SkillEffect> Effects = new List<SkillEffect>();
+    //List 추가해서 Type을 2개 이상
 
     [Header("습득 조건")]
     public int RequireLevel;
@@ -35,9 +37,8 @@ public class SkillData : ScriptableObject
     [Header("스킬 레벨")]
     public int MaxLevel = 1; //최대 레벨
 
-    //[Header("애니메이션")]
-    //public string AnimationName; 
-    //추후 수정 예정 
+    [Header("애니메이션")]
+    public string AnimationName;
 }
 
 [System.Serializable]
@@ -53,7 +54,10 @@ public enum SkillEffectType
 {
     Damage,
     Heal,
-    Buff,
+    AtkBuff,
+    DefBuff,
+    CriBuff,
+    TotalBuff,
     Debuff,
     CC,
     Resource

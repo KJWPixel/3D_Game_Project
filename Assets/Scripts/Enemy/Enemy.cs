@@ -195,7 +195,7 @@ public class Enemy : BaseEnemy
 
         if (CurHp >= 0)
         {
-            CurHp -= _Damage;
+            CurHp -= _Damage - Def;
         }
         else
         {
@@ -220,10 +220,9 @@ public class Enemy : BaseEnemy
 
     public void Die()
     {
-
+        IsDie = true;
         PlayerStat.AddExp(GainExp);
         Destroy(gameObject);
-
     }
 
     public void Reset()

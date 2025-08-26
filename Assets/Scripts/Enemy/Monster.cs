@@ -65,7 +65,7 @@ public class Monster : MonoBehaviour
     }
     public void SetAnimation(string _Ani, SKILL _Skill = SKILL.END)
     {
-        if (CurAni == _Ani) ;
+        if (CurAni == _Ani) 
             return;
         ANIMATOR.SetTrigger(_Ani);
     }

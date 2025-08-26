@@ -30,6 +30,7 @@ public class UI_Tooltip : MonoBehaviour
         TooltipDesc.text = GetDescriptionByType(_Data);
 
         TooltipExtra.text = $"요구 레벨:{_Data.RequireLevel}\n요구 스킬포인트  :{_Data.RequireSP}\n재사용 대기시간  :{_Data.Cooldown}\n스킬데미지 :{_Data.Power}";
+        
 
     }
 

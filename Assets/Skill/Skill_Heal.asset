@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SkillName: Heal
   Icon: {fileID: 21300000, guid: 3d999f4125671fd41b3737d280b3e563, type: 3}
+  Power: 15
   Cost: 20
   Range: 0
   CastTime: 2
   Cooldown: 3
-  Power: 15
   EffectPrefab: {fileID: 9017484664307500583, guid: 1245b8d2997d5b34fb1637be70a7eb05, type: 3}
   Effects:
   - EffectType: 1
@@ -29,3 +29,4 @@ MonoBehaviour:
   RequireSP: 5
   PrerequisiteSkills: []
   MaxLevel: 1
+  AnimationName: IsHeal

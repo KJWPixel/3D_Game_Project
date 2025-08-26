@@ -110,7 +110,16 @@ public class SkillManager : MonoBehaviour
                     case SkillEffectType.Heal:
                         PlayerStat.Heal(Effect.Power);
                         break;
-                    case SkillEffectType.Buff:
+                    case SkillEffectType.AtkBuff:
+                        //PlayerStat.ApplyBuff(Effect); Player 함수 정의 필요
+                        break;
+                    case SkillEffectType.DefBuff:
+                        //PlayerStat.ApplyBuff(Effect); Player 함수 정의 필요
+                        break;
+                    case SkillEffectType.CriBuff:
+                        //PlayerStat.ApplyBuff(Effect); Player 함수 정의 필요
+                        break;
+                    case SkillEffectType.TotalBuff:
                         //PlayerStat.ApplyBuff(Effect); Player 함수 정의 필요
                         break;
                     case SkillEffectType.Debuff:
