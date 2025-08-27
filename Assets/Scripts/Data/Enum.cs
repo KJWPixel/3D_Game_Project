@@ -28,6 +28,7 @@ public enum PlayerState
 {
     Idle,
     Walking,
+    Running,
     Dashing,
     Attacking,
     Casting,
