@@ -61,18 +61,30 @@ public class PlayerAnimationController : MonoBehaviour
                 case SkillEffectType.Damage:
                     Animator.SetBool("IsDamage", _IsPlayering);
                     break;
+
                 case SkillEffectType.Heal:
                     Animator.SetBool("IsHeal", _IsPlayering);
                     break;
-                case SkillEffectType.Buff:
+
+                case SkillEffectType.AtkBuff:
+                case SkillEffectType.DefBuff:
+                case SkillEffectType.CriBuff:
+                case SkillEffectType.TotalBuff:
                     Animator.SetBool("IsBuff", _IsPlayering);
                     break;
+
                 case SkillEffectType.Debuff:
                     Animator.SetBool("IsDebuff", _IsPlayering);
                     break;
+
                 case SkillEffectType.CC:
                     Animator.SetBool("IsCC", _IsPlayering);
                     break;
+
+                case SkillEffectType.MoveMent:
+                    Animator.SetBool("IsTeleport", _IsPlayering);
+                    break;
+
                 default:
                     Debug.LogWarning("Unknown SkillEffectType: " + Effect.EffectType);
                     break;

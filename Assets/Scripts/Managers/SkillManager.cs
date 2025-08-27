@@ -131,6 +131,9 @@ public class SkillManager : MonoBehaviour
                     case SkillEffectType.Resource:
                         //PlayerStat.RestoreResource(effect.Power); 플레이어 함수정의 필요 
                         break;
+                    case SkillEffectType.MoveMent:
+                        //텔레포트의 효과 추가
+                        break;
                 }
             }
         }      

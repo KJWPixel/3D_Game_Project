@@ -18,7 +18,6 @@ public class SkillData : ScriptableObject
     [Header("기본 정보")]
     public string SkillName;
     public Sprite Icon;
-    public float Power;
     public float Cost;
     public float Range;
     public float CastTime;
@@ -48,6 +47,7 @@ public class SkillEffect
     public float Power;    //데미지, 회복 수치
     public float Duration; //버프, 디버프, CC기 지속시간
     public float Radius;   //범위 공격 반경
+    public float Distance; //거리
 }
 
 public enum SkillEffectType
@@ -60,5 +60,6 @@ public enum SkillEffectType
     TotalBuff,
     Debuff,
     CC,
-    Resource
+    Resource,
+    MoveMent,
 }
