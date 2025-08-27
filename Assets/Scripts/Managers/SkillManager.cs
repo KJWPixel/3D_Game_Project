@@ -131,8 +131,12 @@ public class SkillManager : MonoBehaviour
                     case SkillEffectType.Resource:
                         //PlayerStat.RestoreResource(effect.Power); 플레이어 함수정의 필요 
                         break;
-                    case SkillEffectType.MoveMent:
-                        //텔레포트의 효과 추가
+                    case SkillEffectType.Movement:
+                        //이동관련 효과
+                        break;
+                    case SkillEffectType.Teleport:
+                        //텔레포트
+                        this.transform.position += Vector3.forward * Effect.Distance;
                         break;
                 }
             }

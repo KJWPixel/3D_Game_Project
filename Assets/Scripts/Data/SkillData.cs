@@ -61,5 +61,6 @@ public enum SkillEffectType
     Debuff,
     CC,
     Resource,
-    MoveMent,
+    Movement,
+    Teleport,
 }

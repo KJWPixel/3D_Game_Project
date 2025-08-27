@@ -42,9 +42,9 @@ public class PlayerAnimationController : MonoBehaviour
         Animator.SetFloat("yDir", _VerticalVelocity);
     }
 
-    public void SetDash(bool _IsDash)
+    public void SetRunning(bool _IsRunning)
     {
-        Animator.SetBool("IsDash", _IsDash);
+        Animator.SetBool("IsRunning", _IsRunning);
     }
 
     public void SetAttack(bool _IsAttack)
@@ -81,10 +81,12 @@ public class PlayerAnimationController : MonoBehaviour
                     Animator.SetBool("IsCC", _IsPlayering);
                     break;
 
-                case SkillEffectType.MoveMent:
+                case SkillEffectType.Movement:
+                    Animator.SetBool("IsMovement", _IsPlayering);
+                    break;
+                case SkillEffectType.Teleport:
                     Animator.SetBool("IsTeleport", _IsPlayering);
                     break;
-
                 default:
                     Debug.LogWarning("Unknown SkillEffectType: " + Effect.EffectType);
                     break;

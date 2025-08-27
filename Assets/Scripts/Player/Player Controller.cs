@@ -1,41 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Rendering;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 //Rotate 회전
 //X축 위 아래, Y축 좌 우, Z 좌 우 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] CharacterController CharacterController;
+    [SerializeField] public CharacterController CharacterController;
 
     [Header("플레이어 이동")]
-    [SerializeField] float MoveSpeed = 0f;
-    [SerializeField] float WalkSpeed = 0f;
-    [SerializeField] float DashSpeed = 0f;
-    [SerializeField] float DashReductionAmount = 0f;
+    [SerializeField] public float MoveSpeed = 0f;
+    [SerializeField] public float WalkSpeed = 0f;
+    [SerializeField] public float RunningSpeed = 0f;
+    [SerializeField] public float RunningReductionAmount = 0f;
     [SerializeField] float JumpForce = 0f;
     [SerializeField] int BaseJumpCount = 0;
     [SerializeField] int JumpCount = 0;
-    private Vector3 MoveDir;
-    private float VerticalVelocity = 0f;
+    public Vector3 MoveDir;
+    public float VerticalVelocity = 0f;
 
     [Header("플레이어 동작 체크")]
-    [SerializeField] bool IsDash = false;
-    [SerializeField] bool IsGround = false;
+    [SerializeField] public bool IsRunning = false;
+    [SerializeField] public bool IsDashing = false;
+    [SerializeField] public bool IsGround = false;
 
     [Header("플레이어 현재 속도측정")]
-    [SerializeField] Vector3 VelocityValue = Vector3.zero;
+    [SerializeField] public Vector3 VelocityValue = Vector3.zero;
 
     [Header("RayDistance / Gizmo 제어")]
     [SerializeField] float GroundCheckDistance = 0f;
     [SerializeField] bool GizmoOnOffCheck = false;
 
-    PlayerStat PlayerStat;  
-    PlayerAnimationController Anim;
-    [SerializeField] public PlayerState CurrentState { get; set; } = PlayerState.Idle;
+    public PlayerStat PlayerStat;  
+    public PlayerAnimationController Anim;
+
+    IMoveStrategy IMoveStrategy;
+    public PlayerState CurrentState { get; set; } = PlayerState.Idle;
 
     private void Awake()
     {
@@ -47,10 +47,29 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         GroundCheck();
-        Jump();
         GravityCheck();
-        Move();
-        MoveDash();
+        Jump();
+
+        switch (CurrentState)
+        {
+            case PlayerState.Walking:
+                IMoveStrategy = new WalkStrategy();
+                break;
+            case PlayerState.Running:
+                IMoveStrategy = new RunStrategy();
+                break;
+            default:
+                IMoveStrategy = null;
+                break;
+        }
+
+        if (IMoveStrategy != null)
+        {
+            IMoveStrategy.Move(this);
+        }
+
+        //Move();
+        //Running();
 
         HandleSkillInput();
     }
@@ -84,7 +103,6 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-
         //WASD에 입력하여 값을 받음
         float x = Input.GetAxisRaw("Horizontal");
         float z = Input.GetAxisRaw("Vertical");
@@ -102,7 +120,7 @@ public class PlayerController : MonoBehaviour
 
         MoveDir = (CamForward * z + CamRight * x).normalized;
 
-        MoveSpeed = IsDash ? DashSpeed : WalkSpeed;//IsDash에 따라 Dash : Walk Speed 결정
+        MoveSpeed = IsRunning ? RunningSpeed : WalkSpeed;//IsDash에 따라 Dash : Walk Speed 결정
         VelocityValue = MoveDir.normalized * MoveSpeed;
         VelocityValue.y += VerticalVelocity;
 
@@ -124,22 +142,21 @@ public class PlayerController : MonoBehaviour
      
         Vector3 localMove = transform.InverseTransformDirection(MoveDir);
         Anim.AnimationUpdate(localMove.x, localMove.z, VelocityValue.y);
-
-        //Anim.AnimationUpdate(x, z, VerticalVelocity);
     }
 
-    private void MoveDash()
+
+    private void Running()
     {
         if(Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W) && PlayerStat.CurrentStamina > 10)
         {
-            IsDash = true;
-            Anim.SetDash(IsDash);
-            PlayerStat.ReduceStamina(DashReductionAmount * Time.deltaTime);
+            IsRunning = true;
+            Anim.SetRunning(IsRunning);
+            PlayerStat.ReduceStamina(RunningReductionAmount * Time.deltaTime);
         }
         else
         {
-            IsDash = false;
-            Anim.SetDash(IsDash);
+            IsRunning = false;
+            Anim.SetRunning(IsRunning);
         }
     }
 
