@@ -12,34 +12,15 @@ public class PlayerAnimationController : MonoBehaviour
         PlayerController = GetComponent<PlayerController>();
     }
 
-
-    void Start()
-    {
-        
-    }
-  
-    void Update()
-    {
-        
-    }
-
     public void AnimationUpdate(float _x, float _z, float _VerticalVelocity)
     {
-        //if(PlayerController.CanMove == false)
-        //{
-        //    Debug.Log("Animation ÇÔ¼ö Return");
-        //    Animator.SetBool("IsWalk", false);
-        //    Animator.SetFloat("xDir", 0f);
-        //    Animator.SetFloat("yDir", 0f);
-        //    Animator.SetFloat("zDir", 0f);
-        //    return;
-        //}
-
         bool IsWaking = _x != 0 || _z != 0;
         Animator.SetBool("IsWalk", IsWaking);
         Animator.SetFloat("xDir", _x);
         Animator.SetFloat("zDir", _z);
         Animator.SetFloat("yDir", _VerticalVelocity);
+        Debug.Log($"AnimationUpdate => x:{_x}, z:{_z}, IsWalk:{IsWaking}");
+
     }
 
     public void SetRunning(bool _IsRunning)

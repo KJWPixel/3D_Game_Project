@@ -26,6 +26,7 @@ public enum ITEM
 
 public enum PlayerState
 {
+    Create,
     Idle,
     Walking,
     Running,

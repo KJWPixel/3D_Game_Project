@@ -4,25 +4,22 @@ using UnityEngine;
 
 public class WalkStrategy : IMoveStrategy
 {
+    const float DeadZone = 0.01f;
     public void Move(PlayerController player)
     {
-
         float x = Input.GetAxisRaw("Horizontal");
         float z = Input.GetAxisRaw("Vertical");
 
-        if (Mathf.Abs(x) > 0 || Mathf.Abs(z) > 0) //x 또는 z 값이 절대적으로 0보다 크면 
+        if(Mathf.Abs(x) < DeadZone  && Mathf.Abs(z) < DeadZone)
         {
-            if (player.CurrentState != PlayerState.Walking)
-            {
-                player.SetState(PlayerState.Walking);
-            }
+            player.SetState(PlayerState.Idle);
+            return;
         }
-        else
+
+        if(Input.GetKey(KeyCode.LeftShift))
         {
-            if (player.CurrentState == PlayerState.Walking)
-            {
-                player.SetState(PlayerState.Idle);
-            }
+            player.SetState(PlayerState.Running);
+            return;
         }
 
         Vector3 camForward = Camera.main.transform.forward;
@@ -48,6 +45,9 @@ public class WalkStrategy : IMoveStrategy
         }
 
         Vector3 localMove = player.transform.InverseTransformDirection(player.MoveDir);
+         
+        Debug.Log($"localMove.x: {localMove.x}, localMove.z: {localMove.z}, magnitude: {player.MoveDir.magnitude}");
         player.Anim.AnimationUpdate(localMove.x, localMove.z, player.VelocityValue.y);
+
     }
 }

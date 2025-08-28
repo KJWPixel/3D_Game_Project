@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 //Rotate 회전
@@ -50,19 +51,6 @@ public class PlayerController : MonoBehaviour
         GravityCheck();
         Jump();
 
-        switch (CurrentState)
-        {
-            case PlayerState.Walking:
-                IMoveStrategy = new WalkStrategy();
-                break;
-            case PlayerState.Running:
-                IMoveStrategy = new RunStrategy();
-                break;
-            default:
-                IMoveStrategy = null;
-                break;
-        }
-
         if (IMoveStrategy != null)
         {
             IMoveStrategy.Move(this);
@@ -70,6 +58,7 @@ public class PlayerController : MonoBehaviour
 
         //Move();
         //Running();
+
 
         HandleSkillInput();
     }
@@ -93,10 +82,34 @@ public class PlayerController : MonoBehaviour
 
     public void SetState(PlayerState _State)
     {
+        if(CurrentState == _State)
+        {
+            return;
+        }
+
         CurrentState = _State;
+
+        switch(_State)
+        {
+            case PlayerState.Idle:
+                IMoveStrategy = new IdleStrategy();
+                break;
+            case PlayerState.Walking:
+                IMoveStrategy = new WalkStrategy();
+                break;
+            case PlayerState.Running:
+                IMoveStrategy = new RunStrategy();
+                break;
+            default:
+                IMoveStrategy = null;
+                break;
+        }
+
         Debug.Log("Player State 상태 전환:" + _State);
     }
 
+    #region
+    //전략패턴으로 Move함수가 쓰이므로 주석처리
     private void Move()
     {
         if (CurrentState != PlayerState.Idle && CurrentState != PlayerState.Walking)
@@ -143,8 +156,11 @@ public class PlayerController : MonoBehaviour
         Vector3 localMove = transform.InverseTransformDirection(MoveDir);
         Anim.AnimationUpdate(localMove.x, localMove.z, VelocityValue.y);
     }
+    #endregion
 
 
+    #region
+    ////전략패턴에서 분리하여 처리하므로 주석처리
     private void Running()
     {
         if(Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W) && PlayerStat.CurrentStamina > 10)
@@ -159,6 +175,7 @@ public class PlayerController : MonoBehaviour
             Anim.SetRunning(IsRunning);
         }
     }
+    #endregion
 
     private void Jump()
     {
