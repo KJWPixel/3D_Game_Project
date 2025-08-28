@@ -12,6 +12,8 @@ public class SkillManager : MonoBehaviour
     PlayerController PlayerController;
     PlayerAnimationController Anim;
 
+    ISkillBehavior SkillBehavior;
+
     //스킬별 쿨타임 시간 
     public Dictionary<SkillData, float> SkillCoolDownTimers = new Dictionary<SkillData, float>();
 
@@ -88,11 +90,15 @@ public class SkillManager : MonoBehaviour
             yield break;
         }
 
+        //스킬 쿨타임
+        SkillCoolDownTimers[_Skill] = Time.time + _Skill.Cooldown;
+
         //이동 잠금 
         PlayerController.SetState(PlayerState.Casting);
 
         //애니메이션 재생 
         Anim.PlayerSkillAnimation(_Skill.Effects, true);
+
         
         //캐스팅 시간
         yield return new WaitForSeconds(_Skill.CastTime);
@@ -105,7 +111,7 @@ public class SkillManager : MonoBehaviour
                 switch (Effect.EffectType)
                 {
                     case SkillEffectType.Damage:
-                        //Damage 처리
+                        SkillBehavior = new SlashSkill();
                         break;
                     case SkillEffectType.Heal:
                         PlayerStat.Heal(Effect.Power);
@@ -170,8 +176,6 @@ public class SkillManager : MonoBehaviour
         PlayerController.SetState(PlayerState.Idle);
         //애니메이션 종료
         Anim.PlayerSkillAnimation(_Skill.Effects, false);
-
-        SkillCoolDownTimers[_Skill] = Time.time + _Skill.Cooldown;
     }
 
 

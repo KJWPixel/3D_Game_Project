@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -18,6 +19,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] int BaseJumpCount = 0;
     [SerializeField] int JumpCount = 0;
     public Vector3 MoveDir;
+    public float x = 0;
+    public float z = 0;
     public float VerticalVelocity = 0f;
 
     [Header("플레이어 동작 체크")]
@@ -36,31 +39,47 @@ public class PlayerController : MonoBehaviour
     public PlayerAnimationController Anim;
 
     IMoveStrategy IMoveStrategy;
-    public PlayerState CurrentState { get; set; } = PlayerState.Idle;
+    public PlayerState CurrentState { get; set; }
 
     private void Awake()
     {
         //인스펙터에서 CursorLockMode 제어        
         PlayerStat = GetComponent<PlayerStat>();
         Anim = GetComponent<PlayerAnimationController>();
+        SetState(PlayerState.Idle);
     }
 
     void Update()
     {
+        //플레이어 환경체크
         GroundCheck();
         GravityCheck();
-        Jump();
+        
+        //플레이어 입력
+        HandleMoveInput();
+        HandleSkillInput();
 
         if (IMoveStrategy != null)
         {
             IMoveStrategy.Move(this);
         }
 
+        switch (CurrentState)
+        {
+            case PlayerState.Walking:
+                IMoveStrategy = new WalkStrategy();
+                break;
+            case PlayerState.Running:
+                IMoveStrategy = new RunStrategy();
+                break;
+
+        }
+
+        //기본 움직임 동작
         //Move();
         //Running();
-
-
-        HandleSkillInput();
+        Jump();
+        Anim.AnimationUpdate(x, z, VelocityValue.y);
     }
 
     #region
@@ -89,25 +108,33 @@ public class PlayerController : MonoBehaviour
 
         CurrentState = _State;
 
-        switch(_State)
-        {
-            case PlayerState.Idle:
-                IMoveStrategy = new IdleStrategy();
-                break;
-            case PlayerState.Walking:
-                IMoveStrategy = new WalkStrategy();
-                break;
-            case PlayerState.Running:
-                IMoveStrategy = new RunStrategy();
-                break;
-            default:
-                IMoveStrategy = null;
-                break;
-        }
-
         Debug.Log("Player State 상태 전환:" + _State);
     }
 
+    private void HandleMoveInput()
+    {
+        //Player의 입력값을 받아 상태만을 변경
+
+        x = Input.GetAxisRaw("Horizontal");
+        z = Input.GetAxisRaw("Vertical");
+
+        if(Mathf.Abs(x) == 0 && Mathf.Abs(z) == 0)
+        {
+            SetState(PlayerState.Idle);
+            IsRunning = false;
+        }
+
+        if(Mathf.Abs(x) > 0 || Mathf.Abs(z) > 0)
+        {
+            SetState(PlayerState.Walking);
+        }
+
+        if(Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W))
+        {
+            SetState(PlayerState.Running);
+            IsRunning = true;
+        }
+    }
     #region
     //전략패턴으로 Move함수가 쓰이므로 주석처리
     private void Move()
@@ -166,13 +193,13 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W) && PlayerStat.CurrentStamina > 10)
         {
             IsRunning = true;
-            Anim.SetRunning(IsRunning);
+            //Anim.SetRunning(IsRunning);
             PlayerStat.ReduceStamina(RunningReductionAmount * Time.deltaTime);
         }
         else
         {
             IsRunning = false;
-            Anim.SetRunning(IsRunning);
+            //Anim.SetRunning(IsRunning);
         }
     }
     #endregion

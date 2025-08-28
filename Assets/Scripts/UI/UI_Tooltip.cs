@@ -8,11 +8,12 @@ public class UI_Tooltip : MonoBehaviour
 {
     public static UI_Tooltip Instance;
 
-    [SerializeField] private GameObject TooltipPanel;
-    [SerializeField] private TMP_Text TooltipName;
-    [SerializeField] private TMP_Text TooltipDesc;
-    [SerializeField] private TMP_Text TooltipExtra; 
-    [SerializeField] private Image TooltipIcon;
+    [SerializeField] GameObject SkillTree;
+    [SerializeField] GameObject TooltipPanel;
+    [SerializeField] TMP_Text TooltipName;
+    [SerializeField] TMP_Text TooltipDesc;
+    [SerializeField] TMP_Text TooltipExtra; 
+    [SerializeField] Image TooltipIcon;
 
     private void Awake()
     {

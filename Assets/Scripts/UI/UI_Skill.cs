@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class UI_Skill : MonoBehaviour
 {
     [SerializeField] GameObject SkillWindow;
-    [SerializeField] TextMeshProUGUI SkillPointText;
+    [SerializeField] TMP_Text SkillPointText;
 
     bool IsActive = false;
 
@@ -44,6 +44,7 @@ public class UI_Skill : MonoBehaviour
             else
             {
                 SkillWindow.SetActive(false);
+                UI_Tooltip.Instance.HideTooltip(); 
             }
         }
     }

@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using Unity.VisualScripting;
 
 public class UI_SkillIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
@@ -13,6 +13,7 @@ public class UI_SkillIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     [SerializeField] SkillTree SkillTree;
     [SerializeField] PlayerSkillBook PlayerSkillBook;
     [SerializeField] GameObject LearnSkillEffectImage;
+    [SerializeField] TMP_Text SkillName;
     private Button Button;
     
     private void Awake()
@@ -27,6 +28,11 @@ public class UI_SkillIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         {
             IconImage.sprite = SkillData.Icon;
         }    
+
+        if(SkillData != null && SkillName != null)
+        {
+            SkillName.text = SkillData.SkillName;
+        }
     }
 
     public void OnPointerEnter(PointerEventData _EventData)
@@ -51,6 +57,12 @@ public class UI_SkillIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         if(_EventData.button != PointerEventData.InputButton.Right)
         {
             return;//우클릭 아니면 리턴
+        }
+
+        if(!PlayerSkillBook.HasSkill(SkillData))
+        {
+            Debug.Log("스킬을 배우지 않았습니다.");
+            return;
         }
 
         if(UI_Manager.Instance.DuplicationSkillSlot(SkillData)) //중복체크

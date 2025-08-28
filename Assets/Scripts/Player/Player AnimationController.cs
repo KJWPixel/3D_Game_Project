@@ -15,17 +15,12 @@ public class PlayerAnimationController : MonoBehaviour
     public void AnimationUpdate(float _x, float _z, float _VerticalVelocity)
     {
         bool IsWaking = _x != 0 || _z != 0;
+        bool IsRunning = PlayerController.IsRunning;
         Animator.SetBool("IsWalk", IsWaking);
+        Animator.SetBool("IsRunning", IsRunning);
         Animator.SetFloat("xDir", _x);
         Animator.SetFloat("zDir", _z);
         Animator.SetFloat("yDir", _VerticalVelocity);
-        Debug.Log($"AnimationUpdate => x:{_x}, z:{_z}, IsWalk:{IsWaking}");
-
-    }
-
-    public void SetRunning(bool _IsRunning)
-    {
-        Animator.SetBool("IsRunning", _IsRunning);
     }
 
     public void SetAttack(bool _IsAttack)
