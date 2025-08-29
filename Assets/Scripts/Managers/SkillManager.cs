@@ -45,6 +45,8 @@ public class SkillManager : MonoBehaviour
         PlayerController = GetComponent<PlayerController>();
     }
 
+
+
     public void UseSkill(SkillData _Skill, Transform _Target = null)
     {
         if (!CanUse(_Skill)) return;
@@ -112,6 +114,7 @@ public class SkillManager : MonoBehaviour
                 {
                     case SkillEffectType.Damage:
                         SkillBehavior = new SlashSkill();
+                        SkillBehavior.Execute(PlayerController, _Skill);
                         break;
                     case SkillEffectType.Heal:
                         PlayerStat.Heal(Effect.Power);
@@ -164,13 +167,13 @@ public class SkillManager : MonoBehaviour
         //}
         #endregion
 
-        //스킬이펙트 Prefab 생성 
-        if (_Skill.EffectPrefab != null)
-        {
-            Vector3 pos = _Target != null ? _Target.position : PlayerStat.transform.position;
-            GameObject fx = Instantiate(_Skill.EffectPrefab, pos, Quaternion.identity);
-            Destroy(fx, 2f);
-        }
+        ////스킬이펙트 Prefab 생성 
+        //if (_Skill.EffectPrefab != null)
+        //{
+        //    Vector3 pos = _Target != null ? _Target.position : PlayerStat.transform.position;
+        //    GameObject fx = Instantiate(_Skill.EffectPrefab, pos, Quaternion.identity);
+        //    Destroy(fx, 2f);
+        //}
 
         //플레이어 State제어
         PlayerController.SetState(PlayerState.Idle);

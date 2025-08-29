@@ -78,7 +78,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 109e594f27f348c4cbe56f3987d6ca96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PositionOffset: {x: 0, y: 2, z: -2}
+  PositionOffset: {x: 0, y: 2, z: -5}
   RotationOffset: {x: 15, y: 0, z: 0}
   LookSensitivity: 1
   Target: {fileID: 6273887103118301590}
@@ -182,15 +182,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 0c25c38b9e0e76c48906a125b1551ea3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -51.64
+      value: -41.76
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0c25c38b9e0e76c48906a125b1551ea3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.153
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0c25c38b9e0e76c48906a125b1551ea3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -57.26
+      value: -65.25
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0c25c38b9e0e76c48906a125b1551ea3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -259,6 +259,9 @@ PrefabInstance:
       addedObject: {fileID: 198572272302521943}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0c25c38b9e0e76c48906a125b1551ea3, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 4683763610627899257}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0c25c38b9e0e76c48906a125b1551ea3, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 6579361295170654247}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0c25c38b9e0e76c48906a125b1551ea3, type: 3}
       insertIndex: -1
@@ -284,13 +287,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f62487b165418c43afce00d2abebe41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UserName: User
   Level: 0
   MaxExp: 0
   CurrentExp: 0
+  SkillPoint: 0
   MaxHp: 100
-  CurrentHp: 100
-  MaxMp: 100
-  CurrentMp: 100
+  CurrentHp: 0
+  MaxMp: 1000
+  CurrentMp: 1000
   MaxStamina: 100
   CurrentStamina: 1
   Atk: 0
@@ -311,17 +316,23 @@ MonoBehaviour:
   CharacterController: {fileID: 1464161560132305299}
   MoveSpeed: 0
   WalkSpeed: 5
-  DashSpeed: 10
-  DashReductionAmount: 5
+  RunningSpeed: 0
+  RunningReductionAmount: 0
   JumpForce: 5
   BaseJumpCount: 1
   JumpCount: 0
-  IsDash: 0
+  MoveDir: {x: 0, y: 0, z: 0}
+  x: 0
+  z: 0
+  VerticalVelocity: 0
+  IsRunning: 0
+  IsDashing: 0
   IsGround: 0
   VelocityValue: {x: 0, y: 0, z: 0}
   GroundCheckDistance: 0.1
   GizmoOnOffCheck: 1
-  CoursorLock: 0
+  PlayerStat: {fileID: 0}
+  Anim: {fileID: 0}
 --- !u!114 &6661988746604800494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -335,8 +346,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WeaponSword: {fileID: 4731594626325211185}
-  IsAttack: 0
-  AttackCollTimer: 0
+  OwnedSkill:
+  - {fileID: 11400000, guid: eba925e120925554686555515c51dfee, type: 2}
+  AttackTimer: 0
+  AttackDuration: 0
+  ComboCount: 0
+  ComboTimer: 0
+  ComboMaxTime: 1
 --- !u!114 &198572272302521943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -349,6 +365,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aca68aba4fc61a40a27d43f63300960, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4683763610627899257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6165933555645972717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31dad1d51314af5479aae0977d14e011, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LearnedSkills: []
 --- !u!114 &6579361295170654247
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -2,9 +2,9 @@
     "UserName": "",
     "Level": 100,
     "CurrentExp": 10.0,
-    "SkillPoint": 10,
+    "SkillPoint": 0,
     "CurrentHp": 100.0,
-    "CurrentMp": 70.69231414794922,
+    "CurrentMp": 465.0,
     "Atk": 15.0,
     "Def": 15.0,
     "Critical": 0.10000000149011612

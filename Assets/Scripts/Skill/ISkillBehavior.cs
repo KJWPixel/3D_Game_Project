@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface ISkillBehavior
 {
-    void Execute(PlayerController _Player, SkillData _SkillData, Transform _Target);
+    void Execute(PlayerController _Player, SkillData _SkillData);
 }

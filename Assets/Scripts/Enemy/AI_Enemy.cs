@@ -93,6 +93,10 @@ public class AI_Enemy : MonoBehaviour
 
     private void ChaseDistance()
     {
+        if(CurrentAI == AI.AI_ATTACK)
+        {
+            return;
+        }
         float ChaseDistacne = Vector3.Distance(transform.position, Character.transform.position);
 
         if (ChaseDistacne <= ChaseRange)

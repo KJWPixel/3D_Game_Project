@@ -40,14 +40,7 @@ public class PlayerAttackController : MonoBehaviour
 
     void Update()
     {
-        Attack();
-
-        //스킬 테스트
-        if(Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            Debug.Log("Heal스킬");
-            SkillManager.UseSkill(OwnedSkill[0], null);
-        }
+        //Attack();
     }
 
     private void Attack()

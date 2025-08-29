@@ -19,7 +19,6 @@ public class SkillData : ScriptableObject
     public string SkillName;
     public Sprite Icon;
     public float Cost;
-    public float Range;
     public float CastTime;
     public float Cooldown;
     public GameObject EffectPrefab;
@@ -49,7 +48,6 @@ public class SkillEffect
     public float Radius;   //범위 공격 반경
     public float Distance; //거리
 }
-
 public enum SkillEffectType
 {
     Damage,

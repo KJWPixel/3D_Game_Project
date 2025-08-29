@@ -4,20 +4,32 @@ using UnityEngine;
 
 public class SlashSkill : ISkillBehavior
 {
-    public void Execute(PlayerController _Player, SkillData _SkillData, Transform _Target)
-    {     
-        Ray Ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-        RaycastHit Hit;
-
-        if (Physics.Raycast(Ray, out Hit, _SkillData.Range, LayerMask.NameToLayer("Enemy")))
+    public void Execute(PlayerController _Player, SkillData _SkillData)
+    {
+        foreach (var Effect in _SkillData.Effects)
         {
-            Enemy Enemy = Hit.collider.GetComponent<Enemy>();
-            _Target = _Target.transform;
+            Debug.Log("SlashSkill 실행!");
+            // 플레이어 위치 (약간 위에서 발사되게 오프셋)
+            Vector3 start = _Player.transform.position + Vector3.up * 1.0f;
+            Vector3 dir = _Player.transform.forward;
 
-            foreach (var Effect in _SkillData.Effects)
+            // 디버그용 레이 (씬 뷰에서 확인 가능)
+            Debug.DrawRay(start, dir * Effect.Distance, Color.red, 5f);
+            Debug.Log("DrawRay 실행!");
+            // 실제 공격 판정
+            if (Physics.Raycast(start, dir, out RaycastHit hit, Effect.Distance, LayerMask.GetMask("Enemy")))
             {
-                Enemy.TakeDamage(Effect.Power);
-            }         
+                Enemy enemy = hit.collider.GetComponent<Enemy>();
+                if (enemy != null)
+                {
+                    enemy.TakeDamage(Effect.Power);
+
+                    if (_SkillData.EffectPrefab != null)
+                    {
+                        EffectManager.Instance.Spawn(_SkillData.EffectPrefab, enemy.transform.position);
+                    }
+                }
+            }
         }
     }
 }
