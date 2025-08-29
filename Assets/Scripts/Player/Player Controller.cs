@@ -80,11 +80,6 @@ public class PlayerController : MonoBehaviour
         //Running();
         Jump();
         Anim.AnimationUpdate(x, z, VelocityValue.y);
-
-        Vector3 start = transform.position + Vector3.up * 2f;
-        Vector3 dir = transform.forward;
-
-        Debug.DrawRay(start, dir * 10f, Color.red, 0.1f, true);
     }
 
     #region

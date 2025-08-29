@@ -10,22 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b1aabd643963f6347b205db3c9ff671b, type: 3}
-  m_Name: Skill_Slash
+  m_Name: Skill_Electric
   m_EditorClassIdentifier: 
-  SkillName: Slash
-  Icon: {fileID: 21300000, guid: 1a862a305a44ca64e939c2b35b24e829, type: 3}
-  Cost: 15
+  SkillName: Electric
+  Icon: {fileID: 21300000, guid: 6cf658fed04e9ec4eb4dce5566ae2ac1, type: 3}
+  Cost: 30
   CastTime: 1.5
-  Cooldown: 5
-  EffectPrefab: {fileID: 7647375919561907788, guid: 035ce8c9cfc34104991ce416daf8aebe, type: 3}
+  Cooldown: 3
+  EffectPrefab: {fileID: 2965222256817593503, guid: a164e676dbbd6e54587237e619372c98, type: 3}
   Effects:
-  - EffectType: 0
-    Power: 25
+  - EffectType: 1
+    Power: 30
     Duration: 0
     Radius: 0
-    Distance: 30
+    Distance: 15
   RequireLevel: 0
   RequireSP: 0
   PrerequisiteSkills: []
   MaxLevel: 1
-  AnimationName: IsRayDamageSkill
+  AnimationName: IsLineAreaDamageSkill

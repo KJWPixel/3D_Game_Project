@@ -50,7 +50,9 @@ public class SkillEffect
 }
 public enum SkillEffectType
 {
-    Damage,
+    RayDamage,
+    LineAreaDamage,
+    TargetAreaDamage,
     Heal,
     AtkBuff,
     DefBuff,

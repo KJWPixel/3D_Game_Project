@@ -34,8 +34,14 @@ public class PlayerAnimationController : MonoBehaviour
         {
             switch (Effect.EffectType)
             {
-                case SkillEffectType.Damage:
-                    Animator.SetBool("IsDamage", _IsPlayering);
+                case SkillEffectType.RayDamage:
+                    Animator.SetBool("IsRayDamageSkill", _IsPlayering);
+                    break;
+                case SkillEffectType.LineAreaDamage:
+                    Animator.SetBool("IsLineAreaDamageSkill", _IsPlayering);
+                    break;
+                case SkillEffectType.TargetAreaDamage:
+                    Animator.SetBool("IsTargetAreaDamageSkill", _IsPlayering);
                     break;
 
                 case SkillEffectType.Heal:

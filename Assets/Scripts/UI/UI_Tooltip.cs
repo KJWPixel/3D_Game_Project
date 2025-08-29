@@ -53,7 +53,7 @@ public class UI_Tooltip : MonoBehaviour
         {
             switch (Effect.EffectType)
             {
-                case SkillEffectType.Damage:
+                case SkillEffectType.RayDamage:
                     Description += $"대상을 공격하여 {Effect.Power} 데미지를 입힙니다.\n";
                     break;
                 case SkillEffectType.Heal:

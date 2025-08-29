@@ -12,7 +12,7 @@ public class SkillManager : MonoBehaviour
     PlayerController PlayerController;
     PlayerAnimationController Anim;
 
-    ISkillBehavior SkillBehavior;
+    ISkillBehaviorStrategy ISkillBehavior;
 
     //스킬별 쿨타임 시간 
     public Dictionary<SkillData, float> SkillCoolDownTimers = new Dictionary<SkillData, float>();
@@ -112,9 +112,17 @@ public class SkillManager : MonoBehaviour
             {
                 switch (Effect.EffectType)
                 {
-                    case SkillEffectType.Damage:
-                        SkillBehavior = new SlashSkill();
-                        SkillBehavior.Execute(PlayerController, _Skill);
+                    case SkillEffectType.RayDamage:
+                        ISkillBehavior = new RayDamageSkillStrategy();
+                        ISkillBehavior.Execute(PlayerController, _Skill, _Target);
+                        break;
+                    case SkillEffectType.LineAreaDamage:
+                        ISkillBehavior = new LineAreaDamageStrategy();
+                        ISkillBehavior.Execute(PlayerController, _Skill, _Target);
+                        break;
+                    case SkillEffectType.TargetAreaDamage:
+                        ISkillBehavior = new TargetAreaDamageStrategy();
+                        ISkillBehavior.Execute(PlayerController, _Skill, _Target);
                         break;
                     case SkillEffectType.Heal:
                         PlayerStat.Heal(Effect.Power);

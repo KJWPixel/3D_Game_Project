@@ -607,7 +607,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95447d3bc09c6084ca219393d9a931a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillData: {fileID: 11400000, guid: 73afb57f5536932419fa80107d61bd6e, type: 2}
+  SkillData: {fileID: 11400000, guid: 019f639c56777bf428e724f3ea71e149, type: 2}
   IconImage: {fileID: 576350169}
   SkillTree: {fileID: 8061024996635953827}
   PlayerSkillBook: {fileID: 1378704368}
@@ -1977,6 +1977,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mannequkin
       objectReference: {fileID: 0}
+    - target: {fileID: 268273594554477654, guid: 9fb2ee5bebe3d244b9cf753f425208e0, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 644799545296369388, guid: 9fb2ee5bebe3d244b9cf753f425208e0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -35
@@ -2195,6 +2199,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Archer
       objectReference: {fileID: 0}
+    - target: {fileID: 6165933555645972717, guid: ebc7dbcc83e685b4f980da4e52d37b15, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6834805392992688727, guid: ebc7dbcc83e685b4f980da4e52d37b15, type: 3}
       propertyPath: m_LocalPosition.x
       value: -41.76
@@ -2235,8 +2243,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedComponents:
+    - {fileID: 6661988746604800494, guid: ebc7dbcc83e685b4f980da4e52d37b15, type: 3}
+    m_RemovedGameObjects:
+    - {fileID: 7959030438491449707, guid: ebc7dbcc83e685b4f980da4e52d37b15, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ebc7dbcc83e685b4f980da4e52d37b15, type: 3}
