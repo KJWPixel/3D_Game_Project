@@ -48,9 +48,9 @@ public class RayDamageSkillStrategy : ISkillBehaviorStrategy
                     {
                         enemy.TakeDamage(Effect.Power);
 
-                        if (_SkillData.EffectPrefab != null)
+                        if (_SkillData.HitEffectPrefab != null)
                         {
-                            EffectManager.Instance.Spawn(_SkillData.EffectPrefab, enemy.transform.position);
+                            EffectManager.Instance.Spawn(_SkillData.HitEffectPrefab, enemy.transform.position);
                         }
                     }
                 }

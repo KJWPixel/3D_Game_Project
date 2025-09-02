@@ -109,7 +109,6 @@ public class Enemy : BaseEnemy
             return;
         }
 
-        Debug.Log("Enemy Search");
 
         Transform PathPoint = TRPATH[CurrentPathIndex];
         Vector3 Dir = PathPoint.position - transform.position;//목표지점 - 현재위치: 목표로 향하는 방향벡터

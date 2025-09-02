@@ -21,7 +21,8 @@ public class SkillData : ScriptableObject
     public float Cost;
     public float CastTime;
     public float Cooldown;
-    public GameObject EffectPrefab;
+    public GameObject CastEffectPrefab;
+    public GameObject HitEffectPrefab;
 
     [Header("효과들 (여러 개 가능)")]
     public List<SkillEffect> Effects = new List<SkillEffect>();

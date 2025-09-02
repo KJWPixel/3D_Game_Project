@@ -75,11 +75,13 @@ public class PlayerController : MonoBehaviour
 
         }
 
+
         //기본 움직임 동작
         //Move();
         //Running();
         Jump();
         Anim.AnimationUpdate(x, z, VelocityValue.y);
+
     }
 
     #region
@@ -302,6 +304,15 @@ public class PlayerController : MonoBehaviour
         {
             SkillManager.Instance.UseSkill(SkillData, null);
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Vector3 Origin = transform.position + Vector3.up;
+        Vector3 Size = Vector3.one * 5f;
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(Origin + new Vector3(0f, 1f, 3f), Size); 
     }
 
 

@@ -10,19 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b1aabd643963f6347b205db3c9ff671b, type: 3}
-  m_Name: Skill_Electric
+  m_Name: Skill_Freeze Circle
   m_EditorClassIdentifier: 
-  SkillName: Electric
-  Icon: {fileID: 21300000, guid: 6cf658fed04e9ec4eb4dce5566ae2ac1, type: 3}
+  SkillName: Freeze Circle
+  Icon: {fileID: 21300000, guid: 480b6fd098764e244bde8ee6274e6a45, type: 3}
   Cost: 30
   CastTime: 1.5
   Cooldown: 3
-  EffectPrefab: {fileID: 2965222256817593503, guid: a164e676dbbd6e54587237e619372c98, type: 3}
+  CastEffectPrefab: {fileID: 4932088507883938021, guid: 0e5709a7ddb77924090c112cf73bb98a, type: 3}
+  HitEffectPrefab: {fileID: 4924508274929071776, guid: 0edef91621bb6b34384ccc9dbb98729c, type: 3}
   Effects:
   - EffectType: 1
-    Power: 30
+    Power: 50
     Duration: 0
-    Radius: 0
+    Radius: 5
     Distance: 15
   RequireLevel: 0
   RequireSP: 0

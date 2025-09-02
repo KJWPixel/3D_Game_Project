@@ -1,39 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class LineAreaDamageStrategy : ISkillBehaviorStrategy
 {
     public void Execute(PlayerController _Player, SkillData _SkillData, Transform _Target)
     {
-        foreach(var Effect in _SkillData.Effects)
+        Collider[] colliders;
+
+        foreach (var Effect in _SkillData.Effects)
         {
-            Vector3 Origin = _Player.transform.position + Vector3.up * 1.0f;
-            Vector3 Area = Vector3.one * Effect.Radius;
-            Vector3 Dir = _Player.transform.forward;
+            Vector3 Forward = Vector3.forward * 3f;
+            Vector3 Origin = _Player.transform.position + Forward + Vector3.up;
+            Vector3 Size = Vector3.one * Effect.Radius;
 
-            // 디버그용 레이 (씬 뷰에서 확인 가능)
-            Debug.DrawRay(Origin, Dir * Effect.Distance, Color.red, 5f);
-            Debug.Log($"{_SkillData.name} Ray Test On");
+            Quaternion Rotation = Quaternion.LookRotation(Forward);
 
-            RaycastHit[] Hits;
-            Hits = Physics.BoxCastAll(Origin, Area, Dir, Quaternion.identity, Effect.Distance);
-            foreach(RaycastHit Hit in Hits)
+            EffectManager.Instance.Spawn(_SkillData.CastEffectPrefab, Origin, Rotation);
+
+            colliders = Physics.OverlapBox(Forward, Size, Rotation);
+            foreach(var col in colliders)
             {
-                if(Hit.collider.CompareTag("Enemy"))
+                if(col.CompareTag("Enemy"))
                 {
-                    Enemy enemy = Hit.collider.GetComponent<Enemy>();
-
+                    Enemy enemy = col.GetComponent<Enemy>();
                     enemy.TakeDamage(Effect.Power);
 
-                    if(_SkillData.EffectPrefab != null)
-                    {
-                        EffectManager.Instance.Spawn(_SkillData.EffectPrefab, enemy.transform.position);
-                    }
+                    EffectManager.Instance.Spawn(_SkillData.HitEffectPrefab, enemy.transform.position);
                 }
             }
+            
         }
     }
+
+
 
     
 
