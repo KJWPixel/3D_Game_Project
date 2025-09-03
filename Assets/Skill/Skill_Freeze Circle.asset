@@ -21,10 +21,12 @@ MonoBehaviour:
   HitEffectPrefab: {fileID: 4924508274929071776, guid: 0edef91621bb6b34384ccc9dbb98729c, type: 3}
   Effects:
   - EffectType: 1
-    Power: 50
+    Power: 15
+    HitCount: 5
     Duration: 0
     Radius: 5
     Distance: 15
+    DelayTime: 0.3
   RequireLevel: 0
   RequireSP: 0
   PrerequisiteSkills: []

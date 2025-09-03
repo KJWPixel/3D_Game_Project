@@ -1,11 +1,11 @@
 {
     "UserName": "",
-    "Level": 100,
-    "CurrentExp": 10.0,
+    "Level": 103,
+    "CurrentExp": 85.0,
     "SkillPoint": 0,
     "CurrentHp": 100.0,
-    "CurrentMp": 505.0,
-    "Atk": 15.0,
-    "Def": 15.0,
+    "CurrentMp": 790.0,
+    "Atk": 18.0,
+    "Def": 18.0,
     "Critical": 0.10000000149011612
 }

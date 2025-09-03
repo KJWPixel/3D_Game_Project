@@ -45,9 +45,12 @@ public class SkillEffect
 {
     public SkillEffectType EffectType;
     public float Power;    //데미지, 회복 수치
+    public int HitCount;
     public float Duration; //버프, 디버프, CC기 지속시간
     public float Radius;   //범위 공격 반경
     public float Distance; //거리
+    public float DelayTime;
+    
 }
 public enum SkillEffectType
 {

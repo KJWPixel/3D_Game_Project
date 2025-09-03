@@ -2026,6 +2026,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1378704359}
     - target: {fileID: 8267418403231946193, guid: 9fb2ee5bebe3d244b9cf753f425208e0, type: 3}
+      propertyPath: CurHp
+      value: 10000
+      objectReference: {fileID: 0}
+    - target: {fileID: 8267418403231946193, guid: 9fb2ee5bebe3d244b9cf753f425208e0, type: 3}
+      propertyPath: MaxHp
+      value: 10000
+      objectReference: {fileID: 0}
+    - target: {fileID: 8267418403231946193, guid: 9fb2ee5bebe3d244b9cf753f425208e0, type: 3}
       propertyPath: Player
       value: 
       objectReference: {fileID: 1378704353}
