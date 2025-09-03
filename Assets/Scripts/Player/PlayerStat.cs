@@ -133,8 +133,6 @@ public class PlayerStat : MonoBehaviour
         }
     }
 
-
-
     public void TakeDamage(float _Damage)
     {
         if (_Damage <= Def)
@@ -144,8 +142,6 @@ public class PlayerStat : MonoBehaviour
 
         CurrentHp -= (_Damage - Def);
     }
-
-
 
     public void AddExp(float _Exp)
     {
@@ -158,7 +154,6 @@ public class PlayerStat : MonoBehaviour
             LevelUp();
         }
     }
-
     private void LevelUp()
     {
         Level++;

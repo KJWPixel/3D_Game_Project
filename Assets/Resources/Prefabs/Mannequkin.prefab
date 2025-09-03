@@ -53,6 +53,10 @@ PrefabInstance:
       value: Mannequkin
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 4f04fb1fac3682a44935c486d36f72ad, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4f04fb1fac3682a44935c486d36f72ad, type: 3}
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
@@ -101,19 +105,21 @@ MonoBehaviour:
   AI_Enemy: {fileID: 2140632953747801830}
   Character: {fileID: 0}
   Player: {fileID: 0}
-  DamageText: {fileID: 0}
+  DamageTextPrefab: {fileID: 5535637108697594344, guid: d578716669835af45b6a5734f62864d5, type: 3}
+  DynamicObject: {fileID: 0}
   TRPATH:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   CurrentPathIndex: 0
   PatrolWaitTime: 2
-  MaxHp: 100
-  CurHp: 100
+  MaxHp: 10000
+  CurHp: 10000
   AttackDamage: 10
   Def: 0
   WalkSpeed: 5
   ChaseSpeed: 10
+  GainExp: 25
   IsDie: 0
 --- !u!114 &2140632953747801830
 MonoBehaviour:

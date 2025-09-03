@@ -27,6 +27,7 @@ MonoBehaviour:
     Radius: 5
     Distance: 15
     DelayTime: 0.3
+    MaxTarget: 10
   RequireLevel: 0
   RequireSP: 0
   PrerequisiteSkills: []

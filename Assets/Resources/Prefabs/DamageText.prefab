@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Text: {fileID: 6858058142824701869}
   TextSpeed: 3
-  TextDestroyTime: 5
+  TextDestroyTime: 2
 --- !u!95 &8897294675284621175
 Animator:
   serializedVersion: 5

@@ -50,6 +50,7 @@ public class SkillEffect
     public float Radius;   //범위 공격 반경
     public float Distance; //거리
     public float DelayTime;
+    public int MaxTarget;
     
 }
 public enum SkillEffectType

@@ -19,6 +19,8 @@ public class Enemy : BaseEnemy
     [SerializeField] Character Character;
     [SerializeField] GameObject Player;
     [SerializeField] GameObject DamageTextPrefab;
+    [SerializeField] GameObject DynamicObject;
+
 
     [SerializeField] Transform[] TRPATH;
     [SerializeField] int CurrentPathIndex = 0;
@@ -207,7 +209,7 @@ public class Enemy : BaseEnemy
     {
         Vector3 spawnPosition = transform.position + Vector3.up * 2f;
 
-        GameObject DamageTextInstance = Instantiate(DamageTextPrefab, spawnPosition, Quaternion.identity);
+        GameObject DamageTextInstance = Instantiate(DamageTextPrefab, spawnPosition, Quaternion.identity, DynamicObject.transform);
 
         DamageText DamageText = DamageTextInstance.GetComponent<DamageText>();
 

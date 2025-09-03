@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b1aabd643963f6347b205db3c9ff671b, type: 3}
-  m_Name: Skill_Heal
+  m_Name: Skill_Healing
   m_EditorClassIdentifier: 
   SkillName: Heal
   Icon: {fileID: 21300000, guid: 3d999f4125671fd41b3737d280b3e563, type: 3}
@@ -21,15 +21,16 @@ MonoBehaviour:
   HitEffectPrefab: {fileID: 0}
   Effects:
   - EffectType: 3
-    Power: 30
-    HitCount: 0
+    Power: 15
+    HitCount: 4
     Duration: 3
     Radius: 0
     Distance: 0
-    DelayTime: 0
+    DelayTime: 0.3
     MaxTarget: 0
-  RequireLevel: 0
+  RequireLevel: 5
   RequireSP: 5
-  PrerequisiteSkills: []
-  MaxLevel: 1
+  PrerequisiteSkills:
+  - {fileID: 11400000, guid: eba925e120925554686555515c51dfee, type: 2}
+  MaxLevel: 5
   AnimationName: IsHeal
