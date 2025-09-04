@@ -17,16 +17,8 @@ public class SkillManager : MonoBehaviour
     //스킬별 쿨타임 시간 
     public Dictionary<SkillData, float> SkillCoolDownTimers = new Dictionary<SkillData, float>();
 
-
-    /* 스킬 동작 SkillManger
-     * 스킬을 사용할 떄 실행되는 로직
-     * 쿨타임 체크
-     * 지원 소모 체크
-     * 타겟 지정
-     * 애니메이션 실행
-     * 이펙트 생성
-     * 데미지/효과 적용
-    */
+    //효과 타입 => 실행 로직 매핑
+    private Dictionary<SkillEffectType, System.Action<SkillEffect, Transform, SkillData>> EffectHandlers;
 
     private void Awake()
     {
@@ -39,6 +31,7 @@ public class SkillManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
         PlayerStat = GetComponent<PlayerStat>();      
         Anim = GetComponent<PlayerAnimationController>();
         PlayerSkillBook = GetComponent<PlayerSkillBook>();
@@ -105,7 +98,7 @@ public class SkillManager : MonoBehaviour
         //캐스팅 시간
         yield return new WaitForSeconds(_Skill.CastTime);
 
-        //효과 처리
+        //효과 실행
         if(_Skill.Effects != null)
         {
             foreach(var Effect in _Skill.Effects)
@@ -114,15 +107,15 @@ public class SkillManager : MonoBehaviour
                 {
                     case SkillEffectType.RayDamage:
                         ISkillBehavior = new RayDamageSkillStrategy();
-                        ISkillBehavior.Execute(PlayerController, _Skill, _Target);
+                        ISkillBehavior.Execute(PlayerController, PlayerStat, _Skill, _Target);
                         break;
                     case SkillEffectType.LineAreaDamage:
                         ISkillBehavior = new LineAreaDamageStrategy();
-                        ISkillBehavior.Execute(PlayerController, _Skill, _Target);
+                        ISkillBehavior.Execute(PlayerController, PlayerStat, _Skill, _Target);
                         break;
                     case SkillEffectType.TargetAreaDamage:
                         ISkillBehavior = new TargetAreaDamageStrategy();
-                        ISkillBehavior.Execute(PlayerController, _Skill, _Target);
+                        ISkillBehavior.Execute(PlayerController, PlayerStat, _Skill, _Target);
                         break;
                     case SkillEffectType.Heal:
                         PlayerStat.Heal(Effect.Power);
@@ -157,8 +150,8 @@ public class SkillManager : MonoBehaviour
                         break;
                 }
             }
-        }      
-       #region
+        }
+        #region
         //if (_Target != null)
         //{
         //    Enemy Enemy = _Target.GetComponent<Enemy>();

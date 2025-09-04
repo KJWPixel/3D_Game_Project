@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RecoveryStrategy : ISkillBehaviorStrategy
 {
-    public void Execute(PlayerController _Player, SkillData _SkillData, Transform _Target)
+    public void Execute(PlayerController _Player, PlayerStat _PlayerStat, SkillData _SkillData, Transform _Target)
     {
         foreach(var Effect in _SkillData.Effects)
         {
