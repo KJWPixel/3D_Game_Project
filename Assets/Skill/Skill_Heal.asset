@@ -23,13 +23,13 @@ MonoBehaviour:
   - EffectType: 3
     Power: 30
     HitCount: 0
-    Duration: 3
+    Duration: 0
     Radius: 0
     Distance: 0
     DelayTime: 0
     MaxTarget: 0
-  RequireLevel: 0
+  RequireLevel: 5
   RequireSP: 5
   PrerequisiteSkills: []
-  MaxLevel: 1
+  MaxLevel: 5
   AnimationName: IsHeal

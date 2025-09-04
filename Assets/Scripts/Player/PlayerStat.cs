@@ -23,6 +23,8 @@ public class PlayerStat : MonoBehaviour
     [SerializeField] public float Def = 0f;
     [SerializeField] public float Critical = 0f;
 
+    List<float> ActiveBuffs = new List<float>();
+
     PlayerController PlayerController;
     SkillManager SkillManager;
     UI_Status status;
@@ -107,31 +109,7 @@ public class PlayerStat : MonoBehaviour
         CurrentHp = Mathf.Min(CurrentHp + _Power, MaxHp);
     }
 
-    public void Buff(SkillData _SkillData)
-    {
-        float CurrentAtk = Atk;
-        float CurrentDef = Def;
-        float CurrentCri = Critical;
 
-        foreach(var Effect in _SkillData.Effects)
-        {
-            switch (Effect.EffectType)
-            {
-                case SkillEffectType.AtkBuff:
-                    Atk += Effect.Power;
-                    break;
-                case SkillEffectType.Debuff:
-                    Def += Effect.Power;
-                    break;
-                case SkillEffectType.CriBuff:
-                    Critical += Effect.Power;
-                    break;
-                case SkillEffectType.TotalBuff:
-
-                    break;
-            }
-        }
-    }
 
     public void TakeDamage(float _Damage)
     {

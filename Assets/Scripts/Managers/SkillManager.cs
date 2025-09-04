@@ -13,6 +13,7 @@ public class SkillManager : MonoBehaviour
     PlayerAnimationController Anim;
 
     ISkillBehaviorStrategy ISkillBehavior;
+    IBuffBehavoprStrategy IBuff;
 
     //스킬별 쿨타임 시간 
     public Dictionary<SkillData, float> SkillCoolDownTimers = new Dictionary<SkillData, float>();
@@ -36,6 +37,14 @@ public class SkillManager : MonoBehaviour
         Anim = GetComponent<PlayerAnimationController>();
         PlayerSkillBook = GetComponent<PlayerSkillBook>();
         PlayerController = GetComponent<PlayerController>();
+
+        SetupEffectHandlers();
+    }
+
+    private void SetupEffectHandlers()
+    {
+        EffectHandlers = new Dictionary<SkillEffectType, System.Action<SkillEffect, Transform, SkillData>> { };
+        
     }
 
 
@@ -120,31 +129,6 @@ public class SkillManager : MonoBehaviour
                     case SkillEffectType.Heal:
                         PlayerStat.Heal(Effect.Power);
                         break;
-                    case SkillEffectType.AtkBuff:
-                        //PlayerStat.ApplyBuff(Effect); Player 함수 정의 필요
-                        break;
-                    case SkillEffectType.DefBuff:
-                        //PlayerStat.ApplyBuff(Effect); Player 함수 정의 필요
-                        break;
-                    case SkillEffectType.CriBuff:
-                        //PlayerStat.ApplyBuff(Effect); Player 함수 정의 필요
-                        break;
-                    case SkillEffectType.TotalBuff:
-                        //PlayerStat.ApplyBuff(Effect); Player 함수 정의 필요
-                        break;
-                    case SkillEffectType.Debuff:
-                        //if (_Target != null) _Target.GetComponent<Enemy>()?.ApplyDebuff(Effect); Enemy 함수 정의 필요
-                        break;
-                    case SkillEffectType.CC:
-                        //if (_Target != null) _Target.GetComponent<Enemy>()?.ApplyCC(Effect); Enemy 함수 정의 필요
-                        break;
-                    case SkillEffectType.Resource:
-                        //PlayerStat.RestoreResource(effect.Power); 플레이어 함수정의 필요 
-                        break;
-                    case SkillEffectType.Movement:
-                        //이동관련 효과
-                        break;
-                    case SkillEffectType.Teleport:
                         //텔레포트
                         this.transform.position += Vector3.forward * Effect.Distance;
                         break;
@@ -181,6 +165,7 @@ public class SkillManager : MonoBehaviour
         //애니메이션 종료
         Anim.PlayerSkillAnimation(_Skill.Effects, false);
     }
+
 
 
     /* 

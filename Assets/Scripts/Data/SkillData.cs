@@ -63,6 +63,7 @@ public enum SkillEffectType
     DefBuff,
     CriBuff,
     TotalBuff,
+    HealBuff,
     Debuff,
     CC,
     Resource,
