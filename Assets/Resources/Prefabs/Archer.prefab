@@ -257,6 +257,9 @@ PrefabInstance:
       addedObject: {fileID: 198572272302521943}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0c25c38b9e0e76c48906a125b1551ea3, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 3476588512762845878}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0c25c38b9e0e76c48906a125b1551ea3, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 4683763610627899257}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0c25c38b9e0e76c48906a125b1551ea3, type: 3}
       insertIndex: -1
@@ -289,7 +292,7 @@ MonoBehaviour:
   Level: 0
   MaxExp: 0
   CurrentExp: 0
-  SkillPoint: 0
+  SkillPoint: 100
   MaxHp: 100
   CurrentHp: 0
   MaxMp: 1000
@@ -329,8 +332,6 @@ MonoBehaviour:
   VelocityValue: {x: 0, y: 0, z: 0}
   GroundCheckDistance: 0.1
   GizmoOnOffCheck: 1
-  PlayerStat: {fileID: 0}
-  Anim: {fileID: 0}
 --- !u!114 &198572272302521943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -343,6 +344,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aca68aba4fc61a40a27d43f63300960, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3476588512762845878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6165933555645972717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b0b64e6228620640bb11933e2d4a2b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerStat: {fileID: 3594906044060683530}
 --- !u!114 &4683763610627899257
 MonoBehaviour:
   m_ObjectHideFlags: 0
