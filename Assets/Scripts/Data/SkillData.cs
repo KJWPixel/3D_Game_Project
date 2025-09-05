@@ -70,3 +70,9 @@ public enum SkillEffectType
     Movement,
     Teleport,
 }
+
+public enum BuffTargetType
+{
+    Stat,
+    Skill,
+}

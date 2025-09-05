@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HealBuffStrategy : IBuffBehavoprStrategy
 {
+
     public void ApplyBuff(PlayerStat _PlayerStat, SkillData _SkillData, Transform _Target)
     {
         foreach (var Effect in _SkillData.Effects)
@@ -28,4 +29,6 @@ public class HealBuffStrategy : IBuffBehavoprStrategy
     public void RemoveBuff(PlayerStat _PlayrStat, SkillData _SkillData, Transform _Target)
     {
     }
+
+    public BuffTargetType TargetType => throw new System.NotImplementedException();
 }

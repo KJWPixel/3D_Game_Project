@@ -21,4 +21,6 @@ public class AtkBuffStrategy : IBuffBehavoprStrategy
             Debug.Log($"공격력 버프 해제");
         }  
     }
+
+    public BuffTargetType TargetType => throw new System.NotImplementedException();
 }

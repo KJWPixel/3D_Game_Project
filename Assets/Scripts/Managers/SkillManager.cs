@@ -19,7 +19,8 @@ public class SkillManager : MonoBehaviour
     public Dictionary<SkillData, float> SkillCoolDownTimers = new Dictionary<SkillData, float>();
 
     //효과 타입 => 실행 로직 매핑
-    private Dictionary<SkillEffectType, System.Action<SkillEffect, Transform, SkillData>> EffectHandlers;
+    private Dictionary<SkillEffectType, ISkillBehaviorStrategy> EffectHandlers;
+
 
     private void Awake()
     {
@@ -43,8 +44,16 @@ public class SkillManager : MonoBehaviour
 
     private void SetupEffectHandlers()
     {
-        EffectHandlers = new Dictionary<SkillEffectType, System.Action<SkillEffect, Transform, SkillData>> { };
-        
+        //전략패턴 스킬
+        EffectHandlers = new Dictionary<SkillEffectType, ISkillBehaviorStrategy>
+        {
+            {SkillEffectType.RayDamage, new RayDamageSkillStrategy() },
+            {SkillEffectType.LineAreaDamage, new LineAreaDamageStrategy() },
+            {SkillEffectType.TargetAreaDamage, new TargetAreaDamageStrategy() },
+        };
+
+
+
     }
 
 
@@ -112,26 +121,13 @@ public class SkillManager : MonoBehaviour
         {
             foreach(var Effect in _Skill.Effects)
             {
-                switch (Effect.EffectType)
+                if (EffectHandlers.TryGetValue(Effect.EffectType, out var Handler))
                 {
-                    case SkillEffectType.RayDamage:
-                        ISkillBehavior = new RayDamageSkillStrategy();
-                        ISkillBehavior.Execute(PlayerController, PlayerStat, _Skill, _Target);
-                        break;
-                    case SkillEffectType.LineAreaDamage:
-                        ISkillBehavior = new LineAreaDamageStrategy();
-                        ISkillBehavior.Execute(PlayerController, PlayerStat, _Skill, _Target);
-                        break;
-                    case SkillEffectType.TargetAreaDamage:
-                        ISkillBehavior = new TargetAreaDamageStrategy();
-                        ISkillBehavior.Execute(PlayerController, PlayerStat, _Skill, _Target);
-                        break;
-                    case SkillEffectType.Heal:
-                        PlayerStat.Heal(Effect.Power);
-                        break;
-                        //텔레포트
-                        this.transform.position += Vector3.forward * Effect.Distance;
-                        break;
+                    Handler.Execute(PlayerController, PlayerStat, _Skill, _Target);
+                }
+                else
+                {
+                    Debug.Log($"SkillManager.cs: [{Effect.EffectType}] 실행 핸들러가 등록되지 않음");
                 }
             }
         }
@@ -152,13 +148,6 @@ public class SkillManager : MonoBehaviour
         //}
         #endregion
 
-        ////스킬이펙트 Prefab 생성 
-        //if (_Skill.EffectPrefab != null)
-        //{
-        //    Vector3 pos = _Target != null ? _Target.position : PlayerStat.transform.position;
-        //    GameObject fx = Instantiate(_Skill.EffectPrefab, pos, Quaternion.identity);
-        //    Destroy(fx, 2f);
-        //}
 
         //플레이어 State제어
         PlayerController.SetState(PlayerState.Idle);
