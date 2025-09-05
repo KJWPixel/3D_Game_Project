@@ -35,8 +35,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float GroundCheckDistance = 0f;
     [SerializeField] bool GizmoOnOffCheck = false;
 
-    public PlayerStat PlayerStat;  
-    public PlayerAnimationController Anim;
+    PlayerStat PlayerStat;  
+    PlayerAnimationController Anim;
 
     IMoveStrategy IMoveStrategy;
     public PlayerState CurrentState { get; set; }

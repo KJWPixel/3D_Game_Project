@@ -21,6 +21,7 @@ public class SkillData : ScriptableObject
     public float Cost;
     public float CastTime;
     public float Cooldown;
+    public float PrefabDuration;
     public GameObject CastEffectPrefab;
     public GameObject HitEffectPrefab;
 

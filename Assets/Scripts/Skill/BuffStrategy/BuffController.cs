@@ -5,20 +5,28 @@ using UnityEngine;
 
 public class BuffController : MonoBehaviour
 {
-    private List<BuffInstance> activeBuffs = new List<BuffInstance>();
-    private PlayerStat playerStat;
+    //버프 인스턴스를 List로 선언
+    private List<BuffInstance> ActiveBuffs = new List<BuffInstance>();
+    [SerializeField] PlayerStat PlayerStat;
 
     private void Awake()
     {
-        playerStat = GetComponent<PlayerStat>();
+        Debug.Log($"[BuffController] Awake on: {gameObject.name}, PlayerStat: {PlayerStat}");
     }
 
     public void AddBuff(IBuffBehavoprStrategy strategy, float power, float duration, SkillData skillData = null)
     {
+        if (PlayerStat == null)
+        {
+            Debug.LogError("[BuffController] PlayerStat is null!");
+        }
+        else
+        {
+            Debug.Log("[BuffController] PlayerStat is OK: " + PlayerStat.gameObject.name);
+        }
+
         // 같은 전략 + 스킬 데이터(같은 버프 스킬) 중복 검사
-        BuffInstance existing = activeBuffs
-            .FirstOrDefault(b => b.IBuff.GetType() == strategy.GetType()
-                              && b.SkillData == skillData);
+        BuffInstance existing = ActiveBuffs.FirstOrDefault(b => b.IBuff.GetType() == strategy.GetType()&& b.SkillData == skillData);
 
         if (existing != null)
         {
@@ -28,27 +36,32 @@ public class BuffController : MonoBehaviour
 
         // 신규 버프 생성 및 적용
         BuffInstance buff = new BuffInstance(strategy, power, duration, skillData);
-        activeBuffs.Add(buff);
+        ActiveBuffs.Add(buff);
 
         if (strategy.TargetType == BuffTargetType.Stat)
-            strategy.Apply(playerStat, skillData, power);
+        {
+            strategy.ApplyBuff(PlayerStat, skillData, power);
+        }           
         else if (strategy.TargetType == BuffTargetType.Skill && skillData != null)
-            strategy.Apply(playerStat, skillData, power);
+        {
+            strategy.ApplyBuff(PlayerStat, skillData, power);
+        }
+            
     }
 
     private void Update()
     {
-        for (int i = activeBuffs.Count - 1; i >= 0; i--)
+        for (int i = ActiveBuffs.Count - 1; i >= 0; i--)
         {
-            if (activeBuffs[i].IsExpired)
+            if (ActiveBuffs[i].IsExpired)
             {
-                var buff = activeBuffs[i];
+                var buff = ActiveBuffs[i];
                 if (buff.IBuff.TargetType == BuffTargetType.Stat)
-                    buff.IBuff.Remove(playerStat, buff.SkillData, buff.Power);
+                    buff.IBuff.RemoveBuff(PlayerStat, buff.SkillData, buff.Power);
                 else if (buff.IBuff.TargetType == BuffTargetType.Skill && buff.SkillData != null)
-                    buff.IBuff.Remove(playerStat, buff.SkillData, buff.Power);
+                    buff.IBuff.RemoveBuff(PlayerStat, buff.SkillData, buff.Power);
 
-                activeBuffs.RemoveAt(i);
+                ActiveBuffs.RemoveAt(i);
             }
         }
     }

@@ -4,8 +4,7 @@ using UnityEngine;
 
 public interface IBuffBehavoprStrategy
 {
-    void ApplyBuff(PlayerStat _PlayerStat, SkillData _SkillData, Transform _Target);
-    void RemoveBuff(PlayerStat _PlayerStat, SkillData _SkillData, Transform _Target);
-
     BuffTargetType TargetType { get; }
+    void ApplyBuff(PlayerStat _PlayerStat, SkillData _SkillData, float _Power);
+    void RemoveBuff(PlayerStat _PlayerStat, SkillData _SkillData, float _Power);   
 }

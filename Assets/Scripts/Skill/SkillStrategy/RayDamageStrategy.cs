@@ -50,7 +50,7 @@ public class RayDamageSkillStrategy : ISkillBehaviorStrategy
 
                         if (_SkillData.HitEffectPrefab != null)
                         {
-                            EffectManager.Instance.Spawn(_SkillData.HitEffectPrefab, enemy.transform.position);
+                            EffectManager.Instance.Spawn(_SkillData.HitEffectPrefab, enemy.transform.position, _SkillData.PrefabDuration);
                         }
                     }
                 }

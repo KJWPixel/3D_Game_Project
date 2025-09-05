@@ -14,17 +14,17 @@ public class EffectManager : MonoBehaviour
         Instance = this;
     }
 
-    public GameObject Spawn(GameObject _Prefab, Vector3 _Position)
+    public GameObject Spawn(GameObject _Prefab, Vector3 _Position, float _Duration)
     {
         var Prefab = Instantiate(_Prefab, _Position, Quaternion.identity, DynamicObject.transform);
-        Destroy(Prefab, 2f);
+        Destroy(Prefab, _Duration);
         return Prefab;
     }
 
-    public GameObject Spawn(GameObject _Prefab, Vector3 _Position, Quaternion _Rotation)
+    public GameObject Spawn(GameObject _Prefab, Vector3 _Position, Quaternion _Rotation, float _Duration)
     {
         var Prefab = Instantiate(_Prefab, _Position, _Rotation, DynamicObject.transform);
-        Destroy(Prefab, 2f);
+        Destroy(Prefab, _Duration);
         return Prefab;
     }
 

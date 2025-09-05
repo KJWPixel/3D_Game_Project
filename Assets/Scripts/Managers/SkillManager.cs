@@ -7,19 +7,24 @@ public class SkillManager : MonoBehaviour
 {
     public static SkillManager Instance;    
 
+    bool IsCasting = false;
+
     PlayerStat PlayerStat;
     PlayerSkillBook PlayerSkillBook;
     PlayerController PlayerController;
     PlayerAnimationController Anim;
+    BuffController BuffController;
+    
 
-    ISkillBehaviorStrategy ISkillBehavior;
-    IBuffBehavoprStrategy IBuff;
+    ISkillBehaviorStrategy ISkillStrategy;
+    IBuffBehavoprStrategy IBuffStrategy;
 
     //스킬별 쿨타임 시간 
     public Dictionary<SkillData, float> SkillCoolDownTimers = new Dictionary<SkillData, float>();
 
     //효과 타입 => 실행 로직 매핑
     private Dictionary<SkillEffectType, ISkillBehaviorStrategy> EffectHandlers;
+    private Dictionary<SkillEffectType, IBuffBehavoprStrategy> BuffHandlers;
 
 
     private void Awake()
@@ -38,6 +43,7 @@ public class SkillManager : MonoBehaviour
         Anim = GetComponent<PlayerAnimationController>();
         PlayerSkillBook = GetComponent<PlayerSkillBook>();
         PlayerController = GetComponent<PlayerController>();
+        BuffController = GetComponent<BuffController>();
 
         SetupEffectHandlers();
     }
@@ -52,14 +58,21 @@ public class SkillManager : MonoBehaviour
             {SkillEffectType.TargetAreaDamage, new TargetAreaDamageStrategy() },
         };
 
+        //전략패턴 버프
+        BuffHandlers = new Dictionary<SkillEffectType, IBuffBehavoprStrategy>
+        {
+            { SkillEffectType.AtkBuff, new AtkBuffStrategy() },
+            { SkillEffectType.HealBuff, new HealBuffStrategy() },
+        };
 
-
+        //일반스킬
     }
 
 
 
     public void UseSkill(SkillData _Skill, Transform _Target = null)
     {
+        if (IsCasting) return; 
         if (!CanUse(_Skill)) return;
         StartCoroutine(CastSkill(_Skill, _Target));
     }
@@ -95,35 +108,46 @@ public class SkillManager : MonoBehaviour
         return true;
     }
 
-    private IEnumerator CastSkill(SkillData _Skill, Transform _Target)
+    private IEnumerator CastSkill(SkillData _SkillData, Transform _Target)
     {
-        if(!PlayerStat.ConsumeMp(_Skill.Cost))
+        if(!PlayerStat.ConsumeMp(_SkillData.Cost))
         {
             //MP부족 시 false 코루틴 중지
             yield break;
         }
 
+        IsCasting = true;
+
         //스킬 쿨타임
-        SkillCoolDownTimers[_Skill] = Time.time + _Skill.Cooldown;
+        SkillCoolDownTimers[_SkillData] = Time.time + _SkillData.Cooldown;
 
         //이동 잠금 
         PlayerController.SetState(PlayerState.Casting);
 
         //애니메이션 재생 
-        Anim.PlayerSkillAnimation(_Skill.Effects, true);
+        Anim.PlayerSkillAnimation(_SkillData.Effects, true);
 
         
         //캐스팅 시간
-        yield return new WaitForSeconds(_Skill.CastTime);
+        yield return new WaitForSeconds(_SkillData.CastTime);
 
         //효과 실행
-        if(_Skill.Effects != null)
+        if(_SkillData.Effects != null)
         {
-            foreach(var Effect in _Skill.Effects)
+            foreach(var Effect in _SkillData.Effects)
             {
                 if (EffectHandlers.TryGetValue(Effect.EffectType, out var Handler))
                 {
-                    Handler.Execute(PlayerController, PlayerStat, _Skill, _Target);
+                    Handler.Execute(PlayerController, PlayerStat, _SkillData, _Target);
+                }
+                else if(BuffHandlers.TryGetValue(Effect.EffectType, out var BuffHandler))
+                {
+                    BuffController.AddBuff(BuffHandler, Effect.Power, Effect.Duration);
+                }
+                else if(Effect.EffectType == SkillEffectType.Heal)
+                {
+                    PlayerStat.Heal(Effect.Power);
+                    EffectManager.Instance.Spawn(_SkillData.CastEffectPrefab, transform.position, _SkillData.PrefabDuration);
                 }
                 else
                 {
@@ -152,7 +176,9 @@ public class SkillManager : MonoBehaviour
         //플레이어 State제어
         PlayerController.SetState(PlayerState.Idle);
         //애니메이션 종료
-        Anim.PlayerSkillAnimation(_Skill.Effects, false);
+        Anim.PlayerSkillAnimation(_SkillData.Effects, false);
+
+        IsCasting = false;
     }
 
 

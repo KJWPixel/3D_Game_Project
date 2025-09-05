@@ -17,11 +17,12 @@ MonoBehaviour:
   Cost: 20
   CastTime: 2
   Cooldown: 3
-  CastEffectPrefab: {fileID: 919132149155446097, guid: 685224dfba73f3b47a41d53e82ea6df4, type: 3}
+  PrefabDuration: 3
+  CastEffectPrefab: {fileID: 7986504087968017091, guid: 12a56ee4630040c4eb17ae9707ed4cef, type: 3}
   HitEffectPrefab: {fileID: 0}
   Effects:
   - EffectType: 8
-    Power: 15
+    Power: 20
     HitCount: 5
     Duration: 3
     Radius: 0
@@ -29,7 +30,7 @@ MonoBehaviour:
     DelayTime: 0
     MaxTarget: 0
   RequireLevel: 5
-  RequireSP: 5
+  RequireSP: 0
   PrerequisiteSkills:
   - {fileID: 11400000, guid: 467740ddf6fb43d4fb516f21a06de478, type: 2}
   MaxLevel: 1
