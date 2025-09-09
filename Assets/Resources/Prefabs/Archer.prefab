@@ -182,7 +182,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 0c25c38b9e0e76c48906a125b1551ea3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -35.8
+      value: -49.2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0c25c38b9e0e76c48906a125b1551ea3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -190,7 +190,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0c25c38b9e0e76c48906a125b1551ea3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -38.9
+      value: -53.1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0c25c38b9e0e76c48906a125b1551ea3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -299,9 +299,9 @@ MonoBehaviour:
   CurrentMp: 1000
   MaxStamina: 100
   CurrentStamina: 1
-  Atk: 0
-  Def: 0
-  Critical: 0
+  Atk: 1
+  Def: 1
+  Critical: 1
 --- !u!114 &3339896118214070976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -357,6 +357,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerStat: {fileID: 3594906044060683530}
+  BuffIconPrefab: {fileID: 274282997758589497, guid: ffdc2d295a0886e47b469061d22dd61a, type: 3}
+  BuffIconParent: {fileID: 0}
 --- !u!114 &4683763610627899257
 MonoBehaviour:
   m_ObjectHideFlags: 0

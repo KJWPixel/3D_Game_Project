@@ -22,9 +22,9 @@ MonoBehaviour:
   HitEffectPrefab: {fileID: 0}
   Effects:
   - EffectType: 4
-    Power: 5
+    Power: 20
     HitCount: 0
-    Duration: 15
+    Duration: 10
     Radius: 0
     Distance: 0
     DelayTime: 0

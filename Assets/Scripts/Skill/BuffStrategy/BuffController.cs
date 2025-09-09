@@ -7,10 +7,16 @@ public class BuffController : MonoBehaviour
 {
     //버프 인스턴스를 List로 선언
     private List<BuffInstance> ActiveBuffs = new List<BuffInstance>();
+
     [SerializeField] PlayerStat PlayerStat;
+    [SerializeField] UI_BuffIcon BuffIcon;
+    [SerializeField] GameObject BuffIconPrefab;
+    [SerializeField] Transform BuffIconParent;
+
 
     private void Awake()
     {
+        
     }
 
     public void AddBuff(IBuffBehavoprStrategy strategy, float power, float duration, SkillData skillData = null)
@@ -32,6 +38,13 @@ public class BuffController : MonoBehaviour
         // 신규 버프 생성 및 적용
         BuffInstance buff = new BuffInstance(strategy, power, duration, skillData);
         ActiveBuffs.Add(buff);
+
+        GameObject go = Instantiate(BuffIconPrefab, BuffIconParent);
+        UI_BuffIcon BuffIcon = go.GetComponent<UI_BuffIcon>();
+        BuffIcon.Setup(buff);
+
+
+
 
         if (strategy.TargetType == BuffTargetType.Stat)
         {
