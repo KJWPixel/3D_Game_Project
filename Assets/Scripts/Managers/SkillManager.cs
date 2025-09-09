@@ -142,7 +142,7 @@ public class SkillManager : MonoBehaviour
                 }
                 else if(BuffHandlers.TryGetValue(Effect.EffectType, out var BuffHandler))
                 {
-                    BuffController.AddBuff(BuffHandler, Effect.Power, Effect.Duration);
+                    BuffController.AddBuff(BuffHandler, Effect.Power, Effect.Duration, _SkillData);
                 }
                 else if(Effect.EffectType == SkillEffectType.Heal)
                 {

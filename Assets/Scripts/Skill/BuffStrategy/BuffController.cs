@@ -11,22 +11,17 @@ public class BuffController : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log($"[BuffController] Awake on: {gameObject.name}, PlayerStat: {PlayerStat}");
     }
 
     public void AddBuff(IBuffBehavoprStrategy strategy, float power, float duration, SkillData skillData = null)
     {
-        if (PlayerStat == null)
-        {
-            Debug.LogError("[BuffController] PlayerStat is null!");
-        }
-        else
-        {
-            Debug.Log("[BuffController] PlayerStat is OK: " + PlayerStat.gameObject.name);
-        }
-
         // 같은 전략 + 스킬 데이터(같은 버프 스킬) 중복 검사
-        BuffInstance existing = ActiveBuffs.FirstOrDefault(b => b.IBuff.GetType() == strategy.GetType()&& b.SkillData == skillData);
+        BuffInstance existing = ActiveBuffs.FirstOrDefault(Buffs => Buffs.IBuff.GetType() == strategy.GetType()&& Buffs.SkillData == skillData);
+        //Buffs = ActiveBuffs.BuffInstance => GetType으로 StrategyType && SkillData가 같은지 확인 
+        //ActiveBuffs에서 지금 추가하려는 버프(strategy, skillData)와 같은 타입 + 같은 스킬로 걸린 기존 버프가 있는지 찾음
+        //있으면 그 버프를 existing 변수에 저장 없으면 null 
+        //existing 안에 같은 버프가 존재한다면 지속시간 갱신
+        //FirstOrDefault(리스트를 순회하면서 조건에 만족하면 첫번째 요소를 변환, 불조건이면 null)
 
         if (existing != null)
         {

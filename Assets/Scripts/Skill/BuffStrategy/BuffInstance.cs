@@ -13,15 +13,14 @@ public class BuffInstance
 
     public BuffInstance(IBuffBehavoprStrategy _IBuff, float _Power, float _Duration, SkillData _SkillData = null)
     {
-        //인스턴스가 생성되면 IBuff의 값을 집어넣고 StartTime에 현재 시간을 넣음
         IBuff = _IBuff;
         Power = _Power;
         Duration = _Duration;
         SkillData = _SkillData;
-        StartTime = Time.time;
+        StartTime = Time.time; //생성 시점에 Time.time을 찍어 종료시간 기준
     }
 
-    //bool 현재시간 >= 버프실행시간 + 지속시간 이면 True
+    //bool 시작시간 >= 버프실행시간 + 지속시간 이면 True
     public bool IsExpired => Time.time >= StartTime + Duration;
 
     public void RefreshDuration(float _NewDuration)

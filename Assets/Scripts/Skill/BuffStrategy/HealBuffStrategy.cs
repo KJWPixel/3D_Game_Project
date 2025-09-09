@@ -8,17 +8,6 @@ public class HealBuffStrategy : IBuffBehavoprStrategy
 
     public void ApplyBuff(PlayerStat _PlayerStat, SkillData _SkillData, float _Power)
     {
-        if(_PlayerStat == null || _SkillData ==null )
-        {
-            Debug.Log("PlayerStat NUll");
-            return;
-        }
-        if ( _SkillData == null)
-        {
-            Debug.Log("_SkillData NUll");
-            return;
-        }
-
         foreach (var Effect in _SkillData.Effects)
         {
             Debug.Log("Healing ApplyBuff foreach 호출");
@@ -43,5 +32,6 @@ public class HealBuffStrategy : IBuffBehavoprStrategy
 
     public void RemoveBuff(PlayerStat _PlayrStat, SkillData _SkillData, float _Power)
     {
+        //Remove필요없음
     }
 }
