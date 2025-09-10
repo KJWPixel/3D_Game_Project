@@ -83,7 +83,7 @@ public class AI_Enemy : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(AI);
+        //Debug.Log(AI);
 
         State();
         GetAIState();
