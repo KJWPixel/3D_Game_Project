@@ -53,7 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BackGround: {fileID: 0}
   Icon: {fileID: 5844773089555748405}
-  DurationText: {fileID: 0}
+  BuffTimeText: {fileID: 2898601397899071412}
 --- !u!1 &1937417131480304840
 GameObject:
   m_ObjectHideFlags: 0

@@ -39,12 +39,10 @@ public class BuffController : MonoBehaviour
         BuffInstance buff = new BuffInstance(strategy, power, duration, skillData);
         ActiveBuffs.Add(buff);
 
-        GameObject go = Instantiate(BuffIconPrefab, BuffIconParent);
-        UI_BuffIcon BuffIcon = go.GetComponent<UI_BuffIcon>();
-        BuffIcon.Setup(buff);
-
-
-
+        //UI_Buff »ý¼º
+        GameObject BuffGo = Instantiate(BuffIconPrefab, BuffIconParent);
+        UI_BuffIcon ui = BuffGo.GetComponent<UI_BuffIcon>();
+        ui.Setup(buff);
 
         if (strategy.TargetType == BuffTargetType.Stat)
         {

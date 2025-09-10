@@ -24,7 +24,7 @@ MonoBehaviour:
   - EffectType: 4
     Power: 20
     HitCount: 0
-    Duration: 10
+    Duration: 70
     Radius: 0
     Distance: 0
     DelayTime: 0

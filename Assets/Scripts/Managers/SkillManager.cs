@@ -56,6 +56,7 @@ public class SkillManager : MonoBehaviour
             {SkillEffectType.RayDamage, new RayDamageSkillStrategy() },
             {SkillEffectType.LineAreaDamage, new LineAreaDamageStrategy() },
             {SkillEffectType.TargetAreaDamage, new TargetAreaDamageStrategy() },
+            {SkillEffectType.Teleport, new TeleportSkillStrategy()},
         };
 
         //전략패턴 버프
