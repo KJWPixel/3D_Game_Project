@@ -57,6 +57,7 @@ public class SkillManager : MonoBehaviour
             {SkillEffectType.LineAreaDamage, new LineAreaDamageStrategy() },
             {SkillEffectType.TargetAreaDamage, new TargetAreaDamageStrategy() },
             {SkillEffectType.Teleport, new TeleportSkillStrategy()},
+            {SkillEffectType.DistanceAreaDamage, new DistanceAreaSkillStrategy() },
         };
 
         //전략패턴 버프
@@ -128,7 +129,6 @@ public class SkillManager : MonoBehaviour
         //애니메이션 재생 
         Anim.PlayerSkillAnimation(_SkillData.Effects, true);
 
-        
         //캐스팅 시간
         yield return new WaitForSeconds(_SkillData.CastTime);
 
@@ -148,7 +148,7 @@ public class SkillManager : MonoBehaviour
                 else if(Effect.EffectType == SkillEffectType.Heal)
                 {
                     PlayerStat.Heal(Effect.Power);
-                    EffectManager.Instance.Spawn(_SkillData.CastEffectPrefab, transform.position, _SkillData.PrefabDuration);
+                    EffectManager.Instance.Spawn(_SkillData.CastEffectPrefab, transform.position, _SkillData.CastPrefabDuration);
                 }
                 else
                 {
@@ -173,9 +173,9 @@ public class SkillManager : MonoBehaviour
         //}
         #endregion
 
-
         //플레이어 State제어
         PlayerController.SetState(PlayerState.Idle);
+
         //애니메이션 종료
         Anim.PlayerSkillAnimation(_SkillData.Effects, false);
 

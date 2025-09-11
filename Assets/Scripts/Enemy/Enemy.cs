@@ -64,11 +64,13 @@ public class Enemy : BaseEnemy
         }
 
         PlayerStat = Player.GetComponent<PlayerStat>();
-
     }
+
     void Update()
     {
         AnimationControll();
+
+        Debug.Log($"Enemy State 상태확인: {AI_Enemy.CurrentAI}");
     }
 
     private void AnimationControll()
@@ -111,9 +113,8 @@ public class Enemy : BaseEnemy
             return;
         }
 
-
         Transform PathPoint = TRPATH[CurrentPathIndex];
-        Vector3 Dir = PathPoint.position - transform.position;//목표지점 - 현재위치: 목표로 향하는 방향벡터
+        Vector3 Dir = PathPoint.position - transform.position;//목표지점 - Enemy 위치: 목표로 향하는 방향벡터
 
         //이동
         float Distance = Dir.magnitude;//벡터의 길이를 의미
@@ -148,11 +149,6 @@ public class Enemy : BaseEnemy
     }
     public void Chase()
     {
-        if (AI_Enemy.CurrentAI == AI.AI_ATTACK)
-        {
-            return;
-        }
-
         if (AI_Enemy.CurrentAI == AI.AI_CHASE)
         {
             Debug.Log("Enemy Chase");
@@ -183,11 +179,6 @@ public class Enemy : BaseEnemy
                 PlayerStat.TakeDamage(AttackDamage);
             }
         }
-    }
-
-    private void AttackDistanceGizmo()
-    {
-        Gizmos.DrawWireSphere(transform.position, 3);
     }
 
     public void TakeDamage(float _Damage)
@@ -228,8 +219,6 @@ public class Enemy : BaseEnemy
 
     public void Reset()
     {
-
+        
     }
-
-
 }

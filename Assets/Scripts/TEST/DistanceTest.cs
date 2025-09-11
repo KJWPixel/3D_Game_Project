@@ -61,7 +61,7 @@ public class DistanceTest : MonoBehaviour
         float RadiusSqr = Radius * Radius;
 
         //스킬시작 지점 
-        Vector3 SkillArea = Player.transform.position + Vector3.forward * 3f + Vector3.up;
+        Vector3 SkillArea = Player.transform.position + Vector3.forward * 5f + Vector3.up;
         Debug.Log($"<color=red>스킬시작 위치:</color> {SkillArea}");
         Debug.Log($"<color=red>스킬범위 sqrMagnitude:</color> {Radius * Radius}");
 

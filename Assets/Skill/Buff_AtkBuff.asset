@@ -17,11 +17,12 @@ MonoBehaviour:
   Cost: 5
   CastTime: 1
   Cooldown: 5
-  PrefabDuration: 3
+  CastPrefabDuration: 2
+  HitPrefabDuration: 0
   CastEffectPrefab: {fileID: 3744133877081091469, guid: a2a060732547fe64581bb0cb3c2bdf1d, type: 3}
   HitEffectPrefab: {fileID: 0}
   Effects:
-  - EffectType: 4
+  - EffectType: 5
     Power: 20
     HitCount: 0
     Duration: 70

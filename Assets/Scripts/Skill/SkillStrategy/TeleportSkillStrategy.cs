@@ -17,7 +17,7 @@ public class TeleportSkillStrategy : ISkillBehaviorStrategy
             _Player.transform.position = MoveDistance;
             if (controller != null) controller.enabled = true;
 
-            EffectManager.Instance.Spawn(_SkillData.CastEffectPrefab, _Player.transform.position, _SkillData.PrefabDuration);
+            EffectManager.Instance.Spawn(_SkillData.CastEffectPrefab, _Player.transform.position, _SkillData.CastPrefabDuration);
 
             Debug.Log($"[Teleport] Player Move to {MoveDistance}");
         }

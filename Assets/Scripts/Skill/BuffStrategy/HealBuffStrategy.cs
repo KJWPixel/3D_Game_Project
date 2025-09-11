@@ -27,7 +27,7 @@ public class HealBuffStrategy : IBuffBehavoprStrategy
             }          
         }
 
-        EffectManager.Instance.Spawn(_SkillData.CastEffectPrefab, _PlayerStat.transform.position, _SkillData.PrefabDuration);
+        EffectManager.Instance.Spawn(_SkillData.CastEffectPrefab, _PlayerStat.transform.position, _SkillData.CastPrefabDuration);
     }
 
     public void RemoveBuff(PlayerStat _PlayrStat, SkillData _SkillData, float _Power)

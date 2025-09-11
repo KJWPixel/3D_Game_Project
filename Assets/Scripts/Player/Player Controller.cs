@@ -72,16 +72,13 @@ public class PlayerController : MonoBehaviour
             case PlayerState.Running:
                 IMoveStrategy = new RunStrategy();
                 break;
-
         }
-
 
         //기본 움직임 동작
         //Move();
         //Running();
         Jump();
         Anim.AnimationUpdate(x, z, VelocityValue.y);
-
     }
 
     #region
@@ -116,6 +113,12 @@ public class PlayerController : MonoBehaviour
     private void HandleMoveInput()
     {
         //Player의 입력값을 받아 상태만을 변경
+
+        //상태에 따른 리턴조건
+        if (CurrentState == PlayerState.Casting)
+        {
+            return;
+        }
 
         x = Input.GetAxisRaw("Horizontal");
         z = Input.GetAxisRaw("Vertical");

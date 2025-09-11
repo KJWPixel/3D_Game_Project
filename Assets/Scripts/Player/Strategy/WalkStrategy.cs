@@ -5,7 +5,7 @@ using UnityEngine;
 public class WalkStrategy : IMoveStrategy
 {
     public void Move(PlayerController _Player)
-    {
+    {        
         Vector3 CamForward = Camera.main.transform.forward;
         CamForward.y = 0f; // 상하 기울기 제거
         CamForward.Normalize();
@@ -19,6 +19,8 @@ public class WalkStrategy : IMoveStrategy
         _Player.MoveSpeed = _Player.WalkSpeed;//IsDash에 따라 Dash : Walk Speed 결정
         _Player.VelocityValue = _Player.MoveDir.normalized * _Player.MoveSpeed;
         _Player.VelocityValue.y += _Player.VerticalVelocity;
+
+        
 
         _Player.CharacterController.Move(_Player.VelocityValue * Time.deltaTime);
 

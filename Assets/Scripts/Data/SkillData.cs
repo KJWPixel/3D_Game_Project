@@ -21,7 +21,8 @@ public class SkillData : ScriptableObject
     public float Cost;
     public float CastTime;
     public float Cooldown;
-    public float PrefabDuration;
+    public float CastPrefabDuration;
+    public float HitPrefabDuration;
     public GameObject CastEffectPrefab;
     public GameObject HitEffectPrefab;
 
@@ -59,6 +60,7 @@ public enum SkillEffectType
     RayDamage,
     LineAreaDamage,
     TargetAreaDamage,
+    DistanceAreaDamage,
     Heal,
     AtkBuff,
     DefBuff,

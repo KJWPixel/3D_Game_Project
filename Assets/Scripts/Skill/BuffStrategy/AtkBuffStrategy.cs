@@ -12,7 +12,7 @@ public class AtkBuffStrategy : IBuffBehavoprStrategy
             _PlayrStat.Atk += Effect.Power;
             Debug.Log($"공격력 버프 적용");
         }
-        EffectManager.Instance.Spawn(_SkillData.CastEffectPrefab, _PlayrStat.transform.position, _SkillData.PrefabDuration);
+        EffectManager.Instance.Spawn(_SkillData.CastEffectPrefab, _PlayrStat.transform.position, _SkillData.CastPrefabDuration);
     }
 
     public void RemoveBuff(PlayerStat _PlayrStat, SkillData _SkillData, float _Power)

@@ -12,15 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1aabd643963f6347b205db3c9ff671b, type: 3}
   m_Name: Skill_Crystals
   m_EditorClassIdentifier: 
-  SkillName: 
-  Icon: {fileID: 0}
-  Cost: 0
-  CastTime: 0
-  Cooldown: 0
-  PrefabDuration: 0
-  CastEffectPrefab: {fileID: 0}
-  HitEffectPrefab: {fileID: 0}
-  Effects: []
+  SkillName: Crystals
+  Icon: {fileID: 21300000, guid: 480b6fd098764e244bde8ee6274e6a45, type: 3}
+  Cost: 25
+  CastTime: 2
+  Cooldown: 8
+  CastPrefabDuration: 2
+  HitPrefabDuration: 1
+  CastEffectPrefab: {fileID: 176822597162087251, guid: 46009f57772e5e743bec9df57a49ed66, type: 3}
+  HitEffectPrefab: {fileID: 4924508274929071776, guid: 0edef91621bb6b34384ccc9dbb98729c, type: 3}
+  Effects:
+  - EffectType: 3
+    Power: 25
+    HitCount: 5
+    Duration: 0
+    Radius: 5
+    Distance: 5
+    DelayTime: 0.3
+    MaxTarget: 10
   RequireLevel: 0
   RequireSP: 0
   PrerequisiteSkills: []

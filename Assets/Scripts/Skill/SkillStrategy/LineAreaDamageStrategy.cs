@@ -18,7 +18,7 @@ public class LineAreaDamageStrategy : ISkillBehaviorStrategy
 
             Quaternion Rotation = Quaternion.LookRotation(Forward);
 
-            EffectManager.Instance.Spawn(_SkillData.CastEffectPrefab, Origin, Rotation, _SkillData.PrefabDuration);
+            EffectManager.Instance.Spawn(_SkillData.CastEffectPrefab, Origin, Rotation, _SkillData.CastPrefabDuration);
 
             colliders = Physics.OverlapBox(Origin, Size, Rotation);
 
@@ -57,7 +57,7 @@ public class LineAreaDamageStrategy : ISkillBehaviorStrategy
                         if(enemy != null)
                         {
                             enemy.TakeDamage(_Power);
-                            EffectManager.Instance.Spawn(_SkillData.HitEffectPrefab, enemy.transform.position, _SkillData.PrefabDuration);
+                            EffectManager.Instance.Spawn(_SkillData.HitEffectPrefab, enemy.transform.position, _SkillData.HitPrefabDuration);
                         }
                     }
                 }

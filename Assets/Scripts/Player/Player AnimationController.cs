@@ -43,6 +43,9 @@ public class PlayerAnimationController : MonoBehaviour
                 case SkillEffectType.TargetAreaDamage:
                     Animator.SetBool("IsTargetAreaDamageSkill", _IsPlayering);
                     break;
+                case SkillEffectType.DistanceAreaDamage:
+                    Animator.SetBool("IsDistanceDamageSkill", _IsPlayering);
+                    break;
 
                 case SkillEffectType.Heal:
                     Animator.SetBool("IsHeal", _IsPlayering);
