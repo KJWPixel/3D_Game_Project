@@ -32,7 +32,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Skill_Heal
+  m_Name: HealSkill
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -170,42 +170,42 @@ AnimatorStateMachine:
     m_Position: {x: 190, y: 50, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2280453440334926098}
-    m_Position: {x: 60, y: -80, z: 0}
+    m_Position: {x: -110, y: -110, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7911655639148680452}
-    m_Position: {x: -160, y: -80, z: 0}
+    m_Position: {x: -100, y: -180, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4710669897047589601}
-    m_Position: {x: 290, y: -80, z: 0}
+    m_Position: {x: -110, y: -40, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4397191539796488062}
-    m_Position: {x: 500, y: -80, z: 0}
+    m_Position: {x: 190, y: -110, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8686838441753133772}
-    m_Position: {x: 470, y: 160, z: 0}
+    m_Position: {x: -130, y: 260, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3083880831208479835}
-    m_Position: {x: 920, y: -50, z: 0}
+    m_Position: {x: -130, y: 380, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7251522858701970883}
-    m_Position: {x: -210, y: 160, z: 0}
+    m_Position: {x: -130, y: 80, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5678125147970166452}
-    m_Position: {x: 20, y: 160, z: 0}
+    m_Position: {x: -130, y: 140, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6919784803843843252}
-    m_Position: {x: 250, y: 160, z: 0}
+    m_Position: {x: -130, y: 200, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7927588863645666466}
-    m_Position: {x: 730, y: 100, z: 0}
+    m_Position: {x: -130, y: 320, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: -380, y: 10, z: 0}
-  m_EntryPosition: {x: -380, y: 60, z: 0}
-  m_ExitPosition: {x: -370, y: 120, z: 0}
+  m_AnyStatePosition: {x: -510, y: 0, z: 0}
+  m_EntryPosition: {x: -510, y: 60, z: 0}
+  m_ExitPosition: {x: -510, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: -4312787278078747589}
 --- !u!1102 &-5678125147970166452
@@ -455,7 +455,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Skill_Teleport
+  m_Name: TeleportSkill
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -1052,7 +1052,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Buff
+  m_Name: BuffSkill
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
