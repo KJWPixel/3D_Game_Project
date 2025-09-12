@@ -14,7 +14,7 @@ using UnityEngine.TextCore.Text;
 public class AI_Enemy : MonoBehaviour
 {
     [SerializeField] Enemy Enemy;
-    [SerializeField] Character Character;
+    [SerializeField] PlayerController Character;
 
     protected AI AI = AI.AI_CREATE;
     public AI CurrentAI => AI;

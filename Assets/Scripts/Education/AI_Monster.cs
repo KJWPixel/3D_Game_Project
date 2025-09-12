@@ -10,7 +10,7 @@ public class AI_Monster : MonoBehaviour
     protected AI AI = AI.AI_CREATE;
 
     public Monster Monster;
-    public Character Character;
+    public CharacterBase Character;
 
     bool CharacterMove = false;
 

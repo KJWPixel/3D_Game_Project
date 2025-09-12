@@ -13,10 +13,10 @@ using UnityEngine.UIElements;
 /// Enemy의 HP, 애니메이션, 공격 처리 같은 "실제 행동"을 담당
 /// </summary>
 
-public class Enemy : BaseEnemy
+public class Enemy : MonoBehaviour
 {
     [SerializeField] AI_Enemy AI_Enemy;
-    [SerializeField] Character Character;
+    [SerializeField] PlayerController Character;
     [SerializeField] GameObject Player;
     [SerializeField] GameObject DamageTextPrefab;
     [SerializeField] GameObject DynamicObject;

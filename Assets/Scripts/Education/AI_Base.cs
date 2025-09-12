@@ -3,9 +3,9 @@ public class AI_Base
 {
     protected AI AI = AI.AI_CREATE;
 
-    protected Character Character;
+    protected CharacterBase Character;
 
-    public void Init(Character _Character)
+    public void Init(CharacterBase _Character)
     {
         Character = _Character;
     }
