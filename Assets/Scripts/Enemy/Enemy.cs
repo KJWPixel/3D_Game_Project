@@ -69,8 +69,6 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         AnimationControll();
-
-        Debug.Log($"Enemy State 상태확인: {AI_Enemy.CurrentAI}");
     }
 
     private void AnimationControll()

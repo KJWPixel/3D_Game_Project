@@ -42,9 +42,13 @@ public enum AI
 {
     AI_CREATE,//생성
     AI_IDLE,
-    AI_SEARCH,//패트롤 
+    AI_PATROL,
+    AI_SEARCH,
     AI_CHASE,
+    AI_FLEE,
     AI_ATTACK,
+    AI_SKILL,
+    AI_DEAD,
     AI_RESET,
 }
 

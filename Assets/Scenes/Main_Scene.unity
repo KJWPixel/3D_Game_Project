@@ -1440,9 +1440,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1337552814}
   - component: {fileID: 1337552815}
+  - component: {fileID: 1337552816}
   - component: {fileID: 1337552813}
   - component: {fileID: 1337552812}
   - component: {fileID: 1337552811}
+  - component: {fileID: 1337552817}
   m_Layer: 0
   m_Name: EnemyOrc
   m_TagString: Untagged
@@ -1559,6 +1561,52 @@ MonoBehaviour:
   Def: 5
   AtackRange: 3
   GainExp: 45
+  IsIdle: 0
+  IsWalk: 0
+  IsRunning: 0
+  IsAttack: 0
+  EnemyAI: {fileID: 0}
+  TRPATH: []
+  CurrentPathIndex: 0
+  PatrolWaitTime: 0
+--- !u!114 &1337552816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1337552810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c54951ae9eca1f84d9637df276aa72f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerTrs: {fileID: 5597022218211122715}
+  ChaseRange: 8
+  ChaseStartTime: 0
+  ChaseTime: 5
+  AttackRange: 3
+--- !u!95 &1337552817
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1337552810}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a1c4878cad7c0ec46858b0385e96f1a5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1375236631
 GameObject:
   m_ObjectHideFlags: 0
@@ -2723,6 +2771,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d12dc1ad2d4e6240bcd6df79b2d56ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &5597022218211122715 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6834805392992688727, guid: ebc7dbcc83e685b4f980da4e52d37b15, type: 3}
+  m_PrefabInstance: {fileID: 5597022218211122707}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6551178112750614707
 PrefabInstance:
   m_ObjectHideFlags: 0
