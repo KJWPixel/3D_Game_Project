@@ -1565,7 +1565,7 @@ MonoBehaviour:
   IsWalk: 0
   IsRunning: 0
   IsAttack: 0
-  EnemyAI: {fileID: 0}
+  EnemyAI: {fileID: 1337552816}
   TRPATH: []
   CurrentPathIndex: 0
   PatrolWaitTime: 0

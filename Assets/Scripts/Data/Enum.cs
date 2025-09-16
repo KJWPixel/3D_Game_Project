@@ -41,9 +41,9 @@ public enum PlayerState
 public enum AI
 {
     AI_CREATE,//»ý¼º
-    AI_IDLE,
-    AI_PATROL,
+    AI_IDLE,  
     AI_SEARCH,
+    AI_PATROL,
     AI_CHASE,
     AI_FLEE,
     AI_ATTACK,

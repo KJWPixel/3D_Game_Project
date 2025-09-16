@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyAI : AIBase
 {   //Enemy의 AI상태 전환 조건 로직
     //상태에 따른 행동은 EnemyCharacter
-    //어뎁터, 이터레이터, 커맨더 패턴, -카메라(세이크, 흐림필터), -게임완성(몬스터의 다채로움(AI증가), 애니메이터효과, 이펙트), 부족한 수업 부분 보충
+    //9.12 어뎁터, 이터레이터, 커맨더 패턴, -카메라(세이크, 흐림필터), -게임완성(몬스터의 다채로움(AI증가), 애니메이터효과, 이펙트), 부족한 수업 부분 보충
     //EnhancedScroller(?), -NGUI 1달, -Spine, -AssetBundle, -Picking(2D->3D), -UnityPackage(묶기), -Build, AutoBuild, -Market
     private EnemyCharacter Enemy;
     [SerializeField] private Transform PlayerTrs;
@@ -14,6 +14,7 @@ public class EnemyAI : AIBase
     public AI CurrentAI => AI;
 
     [Header("상태 조건")]
+    [SerializeField] float IdleStartTime = 0f;
     [SerializeField] float ChaseRange = 0f;
     [SerializeField] float ChaseStartTime = 0f;
     [SerializeField] float ChaseTime = 0f;
@@ -28,13 +29,6 @@ public class EnemyAI : AIBase
     {
         State();
         GetAIState();
-
-        //상태 조건 함수
-        IdleState();
-        PatrolState();
-        ChaseState();
-        FleeState();
-        AttackState();
     }
 
     public override void init()
@@ -47,18 +41,25 @@ public class EnemyAI : AIBase
         switch(AI)
         {
             case AI.AI_CREATE:
+                CreateState();
                 break;
             case AI.AI_IDLE:
+                IdleState();
                 break;
             case AI.AI_PATROL:
+                PatrolState();
                 break;
             case AI.AI_SEARCH:
+                
                 break;
             case AI.AI_CHASE:
+                ChaseState();
                 break;
             case AI.AI_FLEE:
+                FleeState();
                 break;
             case AI.AI_ATTACK:
+                AttackState();
                 break;
             case AI.AI_SKILL:
                 break;
@@ -75,9 +76,17 @@ public class EnemyAI : AIBase
         return AI;
     }
 
+    private void CreateState()
+    {
+        if (AI == AI.AI_CREATE)
+        {
+            AI = AI.AI_IDLE;
+        }
+    }
+
     private void IdleState()
     {
-        if(AI == AI.AI_CREATE)
+        if(AI == AI.AI_IDLE)
         {
             AI = AI.AI_IDLE;
         }
@@ -85,7 +94,7 @@ public class EnemyAI : AIBase
 
     private void PatrolState()
     {
-        if (AI == AI.AI_IDLE)
+        if (AI == AI.AI_PATROL)
         {
             AI = AI.AI_PATROL;
         }      
@@ -119,12 +128,9 @@ public class EnemyAI : AIBase
         { 
             if(Time.time > ChaseStartTime + ChaseTime)
             {
-                //추적시간 + 추적시작시간 < 게임진행시간 이라면 추적을 중지하고 원래 스폰 위치로 돌아감
+                //추적시간 + 추적시작시간 < 게임진행시간 이라면 추적을 중지하고 스폰 위치로 돌아감
+                //스폰 위치 또는 TRPATH위치로 돌아가면 상태 변경
                 AI = AI.AI_FLEE;
-            }
-            else
-            {
-                AI = AI.AI_PATROL;
             }
         }
     }
@@ -144,6 +150,4 @@ public class EnemyAI : AIBase
             }
         }
     }
-
-
 }
