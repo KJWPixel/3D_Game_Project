@@ -21,7 +21,7 @@ public abstract class EnemyCharacter : CharacterBase
     [SerializeField] protected bool IsWalk;
     [SerializeField] protected bool IsRunning;
     [SerializeField] protected bool IsAttack;
-
+    [SerializeField] protected bool IsDie;
 
     public abstract void Init();
     public abstract void Idle();
