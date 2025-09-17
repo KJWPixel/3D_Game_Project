@@ -55,24 +55,25 @@ public class EnemyAI : AIBase
                 CreateState();
                 break;
             case AI.AI_IDLE:
-                IdleState();
+                IdleTransition();
                 Enemy.Idle();
                 break;
             case AI.AI_PATROL:
-                PatrolState();
+                PatrolTransition();
                 Enemy.Patrol();
                 break;
             case AI.AI_SEARCH:
                 Enemy.Search();
                 break;
             case AI.AI_CHASE:
-                ChaseState();
+                ChaseTransition();
                 Enemy.Chase();
                 break;
             case AI.AI_FLEE:
                 Enemy.Flee();
                 break;
             case AI.AI_ATTACK:
+                AttackTransition();
                 Enemy.Attack();
                 break;
             case AI.AI_SKILL:
@@ -90,6 +91,22 @@ public class EnemyAI : AIBase
         return AI;
     }
 
+    private bool IsPlayerInRange(float range)
+    {
+        if (PlayerTrs == null) return false;
+        return Vector3.Distance(transform.position, PlayerTrs.position) <= range;
+    }
+
+    private bool HasIdleTimePassed()
+    {
+        return Time.time - IdleStartTime >= IdleDuration;
+    }
+
+    private bool HasChaseTimePassed()
+    {
+        return Time.time - ChaseStartTime >= ChaseTime;
+    }
+
     private void CreateState()
     {
         //Enemy가 처음 생성(스폰)되었을 시 CREATE상태이면서 CREATE Animation 출력
@@ -101,62 +118,49 @@ public class EnemyAI : AIBase
         }
     }
 
-    private void IdleState()
+    private void IdleTransition()
     {
-        //IDLE 상태에서 상태전환의 여러 조건을 추가
-        //전환할 상태 - PATROL, CHASE, ATTACK 등등
-
-        //PATROL 전환:IDLE 시작 시간에서 일정 시간이 지나면 PATROL 상태로 전환
-        if (AI == AI.AI_IDLE && IdleStartTime == 0f)
-        {
-            IdleStartTime = Time.time;
-
-            if (Time.time - IdleStartTime >= IdleDuration)
-            {
-                AI = AI.AI_PATROL;
-                IdleStartTime = 0f;        
-            }
-        }
-
-        //CHASE 전환: IDLE상태에서 일정 거리에 다가서면 CHASE상태로 전환
-        ChaseState();
-    }
-
-    private void PatrolState()
-    {
-        //PATROL 상태
-        //PATROL상태라고는 하나 행동은 Enemy에서 TRPATH로 지정된 Trs위치로 계속 이동
-        //EnemyAI에서 다른 동작 추가할게 없음
-
-        ChaseState();
-    }
-
-    private void ChaseState()
-    {
-        //CHASE 상태
-        //플레이어가 일정 추적거리에 들어오면 Chase 상태로 전환
-        //플레이어가 추적거리 안쪽 AttackRange까지 들어오면 바로 ATTACK 상태로 전환
-        //CHASE상태에 일정 시간이 지나면 FLEE 상태로 전환
-
-        if (PlayerTrs == null) return;
-
-        float TargetDis = Vector3.Distance(transform.position, PlayerTrs.position);
-
-        if(TargetDis <= AttackRange)
-        {
-            AI = AI.AI_ATTACK;
-            return;
-        }
-
-        if (AI != AI.AI_CHASE && TargetDis <= ChaseRange)
+        if (IsPlayerInRange(ChaseRange))
         {
             AI = AI.AI_CHASE;
             ChaseStartTime = Time.time;
         }
+        else if (HasIdleTimePassed())
+        {
+            AI = AI.AI_PATROL;
+            IdleStartTime = Time.time;
+        }
+    }
 
-        if (Time.time > ChaseStartTime + ChaseTime)
+    private void PatrolTransition()
+    {
+        if (IsPlayerInRange(ChaseRange))
+        {
+            AI = AI.AI_CHASE;
+            ChaseStartTime = Time.time;
+        }
+    }
+
+    private void ChaseTransition()
+    {
+        if (IsPlayerInRange(AttackRange))
+        {
+            AI = AI.AI_ATTACK;
+        }
+        else if (HasChaseTimePassed())
         {
             AI = AI.AI_FLEE;
         }
     }
+
+    private void AttackTransition()
+    {
+        if (!IsPlayerInRange(AttackRange))
+        {
+            AI = AI.AI_CHASE;
+            ChaseStartTime = Time.time;
+        }
+    }
 }
+
+
