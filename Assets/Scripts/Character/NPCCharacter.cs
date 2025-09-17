@@ -1,18 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class NPCCharacter : MonoBehaviour
+public abstract class NPCCharacter : MonoBehaviour
 {
-    // Start is called before the first frame update
+    protected GameObject Player;
+
+    [Header("기본정보")]
+    [SerializeField] protected string Name;
+    [SerializeField] protected float InsteractionRang = 0f;
+    [SerializeField] protected string[] DialogLine;
+    [SerializeField] protected int CurrentDialogIndex = 0;
+    [SerializeField] protected Image TextPanel;
+    [SerializeField] protected TextMeshProUGUI Text;
     void Start()
     {
         
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
-        
+       
     }
 }

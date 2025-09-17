@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class EnemyAI : AIBase
@@ -9,7 +10,7 @@ public class EnemyAI : AIBase
     //EnhancedScroller(?), -NGUI 1´Þ, -Spine, -AssetBundle, -Picking(2D->3D), -UnityPackage(¹­±â), -Build, AutoBuild, -Market
     //9.16 AssetBundle
 
-    private EnemyCharacter Enemy;
+    private Enemy Enemy;
     [SerializeField] private Transform PlayerTrs;
 
     protected AI AI = AI.AI_CREATE;
@@ -30,7 +31,8 @@ public class EnemyAI : AIBase
 
     private void Awake()
     {
-        Enemy = GetComponent<EnemyCharacter>();
+        Enemy = GetComponent<Enemy>();
+        
     }
     private void Update()
     {
@@ -70,6 +72,7 @@ public class EnemyAI : AIBase
                 Enemy.Chase();
                 break;
             case AI.AI_FLEE:
+                FleeTransition();
                 Enemy.Flee();
                 break;
             case AI.AI_ATTACK:
@@ -101,7 +104,6 @@ public class EnemyAI : AIBase
     {
         return Time.time - IdleStartTime >= IdleDuration;
     }
-
     private bool HasChaseTimePassed()
     {
         return Time.time - ChaseStartTime >= ChaseTime;
@@ -150,6 +152,16 @@ public class EnemyAI : AIBase
         else if (HasChaseTimePassed())
         {
             AI = AI.AI_FLEE;
+        }
+    }
+
+    private void FleeTransition()
+    {
+        float SpawnDistance = Vector3.Distance(transform.position, Enemy.TRPATH[Enemy.CurrentPathIndex].transform.position);
+
+        if(SpawnDistance > 2)
+        {
+            AI = AI.AI_PATROL;
         }
     }
 

@@ -60,7 +60,6 @@ public class AI_Enemy : MonoBehaviour
             case AI.AI_ATTACK:
                 break;
             case AI.AI_RESET:
-                Enemy.Reset();  
                 break;  
         }            
     }
