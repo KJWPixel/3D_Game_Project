@@ -19,12 +19,14 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        if (Player == null)
+        {
+            Player = GameObject.FindWithTag("Player");
+        }
     }
     void Start()
     {
-        if(Player == null)
-        {
-            Player = GameObject.FindWithTag("Player");
-        }        
+                
     }
 }

@@ -9,20 +9,8 @@ public abstract class NPCCharacter : MonoBehaviour
     protected GameObject Player;
 
     [Header("기본정보")]
-    [SerializeField] protected string Name;
-    [SerializeField] protected float InsteractionRang = 0f;
-    [SerializeField] protected string[] DialogLine;
-    [SerializeField] protected int CurrentDialogIndex = 0;
-    [SerializeField] protected Image TextPanel;
-    [SerializeField] protected TextMeshProUGUI Text;
-    void Start()
-    {
-        
-    }
-
-    
-    void Update()
-    {
-       
-    }
+    [SerializeField] protected string Name;    
+    [TextArea] [SerializeField] protected string[] DialogueLines;
+    [SerializeField] protected int CurrentDialogueIndex = 0;
+    [SerializeField] protected float InsteractionRange = 0f;
 }

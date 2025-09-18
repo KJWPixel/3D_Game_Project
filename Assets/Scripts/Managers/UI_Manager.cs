@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -11,10 +12,17 @@ public class UI_Manager : MonoBehaviour
     [Header("마우스커서 제어 체크")]
     [SerializeField] public bool IsActiveCursor = false;
 
-    [SerializeField] PlayerSkillBook PlayerSkillBook;
+    [Header("플레이어 스킬 UI")]
     [SerializeField] SkillTree SkillTree;
-
+    [SerializeField] PlayerSkillBook PlayerSkillBook;   
     [SerializeField] List<UI_SkillSlot> UI_SkillSlots;
+
+    [Header("NPC 대사 UI")]
+    [SerializeField] public GameObject DialoguePanel;
+    [SerializeField] public TextMeshProUGUI NameText;
+    [SerializeField] public TextMeshProUGUI DialogueText;
+    
+
 
 
     private void Awake()

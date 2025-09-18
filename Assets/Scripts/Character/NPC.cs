@@ -19,9 +19,9 @@ public class NPC : NPCCharacter
     private void InteractDialog()
     {
         float Distance = Vector3.Distance(transform.position, Player.transform.position);
-        if(Distance < InsteractionRang && Input.GetKeyDown(KeyCode.E))
+        if(Distance < InsteractionRange && Input.GetKeyDown(KeyCode.E))
         {
-            Text.text = DialogLine[CurrentDialogIndex];
+            DialogueManager.Instance.StartDialogue(Name, DialogueLines);
         }
     }
 }
