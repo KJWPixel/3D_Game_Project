@@ -65,16 +65,16 @@ public class UI_SkillIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             return;
         }
 
-        if(UI_Manager.Instance.DuplicationSkillSlot(SkillData)) //중복체크
+        if(UIManager.Instance.DuplicationSkillSlot(SkillData)) //중복체크
         {
             //중복이면 True => 해당스킬 Remove
-            UI_Manager.Instance.RemoveSkillSlot(SkillData);
+            UIManager.Instance.RemoveSkillSlot(SkillData);
             Debug.Log("스킬슬롯에 스킬을 해제합니다.");
         }
         else
         {
             //중복없으면 Set
-            UI_Manager.Instance.SetSkillSlot(SkillData);
+            UIManager.Instance.SetSkillSlot(SkillData);
             Debug.Log("스킬슬롯에 스킬을 등록합니다.");
         }
     }

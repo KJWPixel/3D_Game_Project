@@ -302,7 +302,7 @@ public class PlayerController : MonoBehaviour
 
     private void UseSkillFormSlot(int _SlotIndex)
     {
-        SkillData SkillData = UI_Manager.Instance.GetSkillFromSlot(_SlotIndex);
+        SkillData SkillData = UIManager.Instance.GetSkillFromSlot(_SlotIndex);
         if(SkillData != null)
         {
             SkillManager.Instance.UseSkill(SkillData, null);

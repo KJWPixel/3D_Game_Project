@@ -5,9 +5,9 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
-public class UI_Manager : MonoBehaviour
+public class UIManager : MonoBehaviour
 {
-    public static UI_Manager Instance;
+    public static UIManager Instance;
 
     [Header("마우스커서 제어 체크")]
     [SerializeField] public bool IsActiveCursor = false;
@@ -17,14 +17,12 @@ public class UI_Manager : MonoBehaviour
     [SerializeField] PlayerSkillBook PlayerSkillBook;   
     [SerializeField] List<UI_SkillSlot> UI_SkillSlots;
 
-    [Header("NPC 대사 UI")]
+    [Header("NPC 대화 UI")]
     [SerializeField] public GameObject DialoguePanel;
     [SerializeField] public TextMeshProUGUI NameText;
     [SerializeField] public TextMeshProUGUI DialogueText;
-    
-
-
-
+    [SerializeField] public GameObject ChoiceYes;
+    [SerializeField] public GameObject ChoiceNo;
     private void Awake()
     {
         if(Instance == null)
@@ -35,7 +33,14 @@ public class UI_Manager : MonoBehaviour
         else
         {
             Destroy(gameObject);
-        }    
+        }
+
+        InitUI();
+    }
+
+    private void InitUI()
+    {
+        DialoguePanel.SetActive(false);
     }
 
     private void Update()
@@ -43,6 +48,7 @@ public class UI_Manager : MonoBehaviour
         CursorActive();
     }
 
+    //마우스 커서 제어
     private void CursorActive()
     {
         if(Input.GetKeyDown(KeyCode.LeftAlt))
@@ -61,6 +67,30 @@ public class UI_Manager : MonoBehaviour
             }
         }
     }
+
+    //NPC 대화 대사 분기 버튼
+    public void OnClickYes()
+    {
+        Debug.Log("Yes 선택");
+        //추후 후속으로 필요한 기능 추가
+    }
+    public void OnClickNo()
+    {
+        Debug.Log("No 선택 ");
+        DialogueManager.Instance.Index = 0;
+        ChoiceYes.SetActive(false);
+        ChoiceNo.SetActive(false);
+        DialoguePanel.SetActive(false);
+    }
+
+    public void OnClickShop()
+    {
+        Debug.Log("상점 페이지 활성화");
+        ChoiceYes.SetActive(false);
+        ChoiceNo.SetActive(false);
+        DialoguePanel.SetActive(false);
+    }
+
 
     //스킬 슬롯 Set,Remove, 중복확인
     public void SetSkillSlot(SkillData _SkillData)
