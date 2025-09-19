@@ -28,7 +28,8 @@ public class UIManager : MonoBehaviour
         if(Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            GameObject root = gameObject.transform.root.gameObject;
+            DontDestroyOnLoad(root);
         }
         else
         {
