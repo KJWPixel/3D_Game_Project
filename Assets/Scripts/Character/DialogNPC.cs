@@ -2,9 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DialogNPC : NPCCharacter
+public enum InteractionType
 {
-    
+    None,
+    Choice,
+    Shop,
+    Quest,
+}
+public class DialogNPC : NPCCharacter
+{ 
+    public InteractionType interactionType;
     private void Start()
     {
         if(Player == null)
@@ -22,7 +29,7 @@ public class DialogNPC : NPCCharacter
         float Distance = Vector3.Distance(transform.position, Player.transform.position);
         if(Distance < InsteractionRange && Input.GetKeyDown(KeyCode.E))
         {
-            DialogueManager.Instance.StartDialogue(Name, DialogueLines, DialogChoice);         
+            DialogueManager.Instance.StartDialogue(Name, DialogueLines, interactionType);         
         }
     }
 }

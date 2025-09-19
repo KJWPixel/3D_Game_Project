@@ -2686,6 +2686,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1343106876}
     - target: {fileID: 6671672672723291217, guid: 35ba7d9a1c19f244092360bcae4fa9c9, type: 3}
+      propertyPath: ChoiceNo
+      value: 
+      objectReference: {fileID: 1343106876}
+    - target: {fileID: 6671672672723291217, guid: 35ba7d9a1c19f244092360bcae4fa9c9, type: 3}
+      propertyPath: ChoiceYes
+      value: 
+      objectReference: {fileID: 1334543636}
+    - target: {fileID: 6671672672723291217, guid: 35ba7d9a1c19f244092360bcae4fa9c9, type: 3}
       propertyPath: PlayerSkillBook
       value: 
       objectReference: {fileID: 1378704368}
@@ -2872,6 +2880,10 @@ PrefabInstance:
     - target: {fileID: 3537752042180500110, guid: caf51b448d42c6a4f99354a5c4349a00, type: 3}
       propertyPath: DialogChoice
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3537752042180500110, guid: caf51b448d42c6a4f99354a5c4349a00, type: 3}
+      propertyPath: interactionType
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3537752042180500110, guid: caf51b448d42c6a4f99354a5c4349a00, type: 3}
       propertyPath: DialogueLines.Array.size

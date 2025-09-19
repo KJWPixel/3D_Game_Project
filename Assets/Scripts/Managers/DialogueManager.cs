@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -12,7 +13,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] public int Index;
     [SerializeField] private Coroutine TypingCoroutine;
     [SerializeField] private bool IsTyping;
-    [SerializeField] private bool ShowChoice;
+    [SerializeField] private Enum CurrentInteraction;
 
     private void Awake()
     {
@@ -29,10 +30,10 @@ public class DialogueManager : MonoBehaviour
         ShowTextSentences();
     }
 
-    public void StartDialogue(string _Name, string[] _DialogueLine, bool _choice)
+    public void StartDialogue(string _Name, string[] _DialogueLine, InteractionType _Type)
     {
         Sentences = _DialogueLine;
-        ShowChoice = _choice;
+        CurrentInteraction = _Type;
 
         UIManager.Instance.DialoguePanel.SetActive(true);
         UIManager.Instance.NameText.text = _Name;
@@ -78,15 +79,23 @@ public class DialogueManager : MonoBehaviour
 
     private void EndDialogue()
     {
-        //NPC한테 분기가 존재한다면 버튼으로 분기 선택/ 분기가 없다면 대화 끝
-        if (ShowChoice)
+        switch (CurrentInteraction)
         {
-            UIManager.Instance.ChoiceYes.SetActive(true);
-            UIManager.Instance.ChoiceNo.SetActive(true);
-            return;
+            case InteractionType.Choice:
+                UIManager.Instance.ChoiceYes.SetActive(true);
+                UIManager.Instance.ChoiceNo.SetActive(true);
+                break;
+            case InteractionType.Shop:
+                UIManager.Instance.OnClickShop();
+                break;
+            case InteractionType.Quest:
+                // Quest 관련 버튼/행동 활성화
+                break;
+            default:
+                UIManager.Instance.DialoguePanel.SetActive(false);
+                break;
         }
-        //NPC의 bool값에 따라 필요 버튼의활성화를 달리함
+
         Index = 0;
-        UIManager.Instance.DialoguePanel.SetActive(false);
     }
 }
