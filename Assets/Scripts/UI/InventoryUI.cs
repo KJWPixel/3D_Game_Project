@@ -10,6 +10,7 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] GameObject SlotPrefab;
 
     private ItemSlot[] Slots;
+    private List<InventoryItem> FilteringItem = new List<InventoryItem>();
 
     private void Awake()
     {
@@ -49,5 +50,11 @@ public class InventoryUI : MonoBehaviour
         {
             Slots[i].SetItem(Items[i]);
         }
+    }
+
+    public void ItemFilter(ItemType _Type)
+    {
+        
+        
     }
 }

@@ -7,8 +7,8 @@ public class SkillTree : MonoBehaviour
     //스킬의 습득 조건 검사 및 습득여부 확인
     //스킬클릭 > 해당 스킬의 SP 차감 여부 확인, Level 확인 > 습득이 가능하면 SP 차감 > BackGround변화(습득연출)
 
-    [SerializeField] PlayerStat PlayerStat;
-    [SerializeField] PlayerSkillBook PlayerSkillBook; 
+    [SerializeField] private PlayerStat PlayerStat;
+    [SerializeField] private PlayerSkillBook PlayerSkillBook; 
 
     public bool LearnSkill(SkillData _Skill)
     {

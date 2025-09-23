@@ -46,6 +46,7 @@ public class UIManager : MonoBehaviour
     private void InitUI()
     {
         DialoguePanel.SetActive(false);
+        InventoryPanel.SetActive(false);
     }
 
     private void Update()

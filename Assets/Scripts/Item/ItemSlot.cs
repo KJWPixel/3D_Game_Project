@@ -44,7 +44,7 @@ public class ItemSlot : MonoBehaviour
         switch(CurrentItem.ItemData.Type)
         {
             case ItemType.Consumable:
-                Debug.Log($"사용: {CurrentItem.ItemData.name}");
+                Debug.Log($"사용: {CurrentItem.ItemData.name}, {CurrentItem.ItemData.ItemTooltip}");
                 InventoryManager.Instance.RemoveItem(CurrentItem.ItemData, 1);
                 InventoryUI.Instance.RefreshUI();
                 break;
