@@ -19,9 +19,13 @@ public enum SKILL
     END,
 }
 
-public enum ITEM
+public enum ItemType
 {
-
+    None,
+    Equipment,
+    Consumable,
+    Quest,
+    Material,
 }
 
 public enum PlayerState

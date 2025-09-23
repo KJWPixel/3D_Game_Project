@@ -17,6 +17,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] PlayerSkillBook PlayerSkillBook;   
     [SerializeField] List<UI_SkillSlot> UI_SkillSlots;
 
+    [Header("인벤토리 UI")]
+    [SerializeField] private GameObject InventoryPanel;
+    [SerializeField] private bool IsInventoryOpen = false; 
+
     [Header("NPC 대화 UI")]
     [SerializeField] public GameObject DialoguePanel;
     [SerializeField] public TextMeshProUGUI NameText;
@@ -47,6 +51,11 @@ public class UIManager : MonoBehaviour
     private void Update()
     {
         CursorActive();
+
+        if(Input.GetKeyDown(KeyCode.I))
+        {
+            InventoryOpen();
+        }
     }
 
     //마우스 커서 제어
@@ -66,6 +75,17 @@ public class UIManager : MonoBehaviour
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false; 
             }
+        }
+    }
+
+    private void InventoryOpen()
+    {
+        IsInventoryOpen = !IsInventoryOpen;
+        InventoryPanel.SetActive(IsInventoryOpen);
+
+        if(IsInventoryOpen)
+        {
+            InventoryUI.Instance.RefreshUI();
         }
     }
 

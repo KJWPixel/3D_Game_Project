@@ -4845,14 +4845,14 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2159085474482405002}
+  - {fileID: 6257611001892925959}
+  - {fileID: 3185110396161361389}
+  - {fileID: 6686337855254624631}
+  - {fileID: 5912484660181092852}
   - {fileID: 5170712816899531037}
   - {fileID: 4584666247429931072}
   - {fileID: 3442244041899500254}
-  - {fileID: 3185110396161361389}
   - {fileID: 8343150206224237551}
-  - {fileID: 6257611001892925959}
-  - {fileID: 6686337855254624631}
-  - {fileID: 5912484660181092852}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -6962,7 +6962,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6656299495414423287}
   m_HandleRect: {fileID: 3943082255556092018}
   m_Direction: 2
-  m_Value: 0.66701376
+  m_Value: 0.5703404
   m_Size: 0.225
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -8648,7 +8648,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 1032.2572}
+  m_AnchoredPosition: {x: 0, y: 1331.9447}
   m_SizeDelta: {x: 0, y: 4000}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &8785260907487982197
