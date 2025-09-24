@@ -49,7 +49,7 @@ public class SaveManager : MonoBehaviour
         playerSaveData.CurrentMp = PlayerStat.CurrentMp;
         playerSaveData.Atk = PlayerStat.Atk;
         playerSaveData.Def = PlayerStat.Def;
-        playerSaveData.Critical = PlayerStat.Critical;
+        playerSaveData.Critical = PlayerStat.Crit;
 
         string json = JsonUtility.ToJson(playerSaveData, true);
         File.WriteAllText(filePath, json);
@@ -76,7 +76,7 @@ public class SaveManager : MonoBehaviour
         PlayerStat.CurrentMp = playerSaveData.CurrentMp;
         PlayerStat.Atk = playerSaveData.Atk;
         PlayerStat.Def = playerSaveData.Def;
-        PlayerStat.Critical = playerSaveData.Critical;
+        PlayerStat.Crit = playerSaveData.Critical;
 
         Debug.Log("게임 불러오기 완료");
     }

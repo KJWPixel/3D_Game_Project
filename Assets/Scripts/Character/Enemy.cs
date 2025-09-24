@@ -24,12 +24,14 @@ public class Enemy : EnemyCharacter
     [SerializeField] GameObject Player;
     [SerializeField] PlayerStat PlayerStat;
     Animator Animator;
+    ItemDrop ItemDrop;
 
     private void Awake()
     {
         Init();
         EnemyAI = GetComponent<EnemyAI>();
         Animator = GetComponent<Animator>();
+        ItemDrop = GetComponent<ItemDrop>();
     }
 
     public override void Init()
@@ -143,11 +145,14 @@ public class Enemy : EnemyCharacter
         if(Distance <= 3f)
         {
             PlayerStat.TakeDamage(Atk);
+            Debug.Log($"PlayerTake Damage{Atk}");
         }
     }
 
     public override void TakeDamage(float _Damage)
     {
+        if (IsDie) return;
+
         float FinalDamage = 0f;
 
         if (CurHp > 0)
@@ -169,7 +174,7 @@ public class Enemy : EnemyCharacter
             Die();
         }
 
-            ShowDamageText(FinalDamage);
+        ShowDamageText(FinalDamage);
     }
 
     public override void ShowDamageText(float _Damage)
@@ -188,8 +193,9 @@ public class Enemy : EnemyCharacter
 
     private void Die()
     {
-        IsDie = true;
         PlayerStat.AddExp(GainExp);
-        Destroy(gameObject);
+        ItemDrop.ItemsDrop();
+
+        Destroy(gameObject, 0.3f);
     }
 }

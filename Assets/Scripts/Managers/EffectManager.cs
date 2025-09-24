@@ -23,6 +23,8 @@ public class EffectManager : MonoBehaviour
 
     public GameObject Spawn(GameObject _Prefab, Vector3 _Position, Quaternion _Rotation, float _Duration)
     {
+        if (_Position == null) return null;
+
         var Prefab = Instantiate(_Prefab, _Position, _Rotation, DynamicObject.transform);
         Destroy(Prefab, _Duration);
         return Prefab;

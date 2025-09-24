@@ -2,26 +2,120 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using UnityEngine.Assertions.Must;
+using JetBrains.Annotations;
 
 public class PlayerStat : MonoBehaviour
 {
     [Header("Status")]
-    [SerializeField] public string UserName;
-    [SerializeField] public int Level = 1;
-    [SerializeField] public float MaxExp = 0f;
-    [SerializeField] public float CurrentExp = 0f;
-    [SerializeField] public int SkillPoint = 0;
+    [SerializeField] private string userName;
+    [SerializeField] private int level = 1;
+    [SerializeField] private float maxExp = 0f;
+    [SerializeField] private float currentExp = 0f;
+    [SerializeField] private int skillPoint = 0;
 
-    [SerializeField] public float MaxHp = 0f;
-    [SerializeField] public float CurrentHp = 0f;
-    [SerializeField] public float MaxMp = 0f;
-    [SerializeField] public float CurrentMp = 0f;
-    [SerializeField] public float MaxStamina = 0f;
-    [SerializeField] public float CurrentStamina = 0f;
+    [SerializeField] private float maxHp = 0f;
+    [SerializeField] private float currentHp = 0f;
+    [SerializeField] private float maxMp = 0f;
+    [SerializeField] private float currentMp = 0f;
+    [SerializeField] private float maxStamina = 0f;
+    [SerializeField] private float currentStamina = 0f;
 
-    [SerializeField] public float Atk = 0f;
-    [SerializeField] public float Def = 0f;
-    [SerializeField] public float Critical = 0f;
+    [SerializeField] private float atk = 0f;
+    [SerializeField] private float def = 0f;
+    [SerializeField] private float crit = 0f;
+    [SerializeField] private float critDmg = 0f;
+
+    public string UserName
+    {
+        get => userName;
+        set => userName = value;
+    }
+
+    public int Level
+    {
+        get => level;
+        set => level = value;
+    }
+
+    public float MaxExp
+    {
+        get => maxExp;
+        set => maxExp = value;
+    }
+
+    public float CurrentExp
+    {
+        get => currentExp;
+        set => currentExp = Mathf.Clamp(value, 0, maxExp);
+    }
+
+    public int SkillPoint
+    {
+        get => skillPoint;
+        set => skillPoint = value;
+    }
+
+    public float MaxHp
+    {
+        get => maxHp;
+        set => maxHp = value;
+    }
+
+    public float CurrentHp
+    {
+        get => currentHp;
+        set => currentHp = Mathf.Clamp(value, 0, maxHp);
+    }
+
+    public float MaxMp
+    { 
+        get => maxMp;
+        set => maxMp = value;
+    }
+
+    public float CurrentMp
+    {
+        get => currentMp;
+        set => currentMp = Mathf.Clamp(value, 0, maxMp);
+    }
+
+    public float MaxStamina
+    {
+        get => maxStamina;
+        set => maxStamina = value;
+    }
+
+    public float CurrentStamina
+    {
+        get => currentStamina;
+        set => currentStamina = Mathf.Clamp(value, 0, maxStamina);
+    }
+
+    public float Atk
+    {
+        get => atk;
+        set => atk = value;
+    }
+
+    public float Def
+    {
+        get => def;
+        set => def = value;
+    }
+
+    public float Crit
+    {
+        get => crit;
+        set => crit = value;
+    }
+
+    public float CirtDmg
+    {
+        get => critDmg;
+        set => critDmg = value;
+    }
+
 
     List<float> ActiveBuffs = new List<float>();
 
@@ -108,8 +202,6 @@ public class PlayerStat : MonoBehaviour
     {
         CurrentHp = Mathf.Min(CurrentHp + _Power, MaxHp);
     }
-
-
 
     public void TakeDamage(float _Damage)
     {
