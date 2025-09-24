@@ -8,9 +8,9 @@ public class InventoryUI : MonoBehaviour
 
     [SerializeField] Transform SlotParent;
     [SerializeField] GameObject SlotPrefab;
+    [SerializeField] int MaxSlot = 100;
 
     private ItemSlot[] Slots;
-    private List<InventoryItem> FilteringItem = new List<InventoryItem>();
 
     private void Awake()
     {
@@ -19,14 +19,13 @@ public class InventoryUI : MonoBehaviour
 
     private void Start()
     {
-        Slots = new ItemSlot[InventoryManager.Instance.GetAllItems().Count];
         CreateSlots();
-        RefreshUI();
+        InventoryManager.Instance.OnInventoryChanged += RefreshUI;     
+        RefreshUI(InventoryManager.Instance.GetAllItems());
     }
 
     private void CreateSlots()
     {
-        int MaxSlot = 100;
         Slots = new ItemSlot[MaxSlot];
 
         for (int i = 0; i < MaxSlot; i++)
@@ -39,22 +38,28 @@ public class InventoryUI : MonoBehaviour
 
     public void RefreshUI()
     {
-        var Items = InventoryManager.Instance.GetAllItems();
+        RefreshUI(InventoryManager.Instance.GetAllItems());
+    }
 
+    public void RefreshUI(List<InventoryItem> _ItemsToShow)
+    {
         foreach(var Slot in Slots)
         {
             Slot.ClearSlot();
         }
 
-        for(int i = 0; i < Items.Count; i++)
+        for(int i = 0; i < _ItemsToShow.Count; i++)
         {
-            Slots[i].SetItem(Items[i]);
+            Slots[i].SetItem(_ItemsToShow[i]);
         }
     }
 
-    public void ItemFilter(ItemType _Type)
+    public void ItemFilter(int _TypeIndex)
     {
-        
-        
+        ItemType Type = (ItemType)_TypeIndex;
+
+        var filteredItems = InventoryManager.Instance.GetItemByType(Type);
+
+        RefreshUI(filteredItems);       
     }
 }

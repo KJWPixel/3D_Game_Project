@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1
   itemname: TestItem
-  icon: {fileID: 21300000, guid: f40913a88240a4c76bf83c250766aa68, type: 3}
+  icon: {fileID: 21300000, guid: e359cba75fdaf9e43a5e96e1485dfeb9, type: 3}
   itemtooltip: TestItem
   type: 2
   RestoreHp: 15

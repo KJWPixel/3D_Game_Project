@@ -14,18 +14,20 @@ public class ItemSlot : MonoBehaviour
 
     public void SetItem(InventoryItem _Item)
     {
+        if (_Item == null) return;
+
         CurrentItem = _Item;
 
-        if (_Item != null)
-        {
-            Icon.sprite = _Item.ItemData.Icon;
-            Icon.gameObject.SetActive(true);
+        Icon.sprite = _Item.ItemData.Icon;
+        Icon.enabled = true;
 
-            QuantityText.text = _Item.Quantity > 1 ? _Item.Quantity.ToString() : "";
+        if(_Item.Quantity > 1)
+        {
+            QuantityText.text = _Item.Quantity.ToString();
         }
         else
         {
-            ClearSlot();
+            QuantityText.text = "";
         }
     }
 
@@ -33,7 +35,7 @@ public class ItemSlot : MonoBehaviour
     {
         CurrentItem = null;
         Icon.sprite = null;
-        Icon.gameObject.SetActive(false);
+        Icon.enabled = false;
         QuantityText.text = "";
     }
 

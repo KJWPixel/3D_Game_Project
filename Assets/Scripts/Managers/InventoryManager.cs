@@ -21,8 +21,10 @@ public class InventoryManager : MonoBehaviour
     public static InventoryManager Instance; //싱글톤
 
     [SerializeField] private int MaxSlot = 100;//인벤토리 슬롯 사이즈
+
     private List<InventoryItem> Items = new List<InventoryItem>();//인벤토리아이템 리스트
 
+    //기존 Items에서 딕셔너리 구조로 변경 Key: ItemType, Value: List<InventoryItem> 아이템 타입에 따라 리스트 인벤토리 아이템으로 들어감
     Dictionary<ItemType, List<InventoryItem>> ItemByType = new Dictionary<ItemType, List<InventoryItem>>()
     {
         {ItemType.Equipment, new List<InventoryItem>()},
@@ -31,12 +33,7 @@ public class InventoryManager : MonoBehaviour
         {ItemType.Material, new List<InventoryItem>()}
     };
 
-    //아이템 수가 많으면 Dictionary, 아이템을 필터링을 쉽게하려면 Type에 따라 List를 다르게 분리
-    private List<InventoryItem> EquipmentItems = new List<InventoryItem>();
-    private List<InventoryItem> ConsumableItems = new List<InventoryItem>();
-    private List<InventoryItem> QuestItems = new List<InventoryItem>();
-    private List<InventoryItem> MaterialItems = new List<InventoryItem>();  
-    
+    public event Action OnInventoryChanged;
 
     private void Awake()
     {
@@ -50,60 +47,79 @@ public class InventoryManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    public void AddItem(ItemData _ItemData, ItemType _Type, int _Amount = 1)
+
+    public bool AddItem(ItemData _ItemData, int _Amount = 1)
     {
-        //InventoryItem에서 기존과 같은 ID를 가지고 있는지 Find
-        InventoryItem ExistingItem = Items.Find(i => i.ItemData.ID == _ItemData.ID);
+        if (_ItemData == null || _Amount == 0) return false;
+
+        var TypeList = ItemByType[_ItemData.Type];
+
+        //InventoryItem에서 기존과 같은 ID를 가지고 있는지 탐색
+        InventoryItem ExistingItem = TypeList.Find(i => i.ItemData.ID == _ItemData.ID);
 
         //기존에 아이템이 존재한다면 +1
         if (ExistingItem != null)
         {
-            ExistingItem.Quantity += _Amount;            
+            ExistingItem.Quantity += _Amount;
         }
         else
         {
-            if (Items.Count >= MaxSlot)
+            if (GetTotalItemCount() >= MaxSlot)
             {
                 Debug.Log("인벤토리 슬롯 부족");
-                return;
+                return false;
             }
 
-            Items.Add(new InventoryItem(_ItemData, _Amount));
-        }    
-    }
-
-    public void AddItemDic(ItemData _ItemData, ItemType _Type, int _Amount = 1)//딕셔너리방식 Add
-    {
-        //딕셔너리 방식 아이템 관리
-        //딕셔너리 선언 타입별 List >> 아이템타입이 존재하는지 확인 >> 존재한다면 
-        if(!ItemByType.ContainsKey(_Type))
-        {
-            Debug.Log("해당 아이템타입 Key가 존재하지 않음");
-            return;
-        }      
-    }
-
-    public void RemoveItem(ItemData _ItemData, int _Amount = 1)
-    {
-        InventoryItem existingItem = Items.Find(i => i.ItemData.ID == _ItemData.ID);
-
-        if (existingItem == null) return;
-
-        existingItem.Quantity -= _Amount;
-
-        if(existingItem.Quantity <= 0)
-        {
-            Items.Remove(existingItem);
+            TypeList.Add(new InventoryItem(_ItemData, _Amount));
         }
+
+        OnInventoryChanged?.Invoke();
+        return true;
     }
 
-    public InventoryItem GetItem(ItemData _ItemData)
+    public bool RemoveItem(ItemData _ItemData, int _Amount = 1)
     {
-        return Items.Find(i => i.ItemData.ID == _ItemData.ID);
+        if (_ItemData == null || _Amount == 0 ) return false;
+
+        var TypeList = ItemByType[_ItemData.Type];
+
+        InventoryItem ExisitngItem = TypeList.Find(i => i.ItemData.ID == _ItemData.ID);
+
+        if(ExisitngItem == null) return false;
+
+        ExisitngItem.Quantity -= _Amount;
+
+        if(ExisitngItem.Quantity <= 0)
+        {
+            TypeList.Remove(ExisitngItem);
+        }
+
+        OnInventoryChanged.Invoke();
+        return true;
+    }
+
+    public List<InventoryItem> GetItemByType(ItemType _Type)
+    {
+        return ItemByType[_Type];
     }
 
     public List<InventoryItem> GetAllItems()
     {
-        return Items;
+        List<InventoryItem> All = new List<InventoryItem>();
+        foreach (var Item in ItemByType)
+        {
+            All.AddRange(Item.Value);
+        }
+        return All;
+    }
+
+    public int GetTotalItemCount()
+    {
+        int count = 0;
+        foreach (var item in ItemByType)
+        {
+            count += item.Value.Count;
+        }
+        return count;
     }
 }
