@@ -57,12 +57,12 @@ public class DistanceAreaSkillStrategy : ISkillBehaviorStrategy
         {
             foreach (Enemy enemy in EnemyList)
             {
+                if(enemy == null) continue;
                 enemy.TakeDamage(_Power);
                 EffectManager.Instance.Spawn(_SkillData.HitEffectPrefab, enemy.transform.position, _SkillData.HitPrefabDuration);
             }
 
             yield return new WaitForSeconds(_DelayTime);
         }
-
     }
 }
