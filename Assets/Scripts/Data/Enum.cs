@@ -28,6 +28,27 @@ public enum ItemType
     Material,
 }
 
+public enum ItemStatus
+{
+    None,
+    Atk,
+    Def,
+    Crit,
+    CritDmg,
+}
+
+public enum CharacterStatus
+{
+    None,
+    MaxHp,
+    MaxMp,
+    MaxStamina,
+    Atk,
+    Def,
+    Crit,
+    CritDmg,
+}
+
 public enum PlayerState
 {
     Create,
@@ -40,7 +61,13 @@ public enum PlayerState
     Stunned,
 }
 
-
+public enum ConsumableEffect
+{
+    None,
+    ResotreHp,
+    ResotreMp,
+    ResotreStamina,
+}
 
 public enum AI
 {

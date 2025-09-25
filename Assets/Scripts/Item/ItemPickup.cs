@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class ItemPickup : MonoBehaviour
 {
-    [SerializeField] private ItemData itemData;
-
     //기존에 아이템이 각각 드롭되는걸 List로 변경
     [SerializeField] private List<ItemData> ItemDatas = new List<ItemData>();
     public void SetItems(List<ItemData> _Items)
@@ -13,25 +11,21 @@ public class ItemPickup : MonoBehaviour
         ItemDatas = _Items;
     }
 
-    public ItemData ItemData
-    {
-        get => itemData;
-        set => itemData = value;
-    }
+    //public ItemData ItemData
+    //{
+    //    get => itemData;
+    //    set => itemData = value;
+    //}
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Player"))
         {
-            //InventoryManager.Instance.AddItem(ItemData);
-            //Debug.Log($"아이템 드롭 {ItemData.ItemName}");
-
             foreach(var Item in ItemDatas)
             {
                 InventoryManager.Instance.AddItem(Item);
                 Debug.Log($"아이템 획득: {Item.ItemName}");
             }
-
             Destroy(gameObject);
         }
     }

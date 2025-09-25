@@ -45,13 +45,14 @@ public class ItemSlot : MonoBehaviour
         switch(CurrentItem.ItemData.Type)
         {
             case ItemType.Consumable:
-                Debug.Log($"사용: {CurrentItem.ItemData.name}, {CurrentItem.ItemData.ItemTooltip}");
+                Debug.Log($"사용: {CurrentItem.ItemData.name} {CurrentItem.ItemData.ItemTooltip}");
                 InventoryManager.Instance.RemoveItem(CurrentItem.ItemData, 1);
                 InventoryUI.Instance.RefreshUI();
                 break;
             case ItemType.Equipment:
                 Debug.Log($"장착: {CurrentItem.ItemData.ItemName}");
                 CurrentItem.IsEquipped = !CurrentItem.IsEquipped;
+                InventoryUI.Instance.RefreshUI();
                 break;
 
             case ItemType.Quest:

@@ -22,6 +22,7 @@ public class ItemDrop : MonoBehaviour
     [Header("랜덤 값: 드랍할떄 랜덤값으로 바뀜")]
     [SerializeField] private float RandomNumber = 0f;
 
+    private List<ItemData> DroppedItem = new List<ItemData>();
     EnemyCharacter enemyCharacter;
 
     private void Awake()
@@ -40,15 +41,14 @@ public class ItemDrop : MonoBehaviour
             {
                 if (RandomNumber <= item.DropProbability)
                 {
+                    DroppedItem.Add(item.ItemData);
                     Debug.Log($"아이템 드랍: {item.ItemData}");
-
-                    GameObject DropObj = Instantiate(DropItemPrefab, Vector3.up, Quaternion.identity);
-                    ItemPickup pickItem = DropObj.GetComponent<ItemPickup>();
-                    pickItem.ItemData = item.ItemData;
                 }
             }
 
-
+            GameObject DropObj = Instantiate(DropItemPrefab, enemyCharacter.transform.position + Vector3.up, Quaternion.identity);
+            ItemPickup pickItem = DropObj.GetComponent<ItemPickup>();
+            pickItem.SetItems(DroppedItem);
         }
     }
 }

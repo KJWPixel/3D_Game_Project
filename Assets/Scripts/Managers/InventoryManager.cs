@@ -60,7 +60,19 @@ public class InventoryManager : MonoBehaviour
         //기존에 아이템이 존재한다면 +1
         if (ExistingItem != null)
         {
-            ExistingItem.Quantity += _Amount;
+            //아이템의 종류에 따른 MaxStatck확인 후 + 또는 Typelist.Add
+            switch(_ItemData.Type)
+            {
+                case ItemType.Equipment:
+                    break;
+                case ItemType.Consumable:
+                    break;
+                case ItemType.Quest:
+                    break;
+                case ItemType.Material: 
+                    break;
+                default: break;
+            }
         }
         else
         {

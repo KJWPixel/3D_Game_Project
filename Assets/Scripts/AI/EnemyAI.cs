@@ -77,7 +77,6 @@ public class EnemyAI : AIBase
                 break;
             case AI.AI_ATTACK:
                 AttackTransition();
-                Enemy.Attack();
                 break;
             case AI.AI_SKILL:
                 break;
