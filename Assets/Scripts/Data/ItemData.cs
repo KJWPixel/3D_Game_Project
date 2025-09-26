@@ -10,11 +10,14 @@ public abstract class ItemData : ScriptableObject
     [SerializeField] Sprite icon;
     [SerializeField] string itemtooltip;
 
+    public abstract ItemType Type { get; }
+    public abstract int MaxStackAmount { get; }
+
     //프로퍼티   
     public int ID => id;
     public string ItemName => itemname;
     public Sprite Icon => icon;
     public string ItemTooltip => itemtooltip;
-    public abstract ItemType type { get; }
+    
 }   
 

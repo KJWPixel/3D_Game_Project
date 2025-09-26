@@ -1,9 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.IO;
-using UnityEngine.Assertions.Must;
-using JetBrains.Annotations;
+
+
+[System.Serializable]
+public class Status
+{
+    public StatusType StatusType;
+    public float Value;
+}
 
 public class PlayerStat : MonoBehaviour
 {
@@ -14,7 +19,7 @@ public class PlayerStat : MonoBehaviour
     [SerializeField] private int level = 1;
     [SerializeField] private float maxExp = 0f;
     [SerializeField] private float currentExp = 0f;
-    [SerializeField] private int skillPoint = 0;
+    [SerializeField] private int skillPoint = 0; 
 
     [SerializeField] private float maxHp = 0f;
     [SerializeField] private float currentHp = 0f;
@@ -27,6 +32,19 @@ public class PlayerStat : MonoBehaviour
     [SerializeField] private float def = 0f;
     [SerializeField] private float crit = 0f;
     [SerializeField] private float critDmg = 0f;
+
+
+    private Dictionary<StatusType, float> PlayerStatus = new Dictionary<StatusType, float>();
+
+    public float GetStatus(StatusType _Type)
+    {
+        return PlayerStatus[_Type];
+    }
+
+    public float SetStatus(StatusType _Type, float _Value)
+    {
+        return PlayerStatus[_Type] = _Value;
+    }
 
     public string UserName
     {
@@ -141,6 +159,7 @@ public class PlayerStat : MonoBehaviour
 
         PlayerController = GetComponent<PlayerController>();
         SkillManager = GetComponent<SkillManager>();
+
     }
 
     private void Start()
@@ -209,23 +228,23 @@ public class PlayerStat : MonoBehaviour
         return true;
     }
 
-    public void RecoveryStat(Dictionary<StatusType, float> _RecoverValues)
+    public void RecoveryStat(ConsumableType _Type, float _Amount)
     {
-        foreach(var Recover in _RecoverValues)
+        switch (_Type)
         {
-            switch (Recover.Key)
-            {
-                case StatusType.Hp:
-                    CurrentHp += Mathf.Min(CurrentHp + Recover.Value, MaxHp);
-                    Debug.Log($"플레이어 Hp를 {Recover.Value}만큼 회복했습니다. {CurrentHp}/{MaxHp}");
-                    break;
-                case StatusType.Mp:
-                    CurrentMp += Mathf.Min(CurrentMp + Recover.Value, MaxMp);
-                    Debug.Log($"플레이어 Mp를 {Recover.Value}만큼 회복했습니다. {CurrentMp}/{MaxMp}");
-                    break;
-            }
+            case ConsumableType.ResotreHp:
+                CurrentHp += Mathf.Min(CurrentHp + _Amount, MaxHp);
+                Debug.Log($"플레이어의 Hp가 {_Amount}만큼 회복하였습니다. {CurrentHp}/{MaxHp}");
+                break;
+            case ConsumableType.ResotreMp:
+                CurrentMp += Mathf.Min(CurrentMp + _Amount, MaxMp);
+                Debug.Log($"플레이어의 Mp가 {_Amount}만큼 회복하였습니다. {CurrentMp}/{MaxMp}");
+                break;
+            case ConsumableType.ResotreStamina:
+                CurrentStamina += Mathf.Min(CurrentStamina + _Amount, MaxStamina);
+                Debug.Log($"플레이어의 Stamina가 {_Amount}만큼 회복하였습니다. {CurrentStamina}/{MaxStamina}");
+                break;
         }
-        
     }
 
     public void TakeDamage(float _Damage)

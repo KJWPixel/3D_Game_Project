@@ -16,8 +16,7 @@ MonoBehaviour:
   itemname: Sword
   icon: {fileID: 21300000, guid: f7297527d4fb1e34ca5bd1d2e3cedcd6, type: 3}
   itemtooltip: 
-  type: 1
-  maxStackAmount: 1
   EquipementStatus:
-  - ItemStatus: 1
-    Stat: 0
+  - ItemStatus: 0
+    Stat: 15
+  stats: []

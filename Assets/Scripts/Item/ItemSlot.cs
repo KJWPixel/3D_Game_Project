@@ -42,11 +42,10 @@ public class ItemSlot : MonoBehaviour
     {
         if (CurrentItem == null) return;
 
-        switch(CurrentItem.ItemData.type)
+        switch(CurrentItem.ItemData.Type)
         {
             case ItemType.Consumable:
                 Debug.Log($"»ç¿ë: {CurrentItem.ItemData.name} {CurrentItem.ItemData.ItemTooltip}");
-
                 ConsumableData Consumable = CurrentItem.ItemData as ConsumableData;
                 if(Consumable != null)
                 {

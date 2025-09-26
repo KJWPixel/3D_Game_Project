@@ -52,24 +52,46 @@ public class InventoryManager : MonoBehaviour
     {
         if (_ItemData == null || _Amount == 0) return false;
 
-        var TypeList = ItemByType[_ItemData.type];
+        var TypeList = ItemByType[_ItemData.Type];
 
         //InventoryItem에서 기존과 같은 ID를 가지고 있는지 탐색
         InventoryItem ExistingItem = TypeList.Find(i => i.ItemData.ID == _ItemData.ID);
 
+        //장비 아이템의 경우 최대스택은 언제나1, 중복은 허용하게 
+        if(_ItemData.Type == ItemType.Equipment)
+        {
+            if (GetTotalItemCount() >= MaxSlot)
+            {
+                Debug.Log("인벤토리 슬롯 부족");
+                return false;
+            }
+            else
+            {
+                TypeList.Add(new InventoryItem(_ItemData, _Amount));             
+            }
+            OnInventoryChanged?.Invoke();
+            return true;
+        }
+ 
         //기존에 아이템이 존재한다면 +1
         if (ExistingItem != null)
         {
-            //아이템의 종류에 따른 MaxStatck확인 후 + 또는 Typelist.Add
-            switch(_ItemData.type)
+            if(ExistingItem.Quantity >= _ItemData.MaxStackAmount)//아이템 MaxStack확인
             {
-                case ItemType.Equipment:
-                    break;
+                Debug.Log($"{_ItemData.name}아이템 최대수량 초과");
+                return  false;                
+            }
+
+            switch(_ItemData.Type)
+            {
                 case ItemType.Consumable:
+                    ExistingItem.Quantity += _Amount;
                     break;
                 case ItemType.Quest:
+                    ExistingItem.Quantity += _Amount;
                     break;
-                case ItemType.Material: 
+                case ItemType.Material:
+                    ExistingItem.Quantity += _Amount;
                     break;
             }
         }
@@ -92,7 +114,7 @@ public class InventoryManager : MonoBehaviour
     {
         if (_ItemData == null || _Amount == 0 ) return false;
 
-        var TypeList = ItemByType[_ItemData.type];
+        var TypeList = ItemByType[_ItemData.Type];
 
         InventoryItem ExisitngItem = TypeList.Find(i => i.ItemData.ID == _ItemData.ID);
 

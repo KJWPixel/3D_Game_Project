@@ -21,7 +21,6 @@ public enum SKILL
 
 public enum ItemType
 {
-    None,
     Equipment,
     Consumable,
     Quest,
@@ -30,7 +29,6 @@ public enum ItemType
 
 public enum ItemStatus
 {
-    None,
     Atk,
     Def,
     Crit,
@@ -44,6 +42,7 @@ public enum StatusType
     MaxMp,
     Mp,
     MaxStamina,
+    Stamina,
     Atk,
     Def,
     Crit,
@@ -62,11 +61,17 @@ public enum PlayerState
     Stunned,
 }
 
-public enum ConsumableEffect
+public enum ConsumableType
 {
     ResotreHp,
     ResotreMp,
     ResotreStamina,
+}
+
+public enum ConsumableBuffType
+{
+    Atk,
+    Def,
 }
 
 public enum AI
