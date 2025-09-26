@@ -7,4 +7,6 @@ public class QuestData : ItemData
 {
     [Header("Äù½ºÆ® Á¤º¸")]
     public string QuestId;
+
+    public override ItemType type => ItemType.Quest;
 }

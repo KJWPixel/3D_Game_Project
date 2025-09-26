@@ -52,7 +52,7 @@ public class InventoryManager : MonoBehaviour
     {
         if (_ItemData == null || _Amount == 0) return false;
 
-        var TypeList = ItemByType[_ItemData.Type];
+        var TypeList = ItemByType[_ItemData.type];
 
         //InventoryItem에서 기존과 같은 ID를 가지고 있는지 탐색
         InventoryItem ExistingItem = TypeList.Find(i => i.ItemData.ID == _ItemData.ID);
@@ -61,7 +61,7 @@ public class InventoryManager : MonoBehaviour
         if (ExistingItem != null)
         {
             //아이템의 종류에 따른 MaxStatck확인 후 + 또는 Typelist.Add
-            switch(_ItemData.Type)
+            switch(_ItemData.type)
             {
                 case ItemType.Equipment:
                     break;
@@ -71,7 +71,6 @@ public class InventoryManager : MonoBehaviour
                     break;
                 case ItemType.Material: 
                     break;
-                default: break;
             }
         }
         else
@@ -93,7 +92,7 @@ public class InventoryManager : MonoBehaviour
     {
         if (_ItemData == null || _Amount == 0 ) return false;
 
-        var TypeList = ItemByType[_ItemData.Type];
+        var TypeList = ItemByType[_ItemData.type];
 
         InventoryItem ExisitngItem = TypeList.Find(i => i.ItemData.ID == _ItemData.ID);
 

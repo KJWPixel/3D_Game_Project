@@ -16,6 +16,10 @@ MonoBehaviour:
   itemname: HpPotion_Test
   icon: {fileID: 21300000, guid: e359cba75fdaf9e43a5e96e1485dfeb9, type: 3}
   itemtooltip: TestItem
-  type: 2
-  RestoreHp: 15
-  RestoreMp: 0
+  maxStackAmount: 999
+  restoreHp: 35
+  restoreMp: 35
+  AtkBuff: 0
+  DefBuff: 0
+  CritBuff: 0
+  CritDmgBuff: 0

@@ -19,10 +19,12 @@ public class HealBuffStrategy : IBuffBehavoprStrategy
 
         IEnumerator HealOverTime(float _Power, float _HitCount, float _Duration)
         {
+            Dictionary<StatusType, float >  value = new Dictionary< StatusType, float >();
+            value[StatusType.Hp] = _Power;
             //몇초 마다, 몇번을, 회복
             for (int i = 0; i < _Duration; i++)
             {
-                _PlayerStat.Heal(_Power);
+                _PlayerStat.RecoveryStat(value);
                 yield return new WaitForSeconds(_HitCount);//1초 마다
             }          
         }

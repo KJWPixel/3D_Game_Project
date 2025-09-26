@@ -147,7 +147,9 @@ public class SkillManager : MonoBehaviour
                 }
                 else if(Effect.EffectType == SkillEffectType.Heal)
                 {
-                    PlayerStat.Heal(Effect.Power);
+                    Dictionary<StatusType, float> Value = new Dictionary<StatusType, float>();
+                    Value[StatusType.Hp] = Effect.Power;
+                    PlayerStat.RecoveryStat(Value);
                     EffectManager.Instance.Spawn(_SkillData.CastEffectPrefab, transform.position, _SkillData.CastPrefabDuration);
                 }
                 else

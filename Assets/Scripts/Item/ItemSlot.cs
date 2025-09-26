@@ -42,10 +42,16 @@ public class ItemSlot : MonoBehaviour
     {
         if (CurrentItem == null) return;
 
-        switch(CurrentItem.ItemData.Type)
+        switch(CurrentItem.ItemData.type)
         {
             case ItemType.Consumable:
                 Debug.Log($"»ç¿ë: {CurrentItem.ItemData.name} {CurrentItem.ItemData.ItemTooltip}");
+
+                ConsumableData Consumable = CurrentItem.ItemData as ConsumableData;
+                if(Consumable != null)
+                {
+                    Consumable.Use(PlayerStat.Instance.gameObject);
+                }
                 InventoryManager.Instance.RemoveItem(CurrentItem.ItemData, 1);
                 InventoryUI.Instance.RefreshUI();
                 break;

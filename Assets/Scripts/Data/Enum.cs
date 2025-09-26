@@ -37,11 +37,12 @@ public enum ItemStatus
     CritDmg,
 }
 
-public enum CharacterStatus
+public enum StatusType
 {
-    None,
     MaxHp,
+    Hp,
     MaxMp,
+    Mp,
     MaxStamina,
     Atk,
     Def,
@@ -63,7 +64,6 @@ public enum PlayerState
 
 public enum ConsumableEffect
 {
-    None,
     ResotreHp,
     ResotreMp,
     ResotreStamina,

@@ -7,6 +7,8 @@ using JetBrains.Annotations;
 
 public class PlayerStat : MonoBehaviour
 {
+    public static PlayerStat Instance;
+
     [Header("Status")]
     [SerializeField] private string userName;
     [SerializeField] private int level = 1;
@@ -127,7 +129,16 @@ public class PlayerStat : MonoBehaviour
 
     private void Awake()
     {
-        
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
         PlayerController = GetComponent<PlayerController>();
         SkillManager = GetComponent<SkillManager>();
     }
@@ -198,9 +209,23 @@ public class PlayerStat : MonoBehaviour
         return true;
     }
 
-    public void Heal(float _Power)
+    public void RecoveryStat(Dictionary<StatusType, float> _RecoverValues)
     {
-        CurrentHp = Mathf.Min(CurrentHp + _Power, MaxHp);
+        foreach(var Recover in _RecoverValues)
+        {
+            switch (Recover.Key)
+            {
+                case StatusType.Hp:
+                    CurrentHp += Mathf.Min(CurrentHp + Recover.Value, MaxHp);
+                    Debug.Log($"플레이어 Hp를 {Recover.Value}만큼 회복했습니다. {CurrentHp}/{MaxHp}");
+                    break;
+                case StatusType.Mp:
+                    CurrentMp += Mathf.Min(CurrentMp + Recover.Value, MaxMp);
+                    Debug.Log($"플레이어 Mp를 {Recover.Value}만큼 회복했습니다. {CurrentMp}/{MaxMp}");
+                    break;
+            }
+        }
+        
     }
 
     public void TakeDamage(float _Damage)
