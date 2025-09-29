@@ -15,7 +15,8 @@ MonoBehaviour:
   id: 3
   itemname: Sword
   icon: {fileID: 21300000, guid: f7297527d4fb1e34ca5bd1d2e3cedcd6, type: 3}
-  itemtooltip: 
+  grade: 0
+  description: "Sword \uC7A5\uBE44 \uC544\uC774\uD15C "
   EquipementStatus:
   - ItemStatus: 0
     Stat: 15

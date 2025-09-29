@@ -11,6 +11,7 @@ public class ItemSlot : MonoBehaviour
 
     private InventoryItem CurrentItem;
 
+
     public void SetItem(InventoryItem _Item)
     {
         if (_Item == null) return;
@@ -42,31 +43,6 @@ public class ItemSlot : MonoBehaviour
     {
         if (CurrentItem == null) return;
 
-        switch(CurrentItem.ItemData.Type)
-        {
-            case ItemType.Consumable:
-                Debug.Log($"사용: {CurrentItem.ItemData.name} {CurrentItem.ItemData.ItemTooltip}");
-                ConsumableData Consumable = CurrentItem.ItemData as ConsumableData;
-                if(Consumable != null)
-                {
-                    Consumable.Use(PlayerStat.Instance.gameObject);
-                }
-                InventoryManager.Instance.RemoveItem(CurrentItem.ItemData, 1);
-                InventoryUI.Instance.RefreshUI();
-                break;
-            case ItemType.Equipment:
-                Debug.Log($"장착: {CurrentItem.ItemData.ItemName}");
-                CurrentItem.IsEquipped = !CurrentItem.IsEquipped;
-                InventoryUI.Instance.RefreshUI();
-                break;
-
-            case ItemType.Quest:
-                Debug.Log($"퀘스트 아이템: {CurrentItem.ItemData.ItemName}");
-                break;
-
-            case ItemType.Material:
-                Debug.Log($"재료 아이템: {CurrentItem.ItemData.ItemName}");
-                break;
-        }
+        InventoryUI.Instance.ShowTooltip(CurrentItem); 
     }   
 }

@@ -15,7 +15,8 @@ MonoBehaviour:
   id: 1
   itemname: HpPotion_Test
   icon: {fileID: 21300000, guid: e359cba75fdaf9e43a5e96e1485dfeb9, type: 3}
-  itemtooltip: TestItem
+  grade: 1
+  description: "Hp\uD3EC\uC158"
   maxStackAmount: 999
   ConsumRecovery:
   - ConsumableType: 0

@@ -6,9 +6,11 @@ public class InventoryUI : MonoBehaviour
 {
     public static InventoryUI Instance;
 
-    [SerializeField] Transform SlotParent;
-    [SerializeField] GameObject SlotPrefab;
-    [SerializeField] int MaxSlot = 100;
+    [SerializeField] private Transform SlotParent;
+    [SerializeField] private GameObject SlotPrefab;
+    [SerializeField] private int MaxSlot = 100;
+
+    [SerializeField] private InventoryItemTooltip ItemTooltip;
 
     private ItemSlot[] Slots;
 
@@ -61,5 +63,16 @@ public class InventoryUI : MonoBehaviour
         var filteredItems = InventoryManager.Instance.GetItemByType(Type);
 
         RefreshUI(filteredItems);       
+    }
+
+    public void ShowTooltip(InventoryItem _Item)
+    {
+        ItemTooltip.gameObject.SetActive(true);
+        ItemTooltip.ItemTooltipSetup(_Item);
+    }
+
+    public void HideTooltip()
+    {
+        ItemTooltip.gameObject.SetActive(false);
     }
 }
