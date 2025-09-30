@@ -35,17 +35,15 @@ public class PlayerStat : MonoBehaviour
     [SerializeField] private float critDmg = 0f;
 
 
-    private Dictionary<StatusType, float> PlayerStatus = new Dictionary<StatusType, float>();
+    //public float GetStatus(StatusType _Type)
+    //{
+    //    return PlayerStatus[_Type];
+    //}
 
-    public float GetStatus(StatusType _Type)
-    {
-        return PlayerStatus[_Type];
-    }
-
-    public float SetStatus(StatusType _Type, float _Value)
-    {
-        return PlayerStatus[_Type] = _Value;
-    }
+    //public float SetStatus(StatusType _Type, float _Value)
+    //{
+    //    return PlayerStatus[_Type] = _Value;
+    //}
 
     public string UserName
     {

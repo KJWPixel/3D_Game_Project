@@ -74,25 +74,73 @@ public class InventoryItemTooltip : MonoBehaviour
 
             UseButton.onClick.AddListener(() =>
             {
-                if (_InventoryItem.IsEquipped)
+                EquipementData Equipemnet = _InventoryItem.ItemData as EquipementData;
+                if (Equipemnet == null) return;
+
+                if (_InventoryItem.IsEquipped )
                 {
-                    //착용해제
-                    InventoryManager.Instance.UnequipItem(_InventoryItem);
-                    Debug.Log("아이템 해제");
+                    switch(Equipemnet.EquipmentType)
+                    {
+                        case EquipmentType.Weapon:
+                            InventoryManager.Instance.UnequipItem(_InventoryItem);
+                            Debug.Log($"{_InventoryItem.ItemData.name} 해제");
+                            break;
+                        case EquipmentType.Head:
+                            InventoryManager.Instance.UnequipItem(_InventoryItem);
+                            Debug.Log($"{_InventoryItem.ItemData.name} 해제");
+                            break;
+                        case EquipmentType.Armor:
+                            InventoryManager.Instance.UnequipItem(_InventoryItem);
+                            Debug.Log($"{_InventoryItem.ItemData.name} 해제");
+                            break;
+                        case EquipmentType.Shoes:
+                            InventoryManager.Instance.UnequipItem(_InventoryItem);
+                            Debug.Log($"{_InventoryItem.ItemData.name} 해제");
+                            break;
+                        case EquipmentType.Glove:
+                            InventoryManager.Instance.UnequipItem(_InventoryItem);
+                            Debug.Log($"{_InventoryItem.ItemData.name} 해제");
+                            break;
+                    }                   
                 }
                 else
                 {
-                    //장비 착용
-                    InventoryManager.Instance.EquipItem(_InventoryItem);
-                    Debug.Log("아이템 착용");
-                }
+                    //추후 
 
+
+                    switch(Equipemnet.EquipmentType)
+                    {
+                        case EquipmentType.Weapon:
+                            InventoryManager.Instance.EquipItem(_InventoryItem);
+                            Debug.Log($"{_InventoryItem.ItemData.name} 장착");
+                            break;
+                        case EquipmentType.Head:
+                            InventoryManager.Instance.EquipItem(_InventoryItem);
+                            Debug.Log($"{_InventoryItem.ItemData.name} 장착");
+                            break;
+                        case EquipmentType.Armor:
+                            InventoryManager.Instance.EquipItem(_InventoryItem);
+                            Debug.Log($"{_InventoryItem.ItemData.name} 장착");
+                            break;
+                        case EquipmentType.Shoes:
+                            InventoryManager.Instance.EquipItem(_InventoryItem);
+                            Debug.Log($"{_InventoryItem.ItemData.name} 장착");
+                            break;
+                        case EquipmentType.Glove:
+                            InventoryManager.Instance.EquipItem(_InventoryItem);
+                            Debug.Log($"{_InventoryItem.ItemData.name} 장착");
+                            break;
+                    }                 
+                }
                 SetButtonText(_InventoryItem);
 
-                InventoryUI.Instance.RefreshUI();
-               
+                InventoryUI.Instance.RefreshUI();              
             }) ;
         }
+
+        //장비 부위 머리, 몸통, 손, 발, 무기
+        //해당 부위의 장비가 착용 중이다 그러면 UnequipItem,
+        //해당 부위에 장비가 착용중이지 않다 그러면 EquipItem
         else
         {
             Button.SetActive(false);

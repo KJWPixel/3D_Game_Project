@@ -33,6 +33,8 @@ public class InventoryManager : MonoBehaviour
         {ItemType.Material, new List<InventoryItem>()}
     };
 
+    private Dictionary<EquipmentType, InventoryItem> EquipmentItems = new Dictionary<EquipmentType, InventoryItem>();
+
     public event Action OnInventoryChanged;
 
     private void Awake()
@@ -134,12 +136,19 @@ public class InventoryManager : MonoBehaviour
     public void EquipItem(InventoryItem _Item)
     {
         if (_Item.ItemData.Type != ItemType.Equipment) return;
+      
+        EquipementData Equip = _Item.ItemData as EquipementData; //(EquipementData)ItemData;
+        EquipmentType Type = Equip.EquipmentType;
 
+        if (EquipmentItems.TryGetValue(Type, out InventoryItem EquippedItem))
+        {
+            UnequipItem(EquippedItem);
+        }
+
+        EquipmentItems[Type] = _Item;
         _Item.IsEquipped = true;
 
-        EquipementData Equip = _Item.ItemData as EquipementData; //(EquipementData)ItemData;
-
-        if(Equip != null)
+        if (Equip != null)
         {
             Debug.Log("æ∆¿Ã≈€ Ω∫≈» ¿Â¬¯");
             foreach (var stat in Equip.GetEquipStats())
@@ -153,9 +162,15 @@ public class InventoryManager : MonoBehaviour
     {
         if (_Item.ItemData.Type != ItemType.Equipment) return;
 
-        _Item.IsEquipped = false;
-
         EquipementData Equip = _Item.ItemData as EquipementData;
+        EquipmentType Type = Equip.EquipmentType;
+
+        if(EquipmentItems.ContainsKey(Type) && EquipmentItems[Type] == _Item)
+        {
+            EquipmentItems.Remove(Type);
+        }
+
+        _Item.IsEquipped = false;
 
         if (Equip != null)
         {
@@ -166,6 +181,7 @@ public class InventoryManager : MonoBehaviour
             }
         }
     }
+
 
     public List<InventoryItem> GetItemByType(ItemType _Type)
     {

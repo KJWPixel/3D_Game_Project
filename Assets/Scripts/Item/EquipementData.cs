@@ -6,6 +6,7 @@ using UnityEngine;
 public class EquipementItemStatus
 {
     public ItemStatus ItemStatus;
+    public EquipmentType EquipmentType;
     public float Stat;
 }
 
@@ -14,6 +15,8 @@ public class EquipementData : ItemData
 {
     public override int MaxStackAmount => 1;
     public override ItemType Type => ItemType.Equipment;
+    
+    public EquipmentType EquipmentType;
 
     [Header("장비 능력치")]
     [SerializeField] private List<EquipementItemStatus> EquipementStatus = new List<EquipementItemStatus>();

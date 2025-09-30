@@ -1,3 +1,4 @@
+//씬
 public enum SCENE
 {
     TITLE,
@@ -19,6 +20,7 @@ public enum SKILL
     END,
 }
 
+//아이템
 public enum ItemType
 {
     Equipment,
@@ -36,6 +38,23 @@ public enum ItemGrade
     Legendary = 4,
 }
 
+//소비아이템 
+public enum ConsumableType
+{
+    ResotreHp,
+    ResotreMp,
+    ResotreStamina,
+}
+
+//장비아이템 
+public enum EquipmentType
+{
+    Weapon,
+    Head,
+    Armor,
+    Glove,
+    Shoes,    
+}
 
 public enum ItemStatus
 {
@@ -45,6 +64,7 @@ public enum ItemStatus
     CritDmg,
 }
 
+//캐릭터 스테이터스 타입
 public enum StatusType
 {
     MaxHp,
@@ -59,6 +79,7 @@ public enum StatusType
     CritDmg,
 }
 
+//캐릭터 상태
 public enum PlayerState
 {
     Create,
@@ -71,12 +92,7 @@ public enum PlayerState
     Stunned,
 }
 
-public enum ConsumableType
-{
-    ResotreHp,
-    ResotreMp,
-    ResotreStamina,
-}
+
 
 public enum ConsumableBuffType
 {
