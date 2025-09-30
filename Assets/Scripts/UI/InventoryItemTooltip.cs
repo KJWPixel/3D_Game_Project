@@ -12,7 +12,14 @@ public class InventoryItemTooltip : MonoBehaviour
     [SerializeField] private TMP_Text ItemDescription;
     [SerializeField] private Image ItemPrame;
     [SerializeField] private Image ItemIcon;
-    [SerializeField] private GameObject UseButton;
+    [SerializeField] private GameObject Button;
+    private Button UseButton;
+
+    private void Awake()
+    {
+        UseButton = Button.GetComponent<Button>();
+    }
+
 
     [Header("아이템 등급 컬러")]
     [SerializeField] private Color[] GradeColors =
@@ -26,44 +33,84 @@ public class InventoryItemTooltip : MonoBehaviour
 
     public void ItemTooltipSetup(InventoryItem _InventoryItem)
     {
+        //인벤토리아이템클래스 데이터에서 툴팁에 데이터 참조
         ItemName.text = _InventoryItem.ItemData.ItemName;
-        ItemQuantity.text = _InventoryItem.Quantity.ToString();
+        ItemQuantity.text = "x"+_InventoryItem.Quantity.ToString();
         ItemDescription.text = _InventoryItem.ItemData.Description;
         ItemIcon.sprite = _InventoryItem.ItemData.Icon;
 
         var GradeIndex = (int)_InventoryItem.ItemData.Grade;
         ItemPrame.color = GradeColors[GradeIndex];
 
-        UseButton.GetComponent<Button>().onClick.RemoveAllListeners();
+        UseButton.onClick.RemoveAllListeners();
 
         if (_InventoryItem.ItemData.Type == ItemType.Consumable)
         {
-            UseButton.SetActive(true);
-            UseButton.GetComponent<Button>().onClick.AddListener(() =>
+            Button.SetActive(true);
+
+            SetButtonText(_InventoryItem);
+
+            UseButton.onClick.AddListener(() =>
             {
                 ConsumableData consumable = _InventoryItem.ItemData as ConsumableData;
                 if (consumable != null)
                 {
                     consumable.Use(PlayerStat.Instance.gameObject);
                     InventoryManager.Instance.RemoveItem(_InventoryItem.ItemData, 1);
+
+                    ItemQuantity.text = "x" + _InventoryItem.Quantity.ToString();
                     InventoryUI.Instance.RefreshUI();
                 }
-                gameObject.SetActive(false); // 툴팁 닫기
+                
             });
         }
         else if (_InventoryItem.ItemData.Type == ItemType.Equipment)
         {
-            UseButton.SetActive(true);
-            UseButton.GetComponent<Button>().onClick.AddListener(() =>
+            Button.SetActive(true);
+
+            SetButtonText(_InventoryItem);
+
+            InventoryUI.Instance.RefreshUI();
+
+            UseButton.onClick.AddListener(() =>
             {
-                _InventoryItem.IsEquipped = !_InventoryItem.IsEquipped;
+                if (_InventoryItem.IsEquipped)
+                {
+                    //착용해제
+                    InventoryManager.Instance.UnequipItem(_InventoryItem);
+                    Debug.Log("아이템 해제");
+                }
+                else
+                {
+                    //장비 착용
+                    InventoryManager.Instance.EquipItem(_InventoryItem);
+                    Debug.Log("아이템 착용");
+                }
+
+                SetButtonText(_InventoryItem);
+
                 InventoryUI.Instance.RefreshUI();
-                gameObject.SetActive(false); // 툴팁 닫기
-            });
+               
+            }) ;
         }
         else
         {
-            UseButton.SetActive(false);
+            Button.SetActive(false);
         }
-    }    
+    }  
+    
+    private void SetButtonText(InventoryItem _Item)
+    {
+        TextMeshProUGUI ButtonText = UseButton.GetComponentInChildren<TextMeshProUGUI>();
+
+        if(_Item.ItemData.Type == ItemType.Consumable)
+        {
+            ButtonText.text = "사용";
+        }
+        else if(_Item.ItemData.Type == ItemType.Equipment)
+        {
+            string buttonText = _Item.IsEquipped ? "해제" : "착용";
+            ButtonText.text = buttonText;
+        }
+    }
 }

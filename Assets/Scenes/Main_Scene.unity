@@ -1075,7 +1075,7 @@ PrefabInstance:
     - target: {fileID: 1470272235761266913, guid: 06185d9de615d8c4b81b962c2e4cc63c, type: 3}
       propertyPath: ItemDatas.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 8d4bc0d871a94f04aa9383f5e81fe43b, type: 2}
+      objectReference: {fileID: 11400000, guid: 1f2de5a59a89acd4a8fb196928ab1510, type: 2}
     - target: {fileID: 3649554650264084629, guid: 06185d9de615d8c4b81b962c2e4cc63c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 35.26
@@ -1479,6 +1479,7 @@ RectTransform:
   - {fileID: 1503406350}
   - {fileID: 1176754345}
   - {fileID: 94000789}
+  - {fileID: 1485122805}
   m_Father: {fileID: 7419001829230250502}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
@@ -1541,7 +1542,7 @@ MonoBehaviour:
   ItemDescription: {fileID: 94000790}
   ItemPrame: {fileID: 1477547843}
   ItemIcon: {fileID: 1503406351}
-  UseButton: {fileID: 1485122804}
+  Button: {fileID: 1485122804}
   GradeColors:
   - {r: 0.7075472, g: 0.7075472, b: 0.7075472, a: 1}
   - {r: 0, g: 0.8018868, b: 0, a: 1}
@@ -1837,7 +1838,7 @@ GameObject:
   - component: {fileID: 1485122807}
   - component: {fileID: 1485122806}
   m_Layer: 5
-  m_Name: Button
+  m_Name: UseButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1850,17 +1851,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1485122804}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1884554190}
-  m_Father: {fileID: 7419001829230250502}
+  m_Father: {fileID: 1364669878}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -230, y: 80}
+  m_AnchoredPosition: {x: -200, y: -50}
   m_SizeDelta: {x: 380, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1485122806
@@ -3007,7 +3008,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1085580443112780018, guid: b47100bc47cc5904abe004f4c5e4b20c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 500
+      value: 499.99997
       objectReference: {fileID: 0}
     - target: {fileID: 1280597775507271589, guid: b47100bc47cc5904abe004f4c5e4b20c, type: 3}
       propertyPath: m_AnchorMax.y
@@ -3467,9 +3468,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2841133693528976055, guid: b47100bc47cc5904abe004f4c5e4b20c, type: 3}
       insertIndex: 1
       addedObject: {fileID: 1364669878}
-    - targetCorrespondingSourceObject: {fileID: 2841133693528976055, guid: b47100bc47cc5904abe004f4c5e4b20c, type: 3}
-      insertIndex: 2
-      addedObject: {fileID: 1485122805}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b47100bc47cc5904abe004f4c5e4b20c, type: 3}
 --- !u!224 &7419001829230250502 stripped

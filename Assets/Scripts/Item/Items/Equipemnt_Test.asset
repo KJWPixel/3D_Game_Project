@@ -20,4 +20,8 @@ MonoBehaviour:
   EquipementStatus:
   - ItemStatus: 0
     Stat: 15
+  - ItemStatus: 1
+    Stat: 15
+  - ItemStatus: 2
+    Stat: 15
   stats: []

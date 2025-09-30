@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
 using UnityEngine;
 
 
@@ -210,12 +211,14 @@ public class PlayerStat : MonoBehaviour
 
     public void ReduceStamina(float _Amount)
     {
+        //스테미너 감소
         CurrentStamina -= _Amount;
         CurrentStamina = Mathf.Clamp(CurrentStamina, 0, MaxStamina);
     }
 
     public bool ConsumeMp(float _Amount)
     {
+        //MP감소
         if (CurrentMp < _Amount) return false;
         CurrentMp -= _Amount;
         return true;
@@ -223,6 +226,7 @@ public class PlayerStat : MonoBehaviour
 
     public bool ConsumeSp(int _Amount)
     {
+        //SP 감소
         if (SkillPoint < _Amount) return false;
         SkillPoint -= _Amount;
         return true;
@@ -243,6 +247,44 @@ public class PlayerStat : MonoBehaviour
             case ConsumableType.ResotreStamina:
                 CurrentStamina += Mathf.Min(CurrentStamina + _Amount, MaxStamina);
                 Debug.Log($"플레이어의 Stamina가 {_Amount}만큼 회복하였습니다. {CurrentStamina}/{MaxStamina}");
+                break;
+        }
+    }
+
+    public void ApplyStat(ItemStatus _ItemStatus, float _Value)
+    {
+        switch (_ItemStatus)
+        {
+            case ItemStatus.Atk:
+                Atk += _Value;
+                break;
+            case ItemStatus.Def:
+                Def += _Value;
+                break;
+            case ItemStatus.Crit:
+                Crit += _Value;
+                break;
+            case ItemStatus.CritDmg:
+                CirtDmg += _Value;  
+                break;
+        }
+    }
+
+    public void RemoveStat(ItemStatus _ItemStatus, float _Value)
+    {
+        switch (_ItemStatus)
+        {
+            case ItemStatus.Atk:
+                Atk -= _Value;
+                break;
+            case ItemStatus.Def:
+                Def -= _Value;
+                break;
+            case ItemStatus.Crit:
+                Crit -= _Value;
+                break;
+            case ItemStatus.CritDmg:
+                CirtDmg -= _Value;
                 break;
         }
     }

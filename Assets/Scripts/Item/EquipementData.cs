@@ -22,8 +22,8 @@ public class EquipementData : ItemData
     [SerializeField] private float[] stats = new float[System.Enum.GetValues(typeof(ItemStatus)).Length];
 
 
-    public float GetStat(ItemStatus _Status)
+    public List<EquipementItemStatus> GetEquipStats()
     {
-        return stats[(int)_Status];
+        return EquipementStatus;
     }
 }

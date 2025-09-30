@@ -130,6 +130,42 @@ public class InventoryManager : MonoBehaviour
         OnInventoryChanged.Invoke();
         return true;
     }
+    
+    public void EquipItem(InventoryItem _Item)
+    {
+        if (_Item.ItemData.Type != ItemType.Equipment) return;
+
+        _Item.IsEquipped = true;
+
+        EquipementData Equip = _Item.ItemData as EquipementData; //(EquipementData)ItemData;
+
+        if(Equip != null)
+        {
+            Debug.Log("æ∆¿Ã≈€ Ω∫≈» ¿Â¬¯");
+            foreach (var stat in Equip.GetEquipStats())
+            {
+                PlayerStat.Instance.ApplyStat(stat.ItemStatus, stat.Stat);
+            }
+        }
+    }
+
+    public void UnequipItem(InventoryItem _Item)
+    {
+        if (_Item.ItemData.Type != ItemType.Equipment) return;
+
+        _Item.IsEquipped = false;
+
+        EquipementData Equip = _Item.ItemData as EquipementData;
+
+        if (Equip != null)
+        {
+            Debug.Log("æ∆¿Ã≈€ Ω∫≈»«ÿ¡¶");
+            foreach (var stat in Equip.GetEquipStats())
+            {
+                PlayerStat.Instance.RemoveStat(stat.ItemStatus, stat.Stat);
+            }
+        }
+    }
 
     public List<InventoryItem> GetItemByType(ItemType _Type)
     {

@@ -8,6 +8,7 @@ public class ItemSlot : MonoBehaviour
 {
     [SerializeField] private Image Icon;
     [SerializeField] private TMP_Text QuantityText;
+    [SerializeField] private TMP_Text EquipText;
 
     private InventoryItem CurrentItem;
 
@@ -29,6 +30,15 @@ public class ItemSlot : MonoBehaviour
         {
             QuantityText.text = "";
         }
+
+        if(_Item.IsEquipped)
+        {
+            EquipText.text = "ÀåÂø";
+        }
+        else
+        {
+            EquipText.text = "";
+        }
     }
 
     public void ClearSlot()
@@ -37,6 +47,7 @@ public class ItemSlot : MonoBehaviour
         Icon.sprite = null;
         Icon.enabled = false;
         QuantityText.text = "";
+        EquipText.text = "";
     }
 
     public void OnclickSlot()

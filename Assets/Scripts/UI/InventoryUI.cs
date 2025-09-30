@@ -69,6 +69,7 @@ public class InventoryUI : MonoBehaviour
     {
         ItemTooltip.gameObject.SetActive(true);
         ItemTooltip.ItemTooltipSetup(_Item);
+        RefreshUI();
     }
 
     public void HideTooltip()
