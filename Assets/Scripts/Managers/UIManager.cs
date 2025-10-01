@@ -158,7 +158,6 @@ public class UIManager : MonoBehaviour
         return null;
     }
 
-
     //Stack을 이용한 Pop
     #region
     //public void OpnePopup()

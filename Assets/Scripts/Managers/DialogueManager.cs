@@ -61,6 +61,7 @@ public class DialogueManager : MonoBehaviour
             TypingCoroutine = StartCoroutine(TextCoroutine());
             Index++;
         }
+
         else
         {
             EndDialogue();
@@ -85,7 +86,7 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    private void EndDialogue()
+    public void EndDialogue()
     {
         switch (CurrentInteraction)
         {
@@ -103,7 +104,15 @@ public class DialogueManager : MonoBehaviour
                 UIManager.Instance.DialoguePanel.SetActive(false);
                 break;
         }
+    
+        Index = 0;       
+    }
 
-        Index = 0;
+    public void CloseDialogue(bool _IsTolk)
+    {
+        if(!_IsTolk)
+        {
+            UIManager.Instance.DialoguePanel.SetActive(false);
+        }
     }
 }

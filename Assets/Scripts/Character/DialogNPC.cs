@@ -9,27 +9,38 @@ public enum InteractionType
     Shop,
     Quest,
 }
+
 public class DialogNPC : NPCCharacter
-{ 
+{
     public InteractionType interactionType;
     private void Start()
     {
-        if(Player == null)
+        if (Player == null)
         {
             Player = GameManager.Instance.Player;
-        }  
+        }
     }
     private void Update()
     {
-        InteractDialog();
+        Interact();
     }
 
-    private void InteractDialog()
+    private void Interact()
     {
-        float Distance = Vector3.Distance(transform.position, Player.transform.position);
-        if(Distance < InsteractionRange && Input.GetKeyDown(KeyCode.E))
+        distance = Vector3.Distance(transform.position, Player.transform.position);
+        DialogueManager.Instance.CloseDialogue(isTolk);
+
+        if (isTolk && distance > InsteractionRange)
         {
-            DialogueManager.Instance.StartDialogue(Name, DialogueLines, interactionType);         
+            isTolk = false;
+            DialogueManager.Instance.EndDialogue(); 
+            return;
+        }
+
+        if (distance < InsteractionRange && Input.GetKeyDown(KeyCode.E))
+        {
+            isTolk = true;
+            DialogueManager.Instance.StartDialogue(Name, DialogueLines, interactionType);
         }
     }
 }

@@ -48,12 +48,40 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-    private void UpdateQuestPrecess(QuestType _Type, int _id, int _Amount = 1)
+    public void UpdateQuestPrecess(QuestType _Type, int _id, int _Amount = 1)
     {
-        //퀘스트의 전체적인 업데이트를 돌리는 역할 
+        foreach(var quest in ActiveQuests)
+        {
+            if(quest.Data.QuestType == QuestType.NpcTolk)
+            {
+                if(quest.Data.Id == _id)
+                {
+                    quest.AddProgress(_Amount);
+                }               
+            }
+            if (quest.Data.QuestType == QuestType.Kill)
+            {
+                if(quest.Data.Id == _id)
+                {
+                    quest.AddProgress(_Amount);
+                }
+            }
+            if (quest.Data.QuestType == QuestType.Collect)
+            {
+                if(quest.Data.Id == _id)
+                {
+                    quest.AddProgress(_Amount);
+                }
+            }
+
+            if(quest.State == QuestState.Completed)
+            {
+                Debug.Log("퀘스트 완료");
+            }
+        }
     }
 
-    private void AddQuest(QuestData _Quest)
+    public void AddQuest(QuestData _Quest)
     {
         if (_Quest == null) return;
         if (ActiveQuests.Count >= MaxQuestList) return;
@@ -65,6 +93,7 @@ public class QuestManager : MonoBehaviour
     private void RemoveQuest(QuestInstance _Quest)
     {
         if (_Quest == null) return;
+
         ActiveQuests.Remove(_Quest);
     }
 
@@ -75,9 +104,8 @@ public class QuestManager : MonoBehaviour
 
         if(_Quest.Data.QuestType == QuestType.Kill)
         {
-            _Quest.Data.Amount++;
+            
         }
-
     }
 
     private void TolkQuest(QuestInstance _Quest)
