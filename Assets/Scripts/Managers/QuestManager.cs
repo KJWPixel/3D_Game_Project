@@ -11,6 +11,7 @@ public class QuestManager : MonoBehaviour
     퀘스트 ID: int
     퀘스트 이름: string
     퀘스트 설명: string
+    선행 퀘스트: questData
     퀘스트 Target: NPC, Monster, QuestMaterial: Enum
     퀘스트 상태: Enum
     퀘스트 보상: List<int>
@@ -29,10 +30,11 @@ public class QuestManager : MonoBehaviour
 
     */
 
+    [SerializeField] private int MaxQuestList;
 
-
-    [SerializeField] private int[] QuestCount = new int[30];
-
+    [SerializeField] private List<QuestInstance> ActiveQuests = new List<QuestInstance>();
+    [SerializeField] private List<QuestInstance> CompletedQuests = new List<QuestInstance>();
+    
     private void Awake()
     {
         if (Instance == null)
@@ -44,6 +46,50 @@ public class QuestManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
 
+    private void UpdateQuestPrecess(QuestType _Type, int _id, int _Amount = 1)
+    {
+        //퀘스트의 전체적인 업데이트를 돌리는 역할 
+    }
+
+    private void AddQuest(QuestData _Quest)
+    {
+        if (_Quest == null) return;
+        if (ActiveQuests.Count >= MaxQuestList) return;
+
+        QuestInstance NewQuest = new QuestInstance(_Quest);
+        ActiveQuests.Add(NewQuest);
+    }
+
+    private void RemoveQuest(QuestInstance _Quest)
+    {
+        if (_Quest == null) return;
+        ActiveQuests.Remove(_Quest);
+    }
+
+    private void killQuest(QuestInstance _Quest)
+    {
+        if (_Quest == null) return;
+        //Enemy의 Id로 
+
+        if(_Quest.Data.QuestType == QuestType.Kill)
+        {
+            _Quest.Data.Amount++;
+        }
+
+    }
+
+    private void TolkQuest(QuestInstance _Quest)
+    {
+        if (_Quest == null) return;
+    }
+
+    private void CompletedQuest(QuestInstance _Quest)
+    {
+        CompletedQuests.Add(_Quest);
+        ActiveQuests.Remove(_Quest);
+
+        Debug.Log($"{_Quest.Data.QuestName} 완료! 퀘스트 보상: {_Quest.Data.GoldRewward}골드, {_Quest.Data.ExpReward}경험치");
     }
 }

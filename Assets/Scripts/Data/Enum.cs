@@ -92,8 +92,6 @@ public enum PlayerState
     Stunned,
 }
 
-
-
 public enum ConsumableBuffType
 {
     Atk,
@@ -112,6 +110,22 @@ public enum AI
     AI_SKILL,
     AI_DEAD,
     AI_RESET,
+}
+
+//Äù½ºÆ®
+public enum QuestType
+{
+    NpcTolk,
+    Kill,
+    Collect
+}
+
+public enum QuestState
+{
+    NotStart,
+    Precess,
+    Completed,
+    Failed,
 }
 
 
