@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,12 +31,19 @@ public class QuestManager : MonoBehaviour
 
     */
 
+    //퀘스트매니저  중앙관리
+    //NCP(NPC한테 QuestID 부여) >> 대화(Dialogue창) >> 기본적인 대화 후 퀘스트or상점or기타 등등 List목록 SetActive >> 퀘스트 수락
+
+    //NPC퀘스트(퀘스트ID, Level, 선행)데이터 >> GiveQuest()함수로 QuestManager한테 전달 >> 퀘스트 조건? 참:거짓 bool에 따라 퀘스트 수락
+    
     [Header("최대 퀘스트 수")]
     [SerializeField] private int MaxQuestList;
 
     [Header("수락한 퀘스트")]
-    [SerializeField] private List<QuestInstance> ActiveQuests = new List<QuestInstance>();
-    private HashSet<int> ClearQuests = new HashSet<int>();
+    [SerializeField] public List<QuestInstance> ActiveQuests = new List<QuestInstance>();
+    public HashSet<int> ClearQuests = new HashSet<int>();
+
+    public event Action QuestListChanged;
 
     private void Awake()
     {
@@ -47,32 +55,32 @@ public class QuestManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
-        }
+        }      
     }
 
-    public void UpdateQuestPrecess(QuestType _Type, int _id, int _Amount = 1)
+    public void UpdateQuestPrecess(QuestClassification _Type, int _id, int _Amount = 1)
     {
         foreach (var quest in ActiveQuests)
         {
-            if (quest.Data.QuestType == QuestType.NpcTolk && quest.Data.Id == _id)
+            if (quest.Data.QuestClassification == QuestClassification.NpcTolk && quest.Data.QuestId == _id)
             {
                 quest.AddProgress(_Amount);
 
             }
-            if (quest.Data.QuestType == QuestType.Kill && quest.Data.Id == _id)
-            {
-
-                quest.AddProgress(_Amount);
-
-            }
-            if (quest.Data.QuestType == QuestType.Collect && quest.Data.Id == _id)
+            if (quest.Data.QuestClassification == QuestClassification.Kill && quest.Data.QuestId == _id)
             {
 
                 quest.AddProgress(_Amount);
 
             }
+            if (quest.Data.QuestClassification == QuestClassification.Collect && quest.Data.QuestId == _id)
+            {
 
-            if (quest.State == QuestState.Completed)
+                quest.AddProgress(_Amount);
+
+            }
+
+            if (quest.State == QuestCondition.Completed)
             {
                 Debug.Log("퀘스트 완료");
             }
@@ -82,11 +90,29 @@ public class QuestManager : MonoBehaviour
     public void AddQuest(QuestData _Quest)
     {
         if (_Quest == null) return;
-        if (ActiveQuests.Count >= MaxQuestList) return;
 
+        if (ActiveQuests.Count >= MaxQuestList)
+        {
+            Debug.Log($"퀘스트 최대 {MaxQuestList}까지만 받을 수 있습니다.");
+            return;
+        }
+
+        if(_Quest.PrerequisiteQuest != null)
+        {
+            Debug.Log("선행 퀘스트가 완료되지 않았습니다.");
+            if (!ClearQuests.Contains(_Quest.QuestId)) return;
+        }
+
+        if (ActiveQuests.Exists(q => q.Data.QuestId == _Quest.QuestId))
+        {
+            Debug.Log("동일 퀘스트를 복수로 받을 수 없습니다. ");
+            return; //동일 퀘스트 중복방지
+        }
 
         QuestInstance NewQuest = new QuestInstance(_Quest);
         ActiveQuests.Add(NewQuest);
+       
+
     }
 
     private void RemoveQuest(QuestInstance _Quest)
@@ -94,13 +120,14 @@ public class QuestManager : MonoBehaviour
         if (_Quest == null) return;
 
         ActiveQuests.Remove(_Quest);
+       
     }
 
     private void CompletedQuest(QuestInstance _Quest)
     {
         if (_Quest == null) return;
 
-        ClearQuests.Add(_Quest.Data.Id);
+        ClearQuests.Add(_Quest.Data.QuestId);
         ActiveQuests.Remove(_Quest);
 
         PlayerStat.Instance.AddExp(_Quest.Data.ExpReward);

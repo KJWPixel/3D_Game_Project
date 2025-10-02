@@ -17,6 +17,20 @@ public class QuestItemUI : MonoBehaviour
         QuestExplanationText.text = _Quest.Data.QuestDescription;
 
         //퀘스트 이미지는 퀘스트클래스에 따라 이미지 변경
-        //QuestImage
-    }
+        switch (_Quest.Data.QuestClass)
+        {
+            case QuestClass.Main:
+                QuestImage.color = Color.cyan;
+                break;
+            case QuestClass.Sub:
+                QuestImage.color = Color.blue;
+                break;
+            case QuestClass.Repeat:
+                QuestImage.color = Color.green;
+                break;
+            case QuestClass.Daily:
+                QuestImage.color = new Color(0.6f, 0f, 1f);
+                break;
+        }
+    }    
 }

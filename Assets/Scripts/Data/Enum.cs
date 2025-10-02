@@ -113,21 +113,6 @@ public enum AI
 }
 
 //Äù½ºÆ®
-public enum QuestType
-{
-    NpcTolk,
-    Kill,
-    Collect
-}
-
-public enum QuestState
-{
-    NotStart,
-    Precess,
-    Completed,
-    Failed,
-}
-
 public enum QuestClass
 {
     Main,
@@ -135,6 +120,22 @@ public enum QuestClass
     Repeat,
     Daily,
 }
+public enum QuestClassification
+{
+    NpcTolk,
+    Kill,
+    Collect,
+}
+
+public enum QuestCondition
+{
+    NotStart,
+    Precess,
+    Completed,
+    Failed,
+}
+
+
 
 
 

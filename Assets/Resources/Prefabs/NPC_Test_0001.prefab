@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6568809903607816274}
   - component: {fileID: 3537752042180500110}
+  - component: {fileID: 9020462317571786071}
   - component: {fileID: 207251346955366462}
   - component: {fileID: 8639728975025901410}
   - component: {fileID: 4612065550553300496}
@@ -47,13 +48,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8f54e8a3728c7f4cb1fd28a38975cd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: NPC_Test
+  id: 1
+  name: NPC0001
   DialogueLines:
-  - "\uC548\uB155\uD558\uC138\uC6941"
-  - "\uC548\uB155\uD558\uC138\uC69412"
-  - "\uC548\uB155\uD558\uC138\uC694123"
+  - 1234567890
+  - "\u3131\u3134\u3147\u3141\u3142\u314E\u3141\u3134\u314D\u3142\u3141\u3131\u3141\u3134\u3147\u3141\u3141\u3134"
+  - AAAAAAAAAAAAAAAAAA
   CurrentDialogueIndex: 0
   InsteractionRange: 2
+  distance: 0
+  isTolk: 0
+  interactionType: 1
+--- !u!114 &9020462317571786071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8702505540281896558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6693f1c501799749b78a64b06a877e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!33 &207251346955366462
 MeshFilter:
   m_ObjectHideFlags: 0

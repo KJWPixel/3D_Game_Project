@@ -1,15 +1,49 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class QuestUIManager : MonoBehaviour
 {
-    [Header("Äù½ºÆ® ¿ä¾à UI")]
-    [SerializeField] TMP_Text QuestTitleText;
-    [SerializeField] TMP_Text QuestContentsText;
-    [SerializeField] TMP_Text DistanceText;
+    [Header("Äù½ºÆ® °¡ÀÌµå UI")]
+    [SerializeField] GameObject QuestSmallPrefab;
 
-    //[Header("Äù½ºÆ® UI")]
-    
+    [Header("Äù½ºÆ® UI")]
+    [SerializeField] GameObject QuestItemUIPrefab;
+    QuestItemUI QuestItemUI;
+    [SerializeField] Transform QuestScrollView;
+
+    private void Start()
+    {
+       //QuestManager.Instance.QuestListChanged +=
+    }
+
+    private void Update()
+    {
+       
+    }
+
+    public void AddQuestList()
+    {      
+        foreach (var quest in QuestManager.Instance.ActiveQuests)
+        {
+            if(quest != null)
+            {
+                GameObject QuestObj = Instantiate(QuestItemUIPrefab, QuestScrollView);
+                QuestItemUI QuestItem = QuestObj.GetComponent<QuestItemUI>();
+                QuestItem.Setup(quest);
+            }
+        }           
+    }
+
+    public void RemoveQuestList()
+    {
+        foreach(var quest in QuestManager.Instance.ClearQuests)
+        {
+            
+        }
+    }
 }
+
+

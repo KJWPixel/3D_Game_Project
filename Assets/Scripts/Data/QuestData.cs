@@ -6,28 +6,35 @@ using UnityEngine;
 public class QuestData : ScriptableObject
 {
     [Header("Äù½ºÆ® Á¤º¸")]
-    [SerializeField] private int id;
+    [SerializeField] private int questId;
     [SerializeField] private string questName;
     [SerializeField] private string questTip;
     [SerializeField] private string questDescription;
     [SerializeField] private int targetId;
     [SerializeField] private int amount;
+    [SerializeField] private int questLevel;
     [SerializeField] private QuestData prerequisiteQuest;
-    [SerializeField] private QuestType questType;
+    [SerializeField] private QuestClassification questClassification;
+    [SerializeField] private QuestClass questClass;
+    [SerializeField] private QuestCondition questCondition;
+
     [Header("Äù½ºÆ® º¸»ó")]
     [SerializeField] private int goldReward;
     [SerializeField] private int expReward;
     [SerializeField] private ItemData itemReward;
 
-    public int Id => id;
+    public int QuestId => questId;
     public string QuestName => questName;
     public string QuestDescription => questDescription;
     public int TargetId => targetId;
     public int Amount => amount;
-
+    public int QuestLevel => questLevel;
     public QuestData PrerequisiteQuest => prerequisiteQuest;
-    public QuestType QuestType => questType;
+    public QuestClass QuestClass => questClass;
+    public QuestClassification QuestClassification => questClassification;
+    public QuestCondition QuestCondition => questCondition;
     public int GoldRewward => goldReward;
     public int ExpReward => expReward;
     public ItemData ItemReward => itemReward;
+    
 }
