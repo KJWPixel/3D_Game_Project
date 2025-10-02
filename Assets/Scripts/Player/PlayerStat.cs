@@ -34,6 +34,7 @@ public class PlayerStat : MonoBehaviour
     [SerializeField] private float crit = 0f;
     [SerializeField] private float critDmg = 0f;
 
+    [SerializeField] private int gold;
 
     //public float GetStatus(StatusType _Type)
     //{
@@ -133,6 +134,12 @@ public class PlayerStat : MonoBehaviour
     {
         get => critDmg;
         set => critDmg = value;
+    }
+
+    public int Gold
+    {
+        get => gold;
+        set => gold = value;
     }
 
 

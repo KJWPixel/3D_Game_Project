@@ -128,5 +128,13 @@ public enum QuestState
     Failed,
 }
 
+public enum QuestClass
+{
+    Main,
+    Sub,
+    Repeat,
+    Daily,
+}
+
 
 

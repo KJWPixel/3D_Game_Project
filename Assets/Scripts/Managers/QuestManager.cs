@@ -30,11 +30,13 @@ public class QuestManager : MonoBehaviour
 
     */
 
+    [Header("최대 퀘스트 수")]
     [SerializeField] private int MaxQuestList;
 
+    [Header("수락한 퀘스트")]
     [SerializeField] private List<QuestInstance> ActiveQuests = new List<QuestInstance>();
-    [SerializeField] private List<QuestInstance> CompletedQuests = new List<QuestInstance>();
-    
+    private HashSet<int> ClearQuests = new HashSet<int>();
+
     private void Awake()
     {
         if (Instance == null)
@@ -50,31 +52,27 @@ public class QuestManager : MonoBehaviour
 
     public void UpdateQuestPrecess(QuestType _Type, int _id, int _Amount = 1)
     {
-        foreach(var quest in ActiveQuests)
+        foreach (var quest in ActiveQuests)
         {
-            if(quest.Data.QuestType == QuestType.NpcTolk)
+            if (quest.Data.QuestType == QuestType.NpcTolk && quest.Data.Id == _id)
             {
-                if(quest.Data.Id == _id)
-                {
-                    quest.AddProgress(_Amount);
-                }               
+                quest.AddProgress(_Amount);
+
             }
-            if (quest.Data.QuestType == QuestType.Kill)
+            if (quest.Data.QuestType == QuestType.Kill && quest.Data.Id == _id)
             {
-                if(quest.Data.Id == _id)
-                {
-                    quest.AddProgress(_Amount);
-                }
+
+                quest.AddProgress(_Amount);
+
             }
-            if (quest.Data.QuestType == QuestType.Collect)
+            if (quest.Data.QuestType == QuestType.Collect && quest.Data.Id == _id)
             {
-                if(quest.Data.Id == _id)
-                {
-                    quest.AddProgress(_Amount);
-                }
+
+                quest.AddProgress(_Amount);
+
             }
 
-            if(quest.State == QuestState.Completed)
+            if (quest.State == QuestState.Completed)
             {
                 Debug.Log("퀘스트 완료");
             }
@@ -85,6 +83,7 @@ public class QuestManager : MonoBehaviour
     {
         if (_Quest == null) return;
         if (ActiveQuests.Count >= MaxQuestList) return;
+
 
         QuestInstance NewQuest = new QuestInstance(_Quest);
         ActiveQuests.Add(NewQuest);
@@ -97,26 +96,15 @@ public class QuestManager : MonoBehaviour
         ActiveQuests.Remove(_Quest);
     }
 
-    private void killQuest(QuestInstance _Quest)
-    {
-        if (_Quest == null) return;
-        //Enemy의 Id로 
-
-        if(_Quest.Data.QuestType == QuestType.Kill)
-        {
-            
-        }
-    }
-
-    private void TolkQuest(QuestInstance _Quest)
-    {
-        if (_Quest == null) return;
-    }
-
     private void CompletedQuest(QuestInstance _Quest)
     {
-        CompletedQuests.Add(_Quest);
+        if (_Quest == null) return;
+
+        ClearQuests.Add(_Quest.Data.Id);
         ActiveQuests.Remove(_Quest);
+
+        PlayerStat.Instance.AddExp(_Quest.Data.ExpReward);
+        PlayerStat.Instance.Gold += _Quest.Data.GoldRewward;
 
         Debug.Log($"{_Quest.Data.QuestName} 완료! 퀘스트 보상: {_Quest.Data.GoldRewward}골드, {_Quest.Data.ExpReward}경험치");
     }

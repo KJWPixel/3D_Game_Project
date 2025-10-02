@@ -1,18 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class QuestUIManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [Header("Äù½ºÆ® ¿ä¾à UI")]
+    [SerializeField] TMP_Text QuestTitleText;
+    [SerializeField] TMP_Text QuestContentsText;
+    [SerializeField] TMP_Text DistanceText;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    //[Header("Äù½ºÆ® UI")]
+    
 }
