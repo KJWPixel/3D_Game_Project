@@ -35,15 +35,16 @@ public class QuestManager : MonoBehaviour
     //NCP(NPC한테 QuestID 부여) >> 대화(Dialogue창) >> 기본적인 대화 후 퀘스트or상점or기타 등등 List목록 SetActive >> 퀘스트 수락
 
     //NPC퀘스트(퀘스트ID, Level, 선행)데이터 >> GiveQuest()함수로 QuestManager한테 전달 >> 퀘스트 조건? 참:거짓 bool에 따라 퀘스트 수락
-    
+
     [Header("최대 퀘스트 수")]
-    [SerializeField] private int MaxQuestList;
+    [SerializeField] private int maxQuestList;
+    public int MaxQuestList => maxQuestList;
 
     [Header("수락한 퀘스트")]
     [SerializeField] public List<QuestInstance> ActiveQuests = new List<QuestInstance>();
     public HashSet<int> ClearQuests = new HashSet<int>();
 
-    public event Action QuestListChanged;
+    public event Action<QuestClass?> QuestListChanged;
 
     private void Awake()
     {
@@ -111,8 +112,8 @@ public class QuestManager : MonoBehaviour
 
         QuestInstance NewQuest = new QuestInstance(_Quest);
         ActiveQuests.Add(NewQuest);
-       
 
+        QuestListChanged?.Invoke(null);
     }
 
     private void RemoveQuest(QuestInstance _Quest)
