@@ -12,17 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b349f0a243d8f5f468b31b5aee2ba7ff, type: 3}
   m_Name: TestQuest
   m_EditorClassIdentifier: 
-  questId: 0
+  questId: 1
   questName: Test
-  questTip: 
+  questTip: Test Quest
   questDescription: Test Quest
   targetId: 0
-  amount: 0
+  amount: 1
   questLevel: 0
   prerequisiteQuest: {fileID: 0}
-  questType: 1
-  questClass: 4
+  questClassification: 0
+  questClass: 1
   questCondition: 0
-  goldReward: 0
-  expReward: 0
+  goldReward: 1
+  expReward: 1
   itemReward: {fileID: 0}

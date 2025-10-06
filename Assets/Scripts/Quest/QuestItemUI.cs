@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,10 +10,20 @@ public class QuestItemUI : MonoBehaviour
     [SerializeField] private TMP_Text QuestTitleText;
     [SerializeField] private TMP_Text QuestExplanationText;
     [SerializeField] private Image QuestImage;
+    [SerializeField] private Button QuestToolTipButton;
 
+    private QuestToolTip QuestToolTip;
+    private QuestInstance CurrentQuest;
+
+    private void Start()
+    {
+
+    }
 
     public void Setup(QuestInstance _Quest)
     {
+        CurrentQuest = _Quest;
+
         QuestTitleText.text = _Quest.Data.QuestName;
         QuestExplanationText.text = _Quest.Data.QuestDescription;
 

@@ -19,7 +19,11 @@ public class UIManager : MonoBehaviour
 
     [Header("인벤토리 UI")]
     [SerializeField] private GameObject InventoryPanel;
-    [SerializeField] private bool IsInventoryOpen = false; 
+    [SerializeField] private bool IsInventoryOpen = false;
+
+    [Header("퀘스트 UI")]
+    [SerializeField] private GameObject QuestPanel;
+    [SerializeField] private bool IsQuestOpen = false;
 
     [Header("NPC 대화 UI")]
     [SerializeField] public GameObject DialoguePanel;
@@ -47,6 +51,7 @@ public class UIManager : MonoBehaviour
     {
         DialoguePanel.SetActive(false);
         InventoryPanel.SetActive(false);
+        QuestPanel.SetActive(false);
     }
 
     private void Update()
@@ -56,6 +61,11 @@ public class UIManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.I))
         {
             InventoryOpen();
+        }
+
+        if(Input.GetKeyDown(KeyCode.J))
+        {
+            QuestOpen();
         }
     }
 
@@ -88,6 +98,12 @@ public class UIManager : MonoBehaviour
         {
             InventoryUI.Instance.RefreshUI();
         }
+    }
+
+    private void QuestOpen()
+    {
+        IsQuestOpen = !IsQuestOpen;
+        QuestPanel.SetActive(IsQuestOpen);
     }
 
     //NPC 대화 대사 분기 버튼

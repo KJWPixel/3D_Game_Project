@@ -115,10 +115,11 @@ public enum AI
 //Äù½ºÆ®
 public enum QuestClass
 {
-    Main,
-    Sub,
-    Repeat,
-    Daily,
+    Main = 0,
+    Sub = 1,
+    Repeat = 2,
+    Daily = 3,
+    Event = 4,
 }
 public enum QuestClassification
 {
