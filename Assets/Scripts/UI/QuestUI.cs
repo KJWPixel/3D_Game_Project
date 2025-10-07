@@ -10,7 +10,7 @@ public class QuestUI : MonoBehaviour
     [SerializeField] Transform QuestItemParent;
 
     [Header("Äù½ºÆ® ÅøÆÁ ÇÁ¸®ÆÕ")]
-    [SerializeField] GameObject QuestTooltipPrefab;
+    [SerializeField] QuestToolTip QuestTooltip;
 
     [Header("Äù½ºÆ® °¡ÀÌµå ÇÁ¸®ÆÕ")]
     [SerializeField] GameObject QuestGuidePrefab;
@@ -21,11 +21,14 @@ public class QuestUI : MonoBehaviour
 
     private void Awake()
     {
-        pool = QuestManager.Instance.MaxQuestList;
-        CreatePool(pool);
+       
     }
     private void Start()
     {
+        pool = QuestManager.Instance.MaxQuestList;
+
+        CreatePool(pool);
+
         QuestManager.Instance.QuestListChanged += RefreshQuest;
     }
 
@@ -56,7 +59,7 @@ public class QuestUI : MonoBehaviour
         for (int i = 0; i < quests.Count && i < pooledQuestItemUI.Count; i++)
         {
             pooledQuestItemUI[i].gameObject.SetActive(true);
-            pooledQuestItemUI[i].Setup(quests[i]);
+            pooledQuestItemUI[i].Setup(quests[i], this);
         }
     }
     public void OnClickAllButton()
@@ -67,5 +70,15 @@ public class QuestUI : MonoBehaviour
     {
         QuestClass Type = (QuestClass)_TypeIndex;
         RefreshQuest(Type);
+    }
+    public void OnClickClose()
+    {
+        gameObject.SetActive(false);
+    }
+
+    public void OnClickShowTooltip(QuestInstance _Quest)
+    {
+        QuestTooltip.gameObject.SetActive(true);
+        QuestTooltip.Setup(_Quest);
     }
 }

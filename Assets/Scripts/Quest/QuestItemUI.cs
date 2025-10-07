@@ -9,20 +9,20 @@ public class QuestItemUI : MonoBehaviour
 {
     [SerializeField] private TMP_Text QuestTitleText;
     [SerializeField] private TMP_Text QuestExplanationText;
-    [SerializeField] private Image QuestImage;
+    [SerializeField] private Image QuestClassImage;
     [SerializeField] private Button QuestToolTipButton;
-
-    private QuestToolTip QuestToolTip;
+    
     private QuestInstance CurrentQuest;
-
+    private QuestUI QuestUI;
     private void Start()
     {
 
     }
 
-    public void Setup(QuestInstance _Quest)
+    public void Setup(QuestInstance _Quest, QuestUI _QuestUI)
     {
         CurrentQuest = _Quest;
+        QuestUI = _QuestUI;
 
         QuestTitleText.text = _Quest.Data.QuestName;
         QuestExplanationText.text = _Quest.Data.QuestDescription;
@@ -31,17 +31,22 @@ public class QuestItemUI : MonoBehaviour
         switch (_Quest.Data.QuestClass)
         {
             case QuestClass.Main:
-                QuestImage.color = Color.cyan;
+                QuestClassImage.color = Color.cyan;
                 break;
             case QuestClass.Sub:
-                QuestImage.color = Color.blue;
+                QuestClassImage.color = Color.blue;
                 break;
             case QuestClass.Repeat:
-                QuestImage.color = Color.green;
+                QuestClassImage.color = Color.green;
                 break;
             case QuestClass.Daily:
-                QuestImage.color = new Color(0.6f, 0f, 1f);
+                QuestClassImage.color = new Color(0.6f, 0f, 1f);
                 break;
         }
     }    
+
+    public void OnClickTooltip()
+    {
+        QuestUI.OnClickShowTooltip(CurrentQuest);
+    }
 }

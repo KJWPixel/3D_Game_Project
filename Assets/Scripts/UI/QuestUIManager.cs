@@ -76,7 +76,7 @@ public class QuestUIManager : MonoBehaviour
         for(int i = 0; i < quests.Count && i < pooledQuestItemUI.Count; i++)
         {
             pooledQuestItemUI[i].gameObject.SetActive(true);
-            pooledQuestItemUI[i].Setup(quests[i]);
+            //pooledQuestItemUI[i].Setup(quests[i], this);
         }
     }
 
@@ -98,7 +98,7 @@ public class QuestUIManager : MonoBehaviour
             {
                 GameObject QuestObj = Instantiate(QuestItemUIPrefab, QuestScrollView);
                 QuestItemUI QuestItem = QuestObj.GetComponent<QuestItemUI>();
-                QuestItem.Setup(quest);
+                //QuestItem.Setup(quest, this);
             }
         }           
     }

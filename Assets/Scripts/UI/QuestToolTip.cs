@@ -19,14 +19,9 @@ public class QuestToolTip : MonoBehaviour
 
     public void Setup(QuestInstance _Quest)
     {
-        QuestTitleText.text = _Quest.Data.QuestName;
+        QuestTitleText.text = $"<color=orange>{_Quest.Data.QuestName}</color>";
         QuestDescriptionText.text = _Quest.Data.QuestDescription;
-        QuestRewordText.text = "보상: 골드 " + _Quest.Data.GoldRewward + " / 경험치 " + _Quest.Data.ExpReward;
-    }
-
-    public void OnClickQuestTracking()
-    {
-        Debug.Log("퀘스트 추적");
+        QuestRewordText.text = $"<color=orange>보상: 골드 </color>" + _Quest.Data.GoldRewward + $"<color=orange> / 경험치 </color>" + _Quest.Data.ExpReward;
     }
 
     public void OnClickClose()
@@ -34,4 +29,11 @@ public class QuestToolTip : MonoBehaviour
         Debug.Log("퀘스트 툴팁 닫기");
         gameObject.SetActive(false);
     }
+
+    public void OnClickQuestTracking()
+    {
+        Debug.Log("퀘스트 추적");
+    }
+
+    
 }
