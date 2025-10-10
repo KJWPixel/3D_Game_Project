@@ -13,6 +13,8 @@ public enum InteractionType
 public class DialogNPC : NPCCharacter
 {
     public InteractionType interactionType;
+    public QuestData QuestData;
+
     private void Start()
     {
         if (Player == null)
@@ -40,7 +42,7 @@ public class DialogNPC : NPCCharacter
         if (distance < InsteractionRange && Input.GetKeyDown(KeyCode.E))
         {
             isTolk = true;
-            DialogueManager.Instance.StartDialogue(Name, DialogueLines, interactionType);
+            DialogueManager.Instance.StartDialogue(this, Name, DialogueLines, interactionType);
         }
     }
 }

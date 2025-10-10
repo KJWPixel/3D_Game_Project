@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,13 +13,19 @@ public class QuestToolTip : MonoBehaviour
     [SerializeField] private Button TrackingButton;
     [SerializeField] private Button CloseButton;
 
+    private QuestInstance CurrentQuest;
+    private QuestUI QuestUI;
+
     private void Awake()
     {
         gameObject.SetActive(false);
     }
 
-    public void Setup(QuestInstance _Quest)
+    public void Setup(QuestInstance _Quest, QuestUI _UI)
     {
+        CurrentQuest = _Quest;
+        QuestUI = _UI;
+
         QuestTitleText.text = $"<color=orange>{_Quest.Data.QuestName}</color>";
         QuestDescriptionText.text = _Quest.Data.QuestDescription;
         QuestRewordText.text = $"<color=orange>보상: 골드 </color>" + _Quest.Data.GoldRewward + $"<color=orange> / 경험치 </color>" + _Quest.Data.ExpReward;
@@ -32,8 +39,6 @@ public class QuestToolTip : MonoBehaviour
 
     public void OnClickQuestTracking()
     {
-        Debug.Log("퀘스트 추적");
+        QuestUI.OnClickTrackQuest(CurrentQuest);
     }
-
-    
 }

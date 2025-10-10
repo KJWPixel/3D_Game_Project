@@ -15,6 +15,8 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private bool IsTyping;
     [SerializeField] private Enum CurrentInteraction;
 
+    public DialogNPC CurrentNPC;
+
     private void Awake()
     {
         if (Instance == null)
@@ -38,8 +40,9 @@ public class DialogueManager : MonoBehaviour
         ShowTextSentences();
     }
 
-    public void StartDialogue(string _Name, string[] _DialogueLine, InteractionType _Type)
+    public void StartDialogue(DialogNPC _NPC, string _Name, string[] _DialogueLine, InteractionType _Type)
     {
+        CurrentNPC = _NPC;
         Sentences = _DialogueLine;
         CurrentInteraction = _Type;
 
@@ -98,7 +101,11 @@ public class DialogueManager : MonoBehaviour
                 UIManager.Instance.OnClickShop();
                 break;
             case InteractionType.Quest:
-                // Quest 관련 버튼/행동 활성화
+                UIManager.Instance.ChoiceYes.SetActive(true);
+                UIManager.Instance.ChoiceNo.SetActive(true);
+                UIManager.Instance.SetupQuestButton(CurrentNPC.QuestData);
+                // QuestData를 버튼 클릭 이벤트에 전달
+                
                 break;
             default:
                 UIManager.Instance.DialoguePanel.SetActive(false);

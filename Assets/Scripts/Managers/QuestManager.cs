@@ -59,6 +59,11 @@ public class QuestManager : MonoBehaviour
         }      
     }
 
+    private void Start()
+    {
+
+    }
+
     public void UpdateQuestPrecess(QuestClassification _Type, int _id, int _Amount = 1)
     {
         foreach (var quest in ActiveQuests)
@@ -112,6 +117,7 @@ public class QuestManager : MonoBehaviour
 
         QuestInstance NewQuest = new QuestInstance(_Quest);
         ActiveQuests.Add(NewQuest);
+        Debug.Log("퀘스트 수락완료");
 
         QuestListChanged?.Invoke(null);
     }

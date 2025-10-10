@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6568809903607816274}
   - component: {fileID: 3537752042180500110}
-  - component: {fileID: 9020462317571786071}
   - component: {fileID: 207251346955366462}
   - component: {fileID: 8639728975025901410}
   - component: {fileID: 4612065550553300496}
@@ -59,18 +58,7 @@ MonoBehaviour:
   distance: 0
   isTolk: 0
   interactionType: 1
---- !u!114 &9020462317571786071
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8702505540281896558}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6693f1c501799749b78a64b06a877e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  QuestData: {fileID: 0}
 --- !u!33 &207251346955366462
 MeshFilter:
   m_ObjectHideFlags: 0

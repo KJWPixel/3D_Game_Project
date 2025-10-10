@@ -31,6 +31,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] public TextMeshProUGUI DialogueText;
     [SerializeField] public GameObject ChoiceYes;
     [SerializeField] public GameObject ChoiceNo;
+
+    private QuestData CurrentQuestData;
     private void Awake()
     {
         if(Instance == null)
@@ -110,11 +112,27 @@ public class UIManager : MonoBehaviour
     public void OnClickYes()
     {
         Debug.Log("Yes 선택");
+
+        var NPC = DialogueManager.Instance.CurrentNPC;
+        if (NPC == null) return;
+
         //추후 후속으로 필요한 기능 추가
+
+
+        if(CurrentQuestData != null)
+        {
+            QuestManager.Instance.AddQuest(CurrentQuestData);
+            Debug.Log($"{CurrentQuestData.QuestName} 수락");        
+        }
+        
+        ChoiceYes.SetActive(false);
+        ChoiceNo.SetActive(false);
+        DialoguePanel.SetActive(false);
     }
     public void OnClickNo()
     {
         Debug.Log("No 선택 ");
+
         DialogueManager.Instance.Index = 0;
         ChoiceYes.SetActive(false);
         ChoiceNo.SetActive(false);
@@ -124,9 +142,26 @@ public class UIManager : MonoBehaviour
     public void OnClickShop()
     {
         Debug.Log("상점 페이지 활성화");
+
         ChoiceYes.SetActive(false);
         ChoiceNo.SetActive(false);
         DialoguePanel.SetActive(false);
+    }
+
+    public void SetupQuestButton(QuestData _Quest)
+    {
+        Debug.Log("버튼 호출");
+        CurrentQuestData = _Quest;
+        
+
+        ChoiceYes.GetComponent<Button>().onClick.RemoveAllListeners();
+        ChoiceYes.GetComponent<Button>().onClick.AddListener(OnClickYes);
+        
+        ChoiceNo.GetComponent<Button>().onClick.RemoveAllListeners();
+        ChoiceNo.GetComponent<Button>().onClick.AddListener(OnClickNo);
+
+        ChoiceYes.SetActive(true);
+        ChoiceNo.SetActive(true);
     }
 
 

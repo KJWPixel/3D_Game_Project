@@ -14,10 +14,6 @@ public class QuestItemUI : MonoBehaviour
     
     private QuestInstance CurrentQuest;
     private QuestUI QuestUI;
-    private void Start()
-    {
-
-    }
 
     public void Setup(QuestInstance _Quest, QuestUI _QuestUI)
     {
