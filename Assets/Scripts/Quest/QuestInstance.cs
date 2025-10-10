@@ -1,7 +1,7 @@
 [System.Serializable]
 public class QuestInstance 
 {   public QuestData Data { get; private set; }
-    public QuestCondition State { get; private set; }
+    public QuestCondition State { get; set; }
     public int CurrentAmount { get; private set; }
 
     public QuestInstance(QuestData _Data)

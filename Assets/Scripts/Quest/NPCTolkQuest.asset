@@ -12,13 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b349f0a243d8f5f468b31b5aee2ba7ff, type: 3}
   m_Name: NPCTolkQuest
   m_EditorClassIdentifier: 
-  id: 1
+  questId: 1
   questName: "NPC0001\uACFC \uB300\uD654\uD558\uAE30"
   questTip: "NPC0001\uACFC \uB300\uD654"
   questDescription: "NPC0001\uACFC \uB300\uD654"
+  targetId: 1
   amount: 1
+  questLevel: 0
   prerequisiteQuest: {fileID: 0}
-  questType: 0
+  questClassification: 0
+  questClass: 0
+  questCondition: 0
   goldReward: 15
   expReward: 15
   itemReward: {fileID: 0}

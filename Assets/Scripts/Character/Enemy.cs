@@ -193,6 +193,8 @@ public class Enemy : EnemyCharacter
 
     private void Die()
     {
+        QuestManager.Instance.UpdateQuestPrecess(QuestClassification.Kill, id, 1);
+
         PlayerStat.AddExp(GainExp);
         ItemDrop.ItemsDrop();
 

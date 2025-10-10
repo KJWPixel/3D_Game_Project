@@ -7,6 +7,7 @@ public abstract class EnemyCharacter : CharacterBase
     //Enemy상속에서 필요한 기본적인 정보 및 함수
     [Header("기본 정보")]
     [SerializeField] public string name;
+    [SerializeField] public int id;
     [SerializeField] protected float maxHp;
     [SerializeField] protected float curHp;
     [SerializeField] protected float walkSpeed;

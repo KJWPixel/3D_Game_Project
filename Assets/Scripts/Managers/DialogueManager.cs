@@ -93,12 +93,10 @@ public class DialogueManager : MonoBehaviour
     {
         switch (CurrentInteraction)
         {
-            case InteractionType.Choice:
+            case InteractionType.Shop:
                 UIManager.Instance.ChoiceYes.SetActive(true);
                 UIManager.Instance.ChoiceNo.SetActive(true);
-                break;
-            case InteractionType.Shop:
-                UIManager.Instance.OnClickShop();
+                UIManager.Instance.SetupQuestButton(CurrentNPC.QuestData);
                 break;
             case InteractionType.Quest:
                 UIManager.Instance.ChoiceYes.SetActive(true);

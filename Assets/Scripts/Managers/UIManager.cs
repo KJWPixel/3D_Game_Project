@@ -23,6 +23,7 @@ public class UIManager : MonoBehaviour
 
     [Header("퀘스트 UI")]
     [SerializeField] private GameObject QuestPanel;
+    [SerializeField] private GameObject QuestToolTipPanel;
     [SerializeField] private bool IsQuestOpen = false;
 
     [Header("NPC 대화 UI")]
@@ -54,6 +55,7 @@ public class UIManager : MonoBehaviour
         DialoguePanel.SetActive(false);
         InventoryPanel.SetActive(false);
         QuestPanel.SetActive(false);
+        QuestToolTipPanel.SetActive(false);
     }
 
     private void Update()
@@ -106,6 +108,7 @@ public class UIManager : MonoBehaviour
     {
         IsQuestOpen = !IsQuestOpen;
         QuestPanel.SetActive(IsQuestOpen);
+        QuestToolTipPanel.SetActive(IsQuestOpen);
     }
 
     //NPC 대화 대사 분기 버튼
@@ -117,14 +120,20 @@ public class UIManager : MonoBehaviour
         if (NPC == null) return;
 
         //추후 후속으로 필요한 기능 추가
-
-
-        if(CurrentQuestData != null)
+        switch(NPC.interactionType)
         {
-            QuestManager.Instance.AddQuest(CurrentQuestData);
-            Debug.Log($"{CurrentQuestData.QuestName} 수락");        
+            case InteractionType.Shop:
+                break;
+            case InteractionType.Quest:
+                if (CurrentQuestData != null)
+                {
+                    QuestManager.Instance.AddQuest(CurrentQuestData);                   
+                    Debug.Log($"{CurrentQuestData.QuestName} 수락");
+                }
+                break;
+          
         }
-        
+       
         ChoiceYes.SetActive(false);
         ChoiceNo.SetActive(false);
         DialoguePanel.SetActive(false);

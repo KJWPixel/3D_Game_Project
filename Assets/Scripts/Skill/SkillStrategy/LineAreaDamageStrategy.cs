@@ -51,6 +51,8 @@ public class LineAreaDamageStrategy : ISkillBehaviorStrategy
             {
                 foreach (var col in _Coliiders)
                 {
+                    if(col == null) continue;
+
                     if(col.CompareTag("Enemy"))
                     {
                         Enemy enemy = col.GetComponent<Enemy>();

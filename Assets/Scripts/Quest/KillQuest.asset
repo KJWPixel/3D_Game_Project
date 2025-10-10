@@ -10,17 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b349f0a243d8f5f468b31b5aee2ba7ff, type: 3}
-  m_Name: TestQuest
+  m_Name: KillQuest
   m_EditorClassIdentifier: 
-  questId: 1
-  questName: Test
-  questTip: Test Quest
-  questDescription: Test Quest
-  targetId: 0
+  questId: 2
+  questName: "\uBAAC\uC2A4\uD130 \uD0AC \uD018\uC2A4\uD2B8"
+  questTip: "\uBAAC\uC2A4\uD130 \uD0AC \uD018\uC2A4\uD2B8"
+  questDescription: "\uBAAC\uC2A4\uD130 \uD0AC \uD018\uC2A4\uD2B8"
+  targetId: 2
   amount: 1
   questLevel: 0
   prerequisiteQuest: {fileID: 0}
-  questClassification: 0
+  targetArea: {fileID: 0}
+  questClassification: 1
   questClass: 1
   questCondition: 0
   goldReward: 1

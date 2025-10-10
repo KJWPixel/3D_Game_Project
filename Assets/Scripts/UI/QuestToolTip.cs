@@ -16,7 +16,7 @@ public class QuestToolTip : MonoBehaviour
     private QuestInstance CurrentQuest;
     private QuestUI QuestUI;
 
-    private void Awake()
+    private void OnDisable()
     {
         gameObject.SetActive(false);
     }

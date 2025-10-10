@@ -56,7 +56,7 @@ public class QuestManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
-        }      
+        }
     }
 
     private void Start()
@@ -66,30 +66,33 @@ public class QuestManager : MonoBehaviour
 
     public void UpdateQuestPrecess(QuestClassification _Type, int _id, int _Amount = 1)
     {
+        List<QuestInstance> CompletedQuests = new List<QuestInstance>();
+
         foreach (var quest in ActiveQuests)
         {
             if (quest.Data.QuestClassification == QuestClassification.NpcTolk && quest.Data.QuestId == _id)
             {
                 quest.AddProgress(_Amount);
-
             }
             if (quest.Data.QuestClassification == QuestClassification.Kill && quest.Data.QuestId == _id)
             {
-
                 quest.AddProgress(_Amount);
-
             }
             if (quest.Data.QuestClassification == QuestClassification.Collect && quest.Data.QuestId == _id)
             {
-
                 quest.AddProgress(_Amount);
-
             }
 
             if (quest.State == QuestCondition.Completed)
             {
-                Debug.Log("퀘스트 완료");
+                CompletedQuests.Add(quest);
             }
+        }
+
+        foreach(var quest in CompletedQuests)
+        {
+            Debug.Log("퀘스트 완료");
+            CompletedQuest(quest);
         }
     }
 
@@ -103,7 +106,7 @@ public class QuestManager : MonoBehaviour
             return;
         }
 
-        if(_Quest.PrerequisiteQuest != null)
+        if (_Quest.PrerequisiteQuest != null)
         {
             Debug.Log("선행 퀘스트가 완료되지 않았습니다.");
             if (!ClearQuests.Contains(_Quest.QuestId)) return;
@@ -116,8 +119,10 @@ public class QuestManager : MonoBehaviour
         }
 
         QuestInstance NewQuest = new QuestInstance(_Quest);
+        NewQuest.State = QuestCondition.Precess;
         ActiveQuests.Add(NewQuest);
         Debug.Log("퀘스트 수락완료");
+
 
         QuestListChanged?.Invoke(null);
     }
@@ -127,7 +132,7 @@ public class QuestManager : MonoBehaviour
         if (_Quest == null) return;
 
         ActiveQuests.Remove(_Quest);
-       
+
     }
 
     private void CompletedQuest(QuestInstance _Quest)

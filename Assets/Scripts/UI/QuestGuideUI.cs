@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class QuestGuideUI : MonoBehaviour
 {
-    [SerializeField] TMP_Text QuestTitleText;
     [SerializeField] TMP_Text QuestDescriptionText;
     [SerializeField] TMP_Text QuestProgress;
+    [SerializeField] TMP_Text QuestDistance;
 
     private QuestInstance CurrentQuest;
     private Transform TargetNPC;
@@ -16,7 +16,6 @@ public class QuestGuideUI : MonoBehaviour
     {
         CurrentQuest = _Quest;
 
-        QuestTitleText.text = _Quest.Data.QuestName;
         QuestDescriptionText.text = _Quest.Data.QuestDescription;
 
         UpdateProgress(CurrentQuest);
@@ -26,17 +25,25 @@ public class QuestGuideUI : MonoBehaviour
 
     private void Update()
     {
-        if (CurrentQuest == null) return;
-
+        if (CurrentQuest == null)
+        {
+            QuestDescriptionText.text = string.Empty;
+            QuestProgress.text = string.Empty;
+            QuestDistance.text = string.Empty;
+            return;
+        }
+            
         UpdateProgress(CurrentQuest);
         UpdateDistance(CurrentQuest);
-    }
+    } 
 
     private void UpdateProgress(QuestInstance _Quest)
     {
-        if(CurrentQuest.Data.QuestClassification == QuestClassification.Kill)
+        if (CurrentQuest.Data.QuestClassification == QuestClassification.Kill)
         {
             QuestProgress.text = $"{CurrentQuest.CurrentAmount} / {_Quest.Data.Amount}";
+            //float Dis = Vector3.Distance(PlayerStat.Instance.transform.position, _Quest.Data.TargetArea.transform.position);
+            //QuestDistance.text = $"{Dis:F1}";
         }
         else
         {
@@ -46,18 +53,13 @@ public class QuestGuideUI : MonoBehaviour
 
     private void UpdateDistance(QuestInstance _Quest)
     {
-        if(CurrentQuest.Data.QuestClassification == QuestClassification.NpcTolk)
+        if (CurrentQuest.Data.QuestClassification == QuestClassification.NpcTolk)
         {
             QuestProgress.text = string.Empty;
             if (TargetNPC == null) return;
         }
 
-        float Dis = Vector3.Distance(PlayerStat.Instance.transform.position, TargetNPC.position);
-        QuestProgress.text = $"{Dis:F1}";
-    }
-
-    private void OnClickTrackQuest(QuestInstance _Quest)
-    {
-
+        //float Dis = Vector3.Distance(PlayerStat.Instance.transform.position, _Quest.Data.TargetArea.transform.position);
+        //QuestProgress.text = $"{Dis:F1}";
     }
 }

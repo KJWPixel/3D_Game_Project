@@ -14,6 +14,7 @@ public class QuestData : ScriptableObject
     [SerializeField] private int amount;
     [SerializeField] private int questLevel;
     [SerializeField] private QuestData prerequisiteQuest;
+    [SerializeField] private Transform targetArea;
     [SerializeField] private QuestClassification questClassification;
     [SerializeField] private QuestClass questClass;
     [SerializeField] private QuestCondition questCondition;
@@ -30,11 +31,15 @@ public class QuestData : ScriptableObject
     public int Amount => amount;
     public int QuestLevel => questLevel;
     public QuestData PrerequisiteQuest => prerequisiteQuest;
+    public Transform TargetArea => targetArea;
     public QuestClass QuestClass => questClass;
     public QuestClassification QuestClassification => questClassification;
     public QuestCondition QuestCondition => questCondition;
     public int GoldRewward => goldReward;
     public int ExpReward => expReward;
     public ItemData ItemReward => itemReward;
+
+
+    
     
 }
