@@ -56,3 +56,15 @@ Quaternion 사원수
 발사체에 작용하는 외력 = 중력 + 항력
 중력 = 질량 * 중력 가속도
 항력 = 항력계수 * 속도
+
+1. 오버로딩, 오버라이드, 대리자(Action, Deletage)
+2. STL 작동원리(List,Que,Stack,Map(Dictionary), Tree)
+3. 벡터(특성, 정규화, 내적, 외적), 행렬(사원수)
+4. 물리(운동학, 원의 방정식, 삼각삼수)
+5. 렌더링 파이프 라인(응용, 기하, 레스터화)
+6. 디자인패턴(싱글톤, 전략, 상태, 매니저, 팩토리 ,이터레이터 ,아답터)
+7. 정적, 동적
+8. Table, json, UnityWwebRequest, AssectBundle, xml(파싱)
+9. EditorTool
+10. TCP/IP, 멀티 쓰레드, 동기화
+11. 운영체제(레지스터)

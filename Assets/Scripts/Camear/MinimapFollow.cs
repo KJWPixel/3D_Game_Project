@@ -6,9 +6,6 @@ public class MinimapFollow : MonoBehaviour
 {
     [SerializeField] private Transform Target;
     [SerializeField] private float Height = 100f;
-    [SerializeField] private float zTilt = 1f;
-    [SerializeField] private float RotaionOffset = 5f;
-
 
 
     void LateUpdate()
