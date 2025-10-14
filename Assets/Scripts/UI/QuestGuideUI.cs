@@ -27,28 +27,47 @@ public class QuestGuideUI : MonoBehaviour
     {
         if (CurrentQuest == null)
         {
-            QuestDescriptionText.text = string.Empty;
-            QuestProgress.text = string.Empty;
-            QuestDistance.text = string.Empty;
+            ClearText();
             return;
         }
-            
+
+        if (CurrentQuest.Data.QuestCondition == QuestCondition.Completed || QuestManager.Instance.ClearQuests.Contains(CurrentQuest.Data.QuestId))
+        {
+            ClearText();
+            gameObject.SetActive(false);
+            return;
+        }
+
         UpdateProgress(CurrentQuest);
         UpdateDistance(CurrentQuest);
     } 
 
     private void UpdateProgress(QuestInstance _Quest)
     {
-        if (CurrentQuest.Data.QuestClassification == QuestClassification.Kill)
+        switch (_Quest.Data.QuestClassification)
         {
-            QuestProgress.text = $"{CurrentQuest.CurrentAmount} / {_Quest.Data.Amount}";
-            //float Dis = Vector3.Distance(PlayerStat.Instance.transform.position, _Quest.Data.TargetArea.transform.position);
-            //QuestDistance.text = $"{Dis:F1}";
+            case QuestClassification.Kill:
+                QuestProgress.text = $"{CurrentQuest.CurrentAmount} / {_Quest.Data.Amount}";
+                break;
+            case QuestClassification.Collect:
+                QuestProgress.text = $"{CurrentQuest.CurrentAmount} / {_Quest.Data.Amount}";
+                break;
+            default:
+                QuestProgress.text = string.Empty;
+                break;
         }
-        else
-        {
-            QuestProgress.text = string.Empty;
-        }
+
+
+        //if (CurrentQuest.Data.QuestClassification == QuestClassification.Kill)
+        //{
+        //    QuestProgress.text = $"{CurrentQuest.CurrentAmount} / {_Quest.Data.Amount}";
+        //    //float Dis = Vector3.Distance(PlayerStat.Instance.transform.position, _Quest.Data.TargetArea.transform.position);
+        //    //QuestDistance.text = $"{Dis:F1}";
+        //}
+        //else
+        //{
+        //    QuestProgress.text = string.Empty;
+        //}
     }
 
     private void UpdateDistance(QuestInstance _Quest)
@@ -61,5 +80,12 @@ public class QuestGuideUI : MonoBehaviour
 
         //float Dis = Vector3.Distance(PlayerStat.Instance.transform.position, _Quest.Data.TargetArea.transform.position);
         //QuestProgress.text = $"{Dis:F1}";
+    }
+
+    private void ClearText()
+    {
+        QuestDescriptionText.text = string.Empty;   
+        QuestProgress.text = string.Empty;
+        QuestDistance.text = string.Empty;
     }
 }

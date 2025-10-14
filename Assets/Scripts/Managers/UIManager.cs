@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -24,6 +23,7 @@ public class UIManager : MonoBehaviour
     [Header("Äù½ºÆ® UI")]
     [SerializeField] private GameObject QuestPanel;
     [SerializeField] private GameObject QuestToolTipPanel;
+    [SerializeField] private GameObject QuestGuidePanel;
     [SerializeField] private bool IsQuestOpen = false;
 
     [Header("NPC ´ëÈ­ UI")]
@@ -56,6 +56,7 @@ public class UIManager : MonoBehaviour
         InventoryPanel.SetActive(false);
         QuestPanel.SetActive(false);
         QuestToolTipPanel.SetActive(false);
+        QuestGuidePanel.SetActive(false);
     }
 
     private void Update()

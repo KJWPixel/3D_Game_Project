@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,14 +12,14 @@ public class UI_Status : MonoBehaviour
 {
     PlayerStat PlayerStat;
 
-    private TextMeshPro TextLevel;
-    [SerializeField] Image HpImage;
-    [SerializeField] Image HpEffect;
-    [SerializeField] Image MpImage;
-    [SerializeField] Image MpEffect;
-    [SerializeField] Image SteminaImage;
-    [SerializeField] GameObject SteminaBackGround;
-    [SerializeField] float EffectTime = 0f;
+    [SerializeField] private TMP_Text TextLevel;
+    [SerializeField] private Image HpImage;
+    [SerializeField] private Image HpEffect;
+    [SerializeField] private Image MpImage;
+    [SerializeField] private Image MpEffect;
+    [SerializeField] private Image SteminaImage;
+    [SerializeField] private GameObject SteminaBackGround;
+    [SerializeField] private float EffectTime = 0f;
 
     private void Awake()
     {
@@ -52,6 +53,7 @@ public class UI_Status : MonoBehaviour
 
     private void UIStatsUpdate()
     {
+        TextLevel.text = PlayerStat.Level.ToString();
         float HpFill = PlayerStat.CurrentHp / PlayerStat.MaxHp;
         float MpFill = PlayerStat.CurrentMp / PlayerStat.MaxMp;
         float StaminaFill = PlayerStat.CurrentStamina / PlayerStat.MaxStamina;

@@ -15,6 +15,9 @@ public class QuestUI : MonoBehaviour
     [Header("퀘스트 가이드 프리팹")]
     [SerializeField] QuestGuideUI QuestGuideUI;
 
+    [Header("퀘스트 클리어 UI")]
+    [SerializeField] QuestClear QuestClear;
+
     [Header("퀘스트 풀링")]
     [SerializeField] private List<QuestItemUI> pooledQuestItemUI = new List<QuestItemUI>();
     [SerializeField] private int pool;
@@ -31,6 +34,7 @@ public class QuestUI : MonoBehaviour
     private void Start()
     {
         QuestManager.Instance.QuestListChanged += RefreshQuest;
+        QuestManager.Instance.QuestCleared += ShowQuestClearUI;
     }
 
     private void OnEnable()
@@ -42,8 +46,24 @@ public class QuestUI : MonoBehaviour
             QuestManager.Instance.QuestListChanged += RefreshQuest;
             RefreshQuest(); 
         }
+        if (QuestManager.Instance != null)
+        {
+            QuestManager.Instance.QuestCleared += ShowQuestClearUI;
+        }           
     }
 
+    private void OnDisable()
+    {
+        if (QuestManager.Instance != null)
+        {
+            QuestManager.Instance.QuestListChanged -= RefreshQuest;
+        }           
+        if (QuestManager.Instance != null)
+        {
+            QuestManager.Instance.QuestCleared -= ShowQuestClearUI;
+        }
+            
+    }
     private void TryInitialize()
     {
         // 이미 초기화가 완료됐다면 재시도 불필요
@@ -59,13 +79,6 @@ public class QuestUI : MonoBehaviour
 
         isInitialized = true;
     }
-
-    private void OnDisable()
-    {
-        if (QuestManager.Instance != null)
-            QuestManager.Instance.QuestListChanged -= RefreshQuest;
-    }
-
     public void CreatePool(int _Count)
     {
         for (int i = 0; i < _Count; i++)
@@ -127,5 +140,10 @@ public class QuestUI : MonoBehaviour
     {
         QuestGuideUI.gameObject.SetActive(true);
         QuestGuideUI.Setup(_Quest);
+    }
+
+    private void ShowQuestClearUI(QuestInstance _Quest)
+    {
+        QuestClear.ShowClearUI(_Quest);
     }
 }

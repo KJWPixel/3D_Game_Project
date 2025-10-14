@@ -9,11 +9,6 @@ public class UI_SkillSlot : MonoBehaviour
     [SerializeField] Image BackGround;
     [SerializeField] Image CurrentImage;
 
-    private void Awake()
-    {
-
-    }
-
     private void Update()
     {
         IconCoolTimeUpdate();

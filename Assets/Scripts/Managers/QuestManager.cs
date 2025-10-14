@@ -7,35 +7,6 @@ public class QuestManager : MonoBehaviour
 {
     public static QuestManager Instance;
 
-    /*
-    QuestData: 퀘스트 정보Interaction
-    퀘스트 ID: int
-    퀘스트 이름: string
-    퀘스트 설명: string
-    선행 퀘스트: questData
-    퀘스트 Target: NPC, Monster, QuestMaterial: Enum
-    퀘스트 상태: Enum
-    퀘스트 보상: List<int>
-    */
-
-    /*QuestManager: 퀘스트제어 및 업데이트 
-    퀘스트수 제한: [], List로 퀘스트수락 제한
-
-    퀘스트 수락: AddQuest()
-    퀘스트 포기: RemoveQuest()
-    퀘스트 업데이트: QuestUpdate()
-    퀘스트 완료 딕셔너리 관리
-
-    퀘스트 목적함수: NPCInteraction(): OnTrigger 또는 NPC를 참조하여 거리계산
-    퀘스트 목적함수: EnemyKill(): 해당 Enemy(id로 판별) Die()함수에 참조
-
-    */
-
-    //퀘스트매니저  중앙관리
-    //NCP(NPC한테 QuestID 부여) >> 대화(Dialogue창) >> 기본적인 대화 후 퀘스트or상점or기타 등등 List목록 SetActive >> 퀘스트 수락
-
-    //NPC퀘스트(퀘스트ID, Level, 선행)데이터 >> GiveQuest()함수로 QuestManager한테 전달 >> 퀘스트 조건? 참:거짓 bool에 따라 퀘스트 수락
-
     [Header("최대 퀘스트 수")]
     [SerializeField] private int maxQuestList;
     public int MaxQuestList => maxQuestList;
@@ -45,6 +16,7 @@ public class QuestManager : MonoBehaviour
     public HashSet<int> ClearQuests = new HashSet<int>();
 
     public event Action<QuestClass?> QuestListChanged;
+    public event Action<QuestInstance> QuestCleared;
 
     private void Awake()
     {
@@ -139,12 +111,20 @@ public class QuestManager : MonoBehaviour
     {
         if (_Quest == null) return;
 
-        ClearQuests.Add(_Quest.Data.QuestId);
+        if(_Quest.Data.QuestClass != QuestClass.Repeat)
+        {
+            ClearQuests.Add(_Quest.Data.QuestId);
+        }
+
+        
+
         ActiveQuests.Remove(_Quest);
 
         PlayerStat.Instance.AddExp(_Quest.Data.ExpReward);
         PlayerStat.Instance.Gold += _Quest.Data.GoldRewward;
-
+        QuestCleared?.Invoke(_Quest);
         Debug.Log($"{_Quest.Data.QuestName} 완료! 퀘스트 보상: {_Quest.Data.GoldRewward}골드, {_Quest.Data.ExpReward}경험치");
+      
+        QuestListChanged?.Invoke(null); 
     }
 }
