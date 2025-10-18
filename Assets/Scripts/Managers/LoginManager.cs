@@ -26,7 +26,7 @@ public class LoginManager : MonoBehaviour
         //(Android)/storage/emulated/0/Android/data/com.회사이름.프로젝트이름/files/UserData.json
         //savePath = Path.Combine(Application.persistentDataPath, SVAEFOLDER, FILENAME);
         savePath = Path.Combine(Application.dataPath, SVAEFOLDER, FILENAME);
-
+        //Save폴더가 없다면 생성
         Debug.Log($"Save Path: {savePath}");
         LoadUserData();
     }
@@ -66,6 +66,7 @@ public class LoginManager : MonoBehaviour
             if (ExistUserData.password == password)//패스워드가 같다면 로그인성공
             {
                 ShowMessage("로그인 성공", Color.green);
+                Shared.SceneManager.ChangeScene(SCENE.MAIN, false);
             }
             else
             {
@@ -78,8 +79,7 @@ public class LoginManager : MonoBehaviour
             UserList.Add(NewUser);
             SaveUserData();
             ShowMessage("새 사용자 등록 및 로그인 성공", Color.green);
-
-            //Shared.SceneManager.ChangeScene(SCENE.MAIN, false);
+            Shared.SceneManager.ChangeScene(SCENE.MAIN, false);
         }      
     }
 
