@@ -20,4 +20,9 @@ public abstract class NPCCharacter : MonoBehaviour
     public int Id => id;
     public string Name => name;
     public bool IsTolk => isTolk;
+
+    public void asjnd()
+    {
+
+    }
 }
