@@ -12,8 +12,6 @@ public class OptionPanelUI : BaseUI
     [SerializeField] private TMP_Dropdown ScreenOptions;
     [SerializeField] private TMP_Dropdown ResolutionOptions; 
     [SerializeField] private TMP_Dropdown FrameRateOptions;
-    
-    
 
     protected override void OnOpen()
     {
@@ -25,17 +23,17 @@ public class OptionPanelUI : BaseUI
     }
 
     public void OnClickApply()
-    {   
-        if(ResolutionOptions != null)
-        {
-            string Resolution = ResolutionOptions.options[ResolutionOptions.value].text;
-            Debug.Log($"해상도: {Resolution}");
-        }
-
-        if(FrameRateOptions != null)
+    {
+        if (ScreenOptions != null)
         {
             string Screen = ScreenOptions.options[ScreenOptions.value].text;
             Debug.Log($"화면: {Screen}");
+        }
+
+        if (ResolutionOptions != null)
+        {
+            string Resolution = ResolutionOptions.options[ResolutionOptions.value].text;
+            Debug.Log($"해상도: {Resolution}");
         }
 
         if(FrameRateOptions != null)

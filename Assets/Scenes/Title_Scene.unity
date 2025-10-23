@@ -7664,9 +7664,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiController: {fileID: 561897069}
-  ScreenOptions: {fileID: 0}
-  ResolutionOptions: {fileID: 0}
-  FrameRateOptions: {fileID: 0}
+  ScreenOptions: {fileID: 557253856}
+  ResolutionOptions: {fileID: 1728434947}
+  FrameRateOptions: {fileID: 615881384}
 --- !u!1 &1188582072
 GameObject:
   m_ObjectHideFlags: 0

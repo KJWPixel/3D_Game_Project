@@ -26,13 +26,11 @@ public class SettingsManager : MonoBehaviour
 
         savePath = Path.Combine(Application.dataPath, SAVEFOLDER, FILENAME);
         LoadSetting();
+        ApplySettings();
     }
 
     public void SetSetting()
-    {
-        
-
-
+    {       
         SaveSetting();
     }
 
@@ -40,17 +38,48 @@ public class SettingsManager : MonoBehaviour
     {
         if(File.Exists(savePath))
         {
-            string json = File.ReadAllText(savePath);
-            gameSettings = JsonUtility.FromJson<GameSettings>(json);
-            Debug.Log($"게임세팅 로드 성공: {gameSettings}");
+            try
+            {
+                string json = File.ReadAllText(savePath);
+                gameSettings = JsonUtility.FromJson<GameSettings>(json);
+                Debug.Log($"게임세팅 로드 성공: {gameSettings}");
+            }
+            catch(System.Exception e)
+            {
+                Debug.LogError($"세팅 로드 실패: {e.Message}");
+                gameSettings = new GameSettings();//기본값 사용
+            }
+            
+        }
+        else
+        {
+            gameSettings = new GameSettings();
+            SaveSetting();
         }
     }
 
     private void SaveSetting()
     {
-        string json = JsonUtility.ToJson(gameSettings);
-        File.WriteAllText(savePath, json);
-        Debug.Log($"게임세팅 저장 성공{savePath}");
+        try
+        {
+            string directory = Path.GetDirectoryName(savePath);
+            if(!Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
+            string json = JsonUtility.ToJson(gameSettings, true);
+            File.WriteAllText(savePath, json);
+            Debug.Log($"게임 세팅 저장 성공: {savePath}");
+        }
+        catch(System.Exception e)
+        {
+            Debug.LogError($"세팅 저장 실패: {e.Message}");
+        }       
+    }
+
+    private void ApplySettings()
+    {
+        Resolution[] resolutions = Screen.resolutions;
     }
     
 }
