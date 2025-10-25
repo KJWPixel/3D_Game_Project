@@ -9,7 +9,7 @@ public class GameSettings
     public float MasterVolume;
     public float EffectVolume;
     public float BackGroundVolume;
-    //게임플레이
+    //게임플레이(미구현)
     public int language;
 
     public GameSettings()

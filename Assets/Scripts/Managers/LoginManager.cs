@@ -9,11 +9,10 @@ public class LoginManager : MonoBehaviour
     [SerializeField] private TMP_InputField UserField;
     [SerializeField] private TMP_InputField PasswordField;
     [SerializeField] private Button LoginButton;
-
     [SerializeField] private TMP_Text LoginText;
 
     private string savePath;
-    private const string SVAEFOLDER = "Save";//세이브 폴더 이름
+    private const string SAVEFOLDER = "UserList";//세이브 폴더 이름
     private const string FILENAME = "UserData.json";//파일 이름
 
     private List<UserData> UserList = new List<UserData>();
@@ -24,10 +23,17 @@ public class LoginManager : MonoBehaviour
         //Path.Combine("루트폴더", "서브폴더", "파일이름.확장자")
         //(Window)Application.persistentDataPath: C:/Users/사용자이름/AppData/LocalLow/회사이름/프로젝트이름/UserData.json 
         //(Android)/storage/emulated/0/Android/data/com.회사이름.프로젝트이름/files/UserData.json
-        //savePath = Path.Combine(Application.persistentDataPath, SVAEFOLDER, FILENAME);
-        savePath = Path.Combine(Application.dataPath, SVAEFOLDER, FILENAME);
-        //Save폴더가 없다면 생성
-        Debug.Log($"Save Path: {savePath}");
+
+        //savePath = Path.Combine(Application.persistentDataPath, SVAEFOLDER, FILENAME); 호환성 강화
+        savePath = Path.Combine(Application.dataPath, SAVEFOLDER, FILENAME);
+
+        string directory = Path.GetDirectoryName(savePath);
+        if(!Directory.Exists(directory))
+        {
+            Directory.CreateDirectory(directory);
+            Debug.Log($"세이브 폴더 생성: {directory}");
+        }
+      
         LoadUserData();
     }
 
@@ -35,17 +41,44 @@ public class LoginManager : MonoBehaviour
     {
         if(File.Exists(savePath))
         {
-            string json = File.ReadAllText(savePath);
-            UserList = JsonUtility.FromJson<UserDataList>(json).Users;
-            Debug.Log($"UsserData 로드 성공: {UserList.Count} 명");
+            try
+            {
+                string json = File.ReadAllText(savePath);
+                UserDataList wrapper = JsonUtility.FromJson<UserDataList>(json);
+                UserList = wrapper?.Users; new List<UserData>();
+                Debug.Log($"UsserData 로드 성공: {UserList.Count} 명");
+            }
+            catch(System.Exception e)
+            {
+                Debug.LogError($"UserData 로드 실패: {e.Message}");
+                UserList = new List<UserData>();
+            }
+        }
+        else
+        {
+            Debug.Log("UserData 파일 없음, 새 리스트 생성");
+            UserList = new List<UserData>();
         }
     }
     private void SaveUserData()
     {
-        UserDataList Wrapper = new UserDataList { Users = UserList };
-        string json = JsonUtility.ToJson(Wrapper, true);
-        File.WriteAllText(savePath, json);
-        Debug.Log($"UserData 저장 {savePath}");
+        try
+        {
+            string directory = Path.GetDirectoryName(savePath);
+            if(!Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+                Debug.Log($"세이브 폴더 생성: {directory}");
+            }
+            UserDataList wrapper = new UserDataList { Users = UserList };
+            string json = JsonUtility.ToJson(wrapper, true);
+            File.WriteAllText(savePath, json);
+            Debug.Log($"UserData 저장 성공: {savePath}");
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"UserData 저장 실패: {e.Message}");
+        }
     }
 
     public void TryLogin()
