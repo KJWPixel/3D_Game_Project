@@ -11,10 +11,15 @@ public class UIManager : MonoBehaviour
     [Header("마우스커서 제어 체크")]
     [SerializeField] public bool IsActiveCursor = false;
 
+    [Header("옵션")]
+    [SerializeField] private GameObject OptionPanel;
+    [SerializeField] private bool isOptionPanel = false;
+
     [Header("플레이어 스킬 UI")]
-    [SerializeField] SkillTree SkillTree;
-    [SerializeField] PlayerSkillBook PlayerSkillBook;   
-    [SerializeField] List<UI_SkillSlot> UI_SkillSlots;
+    [SerializeField] private GameObject skillTree;
+    [SerializeField] private bool isSkillTree = false;
+    [SerializeField] private PlayerSkillBook PlayerSkillBook;   
+    [SerializeField] private List<UI_SkillSlot> UI_SkillSlots;
 
     [Header("인벤토리 UI")]
     [SerializeField] private GameObject InventoryPanel;
@@ -47,11 +52,50 @@ public class UIManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        InitUI();
+        InitializeUI();
     }
 
-    private void InitUI()
+    private void Start()
     {
+        InputManager.Instance.OnToggleOption += OnToggleOption;
+        InputManager.Instance.OnToggleInventory += OnToggleInventory;
+        InputManager.Instance.OnToggleSkill += OnToggleSkill;
+        InputManager.Instance.OnToggleQuest += OnToggleQuest;
+    }
+
+    private void OnToggleOption()
+    {
+        isOptionPanel = !isOptionPanel;
+        OptionPanel.SetActive(isOptionPanel);
+    }
+
+    private void OnToggleInventory()
+    {
+        IsInventoryOpen = !IsInventoryOpen;
+        InventoryPanel.SetActive(IsInventoryOpen);
+
+        if (IsInventoryOpen)
+        {
+            InventoryUI.Instance.RefreshUI();
+        }
+    }
+
+    private void OnToggleSkill()
+    {
+        isSkillTree = !isSkillTree;
+        skillTree.SetActive(isSkillTree);
+    }
+
+    private void OnToggleQuest()
+    {
+        IsQuestOpen = !IsQuestOpen;
+        QuestPanel.SetActive(IsQuestOpen);
+        QuestToolTipPanel.SetActive(IsQuestOpen);
+    }
+
+    private void InitializeUI()
+    {
+        OptionPanel.SetActive(false);
         DialoguePanel.SetActive(false);
         InventoryPanel.SetActive(false);
         QuestPanel.SetActive(false);
@@ -62,16 +106,6 @@ public class UIManager : MonoBehaviour
     private void Update()
     {
         CursorActive();
-
-        if(Input.GetKeyDown(KeyCode.I))
-        {
-            InventoryOpen();
-        }
-
-        if(Input.GetKeyDown(KeyCode.J))
-        {
-            QuestOpen();
-        }
     }
 
     //마우스 커서 제어
@@ -92,24 +126,6 @@ public class UIManager : MonoBehaviour
                 Cursor.visible = false; 
             }
         }
-    }
-
-    private void InventoryOpen()
-    {
-        IsInventoryOpen = !IsInventoryOpen;
-        InventoryPanel.SetActive(IsInventoryOpen);
-
-        if(IsInventoryOpen)
-        {
-            InventoryUI.Instance.RefreshUI();
-        }
-    }
-
-    private void QuestOpen()
-    {
-        IsQuestOpen = !IsQuestOpen;
-        QuestPanel.SetActive(IsQuestOpen);
-        QuestToolTipPanel.SetActive(IsQuestOpen);
     }
 
     //NPC 대화 대사 분기 버튼
@@ -156,6 +172,11 @@ public class UIManager : MonoBehaviour
         ChoiceYes.SetActive(false);
         ChoiceNo.SetActive(false);
         DialoguePanel.SetActive(false);
+    }
+
+    public void OnClickClose(GameObject gameObject)
+    {
+        gameObject.SetActive(false);
     }
 
     public void SetupQuestButton(QuestData _Quest)

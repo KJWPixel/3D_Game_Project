@@ -24,7 +24,7 @@ public class UI_Skill : MonoBehaviour
     
     void Update()
     {
-        ActiveUI();
+        //ActiveUI();
         SkillPointUpdate();
     }
     private void InitSkillWindow()

@@ -2,9 +2,8 @@
 public enum SCENE
 {
     TITLE,
-    LOBBY,
-    MAIN,
     LOADING,
+    MAIN,   
     ENG,
 }
 

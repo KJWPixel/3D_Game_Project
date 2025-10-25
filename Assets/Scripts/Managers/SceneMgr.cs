@@ -34,7 +34,7 @@ public class SceneMgr : MonoBehaviour
         {
             case SCENE.TITLE:
                 break;
-            case SCENE.LOBBY:
+            case SCENE.LOADING:
                 break;
             case SCENE.MAIN:
                 break;

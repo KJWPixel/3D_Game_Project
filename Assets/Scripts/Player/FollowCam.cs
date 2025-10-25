@@ -46,7 +46,7 @@ public class FollowCam : MonoBehaviour
         MouseYValue = MouseYValue + MouseY * (-1.0f);//반전, 화면에서 회전을 반전시키기 위해 -1.0f을 곱함
 
         //화면의 각도 제한 
-        MouseYValue = Mathf.Clamp(MouseYValue, -80f, 80f);
+        MouseYValue = Mathf.Clamp(MouseYValue, -70f, 70f);
         
         //Character Body 마우스 움직임에 따라 위아래 회전
         //Spin.localRotation = Quaternion.Euler(MouseYValue, 0f, 0f);      

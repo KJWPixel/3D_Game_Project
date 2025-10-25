@@ -22,7 +22,7 @@ public class UI_Tooltip : MonoBehaviour
     }
 
     public void ShowTooltip(SkillData _Data, Vector3 _Position)
-    {
+    {      
         TooltipPanel.SetActive(true);
         TooltipPanel.transform.position = _Position + new Vector3(0, 0, 0); 
         TooltipIcon.sprite = _Data.Icon;
@@ -30,9 +30,40 @@ public class UI_Tooltip : MonoBehaviour
         TooltipName.text = $"{_Data.SkillName}";
         TooltipDesc.text = GetDescriptionByType(_Data);
 
-        string EffectsDesc = GetDescriptionByType(_Data);
+        string effectDesc = "";
+        foreach (var effect in _Data.Effects)
+        {
+            //string EffectsDesc = GetDescriptionByType(_Data);
+            effectDesc += effect.Power.ToString();
 
-        TooltipExtra.text = $"요구 레벨:{_Data.RequireLevel}\n요구 스킬포인트  :{_Data.RequireSP}\n재사용 대기시간  :{_Data.Cooldown}\n스킬데미지 :{EffectsDesc}";
+            switch(effect.EffectType)
+            {
+                case SkillEffectType.RayDamage:
+                case SkillEffectType.LineAreaDamage:
+                case SkillEffectType.TargetAreaDamage:
+                case SkillEffectType.DistanceAreaDamage:
+                    TooltipExtra.text = $"요구 레벨:{_Data.RequireLevel}\n요구 스킬포인트  :{_Data.RequireSP}\n재사용 대기시간  :{_Data.Cooldown}\n스킬데미지 :{effectDesc}";
+                    break;
+                case SkillEffectType.Heal:
+                case SkillEffectType.HealBuff:
+                    TooltipExtra.text = $"요구 레벨:{_Data.RequireLevel}\n요구 스킬포인트  :{_Data.RequireSP}\n재사용 대기시간  :{_Data.Cooldown}\n회복량 :{effectDesc}";
+                    break;
+                case SkillEffectType.AtkBuff:
+                case SkillEffectType.DefBuff:
+                case SkillEffectType.CriBuff:
+                case SkillEffectType.TotalBuff:
+                    TooltipExtra.text = $"요구 레벨:{_Data.RequireLevel}\n요구 스킬포인트  :{_Data.RequireSP}\n재사용 대기시간  :{_Data.Cooldown}\n스탯 증가량 :{effectDesc}";
+                    break;
+                case SkillEffectType.Debuff:
+                    TooltipExtra.text = $"요구 레벨:{_Data.RequireLevel}\n요구 스킬포인트  :{_Data.RequireSP}\n재사용 대기시간  :{_Data.Cooldown}\n스탯 감소량 :{effectDesc}";
+                    break;
+
+
+            }   
+        }
+
+            
+       
     }
 
     public void HideTooltip()
@@ -54,6 +85,9 @@ public class UI_Tooltip : MonoBehaviour
             switch (Effect.EffectType)
             {
                 case SkillEffectType.RayDamage:
+                case SkillEffectType.DistanceAreaDamage:
+                case SkillEffectType.LineAreaDamage:
+                case SkillEffectType.TargetAreaDamage:
                     Description += $"대상을 공격하여 {Effect.Power} 데미지를 입힙니다.\n";
                     break;
                 case SkillEffectType.Heal:
@@ -78,7 +112,10 @@ public class UI_Tooltip : MonoBehaviour
                     Description += $"적에게 상태이상 효과 {Effect.Duration}초 동안 적용합니다.\n";
                     break;
                 case SkillEffectType.Resource:
-                    Description += $"자원을 {Effect.Power}을 만큼 회복합니당.\n";
+                    Description += $"자원을 {Effect.Power}을 만큼 회복합니다.\n";
+                    break;
+                case SkillEffectType.Teleport:
+                    Description += $"{Effect.Distance}만큼 거리를 이동합니다.\n";
                     break;
             }
         }

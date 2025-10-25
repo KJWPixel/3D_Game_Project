@@ -1,9 +1,9 @@
 {
     "Screen": 0,
-    "Resolution": 23,
-    "FrameRate": 60,
+    "Resolution": 3,
+    "FrameRate": 30,
     "MasterVolume": 1.0,
-    "EffectVolume": 0.6053663492202759,
+    "EffectVolume": 0.7906114459037781,
     "BackGroundVolume": 1.0,
     "language": 0
 }
