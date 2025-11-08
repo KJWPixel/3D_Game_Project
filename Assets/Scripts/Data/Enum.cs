@@ -1,22 +1,15 @@
-//씬
-public enum SCENE
+
+public enum SCENE //SCENE 씬 숫자로 명시
 {
-    TITLE,
-    LOADING,
-    MAIN,   
-    ENG,
+    TITLE = 0,
+    LOADING = 1,
+    MAIN = 2,   
+    
 }
 
 public enum MENU
 {
     OPTION,
-}
-
-public enum SKILL
-{
-    ATTACK,
-    SKILL1,
-    END,
 }
 
 //아이템

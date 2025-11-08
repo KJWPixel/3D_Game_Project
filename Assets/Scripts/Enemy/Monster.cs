@@ -63,7 +63,7 @@ public class Monster : MonoBehaviour
         //transform.position += _Move;
         transform.position = Vector3.MoveTowards(transform.position, _Move, 0.1f);
     }
-    public void SetAnimation(string _Ani, SKILL _Skill = SKILL.END)
+    public void SetAnimation(string _Ani)
     {
         if (CurAni == _Ani) 
             return;

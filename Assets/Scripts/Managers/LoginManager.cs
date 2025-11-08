@@ -99,7 +99,7 @@ public class LoginManager : MonoBehaviour
             if (ExistUserData.password == password)//패스워드가 같다면 로그인성공
             {
                 ShowMessage("로그인 성공", Color.green);
-                Shared.SceneManager.ChangeScene(SCENE.MAIN, false);
+                SceneMgr.Instance.ChangeScene(SCENE.MAIN, true);
             }
             else
             {
@@ -112,7 +112,7 @@ public class LoginManager : MonoBehaviour
             UserList.Add(NewUser);
             SaveUserData();
             ShowMessage("새 사용자 등록 및 로그인 성공", Color.green);
-            Shared.SceneManager.ChangeScene(SCENE.MAIN, false);
+            SceneMgr.Instance.ChangeScene(SCENE.MAIN, true);
         }      
     }
 

@@ -5,43 +5,51 @@ using UnityEngine.SceneManagement;
 
 public class SceneMgr : MonoBehaviour
 {
-    public SCENE Scene;
+    public static SceneMgr Instance { get; private set; }
+    public SCENE CurrentScene { get; private set; }
+    public SCENE NextScene { get; private set; }
+
+    [Header("씬 이름 매핑")]
+    [SerializeField] private string[] sceneNames;
 
     private void Awake()
     {
-        if (Shared.SceneManager == null)
+        if (Instance != null && Instance != this)
         {
-            Shared.SceneManager = this;
-
-            DontDestroyOnLoad(this);
+            Destroy(gameObject);
+            return;
         }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+
     }
     
-    public void ChangeScene(SCENE _e, bool _Loading = false)
+    public void ChangeScene(SCENE target, bool loading = false)
     {
-        if (Scene == _e)
-            return;
+        if (CurrentScene == target) return;//현재 씬과 같다면 리턴
 
-        Scene = _e;
-
-        if (_Loading)
+        if (loading)
         {
+            NextScene = target;
             SceneManager.LoadScene((int)SCENE.LOADING);
             return;
         }
 
-        switch (_e)//리셋이 필요할때 사용
-        {
-            case SCENE.TITLE:
-                break;
-            case SCENE.LOADING:
-                break;
-            case SCENE.MAIN:
-                break;
-            case SCENE.ENG:
-                break;
-        }
+        //즉시 로드
+        CurrentScene = target;
+        SceneManager.LoadScene((int)CurrentScene);
+    }
 
-        SceneManager.LoadScene((int)Scene);
+    public void ChangeSceneByName(string sceneName, bool loading =false)
+    {
+        if(loading)
+        {
+
+        }
+        else
+        {
+            SceneManager.LoadScene(sceneName);
+        }
     }
 }
