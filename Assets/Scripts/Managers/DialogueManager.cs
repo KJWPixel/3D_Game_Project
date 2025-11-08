@@ -93,6 +93,9 @@ public class DialogueManager : MonoBehaviour
     {
         switch (CurrentInteraction)
         {
+            case InteractionType.None:
+                UIManager.Instance.DialoguePanel.SetActive(false);
+                break;
             case InteractionType.Shop:
                 UIManager.Instance.ChoiceYes.SetActive(true);
                 UIManager.Instance.ChoiceNo.SetActive(true);
@@ -102,8 +105,7 @@ public class DialogueManager : MonoBehaviour
                 UIManager.Instance.ChoiceYes.SetActive(true);
                 UIManager.Instance.ChoiceNo.SetActive(true);
                 UIManager.Instance.SetupQuestButton(CurrentNPC.QuestData);
-                // QuestData를 버튼 클릭 이벤트에 전달
-                
+                // QuestData를 버튼 클릭 이벤트에 전달             
                 break;
             default:
                 UIManager.Instance.DialoguePanel.SetActive(false);

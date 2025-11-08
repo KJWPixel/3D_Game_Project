@@ -8,7 +8,15 @@ public class SkillTree : MonoBehaviour
     //스킬클릭 > 해당 스킬의 SP 차감 여부 확인, Level 확인 > 습득이 가능하면 SP 차감 > BackGround변화(습득연출)
 
     [SerializeField] private PlayerStat PlayerStat;
-    [SerializeField] private PlayerSkillBook PlayerSkillBook; 
+    [SerializeField] private PlayerSkillBook PlayerSkillBook;
+
+    private void OnDisable()
+    {
+        if(UI_Tooltip.Instance != null)
+        {
+            UI_Tooltip.Instance.HideTooltip();
+        }
+    }
 
     public bool LearnSkill(SkillData _Skill)
     {

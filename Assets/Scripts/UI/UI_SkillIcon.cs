@@ -39,7 +39,8 @@ public class UI_SkillIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     {
         if (SkillData != null)
         {
-            UI_Tooltip.Instance.ShowTooltip(SkillData, transform.position);
+            if (!SkillTree.gameObject.activeSelf) return;  
+            UI_Tooltip.Instance.ShowTooltip(SkillData, transform.position);                
         }
     }
 

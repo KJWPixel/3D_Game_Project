@@ -22,9 +22,15 @@ public class UI_Tooltip : MonoBehaviour
     }
 
     public void ShowTooltip(SkillData _Data, Vector3 _Position)
-    {      
+    {
+        if (TooltipPanel == null)
+        {
+            Debug.Log("TooltipPanel NULL");
+            return;
+        }
+
         TooltipPanel.SetActive(true);
-        TooltipPanel.transform.position = _Position + new Vector3(0, 0, 0); 
+        TooltipPanel.transform.position = _Position + new Vector3(0, 0, 0);
         TooltipIcon.sprite = _Data.Icon;
 
         TooltipName.text = $"{_Data.SkillName}";
@@ -36,7 +42,7 @@ public class UI_Tooltip : MonoBehaviour
             //string EffectsDesc = GetDescriptionByType(_Data);
             effectDesc += effect.Power.ToString();
 
-            switch(effect.EffectType)
+            switch (effect.EffectType)
             {
                 case SkillEffectType.RayDamage:
                 case SkillEffectType.LineAreaDamage:
@@ -57,13 +63,8 @@ public class UI_Tooltip : MonoBehaviour
                 case SkillEffectType.Debuff:
                     TooltipExtra.text = $"요구 레벨:{_Data.RequireLevel}\n요구 스킬포인트  :{_Data.RequireSP}\n재사용 대기시간  :{_Data.Cooldown}\n스탯 감소량 :{effectDesc}";
                     break;
-
-
-            }   
+            }
         }
-
-            
-       
     }
 
     public void HideTooltip()

@@ -20,6 +20,7 @@ public class LoadingUI : MonoBehaviour
         if(pressAnyKeyPanel != null)
         {
             pressAnyKeyPanel.SetActive(show);
+            percentText.text = "";
         }
     }
 }
