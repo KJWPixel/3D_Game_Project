@@ -22,7 +22,8 @@ public class SkillManager : MonoBehaviour
     //스킬별 쿨타임 시간 
     public Dictionary<SkillData, float> SkillCoolDownTimers = new Dictionary<SkillData, float>();
 
-    //효과 타입 => 실행 로직 매핑
+    //전략패턴 매핑을 위한 변수 선언
+    //키: SkillEffectType, 값: 전략패턴 => SetupEffectHandlers();에서 매핑진행
     private Dictionary<SkillEffectType, ISkillBehaviorStrategy> EffectHandlers;
     private Dictionary<SkillEffectType, IBuffBehavoprStrategy> BuffHandlers;
 
@@ -64,7 +65,11 @@ public class SkillManager : MonoBehaviour
         BuffHandlers = new Dictionary<SkillEffectType, IBuffBehavoprStrategy>
         {
             { SkillEffectType.AtkBuff, new AtkBuffStrategy() },
+            { SkillEffectType.DefBuff, new DefBuffStrategy() },
             { SkillEffectType.HealBuff, new HealBuffStrategy() },
+            { SkillEffectType.MpBuff, new HealBuffStrategy() },
+            { SkillEffectType.Movement, new MovementBuffStrategy() },
+
         };
 
         //일반스킬
@@ -150,7 +155,7 @@ public class SkillManager : MonoBehaviour
                     PlayerStat.RecoveryStat(ConsumableType.ResotreHp, Effect.Power);
                     PlayerStat.RecoveryStat(ConsumableType.ResotreMp, Effect.Power);
                     EffectManager.Instance.Spawn(_SkillData.CastEffectPrefab, transform.position, _SkillData.CastPrefabDuration);
-                }
+                }               
                 else
                 {
                     Debug.Log($"SkillManager.cs: [{Effect.EffectType}] 실행 핸들러가 등록되지 않음");

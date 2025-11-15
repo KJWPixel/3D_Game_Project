@@ -11,6 +11,7 @@ public class Enemy : EnemyCharacter
     [SerializeField] EnemyAI EnemyAI;
 
     [Header("TRPATH")]
+    [SerializeField] private bool TRPATHCheck = false;
     [SerializeField] public Transform[] TRPATH;
     [SerializeField] public int CurrentPathIndex = 0;
     [SerializeField] float PatrolWaitTime = 0f;
@@ -85,6 +86,8 @@ public class Enemy : EnemyCharacter
     public override void Patrol()
     {
         if(TRPATH == null) return;
+
+        if (!TRPATHCheck) return;
 
         Transform PathPoint = TRPATH[CurrentPathIndex];
         Vector3 Dir = PathPoint.position - transform.position;//πÊ«‚∫§≈Õ

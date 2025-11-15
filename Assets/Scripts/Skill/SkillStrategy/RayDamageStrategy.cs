@@ -47,6 +47,7 @@ public class RayDamageSkillStrategy : ISkillBehaviorStrategy
                     if (enemy != null)
                     {
                         enemy.TakeDamage(Effect.Power);
+                        Debug.Log($"{enemy} {_SkillData.SkillName} RayCastHit ! {Effect.Power}");
 
                         if (_SkillData.HitEffectPrefab != null)
                         {

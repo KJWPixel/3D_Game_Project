@@ -5,21 +5,21 @@ using UnityEngine;
 public class AtkBuffStrategy : IBuffBehavoprStrategy
 {
     public BuffTargetType TargetType => BuffTargetType.Stat;
-    public void ApplyBuff(PlayerStat _PlayrStat, SkillData _SkillData, float _Power)
+    public void ApplyBuff(PlayerStat playrStat, SkillData skillData)
     {
-        foreach (var Effect in _SkillData.Effects)
+        foreach (var Effect in skillData.Effects)
         {
-            _PlayrStat.Atk += Effect.Power;
+            playrStat.Atk += Effect.Power;
             Debug.Log($"공격력 버프 적용");
         }
-        EffectManager.Instance.Spawn(_SkillData.CastEffectPrefab, _PlayrStat.transform.position, _SkillData.CastPrefabDuration);
+        EffectManager.Instance.Spawn(skillData.CastEffectPrefab, playrStat.transform.position, skillData.CastPrefabDuration);
     }
 
-    public void RemoveBuff(PlayerStat _PlayrStat, SkillData _SkillData, float _Power)
+    public void RemoveBuff(PlayerStat playrStat, SkillData skillData)
     {
-        foreach (var Effect in _SkillData.Effects)
+        foreach (var Effect in skillData.Effects)
         {
-            _PlayrStat.Atk -= Effect.Power;
+            playrStat.Atk -= Effect.Power;
             Debug.Log($"공격력 버프 해제");
         }  
     }

@@ -46,11 +46,11 @@ public class BuffController : MonoBehaviour
 
         if (strategy.TargetType == BuffTargetType.Stat)
         {
-            strategy.ApplyBuff(PlayerStat, skillData, power);
+            strategy.ApplyBuff(PlayerStat, skillData);
         }           
         else if (strategy.TargetType == BuffTargetType.Skill && skillData != null)
         {
-            strategy.ApplyBuff(PlayerStat, skillData, power);
+            strategy.ApplyBuff(PlayerStat, skillData);
         }
             
     }
@@ -63,9 +63,9 @@ public class BuffController : MonoBehaviour
             {
                 var buff = ActiveBuffs[i];
                 if (buff.IBuff.TargetType == BuffTargetType.Stat)
-                    buff.IBuff.RemoveBuff(PlayerStat, buff.SkillData, buff.Power);
+                    buff.IBuff.RemoveBuff(PlayerStat, buff.SkillData);
                 else if (buff.IBuff.TargetType == BuffTargetType.Skill && buff.SkillData != null)
-                    buff.IBuff.RemoveBuff(PlayerStat, buff.SkillData, buff.Power);
+                    buff.IBuff.RemoveBuff(PlayerStat, buff.SkillData);
 
                 ActiveBuffs.RemoveAt(i);
             }

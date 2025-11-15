@@ -56,6 +56,7 @@ public class PlayerAnimationController : MonoBehaviour
                 case SkillEffectType.CriBuff:
                 case SkillEffectType.TotalBuff:
                 case SkillEffectType.HealBuff:
+                case SkillEffectType.MpBuff:
                     Animator.SetBool("IsBuff", _IsPlayering);
                     break;
 

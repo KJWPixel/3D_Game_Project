@@ -33,12 +33,7 @@ public class FollowCam : MonoBehaviour
         
 
     private void LookCamera()
-    {
-        if(UIManager.IsActiveCursor)
-        {
-            return;
-        }
- 
+    { 
         float MouseX = Input.GetAxisRaw("Mouse X") * LookSensitivity;
         float MouseY = Input.GetAxisRaw("Mouse Y") * LookSensitivity;
 
@@ -76,6 +71,8 @@ public class FollowCam : MonoBehaviour
 
     private void UpdateCameraPosition()
     {
+        if (UIManager.IsActiveCursor) return;
+
         Quaternion CameraRotation = Quaternion.Euler(MouseYValue, MouseXValue, 0f);
 
         Vector3 CameraPosition = Target.position + CameraRotation * PositionOffset;

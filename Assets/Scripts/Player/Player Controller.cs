@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
 
     [Header("플레이어 이동")]
     [SerializeField] public float MoveSpeed = 0f;
+    [SerializeField] public float WalkBaseSpeed = 0f;
+    [SerializeField] public float RunningBaseSpeed = 0f;
     [SerializeField] public float WalkSpeed = 0f;
     [SerializeField] public float RunningSpeed = 0f;
     [SerializeField] public float RunningReductionAmount = 0f;
@@ -296,6 +298,18 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
             UseSkillFormSlot(4);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            UseSkillFormSlot(5);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha7))
+        {
+            UseSkillFormSlot(6);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha8))
+        {
+            UseSkillFormSlot(7);
         }
 
     }
