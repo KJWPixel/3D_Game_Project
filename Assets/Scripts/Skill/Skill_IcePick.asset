@@ -10,28 +10,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b1aabd643963f6347b205db3c9ff671b, type: 3}
-  m_Name: Skill_Freeze Circle
+  m_Name: Skill_IcePick
   m_EditorClassIdentifier: 
-  SkillName: Freeze Circle
-  Icon: {fileID: 21300000, guid: 480b6fd098764e244bde8ee6274e6a45, type: 3}
-  Cost: 30
-  CastTime: 1.5
-  Cooldown: 3
+  SkillID: 4
+  SkillKey: IcePick
+  SkillName: "\uC5BC\uC74C\uC1A1\uACF3"
+  Icon: {fileID: 21300000, guid: d933067119a529448950545300f0d5c9, type: 3}
+  Cost: 20
+  CastTime: 2
+  Cooldown: 8
   CastPrefabDuration: 2
   HitPrefabDuration: 1
-  CastEffectPrefab: {fileID: 4932088507883938021, guid: 0e5709a7ddb77924090c112cf73bb98a, type: 3}
+  CastEffectPrefab: {fileID: 176822597162087251, guid: 46009f57772e5e743bec9df57a49ed66, type: 3}
   HitEffectPrefab: {fileID: 4924508274929071776, guid: 0edef91621bb6b34384ccc9dbb98729c, type: 3}
   Effects:
-  - EffectType: 1
-    Power: 15
+  - EffectType: 3
+    Power: 25
     HitCount: 5
     Duration: 0
     Radius: 5
-    Distance: 15
+    Distance: 5
     DelayTime: 0.3
     MaxTarget: 10
-  RequireLevel: 0
-  RequireSP: 0
+  RequireLevel: 5
+  RequireSP: 5
   PrerequisiteSkills: []
   MaxLevel: 1
-  AnimationName: IsLineAreaDamageSkill
+  AnimationName: IsDistanceDamageSkill

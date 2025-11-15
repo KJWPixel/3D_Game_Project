@@ -10,28 +10,31 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b1aabd643963f6347b205db3c9ff671b, type: 3}
-  m_Name: Skill_Heal
+  m_Name: Skill_HealingBeacon
   m_EditorClassIdentifier: 
-  SkillName: Heal
-  Icon: {fileID: 21300000, guid: 3d999f4125671fd41b3737d280b3e563, type: 3}
+  SkillID: 14
+  SkillKey: HealingBeacon
+  SkillName: "\uCE58\uC720\uC758 \uB4F1\uB300"
+  Icon: {fileID: 21300000, guid: 6cf658fed04e9ec4eb4dce5566ae2ac1, type: 3}
   Cost: 20
   CastTime: 2
-  Cooldown: 3
-  CastPrefabDuration: 1
+  Cooldown: 5
+  CastPrefabDuration: 1.5
   HitPrefabDuration: 0
-  CastEffectPrefab: {fileID: 9017484664307500583, guid: 1245b8d2997d5b34fb1637be70a7eb05, type: 3}
+  CastEffectPrefab: {fileID: 7986504087968017091, guid: 12a56ee4630040c4eb17ae9707ed4cef, type: 3}
   HitEffectPrefab: {fileID: 0}
   Effects:
-  - EffectType: 4
-    Power: 30
-    HitCount: 0
-    Duration: 0
+  - EffectType: 9
+    Power: 25
+    HitCount: 3
+    Duration: 15
     Radius: 0
     Distance: 0
     DelayTime: 0
     MaxTarget: 0
   RequireLevel: 5
-  RequireSP: 0
-  PrerequisiteSkills: []
+  RequireSP: 15
+  PrerequisiteSkills:
+  - {fileID: 11400000, guid: 467740ddf6fb43d4fb516f21a06de478, type: 2}
   MaxLevel: 1
   AnimationName: IsHeal

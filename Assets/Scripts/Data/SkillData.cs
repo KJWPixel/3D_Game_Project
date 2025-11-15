@@ -16,7 +16,9 @@ public class SkillData : ScriptableObject
     #endregion
 
     [Header("기본 정보")]
-    public string SkillName;
+    public int SkillID;
+    public string SkillKey;
+    public string SkillName; 
     public Sprite Icon;
     public float Cost;
     public float CastTime;
@@ -67,6 +69,7 @@ public enum SkillEffectType
     CriBuff,
     TotalBuff,
     HealBuff,
+    MpBuff,
     Debuff,
     CC,
     Resource,
@@ -74,7 +77,7 @@ public enum SkillEffectType
     Teleport,
 }
 
-public enum BuffTargetType
+public enum BuffTargetType //버프스킬이 플레이어스탯 상승 or 스킬 강화
 {
     Stat,
     Skill,

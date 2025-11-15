@@ -10,30 +10,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b1aabd643963f6347b205db3c9ff671b, type: 3}
-  m_Name: Skill_Teleport
+  m_Name: Skill_SpellofSwiftness
   m_EditorClassIdentifier: 
-  SkillID: 19
-  SkillKey: Teleport
-  SkillName: "\uACF5\uAC04\uC774\uB3D9"
-  Icon: {fileID: 21300000, guid: 653223c75759bfa4cb2ab79218897e19, type: 3}
-  Cost: 20
-  CastTime: 0.2
-  Cooldown: 2
-  CastPrefabDuration: 1
+  SkillID: 16
+  SkillKey: SpellofSwitfness
+  SkillName: "\uC2E0\uC18D\uC758 \uC8FC\uBB38"
+  Icon: {fileID: 21300000, guid: 00d93e870e281474eaffc504915561f0, type: 3}
+  Cost: 25
+  CastTime: 1.5
+  Cooldown: 20
+  CastPrefabDuration: 1.5
   HitPrefabDuration: 0
-  CastEffectPrefab: {fileID: 7761031033666763820, guid: 1eb833340b41fb444b576c4dced8d4dc, type: 3}
+  CastEffectPrefab: {fileID: 3744133877081091469, guid: a2a060732547fe64581bb0cb3c2bdf1d, type: 3}
   HitEffectPrefab: {fileID: 0}
   Effects:
-  - EffectType: 15
-    Power: 0
+  - EffectType: 14
+    Power: 0.2
     HitCount: 0
-    Duration: 0
+    Duration: 90
     Radius: 0
-    Distance: 10
+    Distance: 0
     DelayTime: 0
     MaxTarget: 0
-  RequireLevel: 1
-  RequireSP: 25
+  RequireLevel: 15
+  RequireSP: 20
   PrerequisiteSkills: []
   MaxLevel: 1
-  AnimationName: IsTeleport
+  AnimationName: IsHeal

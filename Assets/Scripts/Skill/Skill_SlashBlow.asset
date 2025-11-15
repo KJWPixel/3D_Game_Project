@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b1aabd643963f6347b205db3c9ff671b, type: 3}
-  m_Name: Skill_Slash
+  m_Name: Skill_SlashBlow
   m_EditorClassIdentifier: 
-  SkillName: Slash
+  SkillID: 1
+  SkillName: "\uC2AC\uB808\uC26C\uBE14\uB85C\uC6B0"
   Icon: {fileID: 21300000, guid: 1a862a305a44ca64e939c2b35b24e829, type: 3}
-  Cost: 15
+  Cost: 5
   CastTime: 1.5
-  Cooldown: 5
+  Cooldown: 2
   CastPrefabDuration: 0
   HitPrefabDuration: 1
   CastEffectPrefab: {fileID: 0}
@@ -24,10 +25,10 @@ MonoBehaviour:
   Effects:
   - EffectType: 0
     Power: 25
-    HitCount: 0
+    HitCount: 1
     Duration: 0
     Radius: 0
-    Distance: 30
+    Distance: 10
     DelayTime: 0
     MaxTarget: 1
   RequireLevel: 0

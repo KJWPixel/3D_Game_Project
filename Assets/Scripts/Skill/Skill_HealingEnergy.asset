@@ -10,28 +10,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b1aabd643963f6347b205db3c9ff671b, type: 3}
-  m_Name: Buff_AtkBuff
+  m_Name: Skill_HealingEnergy
   m_EditorClassIdentifier: 
-  SkillName: AtkBuff
-  Icon: {fileID: 21300000, guid: 60be931574a9c17468f13cdfa68e39ce, type: 3}
-  Cost: 5
-  CastTime: 1
-  Cooldown: 5
-  CastPrefabDuration: 2
+  SkillID: 13
+  SkillKey: HealingEnergy
+  SkillName: "\uCE58\uC720\uC758 \uAE30\uC6B4"
+  Icon: {fileID: 21300000, guid: 3d999f4125671fd41b3737d280b3e563, type: 3}
+  Cost: 20
+  CastTime: 2
+  Cooldown: 3
+  CastPrefabDuration: 1
   HitPrefabDuration: 0
-  CastEffectPrefab: {fileID: 3744133877081091469, guid: a2a060732547fe64581bb0cb3c2bdf1d, type: 3}
+  CastEffectPrefab: {fileID: 9017484664307500583, guid: 1245b8d2997d5b34fb1637be70a7eb05, type: 3}
   HitEffectPrefab: {fileID: 0}
   Effects:
-  - EffectType: 5
-    Power: 20
+  - EffectType: 4
+    Power: 30
     HitCount: 0
-    Duration: 70
+    Duration: 0
     Radius: 0
     Distance: 0
     DelayTime: 0
     MaxTarget: 0
-  RequireLevel: 0
-  RequireSP: 0
+  RequireLevel: 1
+  RequireSP: 5
   PrerequisiteSkills: []
   MaxLevel: 1
-  AnimationName: IsBuff
+  AnimationName: IsHeal

@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1aabd643963f6347b205db3c9ff671b, type: 3}
+  m_Name: Skill_IceShower
+  m_EditorClassIdentifier: 
+  SkillID: 10
+  SkillKey: IceShower
+  SkillName: "\uC5BC\uC74C \uC18C\uB098\uAE30"
+  Icon: {fileID: 21300000, guid: 480b6fd098764e244bde8ee6274e6a45, type: 3}
+  Cost: 50
+  CastTime: 3
+  Cooldown: 10
+  CastPrefabDuration: 2
+  HitPrefabDuration: 1
+  CastEffectPrefab: {fileID: 161766660727748596, guid: 05ce920d629922a4eb4795ef7494ce5c, type: 3}
+  HitEffectPrefab: {fileID: 4924508274929071776, guid: 0edef91621bb6b34384ccc9dbb98729c, type: 3}
+  Effects:
+  - EffectType: 1
+    Power: 25
+    HitCount: 10
+    Duration: 0
+    Radius: 5
+    Distance: 15
+    DelayTime: 0.3
+    MaxTarget: 15
+  RequireLevel: 20
+  RequireSP: 30
+  PrerequisiteSkills:
+  - {fileID: 11400000, guid: 019f639c56777bf428e724f3ea71e149, type: 2}
+  MaxLevel: 1
+  AnimationName: IsLineAreaDamageSkill

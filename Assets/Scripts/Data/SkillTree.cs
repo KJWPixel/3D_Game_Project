@@ -44,6 +44,7 @@ public class SkillTree : MonoBehaviour
         if(PlayerStat.Level < _Skill.RequireLevel)
         {
             Debug.Log("플레이어 레벨이 부족합니다.");
+            return false;
         }
 
         //SP 조건 체크

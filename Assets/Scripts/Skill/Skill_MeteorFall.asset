@@ -10,28 +10,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b1aabd643963f6347b205db3c9ff671b, type: 3}
-  m_Name: Skill_Ground
+  m_Name: Skill_MeteorFall
   m_EditorClassIdentifier: 
-  SkillName: Ground
-  Icon: {fileID: 21300000, guid: 2630aaca550cda44986260cb35cf1387, type: 3}
-  Cost: 25
-  CastTime: 2
-  Cooldown: 10
-  CastPrefabDuration: 2
+  SkillID: 11
+  SkillKey: MeteorFall
+  SkillName: "\uC720\uC131 \uB099\uD558"
+  Icon: {fileID: 21300000, guid: cc16da6188962544787f7f3b5c7f499f, type: 3}
+  Cost: 70
+  CastTime: 5
+  Cooldown: 30
+  CastPrefabDuration: 5
   HitPrefabDuration: 1
-  CastEffectPrefab: {fileID: 4994997792314849709, guid: 3dd50886582244645be87adb42aa8528, type: 3}
+  CastEffectPrefab: {fileID: 7957833072274404953, guid: 3355f6bfa6db8b24281b827de929694c, type: 3}
   HitEffectPrefab: {fileID: 1758473627833946668, guid: 9b21333b068a5084ba09535839bee3c8, type: 3}
   Effects:
-  - EffectType: 3
-    Power: 50
-    HitCount: 1
+  - EffectType: 1
+    Power: 25
+    HitCount: 15
     Duration: 0
     Radius: 5
-    Distance: 5
-    DelayTime: 0
-    MaxTarget: 10
-  RequireLevel: 0
-  RequireSP: 0
+    Distance: 15
+    DelayTime: 0.3
+    MaxTarget: 15
+  RequireLevel: 25
+  RequireSP: 30
   PrerequisiteSkills: []
   MaxLevel: 1
-  AnimationName: 
+  AnimationName: IsLineAreaDamageSkill
