@@ -61,11 +61,16 @@ public class PlayerController : MonoBehaviour
         HandleMoveInput();
         HandleSkillInput();
 
-        if (IMoveStrategy != null)
+        // - 캐스팅 상태이면 이동 호출 막음 -
+        if(CurrentState != PlayerState.Casting)
         {
-            IMoveStrategy.Move(this);
+            if (IMoveStrategy != null)
+            {
+                IMoveStrategy.Move(this);
+            }
         }
-
+        
+        // - 상태에 따라 이동 전략 결정
         switch (CurrentState)
         {
             case PlayerState.Walking:
@@ -73,6 +78,9 @@ public class PlayerController : MonoBehaviour
                 break;
             case PlayerState.Running:
                 IMoveStrategy = new RunStrategy();
+                break;
+            case PlayerState.Casting:
+                IMoveStrategy = null;
                 break;
         }
 
@@ -119,6 +127,9 @@ public class PlayerController : MonoBehaviour
         //상태에 따른 리턴조건
         if (CurrentState == PlayerState.Casting)
         {
+            x = 0f;
+            z = 0f;
+            IsRunning = false;
             return;
         }
 

@@ -31,7 +31,7 @@ public class ConsumableData : ItemData
     [Header("버프 효과")]
     [SerializeField] ConsumableBuffEffect[] ConsumBuff;
 
-    IBuffBehavoprStrategy Strategy;
+    IBuffBehaviorStrategy Strategy;
     public void Use(GameObject _Target)
     {
         PlayerStat Stat = _Target.GetComponent<PlayerStat>();

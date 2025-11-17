@@ -25,7 +25,7 @@ MonoBehaviour:
   HitEffectPrefab: {fileID: 0}
   Effects:
   - EffectType: 14
-    Power: 0.2
+    Power: 1.2
     HitCount: 0
     Duration: 90
     Radius: 0

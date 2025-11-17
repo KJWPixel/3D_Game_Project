@@ -242,15 +242,15 @@ public class PlayerStat : MonoBehaviour
         switch (_Type)
         {
             case ConsumableType.ResotreHp:
-                CurrentHp += Mathf.Min(CurrentHp + _Amount, MaxHp);
+                CurrentHp = Mathf.Min(CurrentHp + _Amount, MaxHp);
                 Debug.Log($"플레이어의 Hp가 {_Amount}만큼 회복하였습니다. {CurrentHp}/{MaxHp}");
                 break;
             case ConsumableType.ResotreMp:
-                CurrentMp += Mathf.Min(CurrentMp + _Amount, MaxMp);
+                CurrentMp = Mathf.Min(CurrentMp + _Amount, MaxMp);
                 Debug.Log($"플레이어의 Mp가 {_Amount}만큼 회복하였습니다. {CurrentMp}/{MaxMp}");
                 break;
             case ConsumableType.ResotreStamina:
-                CurrentStamina += Mathf.Min(CurrentStamina + _Amount, MaxStamina);
+                CurrentStamina = Mathf.Min(CurrentStamina + _Amount, MaxStamina);
                 Debug.Log($"플레이어의 Stamina가 {_Amount}만큼 회복하였습니다. {CurrentStamina}/{MaxStamina}");
                 break;
         }

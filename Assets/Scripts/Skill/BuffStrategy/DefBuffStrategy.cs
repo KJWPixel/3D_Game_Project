@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DefBuffStrategy : IBuffBehavoprStrategy
+public class DefBuffStrategy : IBuffBehaviorStrategy
 {
     public BuffTargetType TargetType => BuffTargetType.Stat;
 

@@ -19,7 +19,7 @@ public class BuffController : MonoBehaviour
         
     }
 
-    public void AddBuff(IBuffBehavoprStrategy strategy, float power, float duration, SkillData skillData = null)
+    public void AddBuff(IBuffBehaviorStrategy strategy, float power, float duration, SkillData skillData = null)
     {
         // 같은 전략 + 스킬 데이터(같은 버프 스킬) 중복 검사
         BuffInstance existing = ActiveBuffs.FirstOrDefault(Buffs => Buffs.IBuff.GetType() == strategy.GetType()&& Buffs.SkillData == skillData);

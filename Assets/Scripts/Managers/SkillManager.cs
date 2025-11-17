@@ -17,7 +17,7 @@ public class SkillManager : MonoBehaviour
     
 
     ISkillBehaviorStrategy ISkillStrategy;
-    IBuffBehavoprStrategy IBuffStrategy;
+    IBuffBehaviorStrategy IBuffStrategy;
 
     //스킬별 쿨타임 시간 
     public Dictionary<SkillData, float> SkillCoolDownTimers = new Dictionary<SkillData, float>();
@@ -25,7 +25,7 @@ public class SkillManager : MonoBehaviour
     //전략패턴 매핑을 위한 변수 선언
     //키: SkillEffectType, 값: 전략패턴 => SetupEffectHandlers();에서 매핑진행
     private Dictionary<SkillEffectType, ISkillBehaviorStrategy> EffectHandlers;
-    private Dictionary<SkillEffectType, IBuffBehavoprStrategy> BuffHandlers;
+    private Dictionary<SkillEffectType, IBuffBehaviorStrategy> BuffHandlers;
 
 
     private void Awake()
@@ -62,7 +62,7 @@ public class SkillManager : MonoBehaviour
         };
 
         //전략패턴 버프
-        BuffHandlers = new Dictionary<SkillEffectType, IBuffBehavoprStrategy>
+        BuffHandlers = new Dictionary<SkillEffectType, IBuffBehaviorStrategy>
         {
             { SkillEffectType.AtkBuff, new AtkBuffStrategy() },
             { SkillEffectType.DefBuff, new DefBuffStrategy() },

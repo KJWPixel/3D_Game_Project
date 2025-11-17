@@ -5,13 +5,13 @@ using UnityEngine;
 public class BuffInstance 
 {
     //버프 실행시 인스턴스 생성하여 인스턴스에 대입
-    public IBuffBehavoprStrategy IBuff;
+    public IBuffBehaviorStrategy IBuff;
     public SkillData SkillData;
     public float Power;
     public float Duration;
     public float StartTime;
 
-    public BuffInstance(IBuffBehavoprStrategy _IBuff, float _Power, float _Duration, SkillData _SkillData = null)
+    public BuffInstance(IBuffBehaviorStrategy _IBuff, float _Power, float _Duration, SkillData _SkillData = null)
     {
         IBuff = _IBuff;
         Power = _Power;

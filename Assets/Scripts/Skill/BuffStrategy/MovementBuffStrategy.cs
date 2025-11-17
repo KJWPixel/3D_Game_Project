@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovementBuffStrategy : IBuffBehavoprStrategy
+public class MovementBuffStrategy : IBuffBehaviorStrategy
 {
     public BuffTargetType TargetType => BuffTargetType.Stat;
     public void ApplyBuff(PlayerStat playerStat, SkillData skillData)
