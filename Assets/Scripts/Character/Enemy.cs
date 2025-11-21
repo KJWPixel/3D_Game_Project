@@ -11,13 +11,13 @@ public class Enemy : EnemyCharacter
     [SerializeField] EnemyAI EnemyAI;
 
     [Header("TRPATH")]
-    [SerializeField] private bool TRPATHCheck = false;
+    [SerializeField] public bool TRPATHCheck = false;
     [SerializeField] public Transform[] TRPATH;
     [SerializeField] public int CurrentPathIndex = 0;
     [SerializeField] float PatrolWaitTime = 0f;
     [SerializeField] float PatrolWaitStartTime= 0f;
 
-    [Header("ÇÁ¸®ÆÕ")]
+    [Header("Prefabs")]
     [SerializeField] GameObject DamageTextPrefab;
     [SerializeField] GameObject DynamicObject;
 
@@ -27,6 +27,10 @@ public class Enemy : EnemyCharacter
     Animator Animator;
     ItemDrop ItemDrop;
 
+    public event Action<GameObject> OnDied;
+
+    private Vector3 originalPosition;
+    public Vector3 OriginalPosition => originalPosition;
     private void Awake()
     {
         Init();
@@ -38,6 +42,7 @@ public class Enemy : EnemyCharacter
     public override void Init()
     {
         CurHp = MaxHp;
+        originalPosition = transform.position;
     }
 
     private void Start()
@@ -46,8 +51,13 @@ public class Enemy : EnemyCharacter
         {
             Player = GameObject.FindWithTag("Player");
         }
-
         PlayerStat = Player.GetComponent<PlayerStat>();
+
+        if(DynamicObject == null)
+        {
+            DynamicObject = GameObject.Find("DynamicObject");
+
+        }
     }
 
     private void Update()
@@ -85,9 +95,7 @@ public class Enemy : EnemyCharacter
     }
     public override void Patrol()
     {
-        if(TRPATH == null) return;
-
-        if (!TRPATHCheck) return;
+        if(TRPATH == null || TRPATH.Length == 0 || !TRPATHCheck) return;
 
         Transform PathPoint = TRPATH[CurrentPathIndex];
         Vector3 Dir = PathPoint.position - transform.position;//¹æÇâº¤ÅÍ
@@ -135,10 +143,35 @@ public class Enemy : EnemyCharacter
 
     public override void Flee()
     {
-        Vector3 Dir = TRPATH[CurrentPathIndex].position - transform.position;
-        transform.position += Dir.normalized * RunningSpeed * Time.deltaTime;
+        Vector3 targetPosition;
 
-        
+        if(TRPATH != null && TRPATH.Length > 0)
+        {
+            if (CurrentPathIndex >= 0 && CurrentPathIndex < TRPATH.Length && TRPATH[CurrentPathIndex] != null)
+            {
+                targetPosition = TRPATH[CurrentPathIndex].position;
+            }
+            else
+            {
+                targetPosition = originalPosition;
+            }
+        }
+        else
+        {
+            targetPosition = originalPosition;
+        }
+
+        Vector3 Dir = targetPosition - transform.position;
+
+        transform.position += Dir.normalized * runningSpeed * Time.deltaTime;
+
+        if (Dir != Vector3.zero)
+        {
+            Quaternion TargetRotation = Quaternion.LookRotation(Dir);
+            transform.rotation = Quaternion.Slerp(transform.rotation, TargetRotation, 5f * Time.deltaTime);
+        }
+
+
     }
     public override void Attack()
     {
@@ -197,6 +230,11 @@ public class Enemy : EnemyCharacter
     private void Die()
     {
         QuestManager.Instance.UpdateQuestPrecess(QuestClassification.Kill, id, 1);
+
+        if (IsDie)
+        {
+            OnDied?.Invoke(gameObject);
+        }
 
         PlayerStat.AddExp(GainExp);
         ItemDrop.ItemsDrop();

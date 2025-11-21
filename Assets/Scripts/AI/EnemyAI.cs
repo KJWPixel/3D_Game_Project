@@ -32,6 +32,11 @@ public class EnemyAI : AIBase
     private void Awake()
     {
         Enemy = GetComponent<Enemy>();
+        GameObject playerObject = GameObject.FindWithTag("Player");
+        if(playerObject != null)
+        {
+            PlayerTrs = playerObject.transform;
+        }
         
     }
     private void Update()
@@ -115,7 +120,18 @@ public class EnemyAI : AIBase
         //스폰 Animation이 출력되기에 아무것도하지 않고 Animation만 재생하게 만듬
         if (AI == AI.AI_CREATE)
         {
-            AI = AI.AI_IDLE;
+            bool canPatrol = Enemy.TRPATH != null && Enemy.TRPATH.Length > 0 && Enemy.TRPATHCheck;
+
+            if (canPatrol)
+            {
+                AI = AI.AI_PATROL;
+            }
+            else
+            {
+                AI = AI.AI_IDLE;
+                // IdleStartTime을 여기서 초기화해야 IDLE 상태 진입 후 바로 PATROL로 넘어가지 않습니다.
+                IdleStartTime = Time.time;
+            }
         }
     }
 
@@ -128,8 +144,19 @@ public class EnemyAI : AIBase
         }
         else if (HasIdleTimePassed())
         {
-            AI = AI.AI_PATROL;
-            IdleStartTime = Time.time;
+            bool canPatrol = Enemy.TRPATH != null && Enemy.TRPATH.Length > 0 && Enemy.TRPATHCheck;
+
+            if (canPatrol)
+            {
+                AI = AI.AI_PATROL; // 순찰 경로가 있고, 순찰이 활성화된 경우에만 PATROL로 전환
+            }
+            else
+            {
+                // 순찰 조건이 불충족되면 IDLE 상태 유지
+                // IdleStartTime을 다시 현재 시간으로 리셋하여 IdleDuration만큼 다시 대기합니다.
+                IdleStartTime = Time.time;
+                AI = AI.AI_IDLE; // 명시적으로 IDLE 유지
+            }
         }
     }
 
@@ -156,11 +183,43 @@ public class EnemyAI : AIBase
 
     private void FleeTransition()
     {
-        float SpawnDistance = Vector3.Distance(transform.position, Enemy.TRPATH[Enemy.CurrentPathIndex].transform.position);
+        Vector3 targetPosition;
+        AI nextAIState;
 
-        if(SpawnDistance > 2)
+        // 순찰 경로의 유효성 (null 아님, 길이 0 초과, 순찰 체크 활성화)
+        bool hasValidPatrolPath = Enemy.TRPATH != null && Enemy.TRPATH.Length > 0 && Enemy.TRPATHCheck;
+
+        if (hasValidPatrolPath)
         {
-            AI = AI.AI_PATROL;
+            // 1. PATROL 몬스터: 현재 순찰 지점으로 복귀 후 PATROL 상태로 전환
+            if (Enemy.CurrentPathIndex >= 0 && Enemy.CurrentPathIndex < Enemy.TRPATH.Length && Enemy.TRPATH[Enemy.CurrentPathIndex] != null)
+            {
+                targetPosition = Enemy.TRPATH[Enemy.CurrentPathIndex].position;
+                nextAIState = AI.AI_PATROL;
+            }
+            else
+            {
+                // 인덱스 문제 발생 시 최초 위치로 복귀 및 IDLE 전환 (안전 장치)
+                targetPosition = Enemy.OriginalPosition;
+                nextAIState = AI.AI_IDLE;
+            }
+        }
+        else
+        {
+            // 2. IDLE 몬스터: 최초 스폰 위치로 복귀 후 IDLE 상태로 전환
+            targetPosition = Enemy.OriginalPosition;
+            nextAIState = AI.AI_IDLE;
+        }
+
+        // 복귀 목표와의 거리 계산
+        float distanceToTarget = Vector3.Distance(transform.position, targetPosition);
+
+        // 목표에 충분히 가까워지면 상태 전환 (복귀 완료)
+        if (distanceToTarget < 1.0f) // 1.0f는 복귀 완료로 간주하는 거리 임계값
+        {
+            AI = nextAIState;
+            // 상태 전환 후 IDLE/PATROL 상태 진입 시간 초기화
+            IdleStartTime = Time.time;
         }
     }
 
