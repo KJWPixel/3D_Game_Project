@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class QuestGuideUI : MonoBehaviour
@@ -70,7 +71,7 @@ public class QuestGuideUI : MonoBehaviour
         //}
     }
 
-    private void UpdateDistance(QuestInstance _Quest)
+    private void UpdateDistance(QuestInstance quest)
     {
         if (CurrentQuest.Data.QuestClassification == QuestClassification.NpcTolk)
         {
@@ -78,8 +79,17 @@ public class QuestGuideUI : MonoBehaviour
             if (TargetNPC == null) return;
         }
 
-        //float Dis = Vector3.Distance(PlayerStat.Instance.transform.position, _Quest.Data.TargetArea.transform.position);
-        //QuestProgress.text = $"{Dis:F1}";
+        if(CurrentQuest.Data.QuestClassification == QuestClassification.Kill)
+        {
+            QuestProgress.text = string.Empty;
+            if(quest.Data.TargetArea == null) return;
+
+            Vector3 target = quest.Data.TargetArea.transform.position;  
+            float dir = Vector3.Distance(target, GameManager.Instance.Player.transform.position);
+
+            QuestDistance.text = ((int)dir).ToString() + "m";
+
+        }
     }
 
     private void ClearText()

@@ -153,7 +153,7 @@ MonoBehaviour:
   atk: 15
   def: 0
   attackRange: 0
-  gainExp: 0
+  gainExp: 15
   IsIdle: 0
   IsWalk: 0
   IsRunning: 0
@@ -201,12 +201,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4e931d336b506e47ba3415f6e311225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DropItemPrefab: {fileID: 8760925997805543698, guid: 06185d9de615d8c4b81b962c2e4cc63c, type: 3}
+  DropItemPrefab: {fileID: 4690846571101904909, guid: 9a10fa2c14be9b94c90e257bf1680c04, type: 3}
   DropItems:
   - ItemData: {fileID: 11400000, guid: 1f2de5a59a89acd4a8fb196928ab1510, type: 2}
-    DropProbability: 0.9
+    DropProbability: 0.2
   - ItemData: {fileID: 11400000, guid: 8d4bc0d871a94f04aa9383f5e81fe43b, type: 2}
-    DropProbability: 0.9
+    DropProbability: 0
   RandomNumber: 0
 --- !u!136 &7100487767561807076
 CapsuleCollider:

@@ -9,6 +9,9 @@ public class QuestUI : MonoBehaviour
     [SerializeField] GameObject QuestItemPrefab;
     [SerializeField] Transform QuestItemParent;
 
+    [Header("퀘스트 패널")]
+    [SerializeField] private GameObject questPanel;
+
     [Header("퀘스트 툴팁 프리팹")]
     [SerializeField] QuestToolTip QuestTooltip;
 
@@ -127,7 +130,8 @@ public class QuestUI : MonoBehaviour
     }
     public void OnClickClose()
     {
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
+        questPanel.SetActive(false);
     }
 
     public void OnClickShowTooltip(QuestInstance _Quest)
@@ -140,7 +144,13 @@ public class QuestUI : MonoBehaviour
     {
         QuestGuideUI.gameObject.SetActive(true);
         QuestGuideUI.Setup(_Quest);
+
+        //QuestGuideUI에서 Target위치까지의 실시간거리 측정
+        
+        
     }
+
+
 
     private void ShowQuestClearUI(QuestInstance _Quest)
     {
