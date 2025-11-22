@@ -114,9 +114,7 @@ public class QuestManager : MonoBehaviour
         if(_Quest.Data.QuestClass != QuestClass.Repeat)
         {
             ClearQuests.Add(_Quest.Data.QuestId);
-        }
-
-        
+        }   
 
         ActiveQuests.Remove(_Quest);
 
