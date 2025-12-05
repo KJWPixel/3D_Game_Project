@@ -22,7 +22,12 @@ public class UI_BuffIcon : MonoBehaviour
 
     void Update()
     {
-        if(LinkBuff != null)
+        BuffTimeTextUpdate();
+    }
+
+    private void BuffTimeTextUpdate()
+    {
+        if (LinkBuff != null)
         {
             //버프시작시간 + 지속시간 - 흘러간 시간
             float Remaining = LinkBuff.StartTime + LinkBuff.Duration - Time.time;
@@ -41,8 +46,6 @@ public class UI_BuffIcon : MonoBehaviour
             int Minutes = Mathf.FloorToInt(Remaining / 60f);
             int Seconds = Mathf.FloorToInt(Remaining % 60f);
             BuffTimeText.text = $"{Minutes:D2}:{Seconds:D2}";
-            
-
 
         }
     }

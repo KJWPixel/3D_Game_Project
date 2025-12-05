@@ -5,25 +5,16 @@ using UnityEngine.InputSystem.XR;
 
 public class LoginPanelUI : BaseUI
 {
-    [SerializeField] private TitleUIController uiController;
-    [SerializeField] private LoginManager LoginManager;
-    protected override void OnOpen()
-    {
-        
-    }
-    protected override void OnClose()
-    {
-        uiController.OnClickCloseTopUI();
-    }
-
+    [SerializeField] private LoginManager loginManager;
+ 
     public void OnClickLogin()
     {
-        if(LoginManager == null)
+        if (loginManager == null)
         {
             Debug.LogError("LoginManager가 할당되지 않음");
             return;
         }
 
-        LoginManager.TryLogin();
+        loginManager.TryLogin();
     }
 }

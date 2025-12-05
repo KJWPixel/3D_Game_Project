@@ -8,51 +8,35 @@ public class LoginManager : MonoBehaviour
 {
     [SerializeField] private TMP_InputField UserField;
     [SerializeField] private TMP_InputField PasswordField;
-    [SerializeField] private Button LoginButton;
     [SerializeField] private TMP_Text LoginText;
 
     private string savePath;
-    private const string SAVEFOLDER = "UserList";//세이브 폴더 이름
-    private const string FILENAME = "UserData.json";//파일 이름
+    private const string SAVEFOLDER = "UserList";
+    private const string FILENAME = "UserData.json";
+    private const string AES_KEY = "MySecretKey12345"; // AES 키
 
     private List<UserData> UserList = new List<UserData>();
+    public UserData CurrentUser { get; private set; } // 현재 로그인한 사용자
 
     private void Awake()
     {
-        //Path.Combine("폴더경로", "파일이름.확장자") 
-        //Path.Combine("루트폴더", "서브폴더", "파일이름.확장자")
-        //(Window)Application.persistentDataPath: C:/Users/사용자이름/AppData/LocalLow/회사이름/프로젝트이름/UserData.json 
-        //(Android)/storage/emulated/0/Android/data/com.회사이름.프로젝트이름/files/UserData.json
-
-        //savePath = Path.Combine(Application.persistentDataPath, SVAEFOLDER, FILENAME); 호환성 강화
-        savePath = Path.Combine(Application.dataPath, SAVEFOLDER, FILENAME);
+        savePath = Path.Combine(Application.persistentDataPath, SAVEFOLDER, FILENAME);
 
         string directory = Path.GetDirectoryName(savePath);
-        if(!Directory.Exists(directory))
-        {
+        if (!Directory.Exists(directory))
             Directory.CreateDirectory(directory);
-            Debug.Log($"세이브 폴더 생성: {directory}");
-        }
-      
+
         LoadUserData();
     }
 
     private void LoadUserData()
     {
-        if(File.Exists(savePath))
+        if (File.Exists(savePath))
         {
-            try
-            {
-                string json = File.ReadAllText(savePath);
-                UserDataList wrapper = JsonUtility.FromJson<UserDataList>(json);
-                UserList = wrapper?.Users; new List<UserData>();
-                Debug.Log($"UsserData 로드 성공: {UserList.Count} 명");
-            }
-            catch(System.Exception e)
-            {
-                Debug.LogError($"UserData 로드 실패: {e.Message}");
-                UserList = new List<UserData>();
-            }
+            string json = File.ReadAllText(savePath);
+            UserDataList wrapper = JsonUtility.FromJson<UserDataList>(json);
+            UserList = wrapper?.Users ?? new List<UserData>();
+            Debug.Log($"UserData 로드 성공: {UserList.Count} 명");
         }
         else
         {
@@ -60,44 +44,35 @@ public class LoginManager : MonoBehaviour
             UserList = new List<UserData>();
         }
     }
+
     private void SaveUserData()
     {
-        try
-        {
-            string directory = Path.GetDirectoryName(savePath);
-            if(!Directory.Exists(directory))
-            {
-                Directory.CreateDirectory(directory);
-                Debug.Log($"세이브 폴더 생성: {directory}");
-            }
-            UserDataList wrapper = new UserDataList { Users = UserList };
-            string json = JsonUtility.ToJson(wrapper, true);
-            File.WriteAllText(savePath, json);
-            Debug.Log($"UserData 저장 성공: {savePath}");
-        }
-        catch (System.Exception e)
-        {
-            Debug.LogError($"UserData 저장 실패: {e.Message}");
-        }
+        UserDataList wrapper = new UserDataList { Users = UserList };
+        string json = JsonUtility.ToJson(wrapper, true);
+        File.WriteAllText(savePath, json);
+        Debug.Log("UserData 저장 성공");
     }
 
     public void TryLogin()
     {
-        string username = UserField.text.Trim();//Trim() 공백제거
+        string username = UserField.text.Trim();
         string password = PasswordField.text.Trim();
 
-        if (string.IsNullOrEmpty(UserField.text) || string.IsNullOrEmpty(PasswordField.text))
+        if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
         {
-            ShowMessage("유저이름 또는 패스워드를 입력하시기 바랍니다.", Color.yellow);
+            ShowMessage("유저이름 또는 패스워드를 입력해주세요.", Color.yellow);
             return;
         }
 
-        UserData ExistUserData = UserList.Find(x => x.username == username);
+        string encryptedPassword = AES.EncryptAES(password, AES_KEY);
 
-        if (ExistUserData != null)//ExistUserData가 UserList에 존재하고
+        UserData existUser = UserList.Find(x => x.username == username);
+
+        if (existUser != null)
         {
-            if (ExistUserData.password == password)//패스워드가 같다면 로그인성공
+            if (existUser.password == encryptedPassword)
             {
+                CurrentUser = existUser;
                 ShowMessage("로그인 성공", Color.green);
                 SceneMgr.Instance.ChangeScene(SCENE.MAIN, true);
             }
@@ -106,33 +81,36 @@ public class LoginManager : MonoBehaviour
                 ShowMessage("패스워드가 일치하지 않습니다.", Color.red);
             }
         }
-        else//ExistUserData가 기존에 존재하지 않는다면, 새 사용자 등록
+        else
         {
-            UserData NewUser = new UserData { username = username, password = password };
-            UserList.Add(NewUser);
+            UserData newUser = new UserData
+            {
+                username = username,
+                password = encryptedPassword
+            };
+            UserList.Add(newUser);
             SaveUserData();
+            CurrentUser = newUser;
             ShowMessage("새 사용자 등록 및 로그인 성공", Color.green);
             SceneMgr.Instance.ChangeScene(SCENE.MAIN, true);
-        }      
+        }
     }
 
-    private void ShowMessage(string _Message, Color _Color)
-    { 
-        if(LoginText != null)
+    private void ShowMessage(string message, Color color)
+    {
+        if (LoginText != null)
         {
-            LoginText.text = _Message;
-            LoginText.color = _Color;
+            LoginText.text = message;
+            LoginText.color = color;
             LoginText.gameObject.SetActive(true);
-            Invoke(nameof(HideMessage),3f);
+            Invoke(nameof(HideMessage), 3f);
         }
-        Debug.Log(_Message);
+        Debug.Log(message);
     }
 
     private void HideMessage()
     {
         if (LoginText != null)
-        {
             LoginText.gameObject.SetActive(false);
-        }
     }
 }

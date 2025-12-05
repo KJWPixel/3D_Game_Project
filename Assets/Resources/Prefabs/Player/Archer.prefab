@@ -1,5 +1,76 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &376599514220666367
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4355902434527239575}
+  - component: {fileID: 5523671502174659448}
+  - component: {fileID: 681691211388720087}
+  m_Layer: 10
+  m_Name: Player Post-process Volume
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4355902434527239575
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376599514220666367}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6834805392992688727}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &5523671502174659448
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376599514220666367}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &681691211388720087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376599514220666367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: 4814f5766c081d34d84bb20049ade1fd, type: 2}
+  isGlobal: 1
+  blendDistance: 3
+  weight: 1
+  priority: 0
 --- !u!1 &4382837284066439405
 GameObject:
   m_ObjectHideFlags: 0
@@ -43,6 +114,7 @@ GameObject:
   - component: {fileID: 2151500069772840827}
   - component: {fileID: 7650662591984283708}
   - component: {fileID: 7765270485162434633}
+  - component: {fileID: 968075756379411506}
   - component: {fileID: 4225581406444852958}
   m_Layer: 0
   m_Name: Main Camera
@@ -78,6 +150,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 109e594f27f348c4cbe56f3987d6ca96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MinZoomZ: -7
+  MaxZoomZ: -2
+  ZoomSensitivity: 0.5
   PositionOffset: {x: 0, y: 2, z: -5}
   RotationOffset: {x: 15, y: 0, z: 0}
   LookSensitivity: 1
@@ -114,7 +189,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 800
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -133,6 +208,66 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &968075756379411506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4569067587281873572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeTrigger: {fileID: 2151500069772840827}
+  volumeLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  stopNaNPropagation: 1
+  finalBlitToCameraTarget: 0
+  antialiasingMode: 0
+  temporalAntialiasing:
+    jitterSpread: 0.75
+    sharpness: 0.25
+    stationaryBlending: 0.95
+    motionBlending: 0.85
+  subpixelMorphologicalAntialiasing:
+    quality: 2
+  fastApproximateAntialiasing:
+    fastMode: 0
+    keepAlpha: 0
+  fog:
+    enabled: 1
+    excludeSkybox: 1
+  debugLayer:
+    lightMeter:
+      width: 512
+      height: 256
+      showCurves: 1
+    histogram:
+      width: 512
+      height: 256
+      channel: 3
+    waveform:
+      exposure: 0.12
+      height: 256
+    vectorscope:
+      size: 256
+      exposure: 0.12
+    overlaySettings:
+      linearDepth: 0
+      motionColorIntensity: 4
+      motionGridSize: 64
+      colorBlindnessType: 0
+      colorBlindnessStrength: 1
+  m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
+  m_ShowToolkit: 0
+  m_ShowCustomSorter: 0
+  breakBeforeColorGrading: 0
+  m_BeforeTransparentBundles: []
+  m_BeforeStackBundles: []
+  m_AfterStackBundles: []
 --- !u!81 &4225581406444852958
 AudioListener:
   m_ObjectHideFlags: 0
@@ -234,7 +369,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0c25c38b9e0e76c48906a125b1551ea3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 500
+      value: 586.64
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0c25c38b9e0e76c48906a125b1551ea3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -289,6 +424,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0c25c38b9e0e76c48906a125b1551ea3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1064192099960720101}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0c25c38b9e0e76c48906a125b1551ea3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4355902434527239575}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0c25c38b9e0e76c48906a125b1551ea3, type: 3}
       insertIndex: -1
@@ -333,14 +471,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   userName: Player
-  level: 1
+  level: 100
   maxExp: 100
   currentExp: 0
-  skillPoint: 100
+  skillPoint: 1000
   maxHp: 100
   currentHp: 100
-  maxMp: 100
-  currentMp: 100
+  maxMp: 1000000
+  currentMp: 1000
   maxStamina: 100
   currentStamina: 100
   atk: 10
@@ -348,6 +486,8 @@ MonoBehaviour:
   crit: 10
   critDmg: 10
   gold: 0
+  postProcessVolume: {fileID: 681691211388720087}
+  vignette: {fileID: 0}
 --- !u!114 &3339896118214070976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -362,8 +502,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CharacterController: {fileID: 1464161560132305299}
   MoveSpeed: 0
-  WalkSpeed: 5
-  RunningSpeed: 10
+  WalkBaseSpeed: 3
+  RunningBaseSpeed: 7
+  WalkSpeed: 3
+  RunningSpeed: 7
   RunningReductionAmount: 0
   JumpForce: 5
   BaseJumpCount: 1

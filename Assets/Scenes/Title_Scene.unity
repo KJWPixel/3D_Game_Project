@@ -5389,8 +5389,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 213f11aa58dcf214dbf8fd6bd4735f72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiController: {fileID: 561897069}
-  LoginManager: {fileID: 1722131699}
+  loginManager: {fileID: 1722131699}
 --- !u!1 &994015465
 GameObject:
   m_ObjectHideFlags: 0

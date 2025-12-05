@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using Newtonsoft.Json.Linq;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 
 [System.Serializable]
@@ -35,6 +35,8 @@ public class PlayerStat : MonoBehaviour
     [SerializeField] private float critDmg = 0f;
 
     [SerializeField] private int gold;
+    [SerializeField] private PostProcessVolume postProcessVolume;
+    [SerializeField] private UnityEngine.Rendering.PostProcessing.Vignette vignette;
 
     //public float GetStatus(StatusType _Type)
     //{
@@ -175,12 +177,16 @@ public class PlayerStat : MonoBehaviour
         {
             Ui.SetStatus(this);
         }
+        StatInit();
+        PostProcessInit();
     }
 
+
+
     void Update()
-    {
-        StatInit();
+    {    
         NaturalRecovery();
+        HpDangerEffect();
     }
 
     private void StatInit()
@@ -197,7 +203,14 @@ public class PlayerStat : MonoBehaviour
         if (CurrentStamina > MaxStamina)
         {
             CurrentStamina = MaxStamina;
-        }
+        }  
+    }
+
+    private void PostProcessInit()
+    {
+        postProcessVolume.profile.TryGetSettings(out vignette);
+
+        vignette.intensity.value = 0f;
     }
 
     private void NaturalRecovery()
@@ -212,6 +225,12 @@ public class PlayerStat : MonoBehaviour
         {
             CurrentStamina += 2 * Time.deltaTime;
         }
+    }
+
+    private void HpDangerEffect()
+    {
+        float targetIntensity = (CurrentHp <= MaxHp * 0.3f) ? 0.45f : 0f;
+        vignette.intensity.value = Mathf.Lerp(vignette.intensity.value, targetIntensity, Time.deltaTime * 5);
     }
 
     public void ReduceStamina(float _Amount)
@@ -302,6 +321,9 @@ public class PlayerStat : MonoBehaviour
         }
 
         CurrentHp -= (_Damage - Def);
+
+        vignette.intensity.value = 0.35f;
+        vignette.intensity.value = Mathf.Lerp(vignette.intensity.value, 0f, Time.deltaTime * 5f);
     }
 
     public void AddExp(float _Exp)

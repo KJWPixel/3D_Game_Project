@@ -6,18 +6,23 @@ using UnityEngine;
 //1인칭, 3인칭 스위칭하는 기능 및 Offset값을 가지고 세부조정가능 
 public class FollowCam : MonoBehaviour
 {
-    [Header("카메라 위치 오프셋")]
-    [SerializeField] Vector3 PositionOffset = Vector3.zero;
-    [SerializeField] Vector3 RotationOffset = Vector3.zero;
+    [Header("카메라 줌 오프셋")]
+    [SerializeField] private float MinZoomZ = -7f;
+    [SerializeField] private float MaxZoomZ = -2f;
+    [SerializeField] private float ZoomSensitivity = 0.5f;
+
+    [Header("카메라 위치 회전 값")]
+    [SerializeField] private Vector3 PositionOffset = Vector3.zero;
+    [SerializeField] private Vector3 RotationOffset = Vector3.zero;
 
     [Header("카메라 감도")]
-    [SerializeField] float LookSensitivity = 1f;//기본 1
+    [SerializeField] private float LookSensitivity = 1f;//기본 1
 
-    [SerializeField] Transform Target;//Player Body_Spin Tarnsform
+    [SerializeField] private Transform Target;//Player Body_Spin Tarnsform
 
-    float MouseXValue = 0f;
-    float MouseYValue = 0f;
-    float rotX = 0f;
+    private float MouseXValue = 0f;
+    private float MouseYValue = 0f;
+    private float rotX = 0f;
 
     UIManager UIManager;
 
@@ -25,12 +30,6 @@ public class FollowCam : MonoBehaviour
     {
         UIManager = UIManager.Instance;
     }
-
-    private void Update()
-    {
-       
-    }
-        
 
     private void LookCamera()
     { 
@@ -41,13 +40,23 @@ public class FollowCam : MonoBehaviour
         MouseYValue = MouseYValue + MouseY * (-1.0f);//반전, 화면에서 회전을 반전시키기 위해 -1.0f을 곱함
 
         //화면의 각도 제한 
-        MouseYValue = Mathf.Clamp(MouseYValue, -70f, 70f);
-        
+        MouseYValue = Mathf.Clamp(MouseYValue, -10f, 60f);
+
         //Character Body 마우스 움직임에 따라 위아래 회전
         //Spin.localRotation = Quaternion.Euler(MouseYValue, 0f, 0f);      
 
         //마우스 움직에 따라 Camera회전
         //this.transform.rotation = Quaternion.Euler(MouseYValue, MouseXValue, 0f);
+
+        // --- 줌 기능 추가 ---
+        float scrollInput = Input.GetAxis("Mouse ScrollWheel");
+
+        if(scrollInput != 0)
+        {
+            PositionOffset.z += scrollInput * ZoomSensitivity;
+
+            PositionOffset.z = Mathf.Clamp(PositionOffset.z, MinZoomZ, MaxZoomZ);
+        }
 
         UpdateCameraPosition();
     }
