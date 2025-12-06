@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneMgr : MonoBehaviour
 {
-    public static SceneMgr Instance { get; private set; }
+    public static SceneMgr Instance;
     public SCENE CurrentScene { get; private set; }
     public SCENE NextScene { get; private set; }
 
@@ -22,11 +22,10 @@ public class SceneMgr : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
-
     }
-    
+
     public void ChangeScene(SCENE target, bool loading = false)
-    {
+    {      
         if (CurrentScene == target) return;//현재 씬과 같다면 리턴
 
         if (loading)
@@ -52,4 +51,6 @@ public class SceneMgr : MonoBehaviour
             SceneManager.LoadScene(sceneName);
         }
     }
+
+
 }

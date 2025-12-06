@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class OptionPanelUI : BaseUI
@@ -61,8 +63,23 @@ public class OptionPanelUI : BaseUI
         FrameRateOptions.options.Add(new TMP_Dropdown.OptionData("30"));
         FrameRateOptions.options.Add(new TMP_Dropdown.OptionData("60"));
         FrameRateOptions.options.Add(new TMP_Dropdown.OptionData("120"));
-        int frameRateIndex = FrameRateOptions.options.FindIndex(opt => opt.text == SettingsManager.Instance.GetSettings().FrameRate.ToString());
-        FrameRateOptions.value = frameRateIndex >= 0 ? frameRateIndex : 1;//기본 60fps
+        FrameRateOptions.options.Add(new TMP_Dropdown.OptionData("무한"));
+
+        //설정에 저장된 값으로 드롭다운 선택
+        int savedFrame = SettingsManager.Instance.GetSettings().FrameRate; // -1이면 무한
+        int frameRateIndex = -1;
+        //int frameRateIndex = FrameRateOptions.options.FindIndex(opt => opt.text == SettingsManager.Instance.GetSettings().FrameRate.ToString());
+        //FrameRateOptions.value = frameRateIndex >= 0 ? frameRateIndex : 1;//기본 60fps
+
+        if(savedFrame == -1)
+        {
+            frameRateIndex = FrameRateOptions.options.FindIndex(opt => opt.text == "무한");
+        }
+        else
+        {
+            frameRateIndex = FrameRateOptions.options.FindIndex(opt => opt.text == savedFrame.ToString());
+        }
+        FrameRateOptions.value = frameRateIndex >= 0 ? frameRateIndex : 2; // 기본 60fps (index 2)
         FrameRateOptions.RefreshShownValue();
     }
 
@@ -101,7 +118,7 @@ public class OptionPanelUI : BaseUI
     {
         GraphicsPanel.SetActive(activePanel == GraphicsPanel);
         SoundPanel.SetActive(activePanel == SoundPanel);
-        GamePlayPanel.SetActive(activePanel == GamePlayPanel);
+        //GamePlayPanel.SetActive(activePanel == GamePlayPanel);
     }
 
     public void OnClickApply()
@@ -110,7 +127,21 @@ public class OptionPanelUI : BaseUI
         {
             int resolutionIndex = ResolutionOptions.value;
             int screenIndex = ScreenOptions.value;
-            int frameRate = int.Parse(FrameRateOptions.options[FrameRateOptions.value].text);
+
+            // FrameRate 처리: "무한"이면 -1 아니면 int.Parse
+            //int frameRate = int.Parse(FrameRateOptions.options[FrameRateOptions.value].text);
+            string selectedFrameText = FrameRateOptions.options[FrameRateOptions.value].text;
+            int frameRate;
+            if (selectedFrameText == "무한")
+            {
+                frameRate = -1;
+            }
+            else
+            {
+                // 안전하게 파싱 (예외 방지)
+                if (!int.TryParse(selectedFrameText, out frameRate))
+                    frameRate = 60; // fallback
+            }
 
             SettingsManager.Instance.SetGraphicsSettings(screenIndex, resolutionIndex, frameRate);
             Debug.Log($"그래픽 설정 적용: 해상도 인덱스 = {resolutionIndex}, 화면모드 = {ScreenOptions.options[screenIndex].text}, 프레임레이트 = {frameRate}");
@@ -132,5 +163,29 @@ public class OptionPanelUI : BaseUI
         {
             Debug.Log("사운드 슬라이더 컴포넌트가 할당되지 않았습니다.");
         }
+    }
+
+    public void TitleClickButton()
+    {
+        //저장 후 타이틀 씬으로 이동
+        if(SceneMgr.Instance != null)
+        {
+            SceneMgr.Instance.ChangeScene(SCENE.TITLE, false);
+        }
+        else
+        {
+            Debug.Log("SceneMgr Instance null");
+        }
+        SceneManager.LoadScene(0);
+    }
+
+    public void ExitClickButton()
+    {
+        //저장 후 게임 종료
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 }

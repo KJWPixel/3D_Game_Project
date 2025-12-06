@@ -9,9 +9,9 @@ public class Table_Reload : MonoBehaviour
 
     static public void ParserTableCSV()
     {
-        Shared.TableManager = new TableManager();
+        //Shared.TableManager = new TableManager();
 
-        Shared.TableManager.Init();
-        Shared.TableManager.Save();
+        //Shared.TableManager.Init();
+        //Shared.TableManager.Save();
     }
 }
