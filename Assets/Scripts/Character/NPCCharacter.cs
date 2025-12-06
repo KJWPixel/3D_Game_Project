@@ -10,7 +10,7 @@ public abstract class NPCCharacter : MonoBehaviour
 
     [Header("기본정보")]
     [SerializeField] protected int id;
-    [SerializeField] protected string NPCname;
+    [SerializeField] protected string NpcName;
     [SerializeField] protected TextMeshPro NPCText;
     [SerializeField] protected GameObject NPCMark;
     [SerializeField] protected int NameDistance = 10;
@@ -23,6 +23,6 @@ public abstract class NPCCharacter : MonoBehaviour
     [SerializeField] protected bool isTolk = false;
 
     public int Id => id;
-    public string Name => NPCname;
+    public string Name => NpcName;
     public bool IsTolk => isTolk;
 }

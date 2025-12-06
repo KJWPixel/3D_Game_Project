@@ -38,6 +38,10 @@ public class PlayerStat : MonoBehaviour
     [SerializeField] private PostProcessVolume postProcessVolume;
     [SerializeField] private UnityEngine.Rendering.PostProcessing.Vignette vignette;
 
+    [SerializeField] public float posX;
+    [SerializeField] public float posY;
+    [SerializeField] public float posZ;
+
     //public float GetStatus(StatusType _Type)
     //{
     //    return PlayerStatus[_Type];
@@ -341,8 +345,9 @@ public class PlayerStat : MonoBehaviour
     {
         Level++;
         MaxExp *= 1.2f;
-        MaxHp++;
-        Atk++;
+        MaxHp *= 1.1f;
+        MaxMp *= 1.4f;
+        Atk *= 1.1f;
         Def++;
     }
 }

@@ -8,15 +8,14 @@ using UnityEngine.UI;
 
 public class OptionPanelUI : BaseUI
 {
-    [SerializeField] private TitleUIController uiController;
 
     [Header("옵션 패널")]
     [SerializeField] private GameObject GraphicsPanel;
     [SerializeField] private GameObject SoundPanel;
-    [SerializeField] private GameObject GamePlayPanel;
+    [SerializeField] private GameObject GameHelperPanel;
     [SerializeField] private Button GraphicsButton;
     [SerializeField] private Button SoundButton;
-    [SerializeField] private Button GamePlayButton;
+    [SerializeField] private Button GameHelperButton;
 
     [Header("그래픽 옵션")]
     [SerializeField] private TMP_Dropdown ScreenOptions;
@@ -35,7 +34,7 @@ public class OptionPanelUI : BaseUI
     }
     protected override void OnClose()
     {
-        uiController.OnClickCloseTopUI();
+        
     }
 
     private void InitializeDropdowns()
@@ -110,15 +109,17 @@ public class OptionPanelUI : BaseUI
     {
         ShowPanel(SoundPanel);
     }
-    public void OnClickGamePlayButton()
+    public void OnClickGameHelperButton()
     {
-        ShowPanel(GamePlayPanel);
+        ShowPanel(GameHelperPanel);
     }
     private void ShowPanel(GameObject activePanel)
     {
         GraphicsPanel.SetActive(activePanel == GraphicsPanel);
         SoundPanel.SetActive(activePanel == SoundPanel);
-        //GamePlayPanel.SetActive(activePanel == GamePlayPanel);
+        GameHelperPanel.SetActive(activePanel == GameHelperPanel);
+ 
+            
     }
 
     public void OnClickApply()
@@ -163,6 +164,20 @@ public class OptionPanelUI : BaseUI
         {
             Debug.Log("사운드 슬라이더 컴포넌트가 할당되지 않았습니다.");
         }
+    }
+
+    public void OnClickAddLevel(int amount)
+    {
+        PlayerStat.Instance.Level += amount;
+    }
+    public void OnClickAddSp(int amount)
+    {
+        PlayerStat.Instance.SkillPoint += amount;
+    }
+
+    public void OnClickAddGold(int amount)
+    {
+        PlayerStat.Instance.Gold += amount;
     }
 
     public void TitleClickButton()

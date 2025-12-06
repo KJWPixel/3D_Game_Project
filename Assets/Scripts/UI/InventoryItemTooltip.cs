@@ -52,16 +52,20 @@ public class InventoryItemTooltip : MonoBehaviour
 
             UseButton.onClick.AddListener(() =>
             {
-                ConsumableData consumable = _InventoryItem.ItemData as ConsumableData;
-                if (consumable != null)
-                {
-                    consumable.Use(PlayerStat.Instance.gameObject);
-                    InventoryManager.Instance.RemoveItem(_InventoryItem.ItemData, 1);
+                //인벤토리에서 즉시 소비아이템 사용 코드
+                //ConsumableData consumable = _InventoryItem.ItemData as ConsumableData;
+                //if (consumable != null)
+                //{
+                //    consumable.Use(PlayerStat.Instance.gameObject);
+                //    InventoryManager.Instance.RemoveItem(_InventoryItem.ItemData, 1);
 
-                    ItemQuantity.text = "x" + _InventoryItem.Quantity.ToString();
-                    InventoryUI.Instance.RefreshUI();
-                }
-                
+                //    ItemQuantity.text = "x" + _InventoryItem.Quantity.ToString();
+                //    InventoryUI.Instance.RefreshUI();
+                //}
+
+                UI_ItemSlotManager.Instance.RegisterConsumable(_InventoryItem);
+                InventoryUI.Instance.RefreshUI();
+
             });
         }
         else if (_InventoryItem.ItemData.Type == ItemType.Equipment)
@@ -153,7 +157,7 @@ public class InventoryItemTooltip : MonoBehaviour
 
         if(_Item.ItemData.Type == ItemType.Consumable)
         {
-            ButtonText.text = "사용";
+            ButtonText.text = "등록";
         }
         else if(_Item.ItemData.Type == ItemType.Equipment)
         {

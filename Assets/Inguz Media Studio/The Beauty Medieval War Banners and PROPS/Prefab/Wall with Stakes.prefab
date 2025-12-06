@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 517682251739681329}
   serializedVersion: 2
   m_LocalRotation: {x: 0.000000021826873, y: -0.05133864, z: -0.0000000011220416, w: 0.9986813}
-  m_LocalPosition: {x: 40.7, y: -2.7458782, z: 7.3}
+  m_LocalPosition: {x: 36.6, y: -2.7458782, z: 13.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -117,6 +117,7 @@ GameObject:
   - component: {fileID: 5664687395500597789}
   - component: {fileID: 5664687395499630813}
   - component: {fileID: 3396714800306142844}
+  - component: {fileID: 1343118909064848595}
   m_Layer: 0
   m_Name: Rock Wall 01
   m_TagString: Untagged
@@ -190,6 +191,27 @@ MeshRenderer:
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &3396714800306142844
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5664687395497442845}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 20.32482, y: 8.860476, z: 6.3847737}
+  m_Center: {x: -0.19083309, y: 4.4290094, z: 0.014559984}
+--- !u!65 &1343118909064848595
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

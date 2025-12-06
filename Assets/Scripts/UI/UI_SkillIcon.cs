@@ -10,10 +10,10 @@ public class UI_SkillIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     //스킬창 아이콘에 부착하여 마우스 커서에 닿았을 시 스킬툴팁 활성화
     [SerializeField] public SkillData SkillData;
     [SerializeField] private Image IconImage;
-    [SerializeField] SkillTree SkillTree;
-    [SerializeField] PlayerSkillBook PlayerSkillBook;
-    [SerializeField] GameObject LearnSkillEffectImage;
-    [SerializeField] TMP_Text SkillName;
+    [SerializeField] public SkillTree SkillTree;
+    [SerializeField] public PlayerSkillBook PlayerSkillBook;
+    [SerializeField] public GameObject LearnSkillEffectImage;
+    [SerializeField] public TMP_Text SkillName;
     private Button Button;
     
     private void Awake()

@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class UI_SkillSlot : MonoBehaviour
 {
     [SerializeField] public SkillData SkillData;
-    [SerializeField] Image BackGround;
-    [SerializeField] Image CurrentImage;
+    [SerializeField] private Image BackGround;
+    [SerializeField] private Image CurrentImage;
 
     private void Update()
     {

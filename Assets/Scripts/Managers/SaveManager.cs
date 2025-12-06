@@ -7,6 +7,8 @@ public class SaveManager : MonoBehaviour
 {
     [SerializeField] public PlayerStat PlayerStat;
 
+    [SerializeField] private Transform CurrentTrsSave;
+
     PlayerSaveData playerSaveData;
     string filePath;
 
@@ -17,6 +19,7 @@ public class SaveManager : MonoBehaviour
         public int Level;
         public float CurrentExp;
         public int SkillPoint;
+        public int Gold;
 
         public float CurrentHp;
         public float CurrentMp;
@@ -24,6 +27,11 @@ public class SaveManager : MonoBehaviour
         public float Atk;
         public float Def;
         public float Critical;
+
+
+        public float PosX;
+        public float PosY;
+        public float PosZ;
     }
 
     private void Awake()
@@ -45,11 +53,17 @@ public class SaveManager : MonoBehaviour
         playerSaveData.Level = PlayerStat.Level;
         playerSaveData.CurrentExp = PlayerStat.CurrentExp;
         playerSaveData.SkillPoint = PlayerStat.SkillPoint;
+        playerSaveData.Gold = PlayerStat.Gold;
         playerSaveData.CurrentHp = PlayerStat.CurrentHp;
         playerSaveData.CurrentMp = PlayerStat.CurrentMp;
         playerSaveData.Atk = PlayerStat.Atk;
         playerSaveData.Def = PlayerStat.Def;
         playerSaveData.Critical = PlayerStat.Crit;
+
+        Vector3 pos = PlayerStat.Instance.transform.position;
+        playerSaveData.PosX = pos.x;
+        playerSaveData.PosY = pos.y;
+        playerSaveData.PosZ = pos.z;
 
         string json = JsonUtility.ToJson(playerSaveData, true);
         File.WriteAllText(filePath, json);
@@ -71,12 +85,18 @@ public class SaveManager : MonoBehaviour
         PlayerStat.UserName = playerSaveData.UserName;
         PlayerStat.Level = playerSaveData.Level;
         PlayerStat.SkillPoint = playerSaveData.SkillPoint;
+        PlayerStat.Gold = playerSaveData.Gold;
         PlayerStat.CurrentExp = playerSaveData.CurrentExp;
         PlayerStat.CurrentHp = playerSaveData.CurrentHp;
         PlayerStat.CurrentMp = playerSaveData.CurrentMp;
         PlayerStat.Atk = playerSaveData.Atk;
         PlayerStat.Def = playerSaveData.Def;
         PlayerStat.Crit = playerSaveData.Critical;
+
+        Vector3 loadPos = new Vector3(playerSaveData.PosX, playerSaveData.PosY, playerSaveData.PosZ);
+        //PlayerStat.Instance.transform.position = loadPos;
+
+        PlayerStat.Instance.transform.position = CurrentTrsSave.transform.position;
 
         Debug.Log("게임 불러오기 완료");
     }

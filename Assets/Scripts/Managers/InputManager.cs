@@ -14,10 +14,16 @@ public class InputManager : MonoBehaviour
     public KeyCode Skill = KeyCode.K;
     public KeyCode Quest = KeyCode.J;
 
+    public KeyCode ItemSlot1 = KeyCode.F1;
+    public KeyCode ItemSlot2 = KeyCode.F2;
+    public KeyCode ItemSlot3 = KeyCode.F3;
+    public KeyCode ItemSlot4 = KeyCode.F4;
+
     public event Action OnToggleOption;
     public event Action OnToggleInventory;
     public event Action OnToggleSkill;  
     public event Action OnToggleQuest;
+    public event Action OnUseItem;
 
     private void Awake()
     {
@@ -39,6 +45,18 @@ public class InputManager : MonoBehaviour
         if (Input.GetKeyDown(Inventory)) { OnToggleInventory?.Invoke(); }
         if (Input.GetKeyDown(Skill)) { OnToggleSkill?.Invoke(); }
         if (Input.GetKeyDown(Quest)) { OnToggleQuest?.Invoke(); }
+
+        if (Input.GetKeyDown(KeyCode.F1))
+            UI_ItemSlotManager.Instance.GetSlot(0)?.UseItem();
+
+        if (Input.GetKeyDown(KeyCode.F2))
+            UI_ItemSlotManager.Instance.GetSlot(1)?.UseItem();
+
+        if (Input.GetKeyDown(KeyCode.F3))
+            UI_ItemSlotManager.Instance.GetSlot(2)?.UseItem();
+
+        if (Input.GetKeyDown(KeyCode.F4))
+            UI_ItemSlotManager.Instance.GetSlot(3)?.UseItem();
     }
 
 }

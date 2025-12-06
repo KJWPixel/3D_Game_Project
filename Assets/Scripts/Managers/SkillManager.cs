@@ -9,11 +9,11 @@ public class SkillManager : MonoBehaviour
 
     bool IsCasting = false;
 
-    PlayerStat PlayerStat;
-    PlayerSkillBook PlayerSkillBook;
-    PlayerController PlayerController;
-    PlayerAnimationController Anim;
-    BuffController BuffController;
+    private PlayerStat PlayerStat;
+    private PlayerSkillBook PlayerSkillBook;
+    private PlayerController PlayerController;
+    private PlayerAnimationController Anim;
+    private BuffController BuffController;
     
 
     ISkillBehaviorStrategy ISkillStrategy;

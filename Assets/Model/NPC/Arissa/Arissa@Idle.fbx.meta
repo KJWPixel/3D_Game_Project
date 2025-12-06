@@ -1,29 +1,9 @@
 fileFormatVersion: 2
-guid: b123c4a8625f588419d1d9d47553070a
+guid: 1b251b65fea82a24198a8c606d19dbef
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Arissa_MAT
-    second: {fileID: 2100000, guid: 02ec9aaa56a8aa44ab7872d4ab2204b5, type: 2}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Arissa_DIFF_diffuse
-    second: {fileID: 2800000, guid: 3bf55cfe1cbc2df48aa0064d4966a70f, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Arissa_NM_normal
-    second: {fileID: 2800000, guid: 23ee412ddb6617847a9115d0c798d5c4, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Arissa_SPEC_specular
-    second: {fileID: 2800000, guid: 96c38dc7c6879fa4a9d053656426d64f, type: 3}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -97,8 +77,7 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
-  referencedClips:
-  - 1b251b65fea82a24198a8c606d19dbef
+  referencedClips: []
   importAnimation: 1
   humanDescription:
     serializedVersion: 3
@@ -935,11 +914,11 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: b123c4a8625f588419d1d9d47553070a, type: 3}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 3
   humanoidOversampling: 1
-  avatarSetup: 1
+  avatarSetup: 2
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   importBlendShapeDeformPercent: 1
   remapMaterialsIfMaterialImportModeIsNone: 0

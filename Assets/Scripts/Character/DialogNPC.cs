@@ -47,8 +47,8 @@ public class DialogNPC : NPCCharacter
 
     private void NPCSetup()
     {
-        NPCText.text = NPCname;
-        NPCMark.gameObject.SetActive(false);
+        //NPCText.text = NpcName;
+        //NPCMark.gameObject.SetActive(false);
     }
 
     private void NPCNameOn()

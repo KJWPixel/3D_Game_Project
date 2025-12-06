@@ -31,8 +31,7 @@ public class SpawnManager : MonoBehaviour
                 {
                     Spawn();
                 }
-            }
-            
+            }          
         }
     }
     private void OnTriggerExit(Collider other)

@@ -20,7 +20,8 @@ public class LoginManager : MonoBehaviour
 
     private void Awake()
     {
-        savePath = Path.Combine(Application.persistentDataPath, SAVEFOLDER, FILENAME);
+        //savePath = Path.Combine(Application.persistentDataPath, SAVEFOLDER, FILENAME);
+        savePath = Path.Combine(Application.dataPath, SAVEFOLDER, FILENAME);
 
         string directory = Path.GetDirectoryName(savePath);
         if (!Directory.Exists(directory))
