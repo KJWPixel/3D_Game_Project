@@ -13,10 +13,11 @@ public abstract class NPCCharacter : MonoBehaviour
     [SerializeField] protected string NpcName;
     [SerializeField] protected TextMeshPro NPCText;
     [SerializeField] protected GameObject NPCMark;
+    [SerializeField] protected GameObject NPCQuestMark;
     [SerializeField] protected int NameDistance = 10;
 
     [Header("¥Î»≠ DialogueLine")]
-    [TextArea] [SerializeField] protected string[] DialogueLines;
+    [TextArea] [SerializeField] protected List<string> DialogueLines = new List<string>();
     [SerializeField] protected int CurrentDialogueIndex = 0;
     [SerializeField] protected float InsteractionRange = 3f;
     [SerializeField] protected float Playerdistance;

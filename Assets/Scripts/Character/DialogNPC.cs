@@ -23,7 +23,11 @@ public class DialogNPC : NPCCharacter
     {
         MainCamera = Camera.main;
 
-        if(NPCText != null )
+        //if(NPCText != null )
+        //{
+        //    NPCText = NPCMark.gameObject.GetComponent<TextMeshPro>();
+        //}
+        if (NPCText == null && NPCMark != null)
         {
             NPCText = NPCMark.gameObject.GetComponent<TextMeshPro>();
         }
@@ -32,6 +36,7 @@ public class DialogNPC : NPCCharacter
         {
             Player = GameManager.Instance.Player;
         }
+
 
         NPCSetup();
     }
@@ -43,12 +48,21 @@ public class DialogNPC : NPCCharacter
     private void LateUpdate()
     {
         NPCNameOn();
+        //NPCQuestOn();
     }
 
     private void NPCSetup()
     {
-        //NPCText.text = NpcName;
-        //NPCMark.gameObject.SetActive(false);
+        if(NPCText != null)
+        {
+            NPCText.text = NpcName;
+        }
+        
+        if(NPCMark != null)
+        {
+            NPCMark.gameObject.SetActive(false);
+        }
+        
     }
 
     private void NPCNameOn()
@@ -67,6 +81,22 @@ public class DialogNPC : NPCCharacter
         }
     }
 
+    private void NPCQuestOn()
+    {
+        Playerdistance = Vector3.Distance(transform.position, Player.transform.position);
+        if (Playerdistance > NameDistance || Player == null)
+        {
+            NPCQuestMark.gameObject.SetActive(false);
+            return;
+        }
+        else if (Playerdistance < NameDistance)
+        {
+            NPCQuestMark.gameObject.SetActive(true);
+            Quaternion targetRotation = MainCamera.transform.rotation;
+            NPCQuestMark.transform.rotation = targetRotation;
+        }
+    }
+
     private void Interact()
     {
         Playerdistance = Vector3.Distance(transform.position, Player.transform.position);
@@ -82,18 +112,8 @@ public class DialogNPC : NPCCharacter
         {
             isTolk = true;
             Debug.Log("StartDialogue");
+
             DialogueManager.Instance.StartDialogue(this, Name, DialogueLines, interactionType);
-
-            if(QuestData != null)
-            {
-                if (QuestManager.Instance.ClearQuests.Contains(QuestData.QuestId))
-                {
-                    Debug.Log("이미 완료한 퀘스트입니다.");
-                    return;
-                }
-
-                QuestManager.Instance.UpdateQuestPrecess(QuestData.QuestClassification, id, QuestData.Amount);
-            }                    
         }
     }
 }
