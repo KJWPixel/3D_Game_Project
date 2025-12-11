@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 public enum InteractionType
@@ -17,16 +18,27 @@ public class DialogNPC : NPCCharacter
     public QuestData QuestData;
     public Transform TargetTrs;
 
+    [Header("퀘스트마커")]
+    [SerializeField] public GameObject MainQuestMarker;
+    [SerializeField] public GameObject SideQuestMarker;
+    [SerializeField] public GameObject RepeatQuestMarker;
+    [SerializeField] public GameObject EventQuestMarker;
+    [SerializeField] private GameObject currentQuestMarker;
+
     private Camera MainCamera;
+
+    private bool isShowingMarker = false;
+    private float sqrNameDistance;        // Awake()에서 미리 제곱
+
+    private void Awake()
+    {
+        sqrNameDistance = NameDistance * NameDistance; 
+    }
 
     private void Start()
     {
         MainCamera = Camera.main;
 
-        //if(NPCText != null )
-        //{
-        //    NPCText = NPCMark.gameObject.GetComponent<TextMeshPro>();
-        //}
         if (NPCText == null && NPCMark != null)
         {
             NPCText = NPCMark.gameObject.GetComponent<TextMeshPro>();
@@ -43,17 +55,23 @@ public class DialogNPC : NPCCharacter
     private void Update()
     {
         Interact();
+        UpdateShowMarker();
     }
 
     private void LateUpdate()
     {
-        NPCNameOn();
-        //NPCQuestOn();
+        //NPCNameOn();
+        //UpdateShowMarker();
     }
 
     private void NPCSetup()
     {
-        if(NPCText != null)
+        MainQuestMarker.SetActive(false);
+        SideQuestMarker.SetActive(false);
+        RepeatQuestMarker.SetActive(false);
+        EventQuestMarker.SetActive(false);
+
+        if (NPCText != null)
         {
             NPCText.text = NpcName;
         }
@@ -62,7 +80,33 @@ public class DialogNPC : NPCCharacter
         {
             NPCMark.gameObject.SetActive(false);
         }
+
+        if(QuestData != null)
+        {
+            switch (QuestData.QuestClass)
+            {
+                case QuestClass.Main:
+                    currentQuestMarker = MainQuestMarker;
+                    break;
+                case QuestClass.Sub:
+                    currentQuestMarker = SideQuestMarker;
+                    break;
+                case QuestClass.Repeat:
+                    currentQuestMarker = RepeatQuestMarker;
+                    break;
+                case QuestClass.Event:
+                    currentQuestMarker = EventQuestMarker;
+                    break;
+                default:
+                    break;
+            }
+        } 
         
+        if(currentQuestMarker != null)
+        {
+            currentQuestMarker.SetActive(true);
+            currentQuestMarker.transform.localPosition = new Vector3(0, 3, 0);
+        }
     }
 
     private void NPCNameOn()
@@ -81,20 +125,49 @@ public class DialogNPC : NPCCharacter
         }
     }
 
-    private void NPCQuestOn()
+    private void UpdateShowMarker()
     {
-        Playerdistance = Vector3.Distance(transform.position, Player.transform.position);
-        if (Playerdistance > NameDistance || Player == null)
+        if(Player == null)
         {
-            NPCQuestMark.gameObject.SetActive(false);
+            if(isShowingMarker)
+            {
+                isShowingMarker = false;
+            }
             return;
         }
-        else if (Playerdistance < NameDistance)
+
+        float sqrDist = (transform.position - Player.transform.position).sqrMagnitude;
+        bool shouldShow = sqrDist < sqrNameDistance;
+
+        if(shouldShow != isShowingMarker)
         {
-            NPCQuestMark.gameObject.SetActive(true);
-            Quaternion targetRotation = MainCamera.transform.rotation;
-            NPCQuestMark.transform.rotation = targetRotation;
+            SetMarkerActive(shouldShow);
+            isShowingMarker = shouldShow; 
+        }   
+
+        // 회전은 네임, 마커가 보일 떄만
+        if(shouldShow)
+        {
+            NPCMark.transform.LookAt(MainCamera.transform);
+            NPCMark.transform.Rotate(0, 180, 0); //앞면으로 필요 시
+
+            if (currentQuestMarker != null)
+            {
+                currentQuestMarker.transform.LookAt(MainCamera.transform);
+                currentQuestMarker.transform.Rotate(0, 180, 0);
+            }           
         }
+    }
+
+    private void SetMarkerActive(bool active)
+    {
+        NPCMark.SetActive(active);
+
+        if(currentQuestMarker == null)
+        {
+            return;
+        }
+        currentQuestMarker.SetActive(active);
     }
 
     private void Interact()
