@@ -123,9 +123,7 @@ public class DialogueManager : MonoBehaviour
                 UIManager.Instance.DialoguePanel.SetActive(false);
                 break;
             case InteractionType.Shop:
-                UIManager.Instance.ChoiceYes.SetActive(true);
-                UIManager.Instance.ChoiceNo.SetActive(true);
-                UIManager.Instance.SetupQuestButton(CurrentNPC.QuestData);
+                ShopManager.Instance.OpenShop(CurrentNPC);
                 break;
             case InteractionType.Quest:
                 UIManager.Instance.ChoiceYes.SetActive(true);

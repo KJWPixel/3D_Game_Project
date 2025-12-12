@@ -12,6 +12,7 @@ public abstract class ItemData : ScriptableObject
     [SerializeField] private Sprite icon;
     [SerializeField] private string description;
     [SerializeField] private ItemGrade grade;
+    [SerializeField] private int price;
     
 
     //추상 변수
@@ -24,5 +25,6 @@ public abstract class ItemData : ScriptableObject
     public Sprite Icon => icon;
     public string Description => description;
     public ItemGrade Grade => grade;
+    public int Price => price;
 }   
 

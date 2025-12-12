@@ -10,13 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 778a775f023cd0748a5c4262fa864209, type: 3}
-  m_Name: MpPotion_Test
+  m_Name: ElixirPotion
   m_EditorClassIdentifier: 
-  id: 2
-  itemname: MpPotion_Test
-  icon: {fileID: 0}
-  description: "MP\uD3EC\uC158"
-  grade: 2
-  maxStackAmount: 999
-  ConsumRecovery: []
+  id: 3
+  itemname: ElixirPotion
+  icon: {fileID: 21300000, guid: 178ca42dbb83b27458dc0524ac4c7dbb, type: 3}
+  description: "Hp\uC640 Mp\uB97C 70\uD68C\uBCF5 \uC2DC\uD0A8\uB2E4."
+  grade: 1
+  price: 500
+  maxStackAmount: 99
+  ConsumRecovery:
+  - ConsumableType: 0
+    Amount: 70
+  - ConsumableType: 1
+    Amount: 70
   ConsumBuff: []

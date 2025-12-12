@@ -10,17 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 778a775f023cd0748a5c4262fa864209, type: 3}
-  m_Name: HpPotion_Test
+  m_Name: HpPotion
   m_EditorClassIdentifier: 
   id: 1
-  itemname: HpPotion_Test
-  icon: {fileID: 21300000, guid: e359cba75fdaf9e43a5e96e1485dfeb9, type: 3}
-  grade: 1
-  description: "Hp\uD3EC\uC158"
-  maxStackAmount: 999
+  itemname: HpPotion
+  icon: {fileID: 21300000, guid: c175493977708664ea7e2cd8de900ee7, type: 3}
+  description: "Hp\uB97C 30 \uD68C\uBCF5\uC2DC\uD0A8\uB2E4."
+  grade: 0
+  price: 100
+  maxStackAmount: 99
   ConsumRecovery:
   - ConsumableType: 0
-    Amount: 15
-  - ConsumableType: 1
-    Amount: 15
+    Amount: 30
   ConsumBuff: []

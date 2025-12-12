@@ -25,6 +25,9 @@ public class DialogNPC : NPCCharacter
     [SerializeField] public GameObject EventQuestMarker;
     [SerializeField] private GameObject currentQuestMarker;
 
+    [Header("상점 아이템 목록")]
+    [SerializeField] public List<ItemData> itemDatas = new List<ItemData>();
+
     private Camera MainCamera;
 
     private bool isShowingMarker = false;
@@ -66,10 +69,23 @@ public class DialogNPC : NPCCharacter
 
     private void NPCSetup()
     {
-        MainQuestMarker.SetActive(false);
-        SideQuestMarker.SetActive(false);
-        RepeatQuestMarker.SetActive(false);
-        EventQuestMarker.SetActive(false);
+        if(MainQuestMarker != null)
+        {
+            MainQuestMarker.SetActive(false);
+        }
+        if(SideQuestMarker != null)
+        {
+            SideQuestMarker.SetActive(false);
+        }
+        if(RepeatQuestMarker != null)
+        {
+            RepeatQuestMarker.SetActive(false);
+        }
+        if(EventQuestMarker != null)
+        {
+            EventQuestMarker.SetActive(false);
+        }
+        
 
         if (NPCText != null)
         {
