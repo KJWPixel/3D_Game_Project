@@ -260,13 +260,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8f54e8a3728c7f4cb1fd28a38975cd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
-  NpcName: 
+  id: 4
+  NpcName: "\uD398\uB808\uADF8\uB9AC\uB2C8"
   NPCText: {fileID: 8903951221711308184}
   NPCMark: {fileID: 7845428133414382030}
   NPCQuestMark: {fileID: 0}
   NameDistance: 10
-  DialogueLines: []
+  DialogueLines:
+  - "\uB09C \uC0C1\uC778\uC778 \uD398\uB808\uADF8\uB9AC\uB2C8\uB77C\uACE0 \uD574"
   CurrentDialogueIndex: 0
   InsteractionRange: 3
   Playerdistance: 0
@@ -279,3 +280,7 @@ MonoBehaviour:
   RepeatQuestMarker: {fileID: 0}
   EventQuestMarker: {fileID: 0}
   currentQuestMarker: {fileID: 0}
+  itemDatas:
+  - {fileID: 11400000, guid: de858e66afcab93448bfd9bd9ae9d52a, type: 2}
+  - {fileID: 11400000, guid: 6899c763f2cde6240a48021312f5dc60, type: 2}
+  - {fileID: 11400000, guid: 9ee544135512320478daec06db0ce9a7, type: 2}

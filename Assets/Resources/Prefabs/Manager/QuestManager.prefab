@@ -44,6 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ecd88d5b4da55142ad26d751c032c75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxQuestList: 15
+  maxQuestList: 15
   ActiveQuests: []
-  CompletedQuests: []

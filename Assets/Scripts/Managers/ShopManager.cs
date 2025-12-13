@@ -36,6 +36,14 @@ public class ShopManager : MonoBehaviour
         buyButton.onClick.AddListener(OnBuyButtonClicked);
     }
 
+    private void Update()
+    {
+        if (shopPanel.activeInHierarchy && Input.GetKeyDown(KeyCode.Escape))
+        {
+            CloseShop();
+        }
+    }
+
     // DialogueManager의 EndDialogue에서 호출 
     public void OpenShop(DialogNPC npc)
     {
@@ -157,5 +165,10 @@ public class ShopManager : MonoBehaviour
         {
             Debug.Log("구매 실패 (인벤토리 부족 등)");
         }
+    }
+
+    public bool IsShopOpen()
+    {
+        return shopPanel != null && shopPanel.activeInHierarchy;
     }
 }

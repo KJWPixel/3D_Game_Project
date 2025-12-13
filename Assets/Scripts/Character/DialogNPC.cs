@@ -190,19 +190,42 @@ public class DialogNPC : NPCCharacter
     {
         Playerdistance = Vector3.Distance(transform.position, Player.transform.position);
 
+        // 대화 중인데 멀어지면 종료
         if (isTolk && Playerdistance > InsteractionRange)
         {
             isTolk = false;
-            DialogueManager.Instance.EndDialogue(); 
+            DialogueManager.Instance.CloseDialogue(false); // EndDialogue()
             return;
         }
 
+        if (ShopManager.Instance != null && ShopManager.Instance.IsShopOpen())  // IsShopOpen() 함수 아래에 추가할게요
+        {
+            // 상점 열려 있으면 E키 무시 (또는 필요 시 안내 메시지)
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                // 선택적: Debug.Log("상점 이용 중에는 대화를 시작할 수 없습니다.");
+                return;
+            }
+        }
+
+        // E키 입력 처리
         if (Playerdistance < InsteractionRange && Input.GetKeyDown(KeyCode.E))
         {
-            isTolk = true;
-            Debug.Log("StartDialogue");
 
-            DialogueManager.Instance.StartDialogue(this, Name, DialogueLines, interactionType);
+            if(!DialogueManager.Instance.IsDialogueActive)
+            {
+                //대화시작
+                isTolk = true;
+                DialogueManager.Instance.StartDialogue(this, Name, DialogueLines, interactionType);
+            }
+            else
+            {
+                DialogueManager.Instance.ContinueDialogue();
+            }
+            //isTolk = true;
+            //Debug.Log("StartDialogue");
+
+            //DialogueManager.Instance.StartDialogue(this, Name, DialogueLines, interactionType);
         }
     }
 }

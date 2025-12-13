@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5578412696260026151
+--- !u!1 &7667237118346668313
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,41 +8,47 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5876682090354744696}
-  - component: {fileID: 4326611024885475276}
+  - component: {fileID: 8791966833654974185}
+  - component: {fileID: 923222492641228694}
   m_Layer: 0
-  m_Name: SaveManager
+  m_Name: ShopManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5876682090354744696
+--- !u!4 &8791966833654974185
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5578412696260026151}
+  m_GameObject: {fileID: 7667237118346668313}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -34.999985, y: 1.3316176, z: -35}
+  m_LocalPosition: {x: 500, y: 1.8499999, z: 550}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4326611024885475276
+--- !u!114 &923222492641228694
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5578412696260026151}
+  m_GameObject: {fileID: 7667237118346668313}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d026f773e6e1f784cbff41f5df3b34c6, type: 3}
+  m_Script: {fileID: 11500000, guid: 818c52b0ef1f6544fa9ee0eb38d37456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerStat: {fileID: 0}
-  CurrentTrsSave: {fileID: 0}
+  shopPanel: {fileID: 0}
+  itemListParent: {fileID: 0}
+  itemSlotPrefab: {fileID: 2936088873013990025, guid: 9b241476a88e71943a844dbd46a01515, type: 3}
+  itemNameText: {fileID: 0}
+  itemDescriptionText: {fileID: 0}
+  itemPriceText: {fileID: 0}
+  itemIconImage: {fileID: 0}
+  buyButton: {fileID: 0}

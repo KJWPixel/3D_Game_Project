@@ -17,6 +17,8 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private float typingDelay = 0.03f;
     public DialogNPC CurrentNPC;
 
+    // 대화 중인지 외부에서 확인
+    public bool IsDialogueActive => UIManager.Instance.DialoguePanel.activeInHierarchy;
     private void Awake()
     {
         if (Instance == null)
@@ -61,8 +63,7 @@ public class DialogueManager : MonoBehaviour
             Sentences.Add("퀘스트가 있습니다. 수락하시겠습니까?");
         }
 
-        // 인덱스 초기화
-        //Index = 0;
+        Index = 0; // 반도시 인덱스 초기화
 
         // UI 세팅
         UIManager.Instance.DialoguePanel.SetActive(true);
@@ -74,24 +75,46 @@ public class DialogueManager : MonoBehaviour
 
     private void ShowTextSentence()
     {
-        if (Index < Sentences.Count) // Lenght -> Count로 변경 (List)
+        // 모든 문장 끝 -> 대화종료
+        if (Index >= Sentences.Count)
         {
-            if (TypingCoroutine != null)
+            EndDialogue();
+            return;
+        }
+
+        // 타이핑 중인데 플레이엉가 입력하면 즉시 전체 표시
+        if(IsTyping)
+        {
+            if(TypingCoroutine != null)
             {
                 StopCoroutine(TypingCoroutine);
                 TypingCoroutine = null;
-            }    
+            }
+            UIManager.Instance.DialogueText.text = Sentences[Index];
+            IsTyping = false;
+            return;
+        }
 
-            TypingCoroutine = StartCoroutine(TextCoroutine());
-            Index++;
-        }
-        else
-        {
-            EndDialogue();
-        }
+        TypingCoroutine = StartCoroutine(TextCoroutine());
+
+        //if (Index < Sentences.Count) // Lenght -> Count로 변경 (List)
+        //{
+        //    if (TypingCoroutine != null)
+        //    {
+        //        StopCoroutine(TypingCoroutine);
+        //        TypingCoroutine = null;
+        //    }    
+
+        //    TypingCoroutine = StartCoroutine(TextCoroutine());
+        //    Index++;
+        //}
+        //else
+        //{
+        //    EndDialogue();
+        //}
     }
 
-    IEnumerator TextCoroutine()
+    IEnumerator TextCoroutine() // 타이핑 코루틴 
     {
         IsTyping = true;
         UIManager.Instance.DialogueText.text = "";
@@ -99,20 +122,43 @@ public class DialogueManager : MonoBehaviour
         // Index는 아지가 증가 전이어야 하므로, 여기서 현재 문장 사용
         string currnetSentence = Sentences[Index];
 
-        foreach (char s in Sentences[Index])
+        foreach (char c in Sentences[Index])
         {
-            UIManager.Instance.DialogueText.text += s;
+            UIManager.Instance.DialogueText.text += c;
             yield return new WaitForSeconds(typingDelay);
         }
 
-
         // 더 이상 문장이 없으면 종류
-        if (Index >= Sentences.Count)
-        {
-            EndDialogue();
-        }
+        //if (Index >= Sentences.Count)
+        //{
+        //    EndDialogue();
+        //}
 
         IsTyping = false;
+        TypingCoroutine = null;
+    }
+
+    public void ContinueDialogue()
+    {
+        if (!IsDialogueActive) return;
+
+        if (IsTyping)
+        {
+            // 타이핑 중 → 즉시 완료
+            if (TypingCoroutine != null)
+            {
+                StopCoroutine(TypingCoroutine);
+                TypingCoroutine = null;
+            }
+            UIManager.Instance.DialogueText.text = Sentences[Index];
+            IsTyping = false;
+        }
+        else
+        {
+            // 타이핑 끝 → 다음 문장
+            Index++;
+            ShowTextSentence();  // 문장 다 끝나면 여기서 EndDialogue() 자동 호출됨
+        }
     }
 
     public void EndDialogue()
@@ -124,6 +170,7 @@ public class DialogueManager : MonoBehaviour
                 break;
             case InteractionType.Shop:
                 ShopManager.Instance.OpenShop(CurrentNPC);
+                UIManager.Instance.DialoguePanel.SetActive(false);
                 break;
             case InteractionType.Quest:
                 UIManager.Instance.ChoiceYes.SetActive(true);
@@ -136,7 +183,10 @@ public class DialogueManager : MonoBehaviour
                 break;
         }
     
-        Index = 0;       
+        Index = 0;
+        IsTyping = false;
+        TypingCoroutine = null;
+        CurrentInteraction = InteractionType.None;
     }
 
     public void CloseDialogue(bool _IsTolk)
@@ -144,6 +194,14 @@ public class DialogueManager : MonoBehaviour
         if(!_IsTolk)
         {
             UIManager.Instance.DialoguePanel.SetActive(false);
+            Index = 0;
+            IsTyping = false;
+            if (TypingCoroutine != null)
+            {
+                StopCoroutine(TypingCoroutine);
+                TypingCoroutine = null;
+            }
+
         }
     }
 }
