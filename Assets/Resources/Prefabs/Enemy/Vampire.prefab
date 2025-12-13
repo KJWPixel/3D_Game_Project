@@ -203,10 +203,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DropItemPrefab: {fileID: 4690846571101904909, guid: 9a10fa2c14be9b94c90e257bf1680c04, type: 3}
   DropItems:
-  - ItemData: {fileID: 11400000, guid: 1f2de5a59a89acd4a8fb196928ab1510, type: 2}
+  - ItemData: {fileID: 11400000, guid: de858e66afcab93448bfd9bd9ae9d52a, type: 2}
     DropProbability: 0.2
-  - ItemData: {fileID: 11400000, guid: 8d4bc0d871a94f04aa9383f5e81fe43b, type: 2}
-    DropProbability: 0
+  - ItemData: {fileID: 11400000, guid: 6899c763f2cde6240a48021312f5dc60, type: 2}
+    DropProbability: 0.2
   RandomNumber: 0
 --- !u!136 &7100487767561807076
 CapsuleCollider:

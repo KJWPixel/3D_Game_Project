@@ -12128,8 +12128,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3871388695984045842}
   - {fileID: 3702483578546592946}
+  - {fileID: 3871388695984045842}
   - {fileID: 2471583491659690833}
   - {fileID: 4168963006175546955}
   - {fileID: 6432231529760212231}
@@ -12155,6 +12155,7 @@ MonoBehaviour:
   BackGround: {fileID: 4812243092201572479}
   CurrentImage: {fileID: 2360264803710065840}
   QuantityText: {fileID: 0}
+  coolTimeDuration: 5
 --- !u!114 &7602893867706692384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13226,8 +13227,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1272829541657407182}
   - {fileID: 7913833104147559446}
+  - {fileID: 1272829541657407182}
   - {fileID: 8167263703118540389}
   - {fileID: 1606736018912579608}
   - {fileID: 3329697502018843335}
@@ -13253,6 +13254,7 @@ MonoBehaviour:
   BackGround: {fileID: 9025661092683173067}
   CurrentImage: {fileID: 8071560078630329200}
   QuantityText: {fileID: 0}
+  coolTimeDuration: 5
 --- !u!114 &6589265075593805189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13414,8 +13416,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 474999021813063132}
   - {fileID: 8964126833214734345}
+  - {fileID: 474999021813063132}
   - {fileID: 2817185605236744366}
   - {fileID: 808147923384926319}
   - {fileID: 2057189019324486051}
@@ -13441,6 +13443,7 @@ MonoBehaviour:
   BackGround: {fileID: 6974492389715252344}
   CurrentImage: {fileID: 789701525259228261}
   QuantityText: {fileID: 1512524544365771962}
+  coolTimeDuration: 5
 --- !u!114 &2931742761758290056
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21724,8 +21727,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7903367217951189200}
   - {fileID: 8091146647510789242}
+  - {fileID: 7903367217951189200}
   - {fileID: 5866170855176481968}
   - {fileID: 2796950521949398306}
   - {fileID: 7707210891107314708}
@@ -21751,6 +21754,7 @@ MonoBehaviour:
   BackGround: {fileID: 3406430600121545211}
   CurrentImage: {fileID: 1263863432173071313}
   QuantityText: {fileID: 0}
+  coolTimeDuration: 5
 --- !u!114 &7657856477894665997
 MonoBehaviour:
   m_ObjectHideFlags: 0

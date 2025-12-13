@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
+using UnityEngine.InputSystem.iOS;
 using UnityEngine.UI;
 
 public class UI_ItemSlot : MonoBehaviour
@@ -9,8 +11,11 @@ public class UI_ItemSlot : MonoBehaviour
     [SerializeField] private Image BackGround;
     [SerializeField] private Image CurrentImage;
     [SerializeField] private TMP_Text QuantityText;
-
-    [SerializeField] private InventoryItem itemData;
+    [SerializeField] private float coolTimeDuration = 5.0f;
+  
+    private InventoryItem itemData;
+    private float remainingCoolTime = 0f;
+    private bool isCooling = false;
 
     private void Update()
     {
@@ -19,65 +24,117 @@ public class UI_ItemSlot : MonoBehaviour
 
     public void SetItemSlot(InventoryItem item)
     {
-        Debug.Log("SetItemSlot 호출됨. item = " + item);
-        Debug.Log("ItemData = " + item?.ItemData);
+        if(item == null || item.ItemData == null) return;
 
         itemData = item;
-        if(item != null)
+
+        Sprite icon = item.ItemData.Icon;
+        if(icon != null)
         {
-            BackGround.sprite = itemData.ItemData.Icon;
-            CurrentImage.sprite = itemData.ItemData.Icon;
-            QuantityText.text = itemData.Quantity.ToString();
+            BackGround.sprite = icon;
+            CurrentImage.sprite = icon;
         }
+
+        UpdateQuantityText();
+        ResetCoolTime();
+
+        //itemData = item;
+        //if(item != null)
+        //{
+        //    BackGround.sprite = itemData.ItemData.Icon;
+        //    CurrentImage.sprite = itemData.ItemData.Icon;
+        //    QuantityText.text = itemData.Quantity.ToString();
+        //}
     }
 
     public void UseItem()
     {
-        if (itemData == null) return;
-        if (itemData.ItemData.Type != ItemType.Consumable) return;
+        if (itemData == null || itemData.ItemData.Type != ItemType.Consumable) return;
+
+        if(isCooling)
+        {
+            Debug.Log("아직 쿨타임 중입니다.");
+            return;
+        }
 
         ConsumableData consumable = itemData.ItemData as ConsumableData;
         if (consumable == null) return;
 
+        // 아이템 효과 적용
         consumable.Use(PlayerStat.Instance.gameObject);
 
-        // 인벤토리에서 1개 감소
+        // 인벤토리에서 수량 감소
         InventoryManager.Instance.RemoveItem(itemData.ItemData, 1);
 
-        // 슬롯의 수량 갱신
-        QuantityText.text = "x" + itemData.Quantity.ToString();
+        // UI슬롯의 수량 갱신
+        UpdateQuantityText();
 
-        // 만약 수량이 0이면 슬롯 비우기
+        // 수량이 0이면 슬롯 비우기
         if (itemData.Quantity <= 0)
         {
             ClearSlot();
+            return;
+        }
+
+        StartCoolTime();
+    }
+
+    private void StartCoolTime()
+    {
+        isCooling = true;
+        remainingCoolTime = coolTimeDuration;
+        CurrentImage.fillAmount = 1f;
+    }
+
+    private void ResetCoolTime()
+    {
+        isCooling = false;  
+        remainingCoolTime = 0f;
+        CurrentImage.fillAmount = 1f;
+    }
+
+    private void IconCoolTimeUpdate()
+    {
+        if (!isCooling) return;
+
+        remainingCoolTime -= Time.deltaTime;
+
+        if (remainingCoolTime <= 0f)
+        {
+            remainingCoolTime = 0f;
+            isCooling = false;
+            CurrentImage.fillAmount = 1f;
+        }
+        else
+        {
+            CurrentImage.fillAmount = remainingCoolTime / coolTimeDuration;
+        }
+    }
+
+    public void UpdateQuantityText()
+    {
+        if (QuantityText != null && itemData != null)
+        {
+            QuantityText.text = itemData.Quantity.ToString();
         }
     }
     public void ClearSlot()
     {
         itemData = null;
-        CurrentImage.sprite = null;
-        QuantityText.text = "";
-    }
+        if(CurrentImage != null) CurrentImage.sprite = null;
+        if(QuantityText != null) QuantityText.text = "";
+        if(BackGround != null) BackGround.sprite = null;
 
-    private void IconCoolTimeUpdate()
-    {
-        if (itemData == null) return;
-
-        float coolTIme = 0f;
-
-        //if (coolTIme >= 0)
-        //{
-        //    CurrentImage.fillAmount = 1f - (coolTIme / 5f);
-        //}
-        //else
-        //{
-        //    CurrentImage.fillAmount = 1f;
-        //}
+        ResetCoolTime();
     }
 
     public bool IsEmpty()
     {
         return itemData == null;
+    }
+
+    public InventoryItem GetItemData()
+    {
+        return itemData;
     }
 }

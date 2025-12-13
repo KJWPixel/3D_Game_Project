@@ -195,6 +195,7 @@ public class DialogNPC : NPCCharacter
         {
             isTolk = false;
             DialogueManager.Instance.CloseDialogue(false); // EndDialogue()
+            ShopManager.Instance.CloseShop();
             return;
         }
 

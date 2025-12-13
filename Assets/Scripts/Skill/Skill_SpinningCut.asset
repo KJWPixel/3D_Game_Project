@@ -32,7 +32,7 @@ MonoBehaviour:
     Distance: 0
     DelayTime: 0.1
     MaxTarget: 5
-  RequireLevel: 2
+  RequireLevel: 1
   RequireSP: 5
   PrerequisiteSkills: []
   MaxLevel: 1
