@@ -1,14 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+
 public class OptionPanelUI : BaseUI
 {
-
     [Header("옵션 패널")]
     [SerializeField] private GameObject GraphicsPanel;
     [SerializeField] private GameObject SoundPanel;
@@ -91,6 +88,20 @@ public class OptionPanelUI : BaseUI
             EffectVolumeSlider.value = settings.EffectVolume;
             BackGroundVolumeSlider.value = settings.BackGroundVolume;
 
+            //실시간 적용을 위한 이벤트 연결
+            MasterVolumeSlider.onValueChanged.AddListener((value) => 
+            { 
+                SettingsManager.Instance.SetSoundSettings(value, settings.EffectVolume, settings.BackGroundVolume); 
+            });
+            EffectVolumeSlider.onValueChanged.AddListener(value =>
+            {
+                SettingsManager.Instance.SetSoundSettings(settings.MasterVolume, value, settings.BackGroundVolume);
+            });
+            BackGroundVolumeSlider.onValueChanged.AddListener((value) =>
+            {
+                SettingsManager.Instance.SetSoundSettings(settings.MasterVolume, settings.EffectVolume, value);
+            });
+
             //슬라이더 범위 설정
             MasterVolumeSlider.minValue = 0f;
             MasterVolumeSlider.maxValue = 1f;
@@ -117,9 +128,11 @@ public class OptionPanelUI : BaseUI
     {
         GraphicsPanel.SetActive(activePanel == GraphicsPanel);
         SoundPanel.SetActive(activePanel == SoundPanel);
-        GameHelperPanel.SetActive(activePanel == GameHelperPanel);
- 
-            
+
+        if(GameHelperPanel != null)
+        {
+            GameHelperPanel.SetActive(activePanel == GameHelperPanel);
+        }           
     }
 
     public void OnClickApply()

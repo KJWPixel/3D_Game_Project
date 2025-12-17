@@ -117,7 +117,7 @@ public class PlayerController : MonoBehaviour
 
         CurrentState = _State;
 
-        Debug.Log("Player State 상태 전환:" + _State);
+        //Debug.Log("Player State 상태 전환:" + _State);
     }
 
     private void HandleMoveInput()

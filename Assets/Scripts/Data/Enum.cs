@@ -128,6 +128,29 @@ public enum QuestCondition
     Failed,
 }
 
+public enum SFXType
+{
+    None,
+    Walking,
+    Running,
+    Blow, // 타격음
+    Hit,  // 피격음
+    LevelUp,
+    Dead,
+    InventoryOpen,
+    InventoryClose,
+    ShopBuy,
+    QuestOpen,
+    QuestClose,
+    OptionOpen,
+    ButtonClick,
+    SkillSlash,
+    SkillChargeSlash,
+    SkillIce,
+
+    // 나중에 추가 
+
+}
 
 
 
