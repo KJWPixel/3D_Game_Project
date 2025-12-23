@@ -47,6 +47,7 @@ public class TitleUIController : BaseUI
 
     public void OnClickExit()
     {
+        SoundManager.Instance.PlaySFX(SFXType.ButtonClick);
         OpenUI(ExitUI);
     }
 
@@ -60,6 +61,7 @@ public class TitleUIController : BaseUI
         //}
         uiStack.Push(_Ui);
         _Ui.Opne();
+        SoundManager.Instance.PlaySFX(SFXType.ButtonClick);
     }
 
     public void OnClickCloseTopUI()

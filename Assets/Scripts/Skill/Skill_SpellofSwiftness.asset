@@ -24,7 +24,7 @@ MonoBehaviour:
   CastEffectPrefab: {fileID: 3744133877081091469, guid: a2a060732547fe64581bb0cb3c2bdf1d, type: 3}
   HitEffectPrefab: {fileID: 0}
   Effects:
-  - EffectType: 14
+  - EffectType: 6
     Power: 1.2
     HitCount: 0
     Duration: 90
@@ -36,4 +36,4 @@ MonoBehaviour:
   RequireSP: 20
   PrerequisiteSkills: []
   MaxLevel: 1
-  AnimationName: IsHeal
+  AnimationName: IsBuff

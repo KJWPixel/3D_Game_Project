@@ -34,9 +34,23 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip questCloseClip;
     [SerializeField] private AudioClip optionOpenClip;
     [SerializeField] private AudioClip buttonClickClip;
-    [SerializeField] private AudioClip skillSlashClip;
+    [SerializeField] private AudioClip skillSlashBlowClip;
     [SerializeField] private AudioClip skillChargeSlashClip;
-    [SerializeField] private AudioClip skillIceClip;
+    [SerializeField] private AudioClip skillSpinningCutClip;
+    [SerializeField] private AudioClip skillIcePickClip;
+    [SerializeField] private AudioClip skillEarthquakeClip;
+    [SerializeField] private AudioClip skillFrostBladeClip;
+    [SerializeField] private AudioClip skillColdWaveClip;
+    [SerializeField] private AudioClip skillIceShowerClip;
+    [SerializeField] private AudioClip skillMeteorFallClip;
+    [SerializeField] private AudioClip skillEnergyCondensationClip;
+    [SerializeField] private AudioClip skillHealingEnergyClip;
+    [SerializeField] private AudioClip skillHealingBeaconClip;
+    [SerializeField] private AudioClip skillLighthouseofMagicClip;
+    [SerializeField] private AudioClip skillSpellofSwiftnessClip;
+    [SerializeField] private AudioClip skillMagicShieldClip;
+    [SerializeField] private AudioClip skillTeleportClip;
+
 
 
     // clip 추가
@@ -57,6 +71,7 @@ public class SoundManager : MonoBehaviour
         }
         
         SceneManager.sceneLoaded += OnSceneLoaded;
+        SfxClipInit();
     }
 
     private void SfxClipInit()
@@ -76,9 +91,23 @@ public class SoundManager : MonoBehaviour
             { SFXType.QuestClose, questCloseClip},
             { SFXType.OptionOpen, optionOpenClip},
             { SFXType.ButtonClick, buttonClickClip},
-            { SFXType.SkillSlash, skillSlashClip},
+            { SFXType.SkillSlashBlow, skillSlashBlowClip},
             { SFXType.SkillChargeSlash, skillChargeSlashClip},
-            { SFXType.SkillIce, skillIceClip},
+            { SFXType.SkillSpinningCut, skillSpinningCutClip },
+            { SFXType.SkillIcePick, skillIcePickClip },
+            { SFXType.SkillEarthQuake, skillEarthquakeClip },
+            { SFXType.SkillFrostBlade, skillFrostBladeClip },
+            { SFXType.SkillColdWave, skillColdWaveClip },
+            { SFXType.SkillIceShower, skillIceShowerClip },
+            { SFXType.SkillMeteorFall, skillMeteorFallClip },
+            { SFXType.SkillEnergyCondensation, skillEnergyCondensationClip },
+            { SFXType.SkillHealingEnergy, skillHealingEnergyClip },
+            { SFXType.SkillHealingBeacon, skillHealingBeaconClip },
+            { SFXType.SkillLighthouseofMagic, skillLighthouseofMagicClip },
+            { SFXType.SkillSpellofSwiftness, skillSpellofSwiftnessClip },
+            { SFXType.SkillMagicShield, skillMagicShieldClip },
+            { SFXType.SkillTeleport, skillTeleportClip },
+            
             //추가
         };
     }

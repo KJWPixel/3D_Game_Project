@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Skill_SlashBlow
   m_EditorClassIdentifier: 
   SkillID: 1
-  SkillKey: 
+  SkillKey: SlashBlow
   SkillName: "\uC2AC\uB808\uC26C\uBE14\uB85C\uC6B0"
   Icon: {fileID: 21300000, guid: 1a862a305a44ca64e939c2b35b24e829, type: 3}
   Cost: 5

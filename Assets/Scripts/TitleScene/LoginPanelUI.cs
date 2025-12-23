@@ -14,7 +14,8 @@ public class LoginPanelUI : BaseUI
             Debug.LogError("LoginManager가 할당되지 않음");
             return;
         }
-
+        SoundManager.Instance.PlaySFX(SFXType.ButtonClick);
         loginManager.TryLogin();
+        
     }
 }
