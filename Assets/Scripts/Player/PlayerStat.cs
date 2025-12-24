@@ -330,6 +330,11 @@ public class PlayerStat : MonoBehaviour
         vignette.intensity.value = Mathf.Lerp(vignette.intensity.value, 0f, Time.deltaTime * 5f);
     }
 
+    public void Die()
+    {
+        
+    }
+
     public void AddExp(float _Exp)
     {
         CurrentExp += _Exp;
@@ -341,6 +346,7 @@ public class PlayerStat : MonoBehaviour
             LevelUp();
         }
     }
+
     private void LevelUp()
     {
         Level++;
@@ -349,5 +355,6 @@ public class PlayerStat : MonoBehaviour
         MaxMp *= 1.4f;
         Atk *= 1.1f;
         Def++;
+        SoundManager.Instance.PlaySFX(SFXType.LevelUp);
     }
 }

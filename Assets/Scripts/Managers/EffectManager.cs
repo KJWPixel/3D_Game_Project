@@ -19,7 +19,7 @@ public class EffectManager : MonoBehaviour
         if (_Position == null) return null;
 
         Debug.Log("스킬 이펙트 생성");
-        var Prefab = Instantiate(_Prefab, _Position, Quaternion.identity, DynamicObject.transform);
+        var Prefab = Instantiate(_Prefab, _Position, Quaternion.identity, DynamicObject.transform);       
         Destroy(Prefab, _Duration);
         return Prefab;
     }

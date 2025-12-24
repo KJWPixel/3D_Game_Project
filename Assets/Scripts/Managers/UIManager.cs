@@ -67,16 +67,21 @@ public class UIManager : MonoBehaviour
     {
         isOptionPanel = !isOptionPanel;
         OptionPanel.SetActive(isOptionPanel);
+        SoundManager.Instance.PlaySFX(SFXType.OptionOpen);
     }
 
     private void OnToggleInventory()
     {
         IsInventoryOpen = !IsInventoryOpen;
-        InventoryPanel.SetActive(IsInventoryOpen);
-
+        InventoryPanel.SetActive(IsInventoryOpen);      
         if (IsInventoryOpen)
         {
             InventoryUI.Instance.RefreshUI();
+            SoundManager.Instance.PlaySFX(SFXType.InventoryOpen);
+        }
+        else
+        {
+            SoundManager.Instance.PlaySFX(SFXType.InventoryClose);
         }
     }
 
@@ -84,6 +89,14 @@ public class UIManager : MonoBehaviour
     {
         isSkillTree = !isSkillTree;
         skillTree.SetActive(isSkillTree);
+        if(isSkillTree)
+        {
+            SoundManager.Instance.PlaySFX(SFXType.QuestOpen);
+        }
+        else
+        {
+            SoundManager.Instance.PlaySFX(SFXType.QuestClose);
+        }
     }
 
     private void OnToggleQuest()
@@ -91,6 +104,15 @@ public class UIManager : MonoBehaviour
         IsQuestOpen = !IsQuestOpen;
         QuestPanel.SetActive(IsQuestOpen);
         QuestToolTipPanel.SetActive(IsQuestOpen);
+        if(IsQuestOpen)
+        {
+            SoundManager.Instance.PlaySFX(SFXType.QuestOpen);
+        }
+        else
+        {
+            SoundManager.Instance.PlaySFX(SFXType.QuestClose);
+        }
+        
     }
 
     private void InitializeUI()

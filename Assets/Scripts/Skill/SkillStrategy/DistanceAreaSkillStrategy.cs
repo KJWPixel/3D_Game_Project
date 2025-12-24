@@ -9,6 +9,8 @@ public class DistanceAreaSkillStrategy : ISkillBehaviorStrategy
     List<Enemy> EnemyList = new List<Enemy>();
     public void Execute(PlayerController _Player, PlayerStat _PlayerStat, SkillData _SkillData, Transform _Target)
     {
+        SoundManager.Instance.PlayOneShot(_SkillData.CastSFX, _Player.transform.position);
+
         foreach(var Effect in _SkillData.Effects)
         {
             //스킬시작위치

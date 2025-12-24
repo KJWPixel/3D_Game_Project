@@ -931,11 +931,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 193360924}
   m_CullTransparentMesh: 1
---- !u!82 &215038779 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 4029659576252204543, guid: d1d14d14baa98ff4f99bd7272aeeba24, type: 3}
-  m_PrefabInstance: {fileID: 1539570969670135335}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &230733058
 GameObject:
   m_ObjectHideFlags: 0
@@ -2353,7 +2348,7 @@ RectTransform:
   m_Father: {fileID: 1946379536}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -5023,7 +5018,7 @@ RectTransform:
   m_Father: {fileID: 589296576}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -5220,7 +5215,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &988273693
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5295,7 +5290,7 @@ RectTransform:
   m_Father: {fileID: 254490253}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -6453,11 +6448,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1159293604}
   m_CullTransparentMesh: 1
---- !u!82 &1159397565 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 6895515130970704051, guid: d1d14d14baa98ff4f99bd7272aeeba24, type: 3}
-  m_PrefabInstance: {fileID: 1539570969670135335}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1181399740
 GameObject:
   m_ObjectHideFlags: 0
@@ -10008,7 +9998,7 @@ RectTransform:
   m_Father: {fileID: 1794733556}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -10083,7 +10073,7 @@ RectTransform:
   m_Father: {fileID: 430811911}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -10541,7 +10531,7 @@ RectTransform:
   m_Father: {fileID: 1014969634}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -10599,7 +10589,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2123123583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11016,10 +11006,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4029659576252204543, guid: d1d14d14baa98ff4f99bd7272aeeba24, type: 3}
-      propertyPath: OutputAudioMixerGroup
-      value: 
-      objectReference: {fileID: -4678059753670901857, guid: 777e94d80086a944a8cb75e722aca17e, type: 2}
     - target: {fileID: 4612909206708674677, guid: d1d14d14baa98ff4f99bd7272aeeba24, type: 3}
       propertyPath: m_Name
       value: SoundManager
@@ -11064,134 +11050,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8420239745823480265, guid: d1d14d14baa98ff4f99bd7272aeeba24, type: 3}
-      propertyPath: hitClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 687950f8997e44d38848b27edf9af400, type: 3}
-    - target: {fileID: 8420239745823480265, guid: d1d14d14baa98ff4f99bd7272aeeba24, type: 3}
-      propertyPath: blowClip
-      value: 
-      objectReference: {fileID: 8300000, guid: cfe159e00034e4ec598c9fa31faaff78, type: 3}
-    - target: {fileID: 8420239745823480265, guid: d1d14d14baa98ff4f99bd7272aeeba24, type: 3}
-      propertyPath: deadClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 35ce408210dfa9843ba14da86f8efb4e, type: 3}
-    - target: {fileID: 8420239745823480265, guid: d1d14d14baa98ff4f99bd7272aeeba24, type: 3}
-      propertyPath: levelUpClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 3aa3ab3c3d5f24f4da6be38fa605a5e2, type: 3}
-    - target: {fileID: 8420239745823480265, guid: d1d14d14baa98ff4f99bd7272aeeba24, type: 3}
-      propertyPath: runningClip
-      value: 
-      objectReference: {fileID: 8300000, guid: b8a475decfeb17d4fa34d4893eaa7e0b, type: 3}
-    - target: {fileID: 8420239745823480265, guid: d1d14d14baa98ff4f99bd7272aeeba24, type: 3}
-      propertyPath: shopBuyClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 6c6fdca3c9860ac44b5efd7aaf71dd45, type: 3}
-    - target: {fileID: 8420239745823480265, guid: d1d14d14baa98ff4f99bd7272aeeba24, type: 3}
-      propertyPath: walkingClip
-      value: 
-      objectReference: {fileID: 8300000, guid: e23268b284d6d864cb2660abbc6a03a1, type: 3}
-    - target: {fileID: 8420239745823480265, guid: d1d14d14baa98ff4f99bd7272aeeba24, type: 3}
-      propertyPath: questOpenClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 4dc354d1efff25045ba5d26609a906b8, type: 3}
-    - target: {fileID: 8420239745823480265, guid: d1d14d14baa98ff4f99bd7272aeeba24, type: 3}
-      propertyPath: bgmAudioSource
-      value: 
-      objectReference: {fileID: 215038779}
-    - target: {fileID: 8420239745823480265, guid: d1d14d14baa98ff4f99bd7272aeeba24, type: 3}
-      propertyPath: optionOpenClip
-      value: 
-      objectReference: {fileID: 8300000, guid: b79970318c77a454db5292d66534082c, type: 3}
-    - target: {fileID: 8420239745823480265, guid: d1d14d14baa98ff4f99bd7272aeeba24, type: 3}
-      propertyPath: questCloseClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 4dc354d1efff25045ba5d26609a906b8, type: 3}
-    - target: {fileID: 8420239745823480265, guid: d1d14d14baa98ff4f99bd7272aeeba24, type: 3}
-      propertyPath: sfxAudioSource
-      value: 
-      objectReference: {fileID: 1159397565}
-    - target: {fileID: 8420239745823480265, guid: d1d14d14baa98ff4f99bd7272aeeba24, type: 3}
-      propertyPath: skillSlashClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 3f5017b6a829c9a46b24536ec61ba130, type: 3}
-    - target: {fileID: 8420239745823480265, guid: d1d14d14baa98ff4f99bd7272aeeba24, type: 3}
-      propertyPath: buttonClickClip
-      value: 
-      objectReference: {fileID: 8300000, guid: b79970318c77a454db5292d66534082c, type: 3}
-    - target: {fileID: 8420239745823480265, guid: d1d14d14baa98ff4f99bd7272aeeba24, type: 3}
-      propertyPath: skillIcePickClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 11aa4c12354220a4190f1d6496b99782, type: 3}
-    - target: {fileID: 8420239745823480265, guid: d1d14d14baa98ff4f99bd7272aeeba24, type: 3}
-      propertyPath: inventoryOpenClip
-      value: 
-      objectReference: {fileID: 8300000, guid: d5f1623083de0394fa824d740bcaec17, type: 3}
-    - target: {fileID: 8420239745823480265, guid: d1d14d14baa98ff4f99bd7272aeeba24, type: 3}
-      propertyPath: skillColdWaveClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 03455008a18a09442aa725030c02e7c3, type: 3}
-    - target: {fileID: 8420239745823480265, guid: d1d14d14baa98ff4f99bd7272aeeba24, type: 3}
-      propertyPath: skillTeleportClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 126a7914023294e2faf8108acc1e9a71, type: 3}
-    - target: {fileID: 8420239745823480265, guid: d1d14d14baa98ff4f99bd7272aeeba24, type: 3}
-      propertyPath: inventoryCloseClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 807b36b80d6fd4f419abaae14b11b20d, type: 3}
-    - target: {fileID: 8420239745823480265, guid: d1d14d14baa98ff4f99bd7272aeeba24, type: 3}
-      propertyPath: skillIceShowerClip
-      value: 
-      objectReference: {fileID: 8300000, guid: e8b9ecc165dace24b95db26aebe6f7a5, type: 3}
-    - target: {fileID: 8420239745823480265, guid: d1d14d14baa98ff4f99bd7272aeeba24, type: 3}
-      propertyPath: skillSlashBlowClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 3f5017b6a829c9a46b24536ec61ba130, type: 3}
-    - target: {fileID: 8420239745823480265, guid: d1d14d14baa98ff4f99bd7272aeeba24, type: 3}
-      propertyPath: skillEarthquakeClip
-      value: 
-      objectReference: {fileID: 8300000, guid: d65a973fefe58634da3b5a0ed1ca764e, type: 3}
-    - target: {fileID: 8420239745823480265, guid: d1d14d14baa98ff4f99bd7272aeeba24, type: 3}
-      propertyPath: skillFrostBladeClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 6deb2f905c402f345ad56fd39686a2eb, type: 3}
-    - target: {fileID: 8420239745823480265, guid: d1d14d14baa98ff4f99bd7272aeeba24, type: 3}
-      propertyPath: skillMeteorFallClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 101146547cb2c9448aeb4de4310a4f10, type: 3}
-    - target: {fileID: 8420239745823480265, guid: d1d14d14baa98ff4f99bd7272aeeba24, type: 3}
-      propertyPath: skillChargeSlashClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 05448b5c80701864d8e324a0c104eb46, type: 3}
-    - target: {fileID: 8420239745823480265, guid: d1d14d14baa98ff4f99bd7272aeeba24, type: 3}
-      propertyPath: skillMagicShieldClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 53c802b86fac780458b92d4af5052374, type: 3}
-    - target: {fileID: 8420239745823480265, guid: d1d14d14baa98ff4f99bd7272aeeba24, type: 3}
-      propertyPath: skillSpinningCutClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 3f5017b6a829c9a46b24536ec61ba130, type: 3}
-    - target: {fileID: 8420239745823480265, guid: d1d14d14baa98ff4f99bd7272aeeba24, type: 3}
-      propertyPath: skillHealingBeaconClip
-      value: 
-      objectReference: {fileID: 8300000, guid: fd384fbeae6d47a4885da9baa2413a69, type: 3}
-    - target: {fileID: 8420239745823480265, guid: d1d14d14baa98ff4f99bd7272aeeba24, type: 3}
-      propertyPath: skillHealingEnergyClip
-      value: 
-      objectReference: {fileID: 8300000, guid: b29cacd6057ed934bb5d0ea63fba15ca, type: 3}
-    - target: {fileID: 8420239745823480265, guid: d1d14d14baa98ff4f99bd7272aeeba24, type: 3}
-      propertyPath: skillSpellofSwiftnessClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 0ce731c31354baa4595369b6b0e13ca2, type: 3}
-    - target: {fileID: 8420239745823480265, guid: d1d14d14baa98ff4f99bd7272aeeba24, type: 3}
-      propertyPath: skillLighthouseofMagicClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 53c802b86fac780458b92d4af5052374, type: 3}
-    - target: {fileID: 8420239745823480265, guid: d1d14d14baa98ff4f99bd7272aeeba24, type: 3}
-      propertyPath: skillEnergyCondensationClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 6c196d43482264746ae645d0733297cd, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

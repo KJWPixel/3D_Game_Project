@@ -28,6 +28,10 @@ public class SkillData : ScriptableObject
     public GameObject CastEffectPrefab;
     public GameObject HitEffectPrefab;
 
+    [Header("사운드 효과")]
+    public AudioClip CastSFX; // 스킬 시전/발동 시 
+    public AudioClip HitSFX;  // 스킬 적중 시 
+
     [Header("효과들 (여러 개 가능)")]
     public List<SkillEffect> Effects = new List<SkillEffect>();
     //List 추가해서 Type을 2개 이상

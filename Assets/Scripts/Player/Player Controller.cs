@@ -62,14 +62,21 @@ public class PlayerController : MonoBehaviour
         HandleSkillInput();
 
         // - 캐스팅 상태이면 이동 호출 막음 -
-        if(CurrentState != PlayerState.Casting)
+        //if(CurrentState != PlayerState.Casting || !UIManager.Instance.IsActiveCursor)
+        //{
+        //    if (IMoveStrategy != null)
+        //    {
+        //        IMoveStrategy.Move(this);
+        //    }
+        //}
+        if (CurrentState != PlayerState.Casting && !UIManager.Instance.IsActiveCursor)
         {
             if (IMoveStrategy != null)
             {
                 IMoveStrategy.Move(this);
             }
         }
-        
+
         // - 상태에 따라 이동 전략 결정
         switch (CurrentState)
         {
@@ -125,7 +132,7 @@ public class PlayerController : MonoBehaviour
         //Player의 입력값을 받아 상태만을 변경
 
         //상태에 따른 리턴조건
-        if (CurrentState == PlayerState.Casting)
+        if (CurrentState == PlayerState.Casting || UIManager.Instance.IsActiveCursor)
         {
             x = 0f;
             z = 0f;

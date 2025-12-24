@@ -23,6 +23,8 @@ MonoBehaviour:
   HitPrefabDuration: 1
   CastEffectPrefab: {fileID: 7957833072274404953, guid: 3355f6bfa6db8b24281b827de929694c, type: 3}
   HitEffectPrefab: {fileID: 1758473627833946668, guid: 9b21333b068a5084ba09535839bee3c8, type: 3}
+  CastSFX: {fileID: 8300000, guid: 101146547cb2c9448aeb4de4310a4f10, type: 3}
+  HitSFX: {fileID: 0}
   Effects:
   - EffectType: 1
     Power: 25

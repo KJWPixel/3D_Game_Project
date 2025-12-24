@@ -31,9 +31,9 @@ public class TitleUIController : BaseUI
         OptionUI = OptionPanel.GetComponent<OptionPanelUI>();
         ExitUI = ExitPanel.GetComponent<ExitPanelUI>();
 
-        LoginUI.Close();
-        OptionUI.Close();
-        ExitUI.Close();
+        //LoginUI.Close();
+        //OptionUI.Close();
+        //ExitUI.Close();
     }
 
     private void Update()
@@ -46,9 +46,9 @@ public class TitleUIController : BaseUI
     }
 
     public void OnClickExit()
-    {
-        SoundManager.Instance.PlaySFX(SFXType.ButtonClick);
+    {      
         OpenUI(ExitUI);
+        SoundManager.Instance.PlaySFX(SFXType.ButtonClick);
     }
 
     private void OpenUI(BaseUI _Ui)

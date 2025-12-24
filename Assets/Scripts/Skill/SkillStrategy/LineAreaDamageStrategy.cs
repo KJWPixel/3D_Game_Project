@@ -10,6 +10,8 @@ public class LineAreaDamageStrategy : ISkillBehaviorStrategy
     {
         Collider[] colliders;
 
+        SoundManager.Instance.PlayOneShot(_SkillData.CastSFX, _Player.transform.position);
+
         foreach (var Effect in _SkillData.Effects)
         {
             Vector3 Forward = _Player.transform.forward * 3f;

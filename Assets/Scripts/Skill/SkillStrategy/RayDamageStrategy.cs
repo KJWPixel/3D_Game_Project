@@ -6,6 +6,8 @@ public class RayDamageSkillStrategy : ISkillBehaviorStrategy
 {
     public void Execute(PlayerController _Player, PlayerStat _PlayerStat, SkillData _SkillData, Transform _Target)
     {
+        SoundManager.Instance.PlayOneShot(_SkillData.CastSFX, _Player.transform.position);
+
         foreach (var Effect in _SkillData.Effects)
         {
             // 플레이어 위치 (약간 위에서 발사되게 오프셋)

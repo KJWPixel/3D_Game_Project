@@ -16,6 +16,5 @@ public class LoginPanelUI : BaseUI
         }
         SoundManager.Instance.PlaySFX(SFXType.ButtonClick);
         loginManager.TryLogin();
-        
     }
 }

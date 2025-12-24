@@ -1,11 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class PlayerAnimationController : MonoBehaviour
 {
     Animator Animator;
     PlayerController PlayerController;
+
+    private bool isWalking = false;
+    private bool isRunning = false;
+    private bool wasWalking = false;
+    private bool wasRunning = false;
+
     private void Awake()
     {
         Animator = GetComponent<Animator>();
@@ -14,13 +21,29 @@ public class PlayerAnimationController : MonoBehaviour
 
     public void AnimationUpdate(float _x, float _z, float _VerticalVelocity)
     {
-        bool IsWaking = _x != 0 || _z != 0;
-        bool IsRunning = PlayerController.IsRunning;
-        Animator.SetBool("IsWalk", IsWaking);
-        Animator.SetBool("IsRunning", IsRunning);
+        isWalking = _x != 0 || _z != 0;
+        isRunning = PlayerController.IsRunning;
+        Animator.SetBool("IsWalk", isWalking);
+        Animator.SetBool("IsRunning", isRunning);
         Animator.SetFloat("xDir", _x);
         Animator.SetFloat("zDir", _z);
         Animator.SetFloat("yDir", _VerticalVelocity);
+
+        if (isWalking && !wasWalking)
+        {
+            SoundManager.Instance.PlaySFX(isRunning ? SFXType.Running : SFXType.Walking);
+        }
+        else if (!isWalking && wasWalking)  // πÊ±› ∏ÿ√„
+        {
+            SoundManager.Instance.StopLoopSFX();
+        }
+        else if (isWalking && wasWalking && isRunning != wasRunning)  // ∞»±‚ °Í ¥ﬁ∏Æ±‚ ¿¸»Ø
+        {
+            SoundManager.Instance.PlaySFX(isRunning ? SFXType.Running : SFXType.Walking);
+        }
+
+        wasWalking = isWalking;
+        wasRunning = isRunning;
     }
 
     public void SetAttack(bool _IsAttack)

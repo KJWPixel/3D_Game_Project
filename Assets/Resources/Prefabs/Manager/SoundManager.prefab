@@ -49,12 +49,40 @@ MonoBehaviour:
   audioMixer: {fileID: 24100000, guid: 777e94d80086a944a8cb75e722aca17e, type: 2}
   BgmPlayer: {fileID: 7562813815193284359}
   SfxPlayer: {fileID: 5282083570072812571}
-  bgmAudioSource: {fileID: 6895515130970704051}
+  bgmAudioSource: {fileID: 4029659576252204543}
   titleBGMClip: {fileID: 8300000, guid: 5be79b7e84c957149b703e849e1e5752, type: 3}
   loadingBGMClip: {fileID: 8300000, guid: c6c5cd0ee2d7db447be3ac0e13978c23, type: 3}
   inGameBGMClip: {fileID: 8300000, guid: 8b9cb98176c68a2409b2dc72d30e95a3, type: 3}
-  sfxAudioSource: []
-  sfxAudioClip: []
+  sfxAudioSource: {fileID: 6895515130970704051}
+  walkingClip: {fileID: 8300000, guid: e23268b284d6d864cb2660abbc6a03a1, type: 3}
+  runningClip: {fileID: 8300000, guid: b8a475decfeb17d4fa34d4893eaa7e0b, type: 3}
+  blowClip: {fileID: 8300000, guid: cfe159e00034e4ec598c9fa31faaff78, type: 3}
+  hitClip: {fileID: 8300000, guid: 687950f8997e44d38848b27edf9af400, type: 3}
+  levelUpClip: {fileID: 8300000, guid: 3aa3ab3c3d5f24f4da6be38fa605a5e2, type: 3}
+  deadClip: {fileID: 8300000, guid: 35ce408210dfa9843ba14da86f8efb4e, type: 3}
+  inventoryOpenClip: {fileID: 8300000, guid: d5f1623083de0394fa824d740bcaec17, type: 3}
+  inventoryCloseClip: {fileID: 8300000, guid: 807b36b80d6fd4f419abaae14b11b20d, type: 3}
+  shopBuyClip: {fileID: 8300000, guid: 6c6fdca3c9860ac44b5efd7aaf71dd45, type: 3}
+  questOpenClip: {fileID: 8300000, guid: 4dc354d1efff25045ba5d26609a906b8, type: 3}
+  questCloseClip: {fileID: 8300000, guid: 4dc354d1efff25045ba5d26609a906b8, type: 3}
+  optionOpenClip: {fileID: 8300000, guid: b79970318c77a454db5292d66534082c, type: 3}
+  buttonClickClip: {fileID: 8300000, guid: b79970318c77a454db5292d66534082c, type: 3}
+  skillSlashBlowClip: {fileID: 8300000, guid: 3f5017b6a829c9a46b24536ec61ba130, type: 3}
+  skillChargeSlashClip: {fileID: 8300000, guid: 05448b5c80701864d8e324a0c104eb46, type: 3}
+  skillSpinningCutClip: {fileID: 8300000, guid: 3f5017b6a829c9a46b24536ec61ba130, type: 3}
+  skillIcePickClip: {fileID: 8300000, guid: 11aa4c12354220a4190f1d6496b99782, type: 3}
+  skillEarthquakeClip: {fileID: 8300000, guid: d65a973fefe58634da3b5a0ed1ca764e, type: 3}
+  skillFrostBladeClip: {fileID: 8300000, guid: 6deb2f905c402f345ad56fd39686a2eb, type: 3}
+  skillColdWaveClip: {fileID: 8300000, guid: 03455008a18a09442aa725030c02e7c3, type: 3}
+  skillIceShowerClip: {fileID: 8300000, guid: e8b9ecc165dace24b95db26aebe6f7a5, type: 3}
+  skillMeteorFallClip: {fileID: 8300000, guid: 101146547cb2c9448aeb4de4310a4f10, type: 3}
+  skillEnergyCondensationClip: {fileID: 8300000, guid: 6c196d43482264746ae645d0733297cd, type: 3}
+  skillHealingEnergyClip: {fileID: 8300000, guid: b29cacd6057ed934bb5d0ea63fba15ca, type: 3}
+  skillHealingBeaconClip: {fileID: 8300000, guid: fd384fbeae6d47a4885da9baa2413a69, type: 3}
+  skillLighthouseofMagicClip: {fileID: 8300000, guid: 53c802b86fac780458b92d4af5052374, type: 3}
+  skillSpellofSwiftnessClip: {fileID: 8300000, guid: 0ce731c31354baa4595369b6b0e13ca2, type: 3}
+  skillMagicShieldClip: {fileID: 8300000, guid: 53c802b86fac780458b92d4af5052374, type: 3}
+  skillTeleportClip: {fileID: 8300000, guid: 126a7914023294e2faf8108acc1e9a71, type: 3}
 --- !u!1 &5282083570072812571
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,7 +252,7 @@ AudioSource:
   m_GameObject: {fileID: 7562813815193284359}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -4678059753670901857, guid: 777e94d80086a944a8cb75e722aca17e, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1

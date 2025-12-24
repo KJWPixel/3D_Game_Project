@@ -8,6 +8,8 @@ public class TeleportSkillStrategy : ISkillBehaviorStrategy
     {
         var controller = _Player.GetComponent<CharacterController>();
 
+        SoundManager.Instance.PlayOneShot(_SkillData.CastSFX, _Player.transform.position);
+
         foreach (var Effect in _SkillData.Effects)
         {
             Vector3 Dir = _Player.transform.forward;

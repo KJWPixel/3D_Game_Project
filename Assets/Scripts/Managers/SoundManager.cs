@@ -50,9 +50,6 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip skillSpellofSwiftnessClip;
     [SerializeField] private AudioClip skillMagicShieldClip;
     [SerializeField] private AudioClip skillTeleportClip;
-
-
-
     // clip 추가
 
     private Dictionary<SFXType, AudioClip> sfxClips;
@@ -173,7 +170,36 @@ public class SoundManager : MonoBehaviour
         }
 
         //Unity Voice Limit(32개) 
-        sfxAudioSource.PlayOneShot(clip);
+        if(type == SFXType.Walking || type == SFXType.Running)
+        {
+            if (sfxAudioSource.isPlaying && sfxAudioSource.clip == clip && sfxAudioSource) return; // 이미 재생 중이면 리턴
+
+            sfxAudioSource.Stop();
+            sfxAudioSource.clip = clip;
+            sfxAudioSource.loop = true;
+            sfxAudioSource.Play();
+        }
+        else
+        {
+            sfxAudioSource.PlayOneShot(clip);
+        }
+    }
+
+    public void StopLoopSFX()
+    {
+        if (sfxAudioSource != null && sfxAudioSource.loop) //루프 중인 소리만 정지
+        {
+            sfxAudioSource.Stop();           // 재생 중인 루프 소리 정지
+            sfxAudioSource.clip = null;      // 다음 재생 시 깨끗하게 시작하기 위해 클립 비우기 (선택적, 추천)
+            sfxAudioSource.loop = false;           // sfxLoopSource.loop = false;  // 필요 시 루프 끄기 (이미 Stop() 하면 자동 처리됨)
+            Debug.Log("루프 발소리 정지");
+        }
+    }
+
+    public void PlayOneShot(AudioClip clip, Vector3 position, float volume = 1f)
+    {
+        if (clip == null) return;
+        AudioSource.PlayClipAtPoint(clip, position, volume);
     }
 
     // ===볼륨 적용===

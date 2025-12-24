@@ -6,6 +6,8 @@ public class TargetAreaDamageStrategy : ISkillBehaviorStrategy
 {
     public void Execute(PlayerController _Player, PlayerStat _PlayerStat, SkillData _SkillData, Transform _Target)
     {
+        SoundManager.Instance.PlayOneShot(_SkillData.CastSFX, _Player.transform.position);
+
         foreach (var Effect in _SkillData.Effects)
         {
             Vector3 Origin = _Player.transform.position + Vector3.up * 1.0f;
