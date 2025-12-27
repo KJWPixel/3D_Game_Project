@@ -11,9 +11,17 @@ public class UIManager : MonoBehaviour
     [Header("마우스커서 제어 체크")]
     [SerializeField] public bool IsActiveCursor = false;
 
+    [Header("메뉴")]
+    [SerializeField] private GameObject MenuPanel;
+    [SerializeField] private bool isMenuPanel = false;
+
     [Header("옵션")]
     [SerializeField] private GameObject OptionPanel;
     [SerializeField] private bool isOptionPanel = false;
+
+    [Header("게임 종료 패널")]
+    [SerializeField] private GameObject ExitPanel;
+    [SerializeField] private bool isExitPanel = false;
 
     [Header("플레이어 스킬 UI")]
     [SerializeField] private GameObject skillTree;
@@ -57,13 +65,21 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
+        InputManager.Instance.OnToggleMenu += OnToggleMenu;
         InputManager.Instance.OnToggleOption += OnToggleOption;
         InputManager.Instance.OnToggleInventory += OnToggleInventory;
         InputManager.Instance.OnToggleSkill += OnToggleSkill;
         InputManager.Instance.OnToggleQuest += OnToggleQuest;
     }
 
-    private void OnToggleOption()
+    private void OnToggleMenu()
+    {
+        isMenuPanel = !isMenuPanel;
+        MenuPanel.SetActive(isMenuPanel);
+        SoundManager.Instance.PlaySFX(SFXType.OptionOpen);
+    }
+
+    public void OnToggleOption()
     {
         isOptionPanel = !isOptionPanel;
         OptionPanel.SetActive(isOptionPanel);
@@ -117,6 +133,8 @@ public class UIManager : MonoBehaviour
 
     private void InitializeUI()
     {
+        MenuPanel.SetActive(false);
+        ExitPanel.SetActive(false);
         OptionPanel.SetActive(false);
         DialoguePanel.SetActive(false);
         InventoryPanel.SetActive(false);
@@ -194,6 +212,13 @@ public class UIManager : MonoBehaviour
         ChoiceYes.SetActive(false);
         ChoiceNo.SetActive(false);
         DialoguePanel.SetActive(false);
+    }
+
+    public void OnClickExitPanel()
+    {
+        Debug.Log("게임 종료 패널 호출");
+        isExitPanel = !isExitPanel;
+        ExitPanel.SetActive(isExitPanel);
     }
 
     public void OnClickClose(GameObject gameObject)

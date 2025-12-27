@@ -4,7 +4,6 @@ public enum SCENE //SCENE 씬 숫자로 명시
     TITLE = 0,
     LOADING = 1,
     MAIN = 2,   
-    
 }
 
 public enum MENU

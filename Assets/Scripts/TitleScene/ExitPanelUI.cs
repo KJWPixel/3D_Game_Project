@@ -14,6 +14,8 @@ public class ExitPanelUI : BaseUI
 
     protected override void OnClose()
     {
+        if(uiController == null) return;
+
         uiController.OnClickCloseTopUI();
     }
 

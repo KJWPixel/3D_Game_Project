@@ -9,9 +9,6 @@ public class SceneMgr : MonoBehaviour
     public SCENE CurrentScene { get; private set; }
     public SCENE NextScene { get; private set; }
 
-    [Header("æ¿ ¿Ã∏ß ∏≈«Œ")]
-    [SerializeField] private string[] sceneNames;
-
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -21,7 +18,9 @@ public class SceneMgr : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(gameObject); 
+        
+        CurrentScene = (SCENE)SceneManager.GetActiveScene().buildIndex;
     }
 
     public void ChangeScene(SCENE target, bool loading = false)
@@ -40,6 +39,14 @@ public class SceneMgr : MonoBehaviour
         SceneManager.LoadScene((int)CurrentScene);
     }
 
+    public void OnClickLoadScene(int targetindex)
+    {
+        if (CurrentScene == (SCENE)targetindex) return;
+
+        CurrentScene = (SCENE)targetindex;
+        SceneManager.LoadScene(targetindex);
+    }
+
     public void ChangeSceneByName(string sceneName, bool loading =false)
     {
         if(loading)
@@ -51,6 +58,4 @@ public class SceneMgr : MonoBehaviour
             SceneManager.LoadScene(sceneName);
         }
     }
-
-
 }

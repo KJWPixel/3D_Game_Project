@@ -10852,6 +10852,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ExitPanel
       objectReference: {fileID: 0}
+    - target: {fileID: 1998407088370991677, guid: bee2a0cde3ce324489fda74e697ee53f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4072514582035838746, guid: bee2a0cde3ce324489fda74e697ee53f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 

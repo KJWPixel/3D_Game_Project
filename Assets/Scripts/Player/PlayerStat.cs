@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 
-
 [System.Serializable]
 public class Status
 {
@@ -41,16 +40,6 @@ public class PlayerStat : MonoBehaviour
     [SerializeField] public float posX;
     [SerializeField] public float posY;
     [SerializeField] public float posZ;
-
-    //public float GetStatus(StatusType _Type)
-    //{
-    //    return PlayerStatus[_Type];
-    //}
-
-    //public float SetStatus(StatusType _Type, float _Value)
-    //{
-    //    return PlayerStatus[_Type] = _Value;
-    //}
 
     public string UserName
     {

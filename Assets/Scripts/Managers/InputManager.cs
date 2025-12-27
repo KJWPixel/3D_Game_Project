@@ -9,7 +9,8 @@ public class InputManager : MonoBehaviour
     public static InputManager Instance;
 
     [Header("UI Key ¼³Á¤")]
-    public KeyCode Option = KeyCode.Escape;
+    public KeyCode Menu = KeyCode.Escape;
+    public KeyCode Option = KeyCode.None;
     public KeyCode Inventory = KeyCode.I;
     public KeyCode Skill = KeyCode.K;
     public KeyCode Quest = KeyCode.J;
@@ -19,6 +20,7 @@ public class InputManager : MonoBehaviour
     public KeyCode ItemSlot3 = KeyCode.F3;
     public KeyCode ItemSlot4 = KeyCode.F4;
 
+    public event Action OnToggleMenu;
     public event Action OnToggleOption;
     public event Action OnToggleInventory;
     public event Action OnToggleSkill;  
@@ -41,6 +43,7 @@ public class InputManager : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(Menu)) { OnToggleMenu?.Invoke();  }
         if (Input.GetKeyDown(Option)) { OnToggleOption?.Invoke(); }
         if (Input.GetKeyDown(Inventory)) { OnToggleInventory?.Invoke(); }
         if (Input.GetKeyDown(Skill)) { OnToggleSkill?.Invoke(); }
