@@ -86,7 +86,7 @@ public class Enemy : EnemyCharacter
 
     public override void Idle()
     {
-        Debug.Log($"<b><color=orange>{Name}: Idle</color></b>");
+        //Debug.Log($"<b><color=orange>{Name}: Idle</color></b>");
     }
 
     public override void Search()
@@ -210,7 +210,10 @@ public class Enemy : EnemyCharacter
             Die();
         }
 
-        ShowDamageText(FinalDamage);
+        if(CurHp > 0 )
+        {
+            ShowDamageText(FinalDamage);
+        }    
     }
 
     public override void ShowDamageText(float _Damage)

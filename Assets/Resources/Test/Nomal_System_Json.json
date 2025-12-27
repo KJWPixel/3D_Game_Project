@@ -1,0 +1,290 @@
+[
+  {
+    "Index": 0,
+    "StageNo": 1,
+    "StageName": "Nomal 1",
+    "StageType": "N",
+    "LimitTime": 200,
+    "Clearscore": 120,
+    "SavePoint": 1
+  },
+  {
+    "Index": 1,
+    "StageNo": 2,
+    "StageName": "Nomal 2",
+    "StageType": "N",
+    "LimitTime": 190,
+    "Clearscore": 140,
+    "SavePoint": 1
+  },
+  {
+    "Index": 2,
+    "StageNo": 3,
+    "StageName": "Nomal 3",
+    "StageType": "N",
+    "LimitTime": 180,
+    "Clearscore": 160,
+    "SavePoint": 1
+  },
+  {
+    "Index": 3,
+    "StageNo": 4,
+    "StageName": "Nomal 4",
+    "StageType": "N",
+    "LimitTime": 171,
+    "Clearscore": 180,
+    "SavePoint": 1
+  },
+  {
+    "Index": 4,
+    "StageNo": 5,
+    "StageName": "Nomal 5",
+    "StageType": "N",
+    "LimitTime": 162,
+    "Clearscore": 200,
+    "SavePoint": 1
+  },
+  {
+    "Index": 5,
+    "StageNo": 6,
+    "StageName": "Nomal 6",
+    "StageType": "N",
+    "LimitTime": 153,
+    "Clearscore": 220,
+    "SavePoint": 1
+  },
+  {
+    "Index": 6,
+    "StageNo": 7,
+    "StageName": "Nomal 7",
+    "StageType": "N",
+    "LimitTime": 145,
+    "Clearscore": 240,
+    "SavePoint": 1
+  },
+  {
+    "Index": 7,
+    "StageNo": 8,
+    "StageName": "Nomal 8",
+    "StageType": "N",
+    "LimitTime": 137,
+    "Clearscore": 260,
+    "SavePoint": 1
+  },
+  {
+    "Index": 8,
+    "StageNo": 9,
+    "StageName": "Nomal 9",
+    "StageType": "N",
+    "LimitTime": 130,
+    "Clearscore": 280,
+    "SavePoint": 1
+  },
+  {
+    "Index": 9,
+    "StageNo": 10,
+    "StageName": "Nomal 10",
+    "StageType": "N",
+    "LimitTime": 123,
+    "Clearscore": 300,
+    "SavePoint": 1
+  },
+  {
+    "Index": 10,
+    "StageNo": 11,
+    "StageName": "Nomal 11",
+    "StageType": "N",
+    "LimitTime": 116,
+    "Clearscore": 320,
+    "SavePoint": 1
+  },
+  {
+    "Index": 11,
+    "StageNo": 12,
+    "StageName": "Nomal 12",
+    "StageType": "N",
+    "LimitTime": 110,
+    "Clearscore": 340,
+    "SavePoint": 1
+  },
+  {
+    "Index": 12,
+    "StageNo": 13,
+    "StageName": "Nomal 13",
+    "StageType": "N",
+    "LimitTime": 104,
+    "Clearscore": 360,
+    "SavePoint": 1
+  },
+  {
+    "Index": 13,
+    "StageNo": 14,
+    "StageName": "Nomal 14",
+    "StageType": "N",
+    "LimitTime": 98,
+    "Clearscore": 380,
+    "SavePoint": 1
+  },
+  {
+    "Index": 14,
+    "StageNo": 15,
+    "StageName": "Nomal 15",
+    "StageType": "N",
+    "LimitTime": 93,
+    "Clearscore": 400,
+    "SavePoint": 1
+  },
+  {
+    "Index": 15,
+    "StageNo": 16,
+    "StageName": "Nomal 16",
+    "StageType": "N",
+    "LimitTime": 88,
+    "Clearscore": 420,
+    "SavePoint": 0
+  },
+  {
+    "Index": 16,
+    "StageNo": 1,
+    "StageName": "Hard 1",
+    "StageType": "H",
+    "LimitTime": 180,
+    "Clearscore": 230,
+    "SavePoint": 0
+  },
+  {
+    "Index": 17,
+    "StageNo": 2,
+    "StageName": "Hard 2",
+    "StageType": "H",
+    "LimitTime": 171,
+    "Clearscore": 260,
+    "SavePoint": 0
+  },
+  {
+    "Index": 18,
+    "StageNo": 3,
+    "StageName": "Hard 3",
+    "StageType": "H",
+    "LimitTime": 162,
+    "Clearscore": 290,
+    "SavePoint": 0
+  },
+  {
+    "Index": 19,
+    "StageNo": 4,
+    "StageName": "Hard 4",
+    "StageType": "H",
+    "LimitTime": 153,
+    "Clearscore": 320,
+    "SavePoint": 0
+  },
+  {
+    "Index": 20,
+    "StageNo": 5,
+    "StageName": "Hard 5",
+    "StageType": "H",
+    "LimitTime": 145,
+    "Clearscore": 350,
+    "SavePoint": 0
+  },
+  {
+    "Index": 21,
+    "StageNo": 6,
+    "StageName": "Hard 6",
+    "StageType": "H",
+    "LimitTime": 137,
+    "Clearscore": 380,
+    "SavePoint": 0
+  },
+  {
+    "Index": 22,
+    "StageNo": 7,
+    "StageName": "Hard 7",
+    "StageType": "H",
+    "LimitTime": 130,
+    "Clearscore": 410,
+    "SavePoint": 0
+  },
+  {
+    "Index": 23,
+    "StageNo": 8,
+    "StageName": "Hard 8",
+    "StageType": "H",
+    "LimitTime": 123,
+    "Clearscore": 440,
+    "SavePoint": 0
+  },
+  {
+    "Index": 24,
+    "StageNo": 9,
+    "StageName": "Hard 9",
+    "StageType": "H",
+    "LimitTime": 116,
+    "Clearscore": 470,
+    "SavePoint": 0
+  },
+  {
+    "Index": 25,
+    "StageNo": 10,
+    "StageName": "Hard 10",
+    "StageType": "H",
+    "LimitTime": 110,
+    "Clearscore": 500,
+    "SavePoint": 0
+  },
+  {
+    "Index": 26,
+    "StageNo": 11,
+    "StageName": "Hard 11",
+    "StageType": "H",
+    "LimitTime": 104,
+    "Clearscore": 530,
+    "SavePoint": 0
+  },
+  {
+    "Index": 27,
+    "StageNo": 12,
+    "StageName": "Hard 12",
+    "StageType": "H",
+    "LimitTime": 98,
+    "Clearscore": 560,
+    "SavePoint": 0
+  },
+  {
+    "Index": 28,
+    "StageNo": 13,
+    "StageName": "Hard 13",
+    "StageType": "H",
+    "LimitTime": 93,
+    "Clearscore": 590,
+    "SavePoint": 0
+  },
+  {
+    "Index": 29,
+    "StageNo": 14,
+    "StageName": "Hard 14",
+    "StageType": "H",
+    "LimitTime": 88,
+    "Clearscore": 620,
+    "SavePoint": 0
+  },
+  {
+    "Index": 30,
+    "StageNo": 15,
+    "StageName": "Hard 15",
+    "StageType": "H",
+    "LimitTime": 83,
+    "Clearscore": 650,
+    "SavePoint": 0
+  },
+  {
+    "Index": 31,
+    "StageNo": 16,
+    "StageName": "Hard 16",
+    "StageType": "H",
+    "LimitTime": 78,
+    "Clearscore": 680,
+    "SavePoint": 0
+  }
+]

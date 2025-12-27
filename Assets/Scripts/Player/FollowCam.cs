@@ -32,7 +32,12 @@ public class FollowCam : MonoBehaviour
     }
 
     private void LookCamera()
-    { 
+    {
+        if (UIManager.Instance.IsActiveCursor == true || UIManager.Instance.isMenuPanel == true || UIManager.Instance.isSkillTree == true || UIManager.Instance.IsInventoryOpen == true)
+        {
+            return;
+        }
+           
         float MouseX = Input.GetAxisRaw("Mouse X") * LookSensitivity;
         float MouseY = Input.GetAxisRaw("Mouse Y") * LookSensitivity;
 

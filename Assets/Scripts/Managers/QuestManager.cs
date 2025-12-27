@@ -95,7 +95,6 @@ public class QuestManager : MonoBehaviour
         ActiveQuests.Add(NewQuest);
         Debug.Log("퀘스트 수락완료");
 
-
         QuestListChanged?.Invoke(null);
     }
 

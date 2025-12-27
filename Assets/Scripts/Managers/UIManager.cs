@@ -13,11 +13,11 @@ public class UIManager : MonoBehaviour
 
     [Header("메뉴")]
     [SerializeField] private GameObject MenuPanel;
-    [SerializeField] private bool isMenuPanel = false;
+    [SerializeField] public bool isMenuPanel = false;
 
     [Header("옵션")]
     [SerializeField] private GameObject OptionPanel;
-    [SerializeField] private bool isOptionPanel = false;
+    [SerializeField] public bool isOptionPanel = false;
 
     [Header("게임 종료 패널")]
     [SerializeField] private GameObject ExitPanel;
@@ -25,19 +25,19 @@ public class UIManager : MonoBehaviour
 
     [Header("플레이어 스킬 UI")]
     [SerializeField] private GameObject skillTree;
-    [SerializeField] private bool isSkillTree = false;
+    [SerializeField] public bool isSkillTree = false;
     [SerializeField] private PlayerSkillBook PlayerSkillBook;   
     [SerializeField] private List<UI_SkillSlot> UI_SkillSlots;
 
     [Header("인벤토리 UI")]
     [SerializeField] private GameObject InventoryPanel;
-    [SerializeField] private bool IsInventoryOpen = false;
+    [SerializeField] public bool IsInventoryOpen = false;
 
     [Header("퀘스트 UI")]
     [SerializeField] private GameObject QuestPanel;
     [SerializeField] private GameObject QuestToolTipPanel;
     [SerializeField] private GameObject QuestGuidePanel;
-    [SerializeField] private bool IsQuestOpen = false;
+    [SerializeField] public bool IsQuestOpen = false;
 
     [Header("NPC 대화 UI")]
     [SerializeField] public GameObject DialoguePanel;
@@ -231,7 +231,6 @@ public class UIManager : MonoBehaviour
         Debug.Log("버튼 호출");
         CurrentQuestData = _Quest;
         
-
         ChoiceYes.GetComponent<Button>().onClick.RemoveAllListeners();
         ChoiceYes.GetComponent<Button>().onClick.AddListener(OnClickYes);
         

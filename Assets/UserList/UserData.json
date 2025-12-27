@@ -1,27 +1,6 @@
 {
     "Users": [
         {
-            "username": "123",
-            "password": "123",
-            "level": 0,
-            "golds": 0,
-            "lastSavedAt": ""
-        },
-        {
-            "username": "test",
-            "password": "test",
-            "level": 0,
-            "golds": 0,
-            "lastSavedAt": ""
-        },
-        {
-            "username": "1",
-            "password": "1",
-            "level": 0,
-            "golds": 0,
-            "lastSavedAt": ""
-        },
-        {
             "username": "asd",
             "password": "a8bgoSqkJJ2WOsJdA6fuzg==",
             "level": 0,

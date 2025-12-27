@@ -183,6 +183,7 @@ public class DialogNPC : NPCCharacter
         {
             return;
         }
+
         currentQuestMarker.SetActive(active);
     }
 

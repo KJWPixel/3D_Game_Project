@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 //Rotate 회전
 //X축 위 아래, Y축 좌 우, Z 좌 우 
@@ -37,6 +38,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float GroundCheckDistance = 0f;
     [SerializeField] bool GizmoOnOffCheck = false;
 
+    [SerializeField] private PostProcessVolume postProcessVolume;
+    [SerializeField] private LensDistortion lensDistortion;
+    [SerializeField] private float tagetIntensity = -70;
+    [SerializeField] private float intensitySpeed = 3f;
+
     PlayerStat PlayerStat;  
     PlayerAnimationController Anim;
 
@@ -48,7 +54,10 @@ public class PlayerController : MonoBehaviour
         //인스펙터에서 CursorLockMode 제어        
         PlayerStat = GetComponent<PlayerStat>();
         Anim = GetComponent<PlayerAnimationController>();
-        SetState(PlayerState.Idle);
+
+        postProcessVolume = GetComponentInChildren<PostProcessVolume>();
+        PostProcessInit(); 
+        SetState(PlayerState.Idle);      
     }
 
     void Update()
@@ -96,6 +105,13 @@ public class PlayerController : MonoBehaviour
         //Running();
         Jump();
         Anim.AnimationUpdate(x, z, VelocityValue.y);
+        RunningEffect(); 
+    }
+
+    private void PostProcessInit()
+    {
+        postProcessVolume.profile.TryGetSettings(out lensDistortion);
+        lensDistortion.intensity.value = 0;
     }
 
     #region
@@ -143,7 +159,9 @@ public class PlayerController : MonoBehaviour
         x = Input.GetAxisRaw("Horizontal");
         z = Input.GetAxisRaw("Vertical");
 
-        if(Mathf.Abs(x) == 0 && Mathf.Abs(z) == 0)
+        
+
+        if (Mathf.Abs(x) == 0 && Mathf.Abs(z) == 0)
         {
             SetState(PlayerState.Idle);
             IsRunning = false;
@@ -159,7 +177,24 @@ public class PlayerController : MonoBehaviour
             SetState(PlayerState.Running);
             IsRunning = true;
         }
+
+        
     }
+
+    private void RunningEffect()
+    {
+        
+
+        if(IsRunning == true)
+        {
+            lensDistortion.intensity.value = Mathf.Lerp(lensDistortion.intensity.value, tagetIntensity, intensitySpeed * Time.deltaTime);
+        }
+        else
+        {
+            lensDistortion.intensity.value = Mathf.Lerp(lensDistortion.intensity.value, 0, intensitySpeed * Time.deltaTime);
+        }
+    }
+
     #region
     //전략패턴으로 Move함수가 쓰이므로 주석처리
     private void Move()
@@ -341,14 +376,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos()
-    {
-        Vector3 Origin = transform.position + Vector3.up;
-        Vector3 Size = Vector3.one * 5f;
+    //private void OnDrawGizmos()
+    //{
+    //    Vector3 Origin = transform.position + Vector3.up;
+    //    Vector3 Size = Vector3.one * 5f;
 
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(Origin + new Vector3(0f, 1f, 3f), Size); 
-    }
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawWireCube(Origin + new Vector3(0f, 1f, 3f), Size); 
+    //}
 
 
     //이전 문제가되는 Move()함수 Backup

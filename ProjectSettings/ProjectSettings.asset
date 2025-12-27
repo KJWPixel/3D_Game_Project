@@ -77,6 +77,7 @@ PlayerSettings:
   androidMinimumWindowHeight: 300
   androidFullscreenMode: 1
   androidAutoRotationBehavior: 1
+  androidPredictiveBackSupport: 1
   defaultIsNativeResolution: 1
   macRetinaSupport: 1
   runInBackground: 1
@@ -750,7 +751,7 @@ PlayerSettings:
     PS5: UNITY_POST_PROCESSING_STACK_V2
     QNX: UNITY_POST_PROCESSING_STACK_V2
     Stadia: UNITY_POST_PROCESSING_STACK_V2
-    Standalone: UNITY_POST_PROCESSING_STACK_V2
+    Standalone: UNITY_POST_PROCESSING_STACK_V2;UNIVERSAL_PACKAGE;PUBLISHING_TOOLS_ASSET_STORE_RELEASE;AREA_OF_EFFECT_REGIONS_ASSET_STORE_RELEASE
     VisionOS: UNITY_POST_PROCESSING_STACK_V2
     WebGL: UNITY_POST_PROCESSING_STACK_V2
     XboxOne: UNITY_POST_PROCESSING_STACK_V2

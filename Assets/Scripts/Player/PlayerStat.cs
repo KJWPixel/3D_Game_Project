@@ -35,7 +35,7 @@ public class PlayerStat : MonoBehaviour
 
     [SerializeField] private int gold;
     [SerializeField] private PostProcessVolume postProcessVolume;
-    [SerializeField] private UnityEngine.Rendering.PostProcessing.Vignette vignette;
+    [SerializeField] private Vignette vignette;
 
     [SerializeField] public float posX;
     [SerializeField] public float posY;

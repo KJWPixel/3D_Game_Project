@@ -13,6 +13,7 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _ALPHABLEND_ON
+  - _EMISSION
   - _FADING_ON
   m_InvalidKeywords: []
   m_LightmapFlags: 0
@@ -79,7 +80,7 @@ Material:
     - _DistortionStrength: 1
     - _DistortionStrengthScaled: 0
     - _DstBlend: 10
-    - _EmissionEnabled: 0
+    - _EmissionEnabled: 1
     - _FlipbookMode: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
@@ -99,8 +100,8 @@ Material:
     - _ZWrite: 0
     m_Colors:
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
-    - _Color: {r: 6.3479204, g: 6.3479204, b: 6.3479204, a: 1}
+    - _Color: {r: 114.209045, g: 114.209045, b: 114.209045, a: 1}
     - _ColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissionColor: {r: 0.82075477, g: 1.3760751, b: 2, a: 1}
     - _SoftParticleFadeParams: {r: 0, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []

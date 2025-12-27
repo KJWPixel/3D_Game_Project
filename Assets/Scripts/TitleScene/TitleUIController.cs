@@ -31,9 +31,9 @@ public class TitleUIController : BaseUI
         OptionUI = OptionPanel.GetComponent<OptionPanelUI>();
         ExitUI = ExitPanel.GetComponent<ExitPanelUI>();
 
-        //LoginUI.Close();
-        //OptionUI.Close();
-        //ExitUI.Close();
+        LoginUI.Close();
+        OptionUI.Close();
+        ExitUI.Close();
     }
 
     private void Update()

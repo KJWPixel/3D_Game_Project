@@ -179,20 +179,6 @@ public class OptionPanelUI : BaseUI
         }
     }
 
-    public void OnClickAddLevel(int amount)
-    {
-        PlayerStat.Instance.Level += amount;
-    }
-    public void OnClickAddSp(int amount)
-    {
-        PlayerStat.Instance.SkillPoint += amount;
-    }
-
-    public void OnClickAddGold(int amount)
-    {
-        PlayerStat.Instance.Gold += amount;
-    }
-
     public void TitleClickButton()
     {
         //저장 후 타이틀 씬으로 이동
