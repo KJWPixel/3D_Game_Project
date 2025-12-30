@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem.iOS;
 
 public class SkillManager : MonoBehaviour
 {
@@ -9,11 +10,14 @@ public class SkillManager : MonoBehaviour
 
     bool IsCasting = false;
 
+    private float indicatorElapsed = 0f;
+
     private PlayerStat PlayerStat;
     private PlayerSkillBook PlayerSkillBook;
     private PlayerController PlayerController;
     private PlayerAnimationController Anim;
     private BuffController BuffController;
+    private SkillIndicatorController skillIndicator;
     
 
     ISkillBehaviorStrategy ISkillStrategy;
@@ -45,6 +49,7 @@ public class SkillManager : MonoBehaviour
         PlayerSkillBook = GetComponent<PlayerSkillBook>();
         PlayerController = GetComponent<PlayerController>();
         BuffController = GetComponent<BuffController>();
+        skillIndicator = GetComponent<SkillIndicatorController>();
 
         SetupEffectHandlers();
     }
@@ -74,8 +79,6 @@ public class SkillManager : MonoBehaviour
 
         //일반스킬
     }
-
-
 
     public void UseSkill(SkillData _Skill, Transform _Target = null)
     {
@@ -115,9 +118,9 @@ public class SkillManager : MonoBehaviour
         return true;
     }
 
-    private IEnumerator CastSkill(SkillData _SkillData, Transform _Target)
+    private IEnumerator CastSkill(SkillData data, Transform _Target)
     {
-        if(!PlayerStat.ConsumeMp(_SkillData.Cost))
+        if(!PlayerStat.ConsumeMp(data.Cost))
         {
             //MP부족 시 false 코루틴 중지
             yield break;
@@ -125,36 +128,39 @@ public class SkillManager : MonoBehaviour
 
         IsCasting = true;
 
+        //스킬 인디케이터
+        StartCoroutine(IndicatorCoroutine(data));
+
         //스킬 쿨타임
-        SkillCoolDownTimers[_SkillData] = Time.time + _SkillData.Cooldown;
+        SkillCoolDownTimers[data] = Time.time + data.Cooldown;
 
         //이동 잠금 
         PlayerController.SetState(PlayerState.Casting);
 
         //애니메이션 재생 
-        Anim.PlayerSkillAnimation(_SkillData.Effects, true);
+        Anim.PlayerSkillAnimation(data.Effects, true);
 
         //캐스팅 시간
-        yield return new WaitForSeconds(_SkillData.CastTime);
+        yield return new WaitForSeconds(data.CastTime);
 
         //효과 실행
-        if(_SkillData.Effects != null)
+        if(data.Effects != null)
         {
-            foreach(var Effect in _SkillData.Effects)
+            foreach(var Effect in data.Effects)
             {
                 if (EffectHandlers.TryGetValue(Effect.EffectType, out var Handler))
                 {
-                    Handler.Execute(PlayerController, PlayerStat, _SkillData, _Target);
+                    Handler.Execute(PlayerController, PlayerStat, data, _Target);
                 }
                 else if(BuffHandlers.TryGetValue(Effect.EffectType, out var BuffHandler))
                 {
-                    BuffController.AddBuff(BuffHandler, Effect.Power, Effect.Duration, _SkillData);
+                    BuffController.AddBuff(BuffHandler, Effect.Power, Effect.Duration, data);
                 }
                 else if(Effect.EffectType == SkillEffectType.Heal)
                 {
                     PlayerStat.RecoveryStat(ConsumableType.ResotreHp, Effect.Power);
                     PlayerStat.RecoveryStat(ConsumableType.ResotreMp, Effect.Power);
-                    EffectManager.Instance.Spawn(_SkillData.CastEffectPrefab, transform.position, _SkillData.CastPrefabDuration);
+                    EffectManager.Instance.Spawn(data.CastEffectPrefab, transform.position, data.CastPrefabDuration);
                 }               
                 else
                 {
@@ -183,12 +189,29 @@ public class SkillManager : MonoBehaviour
         PlayerController.SetState(PlayerState.Idle);
 
         //애니메이션 종료
-        Anim.PlayerSkillAnimation(_SkillData.Effects, false);
+        Anim.PlayerSkillAnimation(data.Effects, false);
 
         IsCasting = false;
+
+        skillIndicator.AllHide();
+        indicatorElapsed = 0f;
     }
 
+    private IEnumerator IndicatorCoroutine(SkillData data)
+    {
+        skillIndicator.ShowIndicator(data, transform);
 
+        while (indicatorElapsed < data.CastTime)
+        {
+            indicatorElapsed += Time.deltaTime;
+
+            float ratio = Mathf.Clamp01(indicatorElapsed / data.CastTime);
+
+            skillIndicator.UpdateCast(ratio);
+
+            yield return null;
+        }
+    }
 
     /* 
      * 스킬 발동 흐름
