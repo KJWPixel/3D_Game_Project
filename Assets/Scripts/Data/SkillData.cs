@@ -55,34 +55,17 @@ public class SkillEffect
     public float Power;    //데미지, 회복 수치
     public int HitCount;
     public float Duration; //버프, 디버프, CC기 지속시간
-    public float Radius;   //범위 공격 반경
     public float Distance; //거리
+    //DistanceAraeType
+    public float Radius;   //범위 공격 반경
+    //LineAreaType
+    public float Length;
+    public float Width;
+    //FanArea
+    public float Angle;
     public float DelayTime;
-    public int MaxTarget;
-    
-}
-public enum SkillEffectType
-{
-    RayDamage,
-    LineAreaDamage,
-    TargetAreaDamage,
-    DistanceAreaDamage,
-    Heal,
-    AtkBuff,
-    DefBuff,
-    CriBuff,
-    TotalBuff,
-    HealBuff,
-    MpBuff,
-    Debuff,
-    CC,
-    Resource,
-    Movement,
-    Teleport,
+    public int MaxTarget;   
 }
 
-public enum BuffTargetType //버프스킬이 플레이어스탯 상승 or 스킬 강화
-{
-    Stat,
-    Skill,
-}
+
+

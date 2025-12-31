@@ -69,6 +69,9 @@ public class PlayerAnimationController : MonoBehaviour
                 case SkillEffectType.DistanceAreaDamage:
                     Animator.SetBool("IsDistanceDamageSkill", _IsPlayering);
                     break;
+                case SkillEffectType.FanAreaDamage:
+                    Animator.SetBool("IsDistanceDamageSkill", _IsPlayering);
+                    break;
 
                 case SkillEffectType.Heal:
                     Animator.SetBool("IsHeal", _IsPlayering);

@@ -126,6 +126,48 @@ public enum QuestCondition
     Completed,
     Failed,
 }
+public enum SkillEffectType
+{
+    RayDamage,
+    LineAreaDamage,
+    TargetAreaDamage,
+    DistanceAreaDamage,
+    FanAreaDamage,
+    Heal,
+    AtkBuff,
+    DefBuff,
+    CriBuff,
+    TotalBuff,
+    HealBuff,
+    MpBuff,
+    Debuff,
+    CC,
+    Resource,
+    Movement,
+    Teleport,
+}
+public enum BuffTargetType //버프스킬이 플레이어스탯 상승 or 스킬 강화
+{
+    Stat,
+    Skill,
+}
+
+public enum IndicatorType
+{
+    None,
+    Ray,
+    LineArea,
+    DistanceArea,
+    FanArea,
+}
+
+public enum IndicatorShape
+{
+    None,
+    Line,
+    Circle,
+    Fan,
+}
 
 public enum SFXType
 {
@@ -161,7 +203,6 @@ public enum SFXType
     SkillTeleport,
 
     // 나중에 추가 
-
 }
 
 

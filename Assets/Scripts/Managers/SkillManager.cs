@@ -64,6 +64,7 @@ public class SkillManager : MonoBehaviour
             {SkillEffectType.TargetAreaDamage, new TargetAreaDamageStrategy() },
             {SkillEffectType.Teleport, new TeleportSkillStrategy()},
             {SkillEffectType.DistanceAreaDamage, new DistanceAreaSkillStrategy() },
+            {SkillEffectType.FanAreaDamage, new FanAreaDamageStratergy() },
         };
 
         //전략패턴 버프

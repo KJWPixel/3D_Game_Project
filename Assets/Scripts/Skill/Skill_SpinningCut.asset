@@ -26,12 +26,15 @@ MonoBehaviour:
   CastSFX: {fileID: 8300000, guid: 3f5017b6a829c9a46b24536ec61ba130, type: 3}
   HitSFX: {fileID: 0}
   Effects:
-  - EffectType: 3
+  - EffectType: 4
     Power: 30
     HitCount: 3
     Duration: 0
-    Radius: 3
     Distance: 0
+    Radius: 8
+    Length: 0
+    Width: 0
+    Angle: 90
     DelayTime: 0.1
     MaxTarget: 5
   RequireLevel: 1

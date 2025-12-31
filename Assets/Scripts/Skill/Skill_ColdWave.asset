@@ -30,8 +30,10 @@ MonoBehaviour:
     Power: 15
     HitCount: 5
     Duration: 0
-    Radius: 5
-    Distance: 15
+    Distance: 5
+    Radius: 0
+    Length: 3
+    Width: 3
     DelayTime: 0.3
     MaxTarget: 10
   RequireLevel: 10
