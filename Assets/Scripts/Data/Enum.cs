@@ -11,6 +11,13 @@ public enum MENU
     OPTION,
 }
 
+public enum LanguageType
+{
+    Korean,
+    English,
+}
+
+
 //æ∆¿Ã≈€
 public enum ItemType
 {

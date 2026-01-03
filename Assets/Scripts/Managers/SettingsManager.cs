@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
-using UnityEngine.ProBuilder.MeshOperations;
 
 public class SettingsManager : MonoBehaviour
 {
     public static SettingsManager Instance;
+    public LanguageType CurrentLanguage { get; private set; }
+
     private GameSettings gameSettings = new GameSettings();
     private string savePath;
     private const string SAVEFOLDER = "Settings";
@@ -26,7 +27,12 @@ public class SettingsManager : MonoBehaviour
 
         savePath = Path.Combine(Application.dataPath, SAVEFOLDER, FILENAME);
         LoadSetting();
+        CurrentLanguage = gameSettings.Language;
         ApplySettings();
+        if (LocalizationManager.Instance != null)
+        {
+            LocalizationManager.Instance.SetLanguage(CurrentLanguage);
+        }
     }
 
     public void SetGraphicsSettings(int screenIndex, int resolutionIndex, int frameRate)
@@ -45,6 +51,17 @@ public class SettingsManager : MonoBehaviour
         gameSettings.BackGroundVolume = backGroundVolume;
         SaveSetting();
         ApplySettings();
+    }
+
+    public void SetLanguage(LanguageType language)
+    {
+        if (CurrentLanguage == language) return;
+        
+        CurrentLanguage = language;
+        gameSettings.Language = language;
+
+        SaveSetting();
+        LocalizationManager.Instance.SetLanguage(language);
     }
 
     private void LoadSetting()
@@ -117,6 +134,7 @@ public class SettingsManager : MonoBehaviour
         {
             soundManager.ApplySoundSettings(gameSettings);
         }
+
     }
     public GameSettings GetSettings()
     {

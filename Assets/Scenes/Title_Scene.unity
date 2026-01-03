@@ -2509,6 +2509,7 @@ GameObject:
   - component: {fileID: 511135406}
   - component: {fileID: 511135408}
   - component: {fileID: 511135407}
+  - component: {fileID: 511135409}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -2632,6 +2633,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 511135405}
   m_CullTransparentMesh: 1
+--- !u!114 &511135409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 511135405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd4c0756a40821f4cb8a63248accf19f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: OPTION
 --- !u!1 &517647705
 GameObject:
   m_ObjectHideFlags: 0
@@ -3975,6 +3989,7 @@ GameObject:
   - component: {fileID: 767404245}
   - component: {fileID: 767404247}
   - component: {fileID: 767404246}
+  - component: {fileID: 767404248}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -4098,6 +4113,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 767404244}
   m_CullTransparentMesh: 1
+--- !u!114 &767404248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 767404244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd4c0756a40821f4cb8a63248accf19f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: EXIT
 --- !u!1 &782973554
 GameObject:
   m_ObjectHideFlags: 0
@@ -4669,6 +4697,50 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 0
+--- !u!1 &890155202
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 890155204}
+  - component: {fileID: 890155203}
+  m_Layer: 0
+  m_Name: LocalizationManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &890155203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 890155202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5849e4533ed4b54d91297297c28832a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &890155204
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 890155202}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 504.12012, y: -1.2265625, z: 551.42554}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &892626684
 GameObject:
   m_ObjectHideFlags: 0
@@ -9842,6 +9914,7 @@ GameObject:
   - component: {fileID: 1976937498}
   - component: {fileID: 1976937500}
   - component: {fileID: 1976937499}
+  - component: {fileID: 1976937501}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -9965,6 +10038,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1976937497}
   m_CullTransparentMesh: 1
+--- !u!114 &1976937501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1976937497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd4c0756a40821f4cb8a63248accf19f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: START
 --- !u!1 &1982990320
 GameObject:
   m_ObjectHideFlags: 0
@@ -11166,7 +11252,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 177550987829066104, guid: 729843ec542fc0640b0528bff46444dc, type: 3}
       propertyPath: m_Name
-      value: GameSettingManager
+      value: SettingManager
       objectReference: {fileID: 0}
     - target: {fileID: 2022570006951081305, guid: 729843ec542fc0640b0528bff46444dc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11293,6 +11379,7 @@ SceneRoots:
   - {fileID: 907774497}
   - {fileID: 2128223640}
   - {fileID: 561897065}
+  - {fileID: 890155204}
   - {fileID: 9208106568261739006}
   - {fileID: 1378680504682390918}
   - {fileID: 1539570969670135335}

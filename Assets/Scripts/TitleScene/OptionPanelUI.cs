@@ -9,10 +9,10 @@ public class OptionPanelUI : BaseUI
     [Header("옵션 패널")]
     [SerializeField] private GameObject GraphicsPanel;
     [SerializeField] private GameObject SoundPanel;
-    [SerializeField] private GameObject GameHelperPanel;
+    [SerializeField] private GameObject GamePlayPanel;
     [SerializeField] private Button GraphicsButton;
     [SerializeField] private Button SoundButton;
-    [SerializeField] private Button GameHelperButton;
+    [SerializeField] private Button GamePlayButton;
 
     [Header("그래픽 옵션")]
     [SerializeField] private TMP_Dropdown ScreenOptions;
@@ -23,6 +23,9 @@ public class OptionPanelUI : BaseUI
     [SerializeField] private Slider MasterVolumeSlider;
     [SerializeField] private Slider EffectVolumeSlider;
     [SerializeField] private Slider BackGroundVolumeSlider;
+
+    [Header("언어 옵션")]
+    [SerializeField] private TMP_Dropdown LanguageOptions;
 
     private void Awake()
     {
@@ -122,16 +125,16 @@ public class OptionPanelUI : BaseUI
     }
     public void OnClickGameHelperButton()
     {
-        ShowPanel(GameHelperPanel);
+        ShowPanel(GamePlayPanel);
     }
     private void ShowPanel(GameObject activePanel)
     {
         GraphicsPanel.SetActive(activePanel == GraphicsPanel);
         SoundPanel.SetActive(activePanel == SoundPanel);
 
-        if(GameHelperPanel != null)
+        if(GamePlayPanel != null)
         {
-            GameHelperPanel.SetActive(activePanel == GameHelperPanel);
+            GamePlayPanel.SetActive(activePanel == GamePlayPanel);
         }           
     }
 

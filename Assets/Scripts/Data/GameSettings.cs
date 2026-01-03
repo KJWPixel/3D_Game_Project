@@ -10,7 +10,7 @@ public class GameSettings
     public float EffectVolume;
     public float BackGroundVolume;
     //게임플레이(미구현)
-    public int language;
+    public LanguageType Language;
 
     public GameSettings()
     {
@@ -20,6 +20,6 @@ public class GameSettings
         MasterVolume = 1f;
         EffectVolume = 1f;
         BackGroundVolume = 1f;
-        language = 0;//Index
+        Language = LanguageType.Korean;
     }
 }
