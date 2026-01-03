@@ -2,15 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 
 public class LocalizationManager : MonoBehaviour
 {
     public static LocalizationManager Instance;
-
-    public static event Action OnLanguageReady;
-
-    private Dictionary<string, string> currentTable;
-    private Dictionary<LanguageType, Dictionary<string, string>> tables = new Dictionary<LanguageType, Dictionary<string, string>>();
 
     private void Awake()
     {
@@ -24,54 +20,26 @@ public class LocalizationManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
-        LoadTables();
-        SetLanguage(LanguageType.English);
     }
 
-    private void LoadTables()
+    public void ChangeLanguage(string localCode)
     {
-        tables[LanguageType.Korean] = new Dictionary<string, string>()
-        {
-            { "START", "시작" },
-            { "OPTION", "옵션" },
-            { "EXIT", "게임 종료" },
-        };
-        tables[LanguageType.English] = new Dictionary<string, string>()
-        {
-            { "START", "Start" },
-            { "OPTION", "Options" },
-            { "EXIT", "GameExit" },
-        };
+        StartCoroutine(SetLocale(localCode));
     }
 
-    public void SetLanguage(LanguageType language)
+    IEnumerator SetLocale(string localCode)
     {
-        if (!tables.ContainsKey(language))
+        yield return LocalizationSettings.InitializationOperation;
+
+        var selectedLocale = LocalizationSettings.AvailableLocales.GetLocale(localCode);
+
+        if (selectedLocale != null)
         {
-            Debug.LogError($"언어 테이블 없음: {language}");
-            return;
+            LocalizationSettings.SelectedLocale = selectedLocale;
         }
-
-        currentTable = tables[language];
-        OnLanguageReady?.Invoke();
-    }
-
-    public string Get(string key)
-    {
-        if (currentTable == null)
+        else
         {
-            Debug.LogError("currentTable is NULL (SetLanguage 안 됨)");
-            return key;
-        }
-
-        return currentTable.TryGetValue(key, out var value) ? value : key;
-    }
-    public void RefreshAllTexts()
-    {
-        foreach (var text in FindObjectsOfType<LocalizedText>())
-        {
-            text.Refresh();
+            Debug.Log($"Locale not found :: {localCode}");
         }
     }
 }

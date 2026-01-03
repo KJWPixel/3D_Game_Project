@@ -132,12 +132,32 @@ PrefabInstance:
       propertyPath: m_Name
       value: OptionPanel
       objectReference: {fileID: 0}
+    - target: {fileID: 4847996326257832888, guid: 3a305a9ac4775284c849854dc3d4d33c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4968728515515644249, guid: 3a305a9ac4775284c849854dc3d4d33c, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5235608173738541716, guid: 3a305a9ac4775284c849854dc3d4d33c, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6131774279147384139, guid: 3a305a9ac4775284c849854dc3d4d33c, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6131774279147384139, guid: 3a305a9ac4775284c849854dc3d4d33c, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6131774279147384139, guid: 3a305a9ac4775284c849854dc3d4d33c, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6131774279147384139, guid: 3a305a9ac4775284c849854dc3d4d33c, type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7112758589290136369, guid: 3a305a9ac4775284c849854dc3d4d33c, type: 3}

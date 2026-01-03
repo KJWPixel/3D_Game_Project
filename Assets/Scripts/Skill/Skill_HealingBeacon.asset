@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Skill_HealingBeacon
   m_EditorClassIdentifier: 
   SkillID: 14
-  SkillKey: HealingBeacon
+  SkillKey: Skill_HealingBeacon_Name
   SkillName: "\uCE58\uC720\uC758 \uB4F1\uB300"
   Icon: {fileID: 21300000, guid: 6cf658fed04e9ec4eb4dce5566ae2ac1, type: 3}
   Cost: 20
@@ -30,8 +30,11 @@ MonoBehaviour:
     Power: 25
     HitCount: 3
     Duration: 15
-    Radius: 0
     Distance: 0
+    Radius: 0
+    Length: 0
+    Width: 0
+    Angle: 0
     DelayTime: 0
     MaxTarget: 0
   RequireLevel: 5

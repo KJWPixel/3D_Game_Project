@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: OPTION Table Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: OPTION Table
+  m_TableCollectionNameGuidString: cd780a0c9a0b50b4db03a7feb2a7d0db
+  m_Entries:
+  - m_Id: 3461754880
+    m_Key: GRAPHIC
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5093339136
+    m_Key: SOUND
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6871724032
+    m_Key: GAMEPLAY
+    m_Metadata:
+      m_Items: []
+  - m_Id: 716623458304
+    m_Key: CLOSE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 769371025408
+    m_Key: APPLY
+    m_Metadata:
+      m_Items: []
+  - m_Id: 905669128192
+    m_Key: SCREEN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1055623884800
+    m_Key: RESOLUTION
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1168203198464
+    m_Key: REFRESHRATE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1268547727360
+    m_Key: MASTERVOLUME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1465734541312
+    m_Key: EFFECTVOLUME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1568037810176
+    m_Key: BACKGROUNDVLOUME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1723780706304
+    m_Key: LANGUAGE
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 8432449415486111805
+  references:
+    version: 2
+    RefIds:
+    - rid: 8432449415486111805
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1767420082974

@@ -1,0 +1,152 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: SKIl Table Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: SKIl Table
+  m_TableCollectionNameGuidString: cc030497c9dd368438148c15ef8c837e
+  m_Entries:
+  - m_Id: 305166430208
+    m_Key: Skill_SlashBlow_Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 309876633600
+    m_Key: Skill_ChargeSlash_Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 311550160896
+    m_Key: Skill_SpinningCut_Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 313181745152
+    m_Key: Skill_IcePick_Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 314779774976
+    m_Key: Skill_IcePick:Advanced_Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 316000317440
+    m_Key: Skill_Earthquake_Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 317208276992
+    m_Key: Skill_Earthquake:Advanced_Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 318365904896
+    m_Key: Skill_ForstBlade_Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 319477395456
+    m_Key: Skill_ColdWave_Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 320614051840
+    m_Key: Skill_IceShower_Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 321775874048
+    m_Key: Skill_MeteorFall_Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 322920919040
+    m_Key: Skill_EnergyCondensation_Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 324154044416
+    m_Key: Skill_HealingEnergy_Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 325261340672
+    m_Key: Skill_HealingBeacon_Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 326196670464
+    m_Key: Skill_LighthouseofMagic_Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 327312355328
+    m_Key: Skill_SpellofSwiftness_Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 328562257920
+    m_Key: Skill_SenseoPower_Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330311282688
+    m_Key: Skill_MagicShield_Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 332051918848
+    m_Key: Skill_Teleport_Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4332667154432
+    m_Key: Skill_SingleHit_Desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6592230993920
+    m_Key: Skill_MultiHit_Desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6788457312256
+    m_Key: Skill_Heal_Desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7055185686528
+    m_Key: Skill_HealBuff_Desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7885238448128
+    m_Key: Skill_AtkBuff_Desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8701114462208
+    m_Key: Skill_DefBuff_Desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8882081902592
+    m_Key: Skill_MovementBuff_Desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9217064185856
+    m_Key: Skill_Teleport_Desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15877816070144
+    m_Key: Skill_Attack_Requirements_Desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16120456556544
+    m_Key: Skill_Heal_Requirements_Desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16281467498496
+    m_Key: Skill_Buff_Requirements_Desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16318259933184
+    m_Key: Skill_DeBuff_Requirements_Desc
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 8432449415486111820
+  references:
+    version: 2
+    RefIds:
+    - rid: 8432449415486111820
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1767425705340

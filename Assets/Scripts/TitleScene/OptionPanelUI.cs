@@ -47,6 +47,7 @@ public class OptionPanelUI : BaseUI
             Resolution res = resolutions[i];
             ResolutionOptions.options.Add(new TMP_Dropdown.OptionData($"{res.width}x{res.height}"));
         }
+
         ResolutionOptions.value = Mathf.Clamp(SettingsManager.Instance.GetSettings().Resolution, 0, resolutions.Length - 1);
         ResolutionOptions.RefreshShownValue();
 
@@ -80,6 +81,12 @@ public class OptionPanelUI : BaseUI
         }
         FrameRateOptions.value = frameRateIndex >= 0 ? frameRateIndex : 2; // 기본 60fps (index 2)
         FrameRateOptions.RefreshShownValue();
+
+        //게임플레이 옵션 초기화
+        LanguageOptions.options.Clear();
+        LanguageOptions.options.Add(new TMP_Dropdown.OptionData("Korean"));
+        LanguageOptions.options.Add(new TMP_Dropdown.OptionData("English"));
+        LanguageOptions.RefreshShownValue();
     }
 
     private void InitializedSliders()
@@ -123,7 +130,7 @@ public class OptionPanelUI : BaseUI
     {
         ShowPanel(SoundPanel);
     }
-    public void OnClickGameHelperButton()
+    public void OnClickGamePlayButton()
     {
         ShowPanel(GamePlayPanel);
     }
@@ -131,11 +138,11 @@ public class OptionPanelUI : BaseUI
     {
         GraphicsPanel.SetActive(activePanel == GraphicsPanel);
         SoundPanel.SetActive(activePanel == SoundPanel);
-
-        if(GamePlayPanel != null)
+        GamePlayPanel.SetActive(activePanel == GamePlayPanel);
+        if (GamePlayPanel != null)
         {
             GamePlayPanel.SetActive(activePanel == GamePlayPanel);
-        }           
+        }
     }
 
     public void OnClickApply()
@@ -179,6 +186,13 @@ public class OptionPanelUI : BaseUI
         else
         {
             Debug.Log("사운드 슬라이더 컴포넌트가 할당되지 않았습니다.");
+        }
+
+        if (LanguageOptions != null)
+        {
+            int languageIndex = LanguageOptions.value;
+            SettingsManager.Instance.SetLanguage(languageIndex);
+            SettingsManager.Instance.ApplyLanguage(); // 새로 만들 함수
         }
     }
 

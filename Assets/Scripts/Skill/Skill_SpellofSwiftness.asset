@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Skill_SpellofSwiftness
   m_EditorClassIdentifier: 
   SkillID: 16
-  SkillKey: SpellofSwitfness
+  SkillKey: Skill_SpellofSwiftness_Name
   SkillName: "\uC2E0\uC18D\uC758 \uC8FC\uBB38"
   Icon: {fileID: 21300000, guid: 00d93e870e281474eaffc504915561f0, type: 3}
   Cost: 25
@@ -26,12 +26,15 @@ MonoBehaviour:
   CastSFX: {fileID: 8300000, guid: 0ce731c31354baa4595369b6b0e13ca2, type: 3}
   HitSFX: {fileID: 0}
   Effects:
-  - EffectType: 6
+  - EffectType: 15
     Power: 1.2
     HitCount: 0
     Duration: 90
-    Radius: 0
     Distance: 0
+    Radius: 0
+    Length: 0
+    Width: 0
+    Angle: 0
     DelayTime: 0
     MaxTarget: 0
   RequireLevel: 15

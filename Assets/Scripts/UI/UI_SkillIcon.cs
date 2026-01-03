@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
+using UnityEngine.UI;
 
 public class UI_SkillIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
@@ -22,17 +24,39 @@ public class UI_SkillIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         Button.onClick.AddListener(OnClick);
         LearnSkillEffectImage.SetActive(false);
     }
+
+    private void OnEnable()
+    {
+        // 1. 언어 설정이 바뀌었을 때 실행될 함수(OnLocaleChanged)를 등록합니다.
+        LocalizationSettings.SelectedLocaleChanged += OnLocaleChanged;
+
+        // 2. 처음 켰을 때도 한 번은 업데이트 해줘야 합니다.
+        UpdateSkillIcon();
+    }
+
+    private void OnDisable()
+    {
+        // 3. 오브젝트가 사라질 때는 등록을 해제해야 메모리 누수가 없습니다.
+        LocalizationSettings.SelectedLocaleChanged -= OnLocaleChanged;
+    }
+
+    private void OnLocaleChanged(Locale locale)
+    {
+        UpdateSkillIcon();
+    }
     private void Start()
     {      
         if (SkillData != null && IconImage != null)
         {
             IconImage.sprite = SkillData.Icon;
-        }    
-
-        if(SkillData != null && SkillName != null)
-        {
-            SkillName.text = SkillData.SkillName;
         }
+       
+        SkillName.text = LocalizationSettings.StringDatabase.GetLocalizedString("SKIl Table", SkillData.SkillKey);   
+    }
+
+    private void UpdateSkillIcon()
+    {
+        SkillName.text = LocalizationSettings.StringDatabase.GetLocalizedString("SKIl Table", SkillData.SkillKey);
     }
 
     public void OnPointerEnter(PointerEventData _EventData)

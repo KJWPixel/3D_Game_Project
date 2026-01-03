@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Skill_IceShower
   m_EditorClassIdentifier: 
   SkillID: 10
-  SkillKey: IceShower
+  SkillKey: Skill_IceShower_Name
   SkillName: "\uC5BC\uC74C \uC18C\uB098\uAE30"
   Icon: {fileID: 21300000, guid: 480b6fd098764e244bde8ee6274e6a45, type: 3}
   Cost: 50
@@ -30,8 +30,11 @@ MonoBehaviour:
     Power: 25
     HitCount: 10
     Duration: 0
-    Radius: 5
     Distance: 15
+    Radius: 5
+    Length: 0
+    Width: 0
+    Angle: 0
     DelayTime: 0.3
     MaxTarget: 15
   RequireLevel: 20

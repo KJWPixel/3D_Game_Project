@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Skill_Teleport
   m_EditorClassIdentifier: 
   SkillID: 19
-  SkillKey: Teleport
+  SkillKey: Skill_Teleport_Name
   SkillName: "\uACF5\uAC04\uC774\uB3D9"
   Icon: {fileID: 21300000, guid: 653223c75759bfa4cb2ab79218897e19, type: 3}
   Cost: 20
@@ -26,12 +26,15 @@ MonoBehaviour:
   CastSFX: {fileID: 8300000, guid: 126a7914023294e2faf8108acc1e9a71, type: 3}
   HitSFX: {fileID: 0}
   Effects:
-  - EffectType: 15
+  - EffectType: 16
     Power: 0
     HitCount: 0
     Duration: 0
-    Radius: 0
     Distance: 10
+    Radius: 0
+    Length: 0
+    Width: 0
+    Angle: 0
     DelayTime: 0
     MaxTarget: 0
   RequireLevel: 1

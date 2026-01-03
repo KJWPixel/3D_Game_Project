@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Skill_FrostBlade
   m_EditorClassIdentifier: 
   SkillID: 8
-  SkillKey: Frostblade
+  SkillKey: Skill_ForstBlade_Name
   SkillName: "\uC11C\uB9AC\uCE7C\uB0A0"
   Icon: {fileID: 21300000, guid: cb025973e7e3f114aa3db0378956aad8, type: 3}
   Cost: 35
@@ -30,8 +30,11 @@ MonoBehaviour:
     Power: 15
     HitCount: 6
     Duration: 0
-    Radius: 5
     Distance: 15
+    Radius: 5
+    Length: 0
+    Width: 0
+    Angle: 0
     DelayTime: 0.2
     MaxTarget: 10
   RequireLevel: 8

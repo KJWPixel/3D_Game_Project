@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1aabd643963f6347b205db3c9ff671b, type: 3}
+  m_Name: Skill_MagicShield
+  m_EditorClassIdentifier: 
+  SkillID: 18
+  SkillKey: Skill_MagicShield_Name
+  SkillName: "\uB9C8\uB825\uC758 \uBC29\uD328"
+  Icon: {fileID: 21300000, guid: 5bfd472c037342741850dbb209214aee, type: 3}
+  Cost: 5
+  CastTime: 1
+  Cooldown: 5
+  CastPrefabDuration: 2
+  HitPrefabDuration: 0
+  CastEffectPrefab: {fileID: 3744133877081091469, guid: a2a060732547fe64581bb0cb3c2bdf1d, type: 3}
+  HitEffectPrefab: {fileID: 0}
+  CastSFX: {fileID: 8300000, guid: 53c802b86fac780458b92d4af5052374, type: 3}
+  HitSFX: {fileID: 0}
+  Effects:
+  - EffectType: 7
+    Power: 10
+    HitCount: 0
+    Duration: 60
+    Distance: 0
+    Radius: 0
+    Length: 0
+    Width: 0
+    Angle: 0
+    DelayTime: 0
+    MaxTarget: 0
+  RequireLevel: 1
+  RequireSP: 5
+  PrerequisiteSkills: []
+  MaxLevel: 1
+  AnimationName: IsBuff

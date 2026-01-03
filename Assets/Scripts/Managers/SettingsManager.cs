@@ -6,7 +6,7 @@ using UnityEngine;
 public class SettingsManager : MonoBehaviour
 {
     public static SettingsManager Instance;
-    public LanguageType CurrentLanguage { get; private set; }
+    public int LanguageIndex = 0;
 
     private GameSettings gameSettings = new GameSettings();
     private string savePath;
@@ -27,12 +27,7 @@ public class SettingsManager : MonoBehaviour
 
         savePath = Path.Combine(Application.dataPath, SAVEFOLDER, FILENAME);
         LoadSetting();
-        CurrentLanguage = gameSettings.Language;
         ApplySettings();
-        if (LocalizationManager.Instance != null)
-        {
-            LocalizationManager.Instance.SetLanguage(CurrentLanguage);
-        }
     }
 
     public void SetGraphicsSettings(int screenIndex, int resolutionIndex, int frameRate)
@@ -53,15 +48,9 @@ public class SettingsManager : MonoBehaviour
         ApplySettings();
     }
 
-    public void SetLanguage(LanguageType language)
+    public void SetLanguage(int index)
     {
-        if (CurrentLanguage == language) return;
-        
-        CurrentLanguage = language;
-        gameSettings.Language = language;
-
-        SaveSetting();
-        LocalizationManager.Instance.SetLanguage(language);
+        LanguageIndex = index;
     }
 
     private void LoadSetting()
@@ -134,8 +123,20 @@ public class SettingsManager : MonoBehaviour
         {
             soundManager.ApplySoundSettings(gameSettings);
         }
-
     }
+
+    public void ApplyLanguage()
+    {
+        string localeCode = LanguageIndex switch
+        {
+            0 => "ko",
+            1 => "en",
+            _ => "en"
+        };
+
+        LocalizationManager.Instance.ChangeLanguage(localeCode);
+    }
+
     public GameSettings GetSettings()
     {
         return gameSettings;

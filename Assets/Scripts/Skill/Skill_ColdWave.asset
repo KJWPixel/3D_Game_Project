@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Skill_ColdWave
   m_EditorClassIdentifier: 
   SkillID: 9
-  SkillKey: ColdWave
+  SkillKey: Skill_ColdWave_Name
   SkillName: "\uD55C\uD30C"
   Icon: {fileID: 21300000, guid: 7e920e169e7d9d24cbe2fac1f4424006, type: 3}
   Cost: 30
@@ -34,6 +34,7 @@ MonoBehaviour:
     Radius: 0
     Length: 3
     Width: 3
+    Angle: 0
     DelayTime: 0.3
     MaxTarget: 10
   RequireLevel: 10

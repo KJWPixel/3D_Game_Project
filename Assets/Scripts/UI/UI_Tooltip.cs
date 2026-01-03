@@ -2,18 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 
 public class UI_Tooltip : MonoBehaviour
 {
     public static UI_Tooltip Instance;
 
-    [SerializeField] GameObject SkillTree;
-    [SerializeField] GameObject TooltipPanel;
-    [SerializeField] TMP_Text TooltipName;
-    [SerializeField] TMP_Text TooltipDesc;
-    [SerializeField] TMP_Text TooltipExtra; 
-    [SerializeField] Image TooltipIcon;
+    private const string TableName = "Skill Table";
+
+    [SerializeField] private GameObject SkillTree;
+    [SerializeField] private GameObject TooltipPanel;
+    [SerializeField] private TMP_Text TooltipName;
+    [SerializeField] private TMP_Text TooltipDesc;
+    [SerializeField] private TMP_Text TooltipExtra; 
+    [SerializeField] private Image TooltipIcon;
 
     private void Awake()
     {
@@ -21,7 +24,7 @@ public class UI_Tooltip : MonoBehaviour
         TooltipPanel.SetActive(false);
     }
 
-    public void ShowTooltip(SkillData _Data, Vector3 _Position)
+    public void ShowTooltip(SkillData data, Vector3 position)
     {
         if (TooltipPanel == null)
         {
@@ -30,14 +33,20 @@ public class UI_Tooltip : MonoBehaviour
         }
 
         TooltipPanel.SetActive(true);
-        TooltipPanel.transform.position = _Position + new Vector3(0, 0, 0);
-        TooltipIcon.sprite = _Data.Icon;
+        TooltipPanel.transform.position = position + new Vector3(0, 0, 0);
+        TooltipIcon.sprite = data.Icon;
 
-        TooltipName.text = $"{_Data.SkillName}";
-        TooltipDesc.text = GetDescriptionByType(_Data);
+        TooltipName.text = $"{data.SkillName}";
+        TooltipDesc.text = GetDescriptionByType(data);
+
+        //스킬 이름 로컬라이징
+        TooltipName.text = LocalizationSettings.StringDatabase.GetLocalizedString(TableName, data.SkillKey);
+
+        //스킬 설명 로컬라이징
+        TooltipDesc.text = GetDescriptionByType(data);
 
         string effectDesc = "";
-        foreach (var effect in _Data.Effects)
+        foreach (var effect in data.Effects)
         {
             //string EffectsDesc = GetDescriptionByType(_Data);
             effectDesc += effect.Power.ToString();
@@ -48,20 +57,20 @@ public class UI_Tooltip : MonoBehaviour
                 case SkillEffectType.LineAreaDamage:
                 case SkillEffectType.TargetAreaDamage:
                 case SkillEffectType.DistanceAreaDamage:
-                    TooltipExtra.text = $"요구 레벨:{_Data.RequireLevel}\n요구 스킬포인트  :{_Data.RequireSP}\n재사용 대기시간  :{_Data.Cooldown}\n스킬데미지 :{effectDesc}";
+                    TooltipExtra.text = $"요구 레벨:{data.RequireLevel}\n요구 스킬포인트  :{data.RequireSP}\n재사용 대기시간  :{data.Cooldown}\n스킬데미지 :{effectDesc}";
                     break;
                 case SkillEffectType.Heal:
                 case SkillEffectType.HealBuff:
-                    TooltipExtra.text = $"요구 레벨:{_Data.RequireLevel}\n요구 스킬포인트  :{_Data.RequireSP}\n재사용 대기시간  :{_Data.Cooldown}\n회복량 :{effectDesc}";
+                    TooltipExtra.text = $"요구 레벨:{data.RequireLevel}\n요구 스킬포인트  :{data.RequireSP}\n재사용 대기시간  :{data.Cooldown}\n회복량 :{effectDesc}";
                     break;
                 case SkillEffectType.AtkBuff:
                 case SkillEffectType.DefBuff:
                 case SkillEffectType.CriBuff:
                 case SkillEffectType.TotalBuff:
-                    TooltipExtra.text = $"요구 레벨:{_Data.RequireLevel}\n요구 스킬포인트  :{_Data.RequireSP}\n재사용 대기시간  :{_Data.Cooldown}\n스탯 증가량 :{effectDesc}";
+                    TooltipExtra.text = $"요구 레벨:{data.RequireLevel}\n요구 스킬포인트  :{data.RequireSP}\n재사용 대기시간  :{data.Cooldown}\n스탯 증가량 :{effectDesc}";
                     break;
                 case SkillEffectType.Debuff:
-                    TooltipExtra.text = $"요구 레벨:{_Data.RequireLevel}\n요구 스킬포인트  :{_Data.RequireSP}\n재사용 대기시간  :{_Data.Cooldown}\n스탯 감소량 :{effectDesc}";
+                    TooltipExtra.text = $"요구 레벨:{data.RequireLevel}\n요구 스킬포인트  :{data.RequireSP}\n재사용 대기시간  :{data.Cooldown}\n스탯 감소량 :{effectDesc}";
                     break;
             }
         }

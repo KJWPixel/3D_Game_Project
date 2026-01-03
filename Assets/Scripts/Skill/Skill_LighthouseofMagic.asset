@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Skill_LighthouseofMagic
   m_EditorClassIdentifier: 
   SkillID: 15
-  SkillKey: LighthouseofMagic
+  SkillKey: Skill_LighthouseofMagic_Name
   SkillName: "\uB9C8\uB825\uC758 \uB4F1\uB300"
   Icon: {fileID: 21300000, guid: e359cba75fdaf9e43a5e96e1485dfeb9, type: 3}
   Cost: 30
@@ -30,8 +30,11 @@ MonoBehaviour:
     Power: 50
     HitCount: 1
     Duration: 60
-    Radius: 0
     Distance: 0
+    Radius: 0
+    Length: 0
+    Width: 0
+    Angle: 0
     DelayTime: 0
     MaxTarget: 0
   RequireLevel: 10

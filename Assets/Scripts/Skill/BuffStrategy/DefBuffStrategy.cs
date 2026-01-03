@@ -11,7 +11,7 @@ public class DefBuffStrategy : IBuffBehaviorStrategy
         foreach (var Effect in skillData.Effects)
         {
             playerStat.Def += Effect.Power;
-            Debug.Log($"공격력 버프 적용");
+            Debug.Log($"방어력 버프 적용");
         }
         EffectManager.Instance.Spawn(skillData.CastEffectPrefab, playerStat.transform.position, skillData.CastPrefabDuration);
     }

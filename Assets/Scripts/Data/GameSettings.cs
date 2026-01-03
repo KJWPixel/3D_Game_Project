@@ -9,17 +9,17 @@ public class GameSettings
     public float MasterVolume;
     public float EffectVolume;
     public float BackGroundVolume;
-    //게임플레이(미구현)
-    public LanguageType Language;
+    //게임플레이 언어
+    public int LanguageIndex;
 
     public GameSettings()
     {
-        Screen = 0;//Index
-        Resolution = 0;//Index
+        Screen = 0; // Index
+        Resolution = 0; // Index
         FrameRate = 60;
         MasterVolume = 1f;
         EffectVolume = 1f;
         BackGroundVolume = 1f;
-        Language = LanguageType.Korean;
+        LanguageIndex = 0; // Index
     }
 }
