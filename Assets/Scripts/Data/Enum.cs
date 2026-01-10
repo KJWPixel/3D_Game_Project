@@ -88,6 +88,7 @@ public enum PlayerState
     Attacking,
     Casting,
     Stunned,
+    Dead,
 }
 
 public enum ConsumableBuffType

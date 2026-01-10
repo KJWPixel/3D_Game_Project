@@ -8,6 +8,7 @@ public abstract class ItemData : ScriptableObject
     //유니티 에디터 인스펙터
     [Header("Item 공통 정보")]
     [SerializeField] private int id;
+    [SerializeField] private string ItemKey;
     [SerializeField] private string itemname;
     [SerializeField] private Sprite icon;
     [SerializeField] private string description;

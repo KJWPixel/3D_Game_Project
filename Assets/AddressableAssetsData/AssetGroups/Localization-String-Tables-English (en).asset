@@ -24,7 +24,7 @@ MonoBehaviour:
     - Locale-en
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2392973f5219b7c4388473360dfc58c4
-    m_Address: EXITPANEL Table_en
+    m_Address: ITEM Table_en
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en

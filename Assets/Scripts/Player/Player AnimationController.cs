@@ -111,4 +111,14 @@ public class PlayerAnimationController : MonoBehaviour
     {
         Animator.SetBool(_AnimationName, _IsPlayering);
     }
+
+    public void PlayerDieAnimation(bool isDie)
+    {
+        Animator.SetBool("IsDie", isDie);
+
+        if (isDie)
+        {
+            SoundManager.Instance.StopLoopSFX(); 
+        }
+    }
 }

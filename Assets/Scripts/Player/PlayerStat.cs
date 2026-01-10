@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 
@@ -40,6 +41,9 @@ public class PlayerStat : MonoBehaviour
     [SerializeField] public float posX;
     [SerializeField] public float posY;
     [SerializeField] public float posZ;
+
+    [Header("플레이어 상태")]
+    [SerializeField] private bool isDie = false;
 
     public string UserName
     {
@@ -140,7 +144,8 @@ public class PlayerStat : MonoBehaviour
 
     List<float> ActiveBuffs = new List<float>();
 
-    PlayerController PlayerController;
+    PlayerController playerController;
+    PlayerAnimationController playerAniController;
     SkillManager SkillManager;
     UI_Status status;
 
@@ -158,8 +163,10 @@ public class PlayerStat : MonoBehaviour
             Destroy(gameObject);
         }
 
-        PlayerController = GetComponent<PlayerController>();
+        playerController = GetComponent<PlayerController>();
+        playerAniController = GetComponent<PlayerAnimationController>();
         SkillManager = GetComponent<SkillManager>();
+
 
     }
 
@@ -179,7 +186,7 @@ public class PlayerStat : MonoBehaviour
     void Update()
     {    
         NaturalRecovery();
-        HpDangerEffect();
+        DamageEffect(); 
     }
 
     private void StatInit()
@@ -204,6 +211,8 @@ public class PlayerStat : MonoBehaviour
         postProcessVolume.profile.TryGetSettings(out vignette);
 
         vignette.intensity.value = 0f;
+        vignette.smoothness.value = 0f;
+        vignette.roundness.value = 0f;  
     }
 
     private void NaturalRecovery()
@@ -218,12 +227,6 @@ public class PlayerStat : MonoBehaviour
         {
             CurrentStamina += 2 * Time.deltaTime;
         }
-    }
-
-    private void HpDangerEffect()
-    {
-        float targetIntensity = (CurrentHp <= MaxHp * 0.3f) ? 0.45f : 0f;
-        vignette.intensity.value = Mathf.Lerp(vignette.intensity.value, targetIntensity, Time.deltaTime * 5);
     }
 
     public void ReduceStamina(float _Amount)
@@ -308,20 +311,51 @@ public class PlayerStat : MonoBehaviour
 
     public void TakeDamage(float _Damage)
     {
-        if (_Damage <= Def)
-        {
-            return;
-        }
+        if (_Damage <= Def) return;
 
         CurrentHp -= (_Damage - Def);
 
-        vignette.intensity.value = 0.35f;
-        vignette.intensity.value = Mathf.Lerp(vignette.intensity.value, 0f, Time.deltaTime * 5f);
+        if(vignette != null)// Post-Processing Vignette 효과 
+        {
+            vignette.roundness.value = 0.85f;
+        }
+
+        if (CurrentHp <= 0)
+        {
+            CurrentHp = 0;
+            isDie = true;
+            Die();
+        }
+    }
+
+    private void DamageEffect() // 피격 Post-Processing 효과
+    {
+        if (vignette == null) return;
+
+        float targetRoundness = 0f;
+
+        if(CurrentHp <= MaxHp * 0.3f)
+        {
+            targetRoundness = 0.9f;
+        }
+        else
+        {
+            targetRoundness = 0f;
+        }
+        vignette.roundness.value = Mathf.Lerp(vignette.roundness.value, targetRoundness, Time.deltaTime * 5f);
     }
 
     public void Die()
     {
-        
+        playerAniController.PlayerDieAnimation(true);
+        playerController.OnPlayerDie();
+    }
+
+    public void Resurrect()
+    {
+        isDie = false;
+        CurrentHp = MaxHp;
+        playerAniController.PlayerDieAnimation(false);
     }
 
     public void AddExp(float _Exp)

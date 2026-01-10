@@ -37,7 +37,7 @@ MonoBehaviour:
     - Preload
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5f6365ddf0094194daec9ef3b8dcc641
-    m_Address: EXITPANEL Table_ko
+    m_Address: ITEM Table_ko
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ko

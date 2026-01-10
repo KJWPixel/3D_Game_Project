@@ -43,7 +43,7 @@ public class SkillIndicatorController : MonoBehaviour
         Circle1.SetActive(false);
         Circle2.SetActive(false);
         Circle3.SetActive(false);
-        Fan1.SetActive(false);
+        //Fan1.SetActive(false);
     }
 
     public void ShowIndicator(SkillData data, Transform caster)

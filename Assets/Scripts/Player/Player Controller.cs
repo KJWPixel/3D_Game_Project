@@ -279,6 +279,36 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void OnPlayerDie()
+    {
+        SetState(PlayerState.Idle); // 상태를 Idle로 고정
+        x = 0; z = 0;
+        VelocityValue = Vector3.zero;
+
+        StartCoroutine(ResurrectionRoutine());
+    }
+
+    IEnumerator ResurrectionRoutine()
+    {
+        // 1. 애니메이션이 재생될 시간을 기다림 (예: 3초)
+        yield return new WaitForSeconds(3.0f);
+
+        // 2. 포탈 위치로 이동 (포탈 태그나 변수 사용)
+        GameObject portal = GameObject.FindGameObjectWithTag("Portal");
+        if (portal != null)
+        {
+            // CharacterController가 켜져 있으면 transform.position이 안 먹힐 수 있으므로 잠시 끔
+            CharacterController.enabled = false;
+            transform.position = portal.transform.position + Vector3.left * 4;
+            CharacterController.enabled = true;
+        }
+
+        // 3. 스탯 복구 및 애니메이션 리셋
+        PlayerStat.Resurrect();
+
+        Debug.Log("플레이어가 부활했습니다.");
+    }
+
     private void GroundCheck()
     {
         //RayCast를 이용하여 Ground만 Check
