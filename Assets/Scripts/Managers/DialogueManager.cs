@@ -3,11 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager Instance;
+
+    [SerializeField] private string TableName = "NPC Table";
 
     [SerializeField] private List<string> Sentences = new List<string>();
     [SerializeField] public int Index = 0;
@@ -71,6 +74,37 @@ public class DialogueManager : MonoBehaviour
 
         // 첫 문장 표시
         ShowTextSentence();
+    }
+
+    // ID 범위를 이용해 대화를 시작하는 함수 추가
+    public void StartDialogueWithLocalization(DialogNPC _NPC, InteractionType type)
+    {
+        CurrentNPC = _NPC;
+        CurrentInteraction = type;
+        Sentences.Clear();
+
+        // 1. NPC 이름 번역
+        string translatedName = LocalizationSettings.StringDatabase.GetLocalizedString(TableName, _NPC.npcNameKey);
+        UIManager.Instance.NameText.text = translatedName;
+
+        // 2. 대사 리스트 번역 및 할당
+        foreach (string key in _NPC.dialogueKeys)
+        {
+            string translatedLine = LocalizationSettings.StringDatabase.GetLocalizedString(TableName, key);
+            Sentences.Add(translatedLine);
+        }
+
+        // 3. 퀘스트 문구 (시스템 테이블이나 공통 키 활용)
+        if(_NPC.QuestData != null && type == InteractionType.Quest)
+        {
+            string questAsk = LocalizationSettings.StringDatabase.GetLocalizedString(TableName, "NPC_Quest_Accept");
+            Sentences.Add(questAsk);
+        }
+
+        Index = 0;
+        UIManager.Instance.DialoguePanel.SetActive(true);
+        ShowTextSentence();
+
     }
 
     private void ShowTextSentence()

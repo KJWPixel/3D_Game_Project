@@ -2,8 +2,8 @@
     "Screen": 1,
     "Resolution": 18,
     "FrameRate": 120,
-    "MasterVolume": 0.0,
-    "EffectVolume": 0.0,
-    "BackGroundVolume": 0.0,
-    "Language": 0
+    "MasterVolume": 1.0,
+    "EffectVolume": 1.0,
+    "BackGroundVolume": 1.0,
+    "LanguageIndex": 0
 }

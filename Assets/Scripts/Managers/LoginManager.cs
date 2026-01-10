@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 public class LoginManager : MonoBehaviour
 {
@@ -58,10 +59,12 @@ public class LoginManager : MonoBehaviour
     {
         string username = UserField.text.Trim();
         string password = PasswordField.text.Trim();
+        string message;
 
         if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
         {
-            ShowMessage("유저이름 또는 패스워드를 입력해주세요.", Color.yellow);
+            message = LocalizationSettings.StringDatabase.GetLocalizedString("UI Table", "UI_LOGIN_EMPTY");
+            ShowMessage(message, Color.yellow);
             return;
         }
 
@@ -74,12 +77,14 @@ public class LoginManager : MonoBehaviour
             if (existUser.password == encryptedPassword)
             {
                 CurrentUser = existUser;
-                ShowMessage("로그인 성공", Color.green);
+                message= LocalizationSettings.StringDatabase.GetLocalizedString("UI Table", "UI_LOGIN_SUCCESS");
+                ShowMessage(message, Color.green);
                 SceneMgr.Instance.ChangeScene(SCENE.MAIN, true);
             }
             else
             {
-                ShowMessage("패스워드가 일치하지 않습니다.", Color.red);
+                message = LocalizationSettings.StringDatabase.GetLocalizedString("UI Table", "UI_LOGIN_FAIL");
+                ShowMessage(message, Color.red);
             }
         }
         else
@@ -92,7 +97,8 @@ public class LoginManager : MonoBehaviour
             UserList.Add(newUser);
             SaveUserData();
             CurrentUser = newUser;
-            ShowMessage("새 사용자 등록 및 로그인 성공", Color.green);
+            message = LocalizationSettings.StringDatabase.GetLocalizedString("UI Table", "UI_LOGIN_NEW");
+            ShowMessage(message, Color.green);
             SceneMgr.Instance.ChangeScene(SCENE.MAIN, true);
         }
     }

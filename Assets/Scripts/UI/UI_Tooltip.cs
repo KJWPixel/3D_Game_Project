@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Build.Pipeline;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
@@ -9,14 +10,15 @@ public class UI_Tooltip : MonoBehaviour
 {
     public static UI_Tooltip Instance;
 
-    private const string TableName = "Skill Table";
+    private const string TableName = "SKILL Table";
 
     [SerializeField] private GameObject SkillTree;
     [SerializeField] private GameObject TooltipPanel;
-    [SerializeField] private TMP_Text TooltipName;
-    [SerializeField] private TMP_Text TooltipDesc;
-    [SerializeField] private TMP_Text TooltipExtra; 
-    [SerializeField] private Image TooltipIcon;
+    [SerializeField] private Image TooltipIcon;           //스킬이미지
+    [SerializeField] private TMP_Text TooltipSkillName;   //스킬이름
+    [SerializeField] private TMP_Text TooltipSkillDesc;   //스킬설명
+    [SerializeField] private TMP_Text TooltipSkillRequirements;  //스킬요구치
+
 
     private void Awake()
     {
@@ -28,51 +30,59 @@ public class UI_Tooltip : MonoBehaviour
     {
         if (TooltipPanel == null)
         {
-            Debug.Log("TooltipPanel NULL");
+            Debug.Log($"UI_Tooltip NULL {gameObject.name}");
             return;
         }
 
+        // 스킬아이콘에 마우스커서가 들어오면 호출
         TooltipPanel.SetActive(true);
-        TooltipPanel.transform.position = position + new Vector3(0, 0, 0);
+        // 기존 Text 초기화
+        TooltipSkillName.text = "";
+        TooltipSkillDesc.text = "";
+        TooltipSkillRequirements.text = "";
+
         TooltipIcon.sprite = data.Icon;
 
-        TooltipName.text = $"{data.SkillName}";
-        TooltipDesc.text = GetDescriptionByType(data);
+        TooltipPanel.transform.position = position;
 
-        //스킬 이름 로컬라이징
-        TooltipName.text = LocalizationSettings.StringDatabase.GetLocalizedString(TableName, data.SkillKey);
+        object[] args = GetFormattedArgs(data);
 
-        //스킬 설명 로컬라이징
-        TooltipDesc.text = GetDescriptionByType(data);
+        // UI_Tooltip 로컬라이제션: LocalizationTable에서 Table,Key값을 가져와 호출
+        TooltipSkillName.text = LocalizationSettings.StringDatabase.GetLocalizedString(TableName, data.SkillKey); // 스킬이름
 
-        string effectDesc = "";
-        foreach (var effect in data.Effects)
+        TooltipSkillDesc.text = LocalizationSettings.StringDatabase.GetLocalizedString(TableName, data.SkillDescriptionKey, args);
+
+        TooltipSkillRequirements.text = LocalizationSettings.StringDatabase.GetLocalizedString(TableName, data.SkillRequirementsKey, data.GetRequirementParams()); // 스킬요구치
+    }
+
+    private object[] GetFormattedArgs(SkillData data)
+    {
+        if (data.Effects == null || data.Effects.Count == 0) return null;
+        var e = data.Effects[0];
+
+        switch (data.SkillDescriptionKey)
         {
-            //string EffectsDesc = GetDescriptionByType(_Data);
-            effectDesc += effect.Power.ToString();
+            case "Skill_SingleHit_Desc": // 단타
+            case "Skill_Heal_Desc":      // 1회 회복기
+                return new object[] { e.Power };
 
-            switch (effect.EffectType)
-            {
-                case SkillEffectType.RayDamage:
-                case SkillEffectType.LineAreaDamage:
-                case SkillEffectType.TargetAreaDamage:
-                case SkillEffectType.DistanceAreaDamage:
-                    TooltipExtra.text = $"요구 레벨:{data.RequireLevel}\n요구 스킬포인트  :{data.RequireSP}\n재사용 대기시간  :{data.Cooldown}\n스킬데미지 :{effectDesc}";
-                    break;
-                case SkillEffectType.Heal:
-                case SkillEffectType.HealBuff:
-                    TooltipExtra.text = $"요구 레벨:{data.RequireLevel}\n요구 스킬포인트  :{data.RequireSP}\n재사용 대기시간  :{data.Cooldown}\n회복량 :{effectDesc}";
-                    break;
-                case SkillEffectType.AtkBuff:
-                case SkillEffectType.DefBuff:
-                case SkillEffectType.CriBuff:
-                case SkillEffectType.TotalBuff:
-                    TooltipExtra.text = $"요구 레벨:{data.RequireLevel}\n요구 스킬포인트  :{data.RequireSP}\n재사용 대기시간  :{data.Cooldown}\n스탯 증가량 :{effectDesc}";
-                    break;
-                case SkillEffectType.Debuff:
-                    TooltipExtra.text = $"요구 레벨:{data.RequireLevel}\n요구 스킬포인트  :{data.RequireSP}\n재사용 대기시간  :{data.Cooldown}\n스탯 감소량 :{effectDesc}";
-                    break;
-            }
+            case "Skill_MultiHit_Desc":
+                return new object[] { e.Power, e.HitCount };
+
+            case "Skill_HealBuff_Desc": //회복 버프
+            case "Skill_MpBuff_Desc":
+                return new object[] { e.Duration, e.HitCount, e.Power};
+
+            case "Skill_AtkBuff_Desc":
+            case "Skill_DefBuff_Desc":
+            case "Skill_MovementBuff_Desc":
+                return new object[] { e.Duration, e.Power };
+
+            case "Skill_Teleport_Desc":
+                return new object[] { e.Distance };
+
+            default:
+                return new object[] { e.Power };
         }
     }
 
@@ -81,55 +91,5 @@ public class UI_Tooltip : MonoBehaviour
         TooltipPanel.SetActive(false);
     }
 
-    private string GetDescriptionByType(SkillData _SkillData)
-    {
-        if(_SkillData == null || _SkillData.Effects.Count == 0)
-        {
-            return "설명없음";
-        }
 
-        string Description = "";
-
-        foreach(var Effect in _SkillData.Effects)
-        {
-            switch (Effect.EffectType)
-            {
-                case SkillEffectType.RayDamage:
-                case SkillEffectType.DistanceAreaDamage:
-                case SkillEffectType.LineAreaDamage:
-                case SkillEffectType.TargetAreaDamage:
-                    Description += $"대상을 공격하여 {Effect.Power} 데미지를 입힙니다.\n";
-                    break;
-                case SkillEffectType.Heal:
-                    Description += $"대상을 회복하여 {Effect.Power} 체력을 회복합니다.\n";
-                    break;
-                case SkillEffectType.AtkBuff:
-                    Description += $"능력을 {Effect.Power} 만큼 공격력을 강화하는 버프를 적용합니다.\n";
-                    break;
-                case SkillEffectType.DefBuff:
-                    Description += $"능력을 {Effect.Power} 만큼 방어력을 강화하는 버프를 적용합니다.\n";
-                    break;
-                case SkillEffectType.CriBuff:
-                    Description += $"능력을 {Effect.Power} 만큼 크리티컬 확률을 강화하는 버프를 적용합니다.\n";
-                    break;
-                case SkillEffectType.TotalBuff:
-                    Description += $"능력을 {Effect.Power} 만큼 전체적인 스탯을 강화하는 버프를 적용합니다.\n";
-                    break;
-                case SkillEffectType.Debuff:
-                    Description += $"적에게 {Effect.Power} 만큼 약화 효과를 {Effect.Duration}초 동안 적용합니다.\n";
-                    break;
-                case SkillEffectType.CC:
-                    Description += $"적에게 상태이상 효과 {Effect.Duration}초 동안 적용합니다.\n";
-                    break;
-                case SkillEffectType.Resource:
-                    Description += $"자원을 {Effect.Power}을 만큼 회복합니다.\n";
-                    break;
-                case SkillEffectType.Teleport:
-                    Description += $"{Effect.Distance}만큼 거리를 이동합니다.\n";
-                    break;
-            }
-        }
-
-        return Description.TrimEnd();
-    }
 }

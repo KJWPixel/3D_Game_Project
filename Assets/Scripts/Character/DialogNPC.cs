@@ -1,15 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
-public enum InteractionType
-{
-    None,   
-    Shop,
-    Quest,
-}
 
 public class DialogNPC : NPCCharacter
 {
@@ -218,7 +211,8 @@ public class DialogNPC : NPCCharacter
             {
                 //대화시작
                 isTolk = true;
-                DialogueManager.Instance.StartDialogue(this, Name, DialogueLines, interactionType);
+                DialogueManager.Instance.StartDialogueWithLocalization(this, interactionType);
+
             }
             else
             {

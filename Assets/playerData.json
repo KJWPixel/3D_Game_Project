@@ -1,15 +1,15 @@
 {
-    "UserName": "",
+    "UserName": "Player",
     "Level": 100,
     "CurrentExp": 100.0,
-    "SkillPoint": 9350,
-    "Gold": 100,
-    "CurrentHp": 70.19993591308594,
-    "CurrentMp": 29.690332412719728,
-    "Atk": 0.0,
-    "Def": 11.199999809265137,
-    "Critical": 0.10000000149011612,
-    "PosX": 500.0,
-    "PosY": 0.20000000298023225,
-    "PosZ": 550.0
+    "SkillPoint": 9950,
+    "Gold": 0,
+    "CurrentHp": 0.0,
+    "CurrentMp": 144.3324432373047,
+    "Atk": 10.0,
+    "Def": 10.0,
+    "Critical": 10.0,
+    "PosX": 431.4150390625,
+    "PosY": 0.07999995350837708,
+    "PosZ": 462.0420227050781
 }

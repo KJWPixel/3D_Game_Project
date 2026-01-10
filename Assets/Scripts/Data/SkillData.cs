@@ -18,6 +18,8 @@ public class SkillData : ScriptableObject
     [Header("기본 정보")]
     public int SkillID;
     public string SkillKey;
+    public string SkillDescriptionKey;
+    public string SkillRequirementsKey;
     public string SkillName; 
     public Sprite Icon;
     public float Cost;
@@ -46,6 +48,21 @@ public class SkillData : ScriptableObject
 
     [Header("애니메이션")]
     public string AnimationName;
+
+    public object[] GetDescriptionParams()
+    {
+        // 효과가 없다면 빈 배열 반환
+        if(Effects == null || Effects.Count == 0) return new object[0];
+        var main = Effects[0];
+
+        return new object[] { main.Power, main.HitCount, main.Duration, main.Distance, };
+    }
+
+    public object[] GetRequirementParams()
+    {
+        float power = Effects.Count > 0 ? Effects[0].Power : 0;
+        return new object[] { RequireLevel, RequireSP, Cooldown, power };
+    }
 }
 
 [System.Serializable]
@@ -66,6 +83,4 @@ public class SkillEffect
     public float DelayTime;
     public int MaxTarget;   
 }
-
-
 

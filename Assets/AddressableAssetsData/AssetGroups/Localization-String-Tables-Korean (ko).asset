@@ -30,19 +30,21 @@ MonoBehaviour:
     - Locale-ko
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 46cbd25658a2ad7438943c3591ea409e
-    m_Address: SKIl Table_ko
+    m_Address: SKILL Table_ko
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ko
+    - Preload
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5f6365ddf0094194daec9ef3b8dcc641
     m_Address: EXITPANEL Table_ko
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ko
+    - Preload
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6ea19e91486b32b4c8d2ed984175720c
-    m_Address: TITLE Table_ko
+    m_Address: UI Table_ko
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ko
@@ -61,6 +63,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ccc200fd6ec207a419a27439979888d9
     m_Address: LOGIN Table_ko
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: daee6f89b13b8d44faa5875dbbaddab0
+    m_Address: NPC Table_ko
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ko

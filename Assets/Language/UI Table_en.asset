@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UI Table_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: b4e257707c937c64595674d7238aa91c, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 7362457600
+    m_Localized: Start
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16451514368
+    m_Localized: Options
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18846461952
+    m_Localized: Exit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1560838760087552
+    m_Localized: Close
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1560962684993536
+    m_Localized: Login
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1561109909258240
+    m_Localized: USER ID
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1561330085052416
+    m_Localized: Password
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1561511874576384
+    m_Localized: Do you want to quit the game?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1561711728967680
+    m_Localized: YES
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1561904780197888
+    m_Localized: NO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1562520382390272
+    m_Localized: SHOP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1562697994387456
+    m_Localized: TITLE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1562755309551616
+    m_Localized: MENU
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2287506860589056
+    m_Localized: Login Success
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2287808762396672
+    m_Localized: Password Mismatch
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2289346138390528
+    m_Localized: Please enter your user name or password
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2289449909665792
+    m_Localized: New User Registration and Login Success
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

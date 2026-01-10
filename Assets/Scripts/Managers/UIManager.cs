@@ -46,6 +46,12 @@ public class UIManager : MonoBehaviour
     [SerializeField] public GameObject ChoiceYes;
     [SerializeField] public GameObject ChoiceNo;
 
+    [Header("UI 버튼그룹")]
+    [SerializeField] private Button InventroyButton;
+    [SerializeField] private Button SkillTreeButton;
+    [SerializeField] private Button QuestButton;
+    [SerializeField] private Button MenuButton;
+     
     private QuestData CurrentQuestData;
     private void Awake()
     {
@@ -70,6 +76,11 @@ public class UIManager : MonoBehaviour
         InputManager.Instance.OnToggleInventory += OnToggleInventory;
         InputManager.Instance.OnToggleSkill += OnToggleSkill;
         InputManager.Instance.OnToggleQuest += OnToggleQuest;
+
+        if (InventroyButton != null) InventroyButton.onClick.AddListener(OnToggleInventory);
+        if (SkillTreeButton != null) SkillTreeButton.onClick.AddListener(OnToggleSkill);
+        if (QuestButton != null) QuestButton.onClick.AddListener(OnToggleQuest);
+        if (MenuButton != null) MenuButton.onClick.AddListener(OnToggleMenu);
     }
 
     private void OnToggleMenu()

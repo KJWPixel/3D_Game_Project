@@ -58,7 +58,7 @@ public class SkillIndicatorController : MonoBehaviour
             radius = dataEffect.Radius;
             angle = dataEffect.Angle;
 
-            if (dataEffect.EffectType == SkillEffectType.RayDamage)
+            if (dataEffect.EffectType == SkillEffectType.RayDamage)// 문제 없음
             {
                 currentIndicator = IndicatorType.Ray;
 
@@ -77,10 +77,12 @@ public class SkillIndicatorController : MonoBehaviour
 
                 Circle1?.SetActive (true);
 
-                Vector3 pos = caster.position + caster.forward * distance + Vector3.up * 0.05f;
+                Vector3 targetPos = caster.position + (caster.forward * distance) + (Vector3.up * 0.05f);
+                IndicatorRoot.position = targetPos;
 
-                IndicatorRoot.position = pos;
+                IndicatorRoot.rotation = Quaternion.Euler(90f, caster.eulerAngles.y, 0f);
 
+                // ▶ Scale 초기화 (아주 작게)
                 ScaleRoot.localScale = Vector3.one * 0.01f;
             }
             else if(dataEffect.EffectType == SkillEffectType.DistanceAreaDamage)
@@ -89,31 +91,17 @@ public class SkillIndicatorController : MonoBehaviour
 
                 Circle1?.SetActive (true);
 
-                Vector3 pos = caster.position + caster.forward * distance + Vector3.up * 0.05f;
+                //IndicatorRoot.position = caster.position + caster.forward * distance + Vector3.up * 0.05f;
+                //IndicatorRoot.rotation = caster.rotation;
 
-                IndicatorRoot.position = pos;
+                Vector3 targetPos = caster.position + (caster.forward * distance) + (Vector3.up * 0.05f);
+                IndicatorRoot.position = targetPos;
+
+                IndicatorRoot.rotation = Quaternion.Euler(90f, caster.eulerAngles.y, 0f);
 
                 // ▶ Scale 초기화 (아주 작게)
-                ScaleRoot.localScale = Vector3.one * 0.01f;
-            }
-            else if(dataEffect.EffectType == SkillEffectType.FanAreaDamage)
-            {
-                Fan1?.SetActive (true);
-                //fanIndicator.transform.position = caster.position + Vector3.up * 0.05f;
-                ////fanIndicator.transform.rotation = Quaternion.LookRotation(caster.forward);
-
-                //fanIndicator.Build(angle);// 시작은 작게
-                //fanIndicator.UpdateRadius(0.01f);
-
-                IndicatorRoot.position = caster.position + Vector3.up * 0.05f;
-                IndicatorRoot.rotation = caster.rotation;
-
-                fanIndicator.transform.localPosition = Vector3.zero;
-                fanIndicator.transform.localRotation = Quaternion.identity;
-                fanIndicator.transform.localScale = Vector3.one;
-
-                fanIndicator.Build(angle);
-                fanIndicator.UpdateRadius(0.01f);
+                //ScaleRoot.localScale = Vector3.one * 0.01f;
+                ScaleRoot.localScale = new Vector3(0.01f, 0.01f, 1f);
             }
         }
     }
@@ -130,20 +118,20 @@ public class SkillIndicatorController : MonoBehaviour
                 ScaleRoot.localScale = new Vector3(1f, raySize, 1f);
                 Arrow.transform.localPosition = new Vector3(0f, raySize, 0f);
                 break;
+
             case IndicatorType.LineArea:
-                float lengthSize = Mathf.Lerp(0.01f, length, ratio);
-                float widthSize = Mathf.Lerp(0.01f, width, ratio);
-                ScaleRoot.localScale = new Vector3(widthSize, lengthSize, 1f);
+                float wSize = Mathf.Lerp(0.01f, width, ratio);
+                float lSize = Mathf.Lerp(0.01f, length, ratio);
+
+                // 가로(width)는 X, 세로(length)는 Y
+                ScaleRoot.localScale = new Vector3(wSize, lSize, 1f);
                 break;  
+
             case IndicatorType.DistanceArea:
                 //DistanceAreaType
                 float size = Mathf.Lerp(0.01f, radius * 2f, ratio);
                 // X, Y만 키운다 (바닥 원)
                 ScaleRoot.localScale = new Vector3(size, size, 1f);
-                break;
-            case IndicatorType.FanArea:
-                float radiusSize = Mathf.Lerp(0.01f, radius, ratio);
-                fanIndicator.UpdateRadius(radiusSize);
                 break;
         } 
     }

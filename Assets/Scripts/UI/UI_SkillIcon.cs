@@ -17,7 +17,9 @@ public class UI_SkillIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     [SerializeField] public GameObject LearnSkillEffectImage;
     [SerializeField] public TMP_Text SkillName;
     private Button Button;
-    
+
+    private const string TableName = "SKILL Table";
+
     private void Awake()
     {
         Button = GetComponent<Button>();
@@ -51,12 +53,12 @@ public class UI_SkillIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             IconImage.sprite = SkillData.Icon;
         }
        
-        SkillName.text = LocalizationSettings.StringDatabase.GetLocalizedString("SKIl Table", SkillData.SkillKey);   
+        SkillName.text = LocalizationSettings.StringDatabase.GetLocalizedString(TableName, SkillData.SkillKey);   
     }
 
     private void UpdateSkillIcon()
     {
-        SkillName.text = LocalizationSettings.StringDatabase.GetLocalizedString("SKIl Table", SkillData.SkillKey);
+        SkillName.text = LocalizationSettings.StringDatabase.GetLocalizedString(TableName, SkillData.SkillKey);
     }
 
     public void OnPointerEnter(PointerEventData _EventData)

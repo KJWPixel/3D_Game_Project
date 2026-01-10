@@ -29,6 +29,11 @@ public class OptionPanelUI : BaseUI
 
     private void Awake()
     {
+        
+    }
+
+    private void Start()
+    {
         InitializeDropdowns();
         InitializedSliders();
     }
@@ -86,6 +91,8 @@ public class OptionPanelUI : BaseUI
         LanguageOptions.options.Clear();
         LanguageOptions.options.Add(new TMP_Dropdown.OptionData("Korean"));
         LanguageOptions.options.Add(new TMP_Dropdown.OptionData("English"));
+
+        LanguageOptions.value = 0;
         LanguageOptions.RefreshShownValue();
     }
 

@@ -95,7 +95,12 @@ public enum ConsumableBuffType
     Atk,
     Def,
 }
-
+public enum InteractionType
+{
+    None,
+    Shop,
+    Quest,
+}
 public enum AI
 {
     AI_CREATE,//»ý¼º

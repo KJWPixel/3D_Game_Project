@@ -86,6 +86,7 @@ public class EnemyAI : AIBase
             case AI.AI_SKILL:
                 break;
             case AI.AI_DEAD:
+                DeadTransition();
                 break;
             case AI.AI_RESET:
                 break;
@@ -230,6 +231,24 @@ public class EnemyAI : AIBase
             AI = AI.AI_CHASE;
             ChaseStartTime = Time.time;
         }
+    }
+
+    public void OnDamageByPlayer()
+    {
+        if(AI == AI.AI_DEAD) return;
+
+        AI = AI.AI_CHASE;
+        ChaseStartTime += Time.time;
+    }
+
+    public void SetDeadState()
+    {
+        AI = AI.AI_DEAD;
+    }
+
+    private void DeadTransition()
+    {
+
     }
 }
 

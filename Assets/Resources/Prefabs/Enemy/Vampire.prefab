@@ -188,7 +188,7 @@ MonoBehaviour:
   ChaseRange: 8
   ChaseStartTime: 0
   ChaseTime: 2
-  AttackRange: 5
+  AttackRange: 3
 --- !u!114 &2145005099340307166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,7 +207,6 @@ MonoBehaviour:
     DropProbability: 0.2
   - ItemData: {fileID: 11400000, guid: 6899c763f2cde6240a48021312f5dc60, type: 2}
     DropProbability: 0.2
-  RandomNumber: 0
 --- !u!136 &7100487767561807076
 CapsuleCollider:
   m_ObjectHideFlags: 0

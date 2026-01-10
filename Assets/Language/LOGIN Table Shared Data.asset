@@ -14,23 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TableCollectionName: LOGIN Table
   m_TableCollectionNameGuidString: 01b4593715770ad4db43c6bd16eff1a0
-  m_Entries:
-  - m_Id: 6573928448
-    m_Key: LOGIN
-    m_Metadata:
-      m_Items: []
-  - m_Id: 48781209600
-    m_Key: ID
-    m_Metadata:
-      m_Items: []
-  - m_Id: 93744148480
-    m_Key: PASSWORD
-    m_Metadata:
-      m_Items: []
-  - m_Id: 199432220672
-    m_Key: CLOSE
-    m_Metadata:
-      m_Items: []
+  m_Entries: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -16,12 +16,15 @@ public abstract class NPCCharacter : MonoBehaviour
     [SerializeField] protected GameObject NPCQuestMark;
     [SerializeField] protected int NameDistance = 10;
 
-    [Header("대화 DialogueLine")]
-    [TextArea] [SerializeField] protected List<string> DialogueLines = new List<string>();
+    [Header("대화 상호작용")]
     [SerializeField] protected int CurrentDialogueIndex = 0;
     [SerializeField] protected float InsteractionRange = 3f;
     [SerializeField] protected float Playerdistance;
     [SerializeField] protected bool isTolk = false;
+
+    [Header("Localization 설정")]
+    [SerializeField] public string npcNameKey;
+    [SerializeField] public List<string> dialogueKeys;
 
     public int Id => id;
     public string Name => NpcName;

@@ -26,7 +26,7 @@ public class Enemy : EnemyCharacter
     [SerializeField] PlayerStat PlayerStat;
     Animator Animator;
     ItemDrop ItemDrop;
-
+    Collider Collider;
     public event Action<GameObject> OnDied;
 
     private Vector3 originalPosition;
@@ -37,6 +37,7 @@ public class Enemy : EnemyCharacter
         EnemyAI = GetComponent<EnemyAI>();
         Animator = GetComponent<Animator>();
         ItemDrop = GetComponent<ItemDrop>();
+        Collider = GetComponent<Collider>();
     }
 
     public override void Init()
@@ -185,34 +186,25 @@ public class Enemy : EnemyCharacter
         }
     }
 
-    public override void TakeDamage(float _Damage)
+    public override void TakeDamage(float damage)
     {
         if (IsDie) return;
 
-        float FinalDamage = 0f;
+        float finalDamage = Def >= damage ? 1f : damage - def;
+        CurHp -= finalDamage;
 
-        if (CurHp > 0)
+        if(CurHp <= 0)
         {
-            if(Def >= _Damage)
-            {
-                FinalDamage = 1f;
-                CurHp -= FinalDamage;
-            }
-            else
-            {
-                FinalDamage = _Damage - Def;
-                CurHp -= FinalDamage;
-            }
-        }
-        else
-        {
+            CurHp = 0;
             IsDie = true;
             Die();
         }
 
+        EnemyAI.OnDamageByPlayer();
+
         if(CurHp > 0 )
         {
-            ShowDamageText(FinalDamage);
+            ShowDamageText(finalDamage);
         }    
     }
 
@@ -232,16 +224,23 @@ public class Enemy : EnemyCharacter
 
     private void Die()
     {
-        QuestManager.Instance.UpdateQuestPrecess(QuestClassification.Kill, id, 1);
-
-        if (IsDie)
+        
+        // AI 상태를 DEAD로 즉시 전환
+        if (EnemyAI != null)
         {
-            OnDied?.Invoke(gameObject);
+            EnemyAI.SetDeadState();
         }
 
+        // 물리 및 충돌 비활성화
+        Collider.enabled = false;
+
+        // 보상 로직 
+        QuestManager.Instance.UpdateQuestPrecess(QuestClassification.Kill, id, 1);
+        OnDied?.Invoke(gameObject);
         PlayerStat.AddExp(GainExp);
         ItemDrop.ItemsDrop();
 
-        Destroy(gameObject, 0.3f);
+        // 즉시 삭제
+        Destroy(gameObject, 10.0f);
     }
 }

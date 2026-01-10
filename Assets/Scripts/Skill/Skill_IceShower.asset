@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SkillID: 10
   SkillKey: Skill_IceShower_Name
+  SkillDescriptionKey: Skill_MultiHit_Desc
+  SkillRequirementsKey: Skill_Attack_Requirements_Desc
   SkillName: "\uC5BC\uC74C \uC18C\uB098\uAE30"
   Icon: {fileID: 21300000, guid: 480b6fd098764e244bde8ee6274e6a45, type: 3}
   Cost: 50
@@ -30,10 +32,10 @@ MonoBehaviour:
     Power: 25
     HitCount: 10
     Duration: 0
-    Distance: 15
-    Radius: 5
-    Length: 0
-    Width: 0
+    Distance: 5
+    Radius: 0
+    Length: 5
+    Width: 5
     Angle: 0
     DelayTime: 0.3
     MaxTarget: 15
