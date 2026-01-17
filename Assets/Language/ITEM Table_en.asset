@@ -174,6 +174,229 @@ MonoBehaviour:
     m_Localized: Ultimate Gloves
     m_Metadata:
       m_Items: []
+  - m_Id: 5020811745869824
+    m_Localized: 'A magic primer containing basic spells
+
+      -Item Effect
+
+      Increases
+      Attack Power {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5020817479483392
+    m_Localized: 'A practical grimoire with a variety of spells
+
+      - Item Effect
+
+      Increases
+      Attack Power {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5020819295617024
+    m_Localized: 'A high-quality grimoire imbued with powerful magic.
+
+      -Item
+      Effect: Increases attack power by {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5020820855898112
+    m_Localized: 'A secret book containing forgotten ancient magic.
+
+      -Item
+      Effect
+
+      Increases Attack Power by {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5020822240018432
+    m_Localized: 'The ultimate grimoire that masters the origins of the world
+
+      -Item
+      Effect
+
+      Increases Attack Power {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5020823385063424
+    m_Localized: 'Light armor to protect the head
+
+      - Item Effect
+
+      Increases
+      defense {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5020824555274240
+    m_Localized: 'Allows you to simultaneously counter powerful attacks.
+
+      -Item
+      Effect
+
+      Increases defense {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5020825763233792
+    m_Localized: 'Maintains focus during battle
+
+      -Item Effect
+
+      Increases
+      defense {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5020827013136384
+    m_Localized: 'Transmits ancient wisdom to the wearer.
+
+      -Item Effect
+
+      Increases
+      defense {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5020828200124416
+    m_Localized: 'Raises the wearer''s senses to their limits.
+
+      -Item Effect
+
+      Increases
+      defense {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5020829408083968
+    m_Localized: 'Provides the minimum defense required for combat.
+
+      -Item
+      Effect
+
+      Increases Defense {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5020848894820352
+    m_Localized: 'Armor enhanced based on combat experience
+
+      -Item Effect
+
+      Increases
+      defense {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5020851205881856
+    m_Localized: 'It doesn''t break easily even under strong attacks.
+
+      -Item
+      Effect
+
+      Increases defense {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5020853084930048
+    m_Localized: 'Armor imbued with the power of ancient warriors
+
+      -Item Effect
+
+      Increases
+      defense {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5020854783623168
+    m_Localized: 'Ultimate armor that neutralizes almost all attacks
+
+      -Item
+      Effect
+
+      Increases defense {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5020856822054912
+    m_Localized: 'Simple equipment to help control magic
+
+      -Item Effect
+
+      Increases
+      critical hit rate {0}%'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5020858889846784
+    m_Localized: 'Stabilizes the flow of magic power.
+
+      -Item Effect
+
+      Increases
+      critical hit rate {0}%'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5020860777283584
+    m_Localized: 'Increases the power of magic casts.
+
+      -Item Effect
+
+      Increases
+      critical hit rate {0}%'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5020862429839360
+    m_Localized: 'Mysterious gloves imbued with ancient magic.
+
+      -Item Effect
+
+      Increases
+      critical hit rate {0}%'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5020864032063488
+    m_Localized: 'Allows you to freely manipulate magic power.
+
+      -Item Effect
+
+      Increases
+      critical hit rate {0}%'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5020865940471808
+    m_Localized: 'Basic shoes for easier movement
+
+      -Item Effect
+
+      Increases
+      critical hit damage {0}%'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5020867643359232
+    m_Localized: 'Movement becomes significantly lighter.
+
+      -Item Effect
+
+      Increases
+      critical hit damage {0}%'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5020869220417536
+    m_Localized: 'Provides sufficient mobility to navigate the battlefield.
+
+      -Item
+      Effect
+
+      Increases critical hit damage by {0}%'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5020870793281536
+    m_Localized: 'Gives movement as if treading on the wind.
+
+      -Item Effect
+
+      Increases
+      critical hit damage by {0}%'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5020872554889216
+    m_Localized: 'Grants attack power beyond its limits.
+
+      -Item Effect
+
+      Increases
+      critical hit damage by {0}%'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

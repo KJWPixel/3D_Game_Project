@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance; 
+    public static GameManager Instance;
+
+    [SerializeField] private bool isBoss = false;
 
     public GameObject Player;
 
@@ -27,6 +29,10 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        Application.targetFrameRate = -1;
+        
     }
+
+
+
+
 }

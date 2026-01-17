@@ -19,7 +19,7 @@ public class EquipementData : ItemData
     public EquipmentType EquipmentType;
 
     [Header("장비 능력치")]
-    [SerializeField] private List<EquipementItemStatus> EquipementStatus = new List<EquipementItemStatus>();
+    [SerializeField] public List<EquipementItemStatus> EquipementStatus = new List<EquipementItemStatus>();
 
     //[Header("장비 능력치 자동")]
     //[SerializeField] private float[] stats = new float[System.Enum.GetValues(typeof(ItemStatus)).Length];

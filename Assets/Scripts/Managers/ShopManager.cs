@@ -60,7 +60,7 @@ public class ShopManager : MonoBehaviour
         shopPanel.SetActive(true);
 
         if(itemDetailPaenl != null) itemDetailPaenl.SetActive(false);
-        PopulateItemList(); // 왼쪽 목록 채우기
+        PopuplateItemList(); // 왼쪽 목록 채우기
         ClearItemDetail();  // 오륹쪽 초기화
     }
 
@@ -80,7 +80,7 @@ public class ShopManager : MonoBehaviour
         return npc.itemDatas;
     }
 
-    private void PopulateItemList()
+    private void PopuplateItemList()
     {
         //기존 슬롯 삭제
         foreach (Transform child in itemListParent)
@@ -137,10 +137,24 @@ public class ShopManager : MonoBehaviour
         itemNameText.text = LocalizationSettings.StringDatabase.GetLocalizedString(TABLE, item.Itemkey);
         //itemNameText.text = item.name;
 
-        // 아이템 설명 로칼리이제이션
-        itemDescriptionText.text = LocalizationSettings.StringDatabase.GetLocalizedString(TABLE, item.DescKey);
-        //itemDescriptionText.text = item.Description;
+        // 아이템 타입에 따른 로컬라이제이션 매개변수값
+        if (item.Type == ItemType.Equipment)
+        {
+            EquipementData equipData = item as EquipementData;
+            object[] args = GetFormattedArgs(equipData);
 
+            // 아이템 설명 로칼리이제이션
+            itemDescriptionText.text = LocalizationSettings.StringDatabase.GetLocalizedString(TABLE, item.DescKey, args);
+            //itemDescriptionText.text = item.Description;
+        }
+        else
+        {
+            // 아이템 설명 로칼리이제이션
+            itemDescriptionText.text = LocalizationSettings.StringDatabase.GetLocalizedString(TABLE, item.DescKey);
+            //itemDescriptionText.text = item.Description;
+        }
+
+        
         // 아이템 가격
         string priceLabel = LocalizationSettings.StringDatabase.GetLocalizedString("UI Table", "UI_PRICE");
         string goldLabel = LocalizationSettings.StringDatabase.GetLocalizedString("UI Table", "UI_GOLD");
@@ -223,5 +237,30 @@ public class ShopManager : MonoBehaviour
     public bool IsShopOpen()
     {
         return shopPanel != null && shopPanel.activeInHierarchy;
+    }
+
+    private object[] GetFormattedArgs(EquipementData data)
+    {
+        if (data == null || data.EquipementStatus == null || data.EquipementStatus.Count == 0)
+        {
+            return new object[] { 0f };
+        }
+
+        float statValue = 0f;
+
+        switch (data.EquipmentType)
+        {
+            case EquipmentType.Weapon:
+            case EquipmentType.Helmet:
+            case EquipmentType.Armor:
+                statValue = data.EquipementStatus[0].Stat;
+                break;
+            case EquipmentType.Glove:
+            case EquipmentType.Shoes:
+                statValue = data.EquipementStatus[0].Stat * 100f;
+                break;
+        }
+
+        return new object[] { statValue };
     }
 }

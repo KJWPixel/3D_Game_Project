@@ -36,26 +36,37 @@ public class InventoryItemTooltip : MonoBehaviour
         Color.yellow,
     };
 
-    public void ItemTooltipSetup(InventoryItem _InventoryItem)
+    public void ItemTooltipSetup(InventoryItem inventoryItem)
     {
         //인벤토리아이템클래스 데이터에서 툴팁에 데이터 참조
-        
+
         //로컬라이제이션 ItemKey, DescKey
         //ItemName.text = _InventoryItem.ItemData.ItemName;
-        ItemQuantity.text = "x"+_InventoryItem.Quantity.ToString();
-        ItemDescription.text = LocalizationSettings.StringDatabase.GetLocalizedString(ITEMTable, _InventoryItem.ItemData.DescKey);
-        ItemIcon.sprite = _InventoryItem.ItemData.Icon;
+        ItemQuantity.text = "x"+ inventoryItem.Quantity.ToString();
+        ItemIcon.sprite = inventoryItem.ItemData.Icon;
 
-        var GradeIndex = (int)_InventoryItem.ItemData.Grade;
+        if(inventoryItem.ItemData.Type == ItemType.Equipment)
+        {
+            EquipementData equipData = inventoryItem.ItemData as EquipementData;
+            object[] args = GetFormattedArgs(equipData);
+
+            ItemDescription.text = LocalizationSettings.StringDatabase.GetLocalizedString(ITEMTable,inventoryItem.ItemData.DescKey,args);
+        }
+        else
+        {
+            ItemDescription.text = LocalizationSettings.StringDatabase.GetLocalizedString(ITEMTable, inventoryItem.ItemData.DescKey);
+        }
+            
+        var GradeIndex = (int)inventoryItem.ItemData.Grade;
         ItemPrame.color = GradeColors[GradeIndex];
 
         UseButton.onClick.RemoveAllListeners();
 
-        if (_InventoryItem.ItemData.Type == ItemType.Consumable)
+        if (inventoryItem.ItemData.Type == ItemType.Consumable)
         {
             Button.SetActive(true);
 
-            SetButtonText(_InventoryItem);
+            SetButtonText(inventoryItem);
 
             UseButton.onClick.AddListener(() =>
             {
@@ -70,81 +81,35 @@ public class InventoryItemTooltip : MonoBehaviour
                 //    InventoryUI.Instance.RefreshUI();
                 //}
 
-                UI_ItemSlotManager.Instance.RegisterConsumable(_InventoryItem);
+                UI_ItemSlotManager.Instance.RegisterConsumable(inventoryItem);
                 InventoryUI.Instance.RefreshUI();
 
             });
         }
-        else if (_InventoryItem.ItemData.Type == ItemType.Equipment)
+        else if (inventoryItem.ItemData.Type == ItemType.Equipment)
         {
             Button.SetActive(true);
 
-            SetButtonText(_InventoryItem);
+            SetButtonText(inventoryItem);
 
             InventoryUI.Instance.RefreshUI();
 
             UseButton.onClick.AddListener(() =>
             {
-                EquipementData Equipemnet = _InventoryItem.ItemData as EquipementData;
+                EquipementData Equipemnet = inventoryItem.ItemData as EquipementData;
                 if (Equipemnet == null) return;
 
-                if (_InventoryItem.IsEquipped )
+                if (inventoryItem.IsEquipped )
                 {
-                    switch(Equipemnet.EquipmentType)
-                    {
-                        case EquipmentType.Weapon:
-                            InventoryManager.Instance.UnequipItem(_InventoryItem);
-                            Debug.Log($"{_InventoryItem.ItemData.name} 해제");
-                            break;
-                        case EquipmentType.Helmet:
-                            InventoryManager.Instance.UnequipItem(_InventoryItem);
-                            Debug.Log($"{_InventoryItem.ItemData.name} 해제");
-                            break;
-                        case EquipmentType.Armor:
-                            InventoryManager.Instance.UnequipItem(_InventoryItem);
-                            Debug.Log($"{_InventoryItem.ItemData.name} 해제");
-                            break;
-                        case EquipmentType.Shoes:
-                            InventoryManager.Instance.UnequipItem(_InventoryItem);
-                            Debug.Log($"{_InventoryItem.ItemData.name} 해제");
-                            break;
-                        case EquipmentType.Glove:
-                            InventoryManager.Instance.UnequipItem(_InventoryItem);
-                            Debug.Log($"{_InventoryItem.ItemData.name} 해제");
-                            break;
-                    }                   
+                    InventoryManager.Instance.UnequipItem(inventoryItem);
+                    Debug.Log($"{inventoryItem.ItemData.name} 해제");                
                 }
                 else
                 {
-                    //추후 
-
-
-                    switch(Equipemnet.EquipmentType)
-                    {
-                        case EquipmentType.Weapon:
-                            InventoryManager.Instance.EquipItem(_InventoryItem);
-                            Debug.Log($"{_InventoryItem.ItemData.name} 장착");
-                            break;
-                        case EquipmentType.Helmet:
-                            InventoryManager.Instance.EquipItem(_InventoryItem);
-                            Debug.Log($"{_InventoryItem.ItemData.name} 장착");
-                            break;
-                        case EquipmentType.Armor:
-                            InventoryManager.Instance.EquipItem(_InventoryItem);
-                            Debug.Log($"{_InventoryItem.ItemData.name} 장착");
-                            break;
-                        case EquipmentType.Shoes:
-                            InventoryManager.Instance.EquipItem(_InventoryItem);
-                            Debug.Log($"{_InventoryItem.ItemData.name} 장착");
-                            break;
-                        case EquipmentType.Glove:
-                            InventoryManager.Instance.EquipItem(_InventoryItem);
-                            Debug.Log($"{_InventoryItem.ItemData.name} 장착");
-                            break;
-                    }                 
+                    InventoryManager.Instance.EquipItem(inventoryItem);
+                    Debug.Log($"{inventoryItem.ItemData.name} 장착");
                 }
-                SetButtonText(_InventoryItem);
-
+                SetButtonText(inventoryItem);
                 InventoryUI.Instance.RefreshUI();              
             }) ;
         }
@@ -171,5 +136,30 @@ public class InventoryItemTooltip : MonoBehaviour
             string key = _Item.IsEquipped ? "UI_UNEQUIP" : "UI_EQUIP";
             ButtonText.text = LocalizationSettings.StringDatabase.GetLocalizedString(UITable, key);
         }
+    }
+
+    private object[] GetFormattedArgs(EquipementData data)
+    {
+        if (data == null || data.EquipementStatus == null || data.EquipementStatus.Count == 0)
+        {
+            return new object[] { 0f };
+        }
+
+        float statValue = 0f;
+
+        switch (data.EquipmentType)
+        {
+            case EquipmentType.Weapon:
+            case EquipmentType.Helmet:
+            case EquipmentType.Armor:
+                statValue = data.EquipementStatus[0].Stat;
+                break;
+            case EquipmentType.Glove:
+            case EquipmentType.Shoes:
+                statValue = data.EquipementStatus[0].Stat * 100f;
+                break;          
+        }
+
+        return new object[] { statValue };
     }
 }
