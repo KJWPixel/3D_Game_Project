@@ -35,7 +35,10 @@ public class FanAreaDamageStratergy : ISkillBehaviorStrategy
                 Enemy enemy = col.GetComponent<Enemy>();
                 if(enemy != null)
                 {
-                    enemy.TakeDamage(effect.Power);
+                    var result = PlayerStat.Instance.CalculateFianlDamage(effect.Power, enemy.Def);
+
+                    // 적에게 최종 결과 전달
+                    enemy.TakeDamage(result.damage, result.isCrit);
                 }
             }
         }

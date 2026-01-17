@@ -62,7 +62,7 @@ public class InventoryUI : MonoBehaviour
 
         var filteredItems = InventoryManager.Instance.GetItemByType(Type);
 
-        RefreshUI(filteredItems);       
+        RefreshUI(filteredItems);
     }
 
     public void ShowTooltip(InventoryItem _Item)

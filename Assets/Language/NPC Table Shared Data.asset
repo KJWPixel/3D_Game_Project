@@ -59,6 +59,14 @@ MonoBehaviour:
     m_Key: NPC_Quest_Accept
     m_Metadata:
       m_Items: []
+  - m_Id: 3319442169184256
+    m_Key: NPC_Smith_Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3320110665744384
+    m_Key: NPC_Smith_Tolk1
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

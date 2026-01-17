@@ -16,29 +16,259 @@ MonoBehaviour:
   m_TableCollectionNameGuidString: 48d00ae13ac9e2d40947acaacd337f60
   m_Entries:
   - m_Id: 2551524300828672
-    m_Key: ITEM_HP_POTION
+    m_Key: ITEM_HP_POTION_SMALL
     m_Metadata:
       m_Items: []
   - m_Id: 2551961812873216
-    m_Key: ITEM_HP_POTION_DESC
+    m_Key: ITEM_HP_POTION_SMALL_DESC
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3987538076811264
+    m_Key: ITEM_HP_POTION_MIDIUM
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3990714343538688
+    m_Key: ITEM_HP_POTION_MIDIUM_DESC
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3990759520387072
+    m_Key: ITEM_HP_POTION_LARGE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3990864143106048
+    m_Key: ITEM_HP_POTION_LARGE_DESC
     m_Metadata:
       m_Items: []
   - m_Id: 2551561047126016
-    m_Key: ITEM_MP_POTION
+    m_Key: ITEM_MP_POTION_SAMLL
     m_Metadata:
       m_Items: []
   - m_Id: 2552132898533376
-    m_Key: ITEM_MP_POTION_DESC
+    m_Key: ITEM_MP_POTION_SMALL_DESC
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3991095064707072
+    m_Key: ITEM_MP_POTION_MIDIUM
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3991096511741952
+    m_Key: ITEM_MP_POTION_MIDIUM_DESC
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3991098084605952
+    m_Key: ITEM_MP_POTION_LARGE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3991099544223744
+    m_Key: ITEM_MP_POTION_LARGE_DESC
     m_Metadata:
       m_Items: []
   - m_Id: 2551580311564288
-    m_Key: 'ITEM_ELIXIR_POTION
-
-'
+    m_Key: ITEM_ELIXIR_POTION
     m_Metadata:
       m_Items: []
   - m_Id: 2552206974136320
     m_Key: ITEM_ELIXIR_POTION_DESC
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4372994694103040
+    m_Key: ITEM_EQUIP_WEAPON_BOOK_T1_NAME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4374516614086656
+    m_Key: ITEM_EQUIP_WEAPON_BOOK_T2_NAME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4374953622814720
+    m_Key: ITEM_EQUIP_WEAPON_BOOK_T3_NAME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4417235252199424
+    m_Key: ITEM_EQUIP_WEAPON_BOOK_T4_NAME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4417236929921024
+    m_Key: ITEM_EQUIP_WEAPON_BOOK_T5_NAME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4421517313622016
+    m_Key: ITEM_EQUIP_HELMET_IRON_T1_NAME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4422151425277952
+    m_Key: ITEM_EQUIP_HELMET_IRON_T2_NAME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4422152960393216
+    m_Key: ITEM_EQUIP_HELMET_IRON_T3_NAME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4422154344513536
+    m_Key: ITEM_EQUIP_HELMET_IRON_T4_NAME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4422161302863872
+    m_Key: ITEM_EQUIP_HELMET_IRON_T5_NAME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4423600725082112
+    m_Key: ITEM_EQUIP_ARMOR_IRON_T1_NAME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4423998852612096
+    m_Key: ITEM_EQUIP_ARMOR_IRON_T2_NAME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4424015336226816
+    m_Key: ITEM_EQUIP_ARMOR_IRON_T3_NAME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4424491905630208
+    m_Key: ITEM_EQUIP_ARMOR_IRON_T4_NAME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4424505755222016
+    m_Key: ITEM_EQUIP_ARMOR_IRON_T5_NAME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4426780116566016
+    m_Key: ITEM_EQUIP_GLOVE_IRON_T1_NAME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4426932399161344
+    m_Key: ITEM_EQUIP_GLOVE_IRON_T2_NAME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4426956386385920
+    m_Key: ITEM_EQUIP_GLOVE_IRON_T3_NAME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4426957300744192
+    m_Key: ITEM_EQUIP_GLOVE_IRON_T4_NAME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4426958361903104
+    m_Key: ITEM_EQUIP_GLOVE_IRON_T5_NAME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4427652515020800
+    m_Key: ITEM_EQUIP_SHOES_IRON_T1_NAME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4428379337572352
+    m_Key: ITEM_EQUIP_SHOES_IRON_T2_NAME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4428993698250752
+    m_Key: ITEM_EQUIP_SHOES_IRON_T3_NAME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4429012014776320
+    m_Key: ITEM_EQUIP_SHOES_IRON_T4_NAME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4429027256877056
+    m_Key: ITEM_EQUIP_SHOES_IRON_T5_NAME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5020811745869824
+    m_Key: ITEM_EQUIP_WEAPON_BOOK_T1_DESC
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5020817479483392
+    m_Key: ITEM_EQUIP_WEAPON_BOOK_T2_DESC
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5020819295617024
+    m_Key: ITEM_EQUIP_WEAPON_BOOK_T3_DESC
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5020820855898112
+    m_Key: ITEM_EQUIP_WEAPON_BOOK_T4_DESC
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5020822240018432
+    m_Key: ITEM_EQUIP_WEAPON_BOOK_T5_DESC
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5020823385063424
+    m_Key: ITEM_EQUIP_HELMET_IRON_T1_DESC
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5020824555274240
+    m_Key: ITEM_EQUIP_HELMET_IRON_T2_DESC
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5020825763233792
+    m_Key: ITEM_EQUIP_HELMET_IRON_T3_DESC
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5020827013136384
+    m_Key: ITEM_EQUIP_HELMET_IRON_T4_DESC
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5020828200124416
+    m_Key: ITEM_EQUIP_HELMET_IRON_T5_DESC
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5020829408083968
+    m_Key: ITEM_EQUIP_ARMOR_IRON_T1_DESC
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5020848894820352
+    m_Key: ITEM_EQUIP_ARMOR_IRON_T2_DESC
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5020851205881856
+    m_Key: ITEM_EQUIP_ARMOR_IRON_T3_DESC
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5020853084930048
+    m_Key: ITEM_EQUIP_ARMOR_IRON_T4_DESC
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5020854783623168
+    m_Key: ITEM_EQUIP_ARMOR_IRON_T5_DESC
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5020856822054912
+    m_Key: ITEM_EQUIP_GLOVE_IRON_T1_DESC
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5020858889846784
+    m_Key: ITEM_EQUIP_GLOVE_IRON_T2_DESC
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5020860777283584
+    m_Key: ITEM_EQUIP_GLOVE_IRON_T3_DESC
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5020862429839360
+    m_Key: ITEM_EQUIP_GLOVE_IRON_T4_DESC
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5020864032063488
+    m_Key: ITEM_EQUIP_GLOVE_IRON_T5_DESC
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5020865940471808
+    m_Key: ITEM_EQUIP_SHOES_IRON_T1_DESC
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5020867643359232
+    m_Key: ITEM_EQUIP_SHOES_IRON_T2_DESC
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5020869220417536
+    m_Key: ITEM_EQUIP_SHOES_IRON_T3_DESC
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5020870793281536
+    m_Key: ITEM_EQUIP_SHOES_IRON_T4_DESC
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5020872554889216
+    m_Key: ITEM_EQUIP_SHOES_IRON_T5_DESC
     m_Metadata:
       m_Items: []
   m_Metadata:

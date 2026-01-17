@@ -24,7 +24,7 @@ public class ItemPickup : MonoBehaviour
             foreach(var Item in ItemDatas)
             {
                 InventoryManager.Instance.AddItem(Item);
-                Debug.Log($"æ∆¿Ã≈€ »πµÊ: {Item.ItemName}");
+                Debug.Log($"æ∆¿Ã≈€ »πµÊ: {Item.Itemkey}");
             }
             Destroy(gameObject);
         }

@@ -85,7 +85,7 @@ public abstract class EnemyCharacter : CharacterBase
     public abstract void Chase();
     public abstract void Attack();
     public abstract void Flee();
-    public abstract void TakeDamage(float _Damage);
-    public abstract void ShowDamageText(float _Damage);
+    public abstract void TakeDamage(float damage, bool isCritical);
+    public abstract void ShowDamageText(float damage, bool isCritical);
     
 }

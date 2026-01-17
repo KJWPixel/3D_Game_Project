@@ -12,6 +12,7 @@ public class InputManager : MonoBehaviour
     public KeyCode Menu = KeyCode.Escape;
     public KeyCode Option = KeyCode.None;
     public KeyCode Inventory = KeyCode.I;
+    public KeyCode Status = KeyCode.U;
     public KeyCode Skill = KeyCode.K;
     public KeyCode Quest = KeyCode.J;
 
@@ -23,6 +24,7 @@ public class InputManager : MonoBehaviour
     public event Action OnToggleMenu;
     public event Action OnToggleOption;
     public event Action OnToggleInventory;
+    public event Action OnToggleStatus;
     public event Action OnToggleSkill;  
     public event Action OnToggleQuest;
     public event Action OnUseItem;
@@ -46,6 +48,7 @@ public class InputManager : MonoBehaviour
         if (Input.GetKeyDown(Menu)) { OnToggleMenu?.Invoke();  }
         if (Input.GetKeyDown(Option)) { OnToggleOption?.Invoke(); }
         if (Input.GetKeyDown(Inventory)) { OnToggleInventory?.Invoke(); }
+        if (Input.GetKeyDown(Status)) { OnToggleStatus?.Invoke(); }
         if (Input.GetKeyDown(Skill)) { OnToggleSkill?.Invoke(); }
         if (Input.GetKeyDown(Quest)) { OnToggleQuest?.Invoke(); }
 

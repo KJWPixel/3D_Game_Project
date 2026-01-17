@@ -33,6 +33,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject InventoryPanel;
     [SerializeField] public bool IsInventoryOpen = false;
 
+    [Header("능력치 UI")]
+    [SerializeField] private GameObject StatusPanel;
+    [SerializeField] public bool IsStatusOpen = false;
+
     [Header("퀘스트 UI")]
     [SerializeField] private GameObject QuestPanel;
     [SerializeField] private GameObject QuestToolTipPanel;
@@ -74,6 +78,7 @@ public class UIManager : MonoBehaviour
         InputManager.Instance.OnToggleMenu += OnToggleMenu;
         InputManager.Instance.OnToggleOption += OnToggleOption;
         InputManager.Instance.OnToggleInventory += OnToggleInventory;
+        InputManager.Instance.OnToggleStatus += OnToggleStatus;
         InputManager.Instance.OnToggleSkill += OnToggleSkill;
         InputManager.Instance.OnToggleQuest += OnToggleQuest;
 
@@ -112,6 +117,21 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    private void OnToggleStatus()
+    {
+        IsStatusOpen = !IsStatusOpen;
+        StatusPanel.SetActive(IsStatusOpen);
+        if(IsStatusOpen)
+        {
+            StatusPanel.GetComponent<UIStatusPanel>().UpdateStatusUI(PlayerStat.Instance);
+            SoundManager.Instance.PlaySFX(SFXType.InventoryOpen);
+        }
+        else
+        {
+            SoundManager.Instance.PlaySFX(SFXType.InventoryClose);
+        }
+    }
+
     private void OnToggleSkill()
     {
         isSkillTree = !isSkillTree;
@@ -138,8 +158,7 @@ public class UIManager : MonoBehaviour
         else
         {
             SoundManager.Instance.PlaySFX(SFXType.QuestClose);
-        }
-        
+        }    
     }
 
     private void InitializeUI()
@@ -149,6 +168,7 @@ public class UIManager : MonoBehaviour
         OptionPanel.SetActive(false);
         DialoguePanel.SetActive(false);
         InventoryPanel.SetActive(false);
+        StatusPanel.SetActive(false);
         QuestPanel.SetActive(false);
         QuestToolTipPanel.SetActive(false);
         QuestGuidePanel.SetActive(false);

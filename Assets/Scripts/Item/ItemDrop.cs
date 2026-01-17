@@ -44,7 +44,7 @@ public class ItemDrop : MonoBehaviour
             if(rand <= drop.DropProbability)
             {
                 droppedItems.Add(drop.ItemData);
-                Debug.Log($"¾ÆÀÌÅÛ µå¶øµÊ: {drop.ItemData.ItemName} (È®·ü: {drop.DropProbability}])");
+                Debug.Log($"¾ÆÀÌÅÛ µå¶øµÊ: {drop.ItemData.Itemkey} (È®·ü: {drop.DropProbability}])");
             }
         }
 

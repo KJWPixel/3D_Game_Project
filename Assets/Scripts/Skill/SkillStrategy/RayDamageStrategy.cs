@@ -8,14 +8,14 @@ public class RayDamageSkillStrategy : ISkillBehaviorStrategy
     {
         SoundManager.Instance.PlayOneShot(_SkillData.CastSFX, _Player.transform.position);
 
-        foreach (var Effect in _SkillData.Effects)
+        foreach (var effect in _SkillData.Effects)
         {
             // 플레이어 위치 (약간 위에서 발사되게 오프셋)
             Vector3 Origin = _Player.transform.position + Vector3.up * 1.0f;
             Vector3 Dir = _Player.transform.forward;
 
             // 디버그용 레이 (씬 뷰에서 확인 가능)
-            Debug.DrawRay(Origin, Dir * Effect.Distance, Color.red, 5f);
+            Debug.DrawRay(Origin, Dir * effect.Distance, Color.red, 5f);
             Debug.Log($"{_SkillData.name} Ray Test On");
 
             //다수 관통공격 판정 
@@ -40,7 +40,7 @@ public class RayDamageSkillStrategy : ISkillBehaviorStrategy
             //}
 
             //단일 공격판정
-            if (Physics.Raycast(Origin, Dir, out RaycastHit Hit, Effect.Distance))
+            if (Physics.Raycast(Origin, Dir, out RaycastHit Hit, effect.Distance))
             {
                 if(Hit.collider.CompareTag("Enemy"))
                 {
@@ -48,8 +48,13 @@ public class RayDamageSkillStrategy : ISkillBehaviorStrategy
 
                     if (enemy != null)
                     {
-                        enemy.TakeDamage(Effect.Power);
-                        Debug.Log($"{enemy} {_SkillData.SkillName} RayCastHit ! {Effect.Power}");
+                        // 플레이어에서 계산한 결과르 받아오기
+                        var result = PlayerStat.Instance.CalculateFianlDamage(effect.PowerMultiplier, enemy.Def);
+
+                        // 적에게 최종 결과 전달
+                        enemy.TakeDamage(result.damage, result.isCrit);
+
+                        Debug.Log($"{enemy} {_SkillData.SkillName} RayCastHit ! {effect.Power}");
 
                         if (_SkillData.HitEffectPrefab != null)
                         {

@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEditor.Animations.Rigging;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class DistanceAreaSkillStrategy : ISkillBehaviorStrategy
 {
     List<Enemy> EnemyList = new List<Enemy>();
     public void Execute(PlayerController _Player, PlayerStat _PlayerStat, SkillData _SkillData, Transform _Target)
     {
+        EnemyList.Clear();
+
         SoundManager.Instance.PlayOneShot(_SkillData.CastSFX, _Player.transform.position);
 
         foreach(var Effect in _SkillData.Effects)
@@ -45,26 +48,39 @@ public class DistanceAreaSkillStrategy : ISkillBehaviorStrategy
                 }
             }
 
-            for(int i = 0; i < EnemyList.Count; i++)
+            //for(int i = 0; i < EnemyList.Count; i++)
+            //{
+            //    //공격전달
+            //    _Player.StartCoroutine(DamageAttack(_PlayerStat, Effect.PowerMultiplier, Effect.HitCount, Effect.DelayTime, _SkillData));
+            //}    
+            
+            if(EnemyList.Count > 0)
             {
-                //공격전달
-                _Player.StartCoroutine(DamageAttack(Effect.Power, Effect.HitCount, Effect.DelayTime, _SkillData));
-            }          
+                _Player.StartCoroutine(DamageAttack(_PlayerStat, Effect.PowerMultiplier, Effect.HitCount, Effect.DelayTime, _SkillData));
+            }      
         }
     }
 
-    IEnumerator DamageAttack(float _Power, int _HitCount, float _DelayTime, SkillData _SkillData)
+    IEnumerator DamageAttack(PlayerStat playerStat, float power, int hitCount, float delayTime, SkillData data)
     {
-        for (int i = 0; i < _HitCount; i++)
+        List<Enemy> targets = new List<Enemy>(EnemyList);
+
+        for (int i = 0; i < hitCount; i++)
         {
-            foreach (Enemy enemy in EnemyList)
+            foreach (Enemy enemy in targets)
             {
-                if(enemy == null) continue;
-                enemy.TakeDamage(_Power);
-                EffectManager.Instance.Spawn(_SkillData.HitEffectPrefab, enemy.transform.position, _SkillData.HitPrefabDuration);
+                if(enemy == null || enemy.IsDie) continue;
+
+                // 플레이어에서 계산한 결과르 받아오기
+                var result = PlayerStat.Instance.CalculateFianlDamage(power, enemy.Def);
+
+                // 적에게 최종 결과 전달
+                enemy.TakeDamage(result.damage, result.isCrit);
+
+                EffectManager.Instance.Spawn(data.HitEffectPrefab, enemy.transform.position, data.HitPrefabDuration);
             }
 
-            yield return new WaitForSeconds(_DelayTime);
+            yield return new WaitForSeconds(delayTime);
         }
     }
 }

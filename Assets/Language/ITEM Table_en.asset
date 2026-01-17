@@ -19,15 +19,159 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 2551561047126016
-    m_Localized: MP Potion
+    m_Localized: MP Potion(Small)
     m_Metadata:
       m_Items: []
   - m_Id: 2551524300828672
-    m_Localized: HP Potion
+    m_Localized: HP Potion(Small)
     m_Metadata:
       m_Items: []
   - m_Id: 2551580311564288
     m_Localized: Elixir Potion
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2551961812873216
+    m_Localized: Recovers 75 HP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2552132898533376
+    m_Localized: Recovers 125 MP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2552206974136320
+    m_Localized: Restores 500 HP and MP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3987538076811264
+    m_Localized: HP Potion(Midium)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3990714343538688
+    m_Localized: Recovers 125 HP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3990759520387072
+    m_Localized: HP Potion(Large)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3990864143106048
+    m_Localized: Recovers 200 HP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3991095064707072
+    m_Localized: MP Potion(Midium)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3991096511741952
+    m_Localized: Recovers 250 MP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3991098084605952
+    m_Localized: MP Potion(Large)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3991099544223744
+    m_Localized: Recovers 500 MP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4372994694103040
+    m_Localized: Beginner Tome
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4374516614086656
+    m_Localized: Intermediate Tome
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4374953622814720
+    m_Localized: Advanced Tome
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4417235252199424
+    m_Localized: Ancient Vision Book
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4417236929921024
+    m_Localized: Ultimate Vision
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4421517313622016
+    m_Localized: Beginner's pitching
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4422151425277952
+    m_Localized: Intermediate player's pitching
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4422152960393216
+    m_Localized: Senior's Helmet
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4422154344513536
+    m_Localized: Ancient helmet
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4422161302863872
+    m_Localized: Ultimate Helmet
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4423600725082112
+    m_Localized: Beginner's Armor
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4423998852612096
+    m_Localized: Intermediate Armor
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4424015336226816
+    m_Localized: Superior's Armor
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4424491905630208
+    m_Localized: Ancient Armor
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4424505755222016
+    m_Localized: Ultimate Armor
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4426780116566016
+    m_Localized: Beginner's Gloves
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4426932399161344
+    m_Localized: Intermediate Gloves
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4426956386385920
+    m_Localized: Superior's Gloves
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4426957300744192
+    m_Localized: Ancient Gloves
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4426958361903104
+    m_Localized: Ultimate Gloves
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4427652515020800
+    m_Localized: Beginner's Shoes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4428379337572352
+    m_Localized: Intermediate Gloves
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4428993698250752
+    m_Localized: Superior's Gloves
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4429012014776320
+    m_Localized: Ancient Gloves
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4429027256877056
+    m_Localized: Ultimate Gloves
     m_Metadata:
       m_Items: []
   references:

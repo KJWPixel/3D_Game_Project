@@ -15,12 +15,84 @@ MonoBehaviour:
   m_TableCollectionName: UI Table
   m_TableCollectionNameGuidString: b4e257707c937c64595674d7238aa91c
   m_Entries:
+  - m_Id: 1561711728967680
+    m_Key: UI_YES
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1561109909258240
+    m_Key: UI_USER_ID
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1562697994387456
+    m_Key: UI_TITLE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4454232872239104
+    m_Key: UI_STATUS
+    m_Metadata:
+      m_Items: []
   - m_Id: 7362457600
     m_Key: UI_START
     m_Metadata:
       m_Items: []
+  - m_Id: 1562520382390272
+    m_Key: UI_SHOP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4029128472313856
+    m_Key: UI_PRICE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1561330085052416
+    m_Key: UI_Password
+    m_Metadata:
+      m_Items: []
   - m_Id: 16451514368
     m_Key: UI_OPTION
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1561904780197888
+    m_Key: UI_NO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1562755309551616
+    m_Key: UI_MENU
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2287506860589056
+    m_Key: UI_LOGIN_SUCCESS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2289449909665792
+    m_Key: UI_LOGIN_NEW
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2287808762396672
+    m_Key: UI_LOGIN_FAIL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2289346138390528
+    m_Key: UI_LOGIN_EMPTY
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1560962684993536
+    m_Key: UI_LOGIN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4803792740073472
+    m_Key: UI_LELVEL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4803890760957952
+    m_Key: UI_HP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4029276887760896
+    m_Key: UI_GOLD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1561511874576384
+    m_Key: UI_GAMEEXIT
     m_Metadata:
       m_Items: []
   - m_Id: 18846461952
@@ -31,56 +103,48 @@ MonoBehaviour:
     m_Key: UI_CLOSE
     m_Metadata:
       m_Items: []
-  - m_Id: 1560962684993536
-    m_Key: UI_LOGIN
+  - m_Id: 4025003433050112
+    m_Key: UI_BUY
     m_Metadata:
       m_Items: []
-  - m_Id: 1561109909258240
-    m_Key: UI_USER_ID
+  - m_Id: 4803920288858112
+    m_Key: UI_MP
     m_Metadata:
       m_Items: []
-  - m_Id: 1561330085052416
-    m_Key: UI_Password
+  - m_Id: 4803918866989056
+    m_Key: UI_STAMINA
     m_Metadata:
       m_Items: []
-  - m_Id: 1561511874576384
-    m_Key: UI_GAMEEXIT
+  - m_Id: 4803917705166848
+    m_Key: UI_ATK
     m_Metadata:
       m_Items: []
-  - m_Id: 1561711728967680
-    m_Key: UI_YES
+  - m_Id: 4803916576899072
+    m_Key: UI_DEF
     m_Metadata:
       m_Items: []
-  - m_Id: 1561904780197888
-    m_Key: UI_NO
+  - m_Id: 4803915524128768
+    m_Key: UI_CRIT
     m_Metadata:
       m_Items: []
-  - m_Id: 1562520382390272
-    m_Key: UI_SHOP
+  - m_Id: 4803892287684608
+    m_Key: UI_CRITDMG
     m_Metadata:
       m_Items: []
-  - m_Id: 1562697994387456
-    m_Key: UI_TITLE
+  - m_Id: 5028718830993408
+    m_Key: UI_SELL
     m_Metadata:
       m_Items: []
-  - m_Id: 1562755309551616
-    m_Key: UI_MENU
+  - m_Id: 5033509510496256
+    m_Key: UI_EQUIP
     m_Metadata:
       m_Items: []
-  - m_Id: 2289346138390528
-    m_Key: UI_LOGIN_EMPTY
+  - m_Id: 5041622749855744
+    m_Key: UI_UNEQUIP
     m_Metadata:
       m_Items: []
-  - m_Id: 2287506860589056
-    m_Key: UI_LOGIN_SUCCESS
-    m_Metadata:
-      m_Items: []
-  - m_Id: 2287808762396672
-    m_Key: UI_LOGIN_FAIL
-    m_Metadata:
-      m_Items: []
-  - m_Id: 2289449909665792
-    m_Key: UI_LOGIN_NEW
+  - m_Id: 5042161193631744
+    m_Key: UI_EQUIPSLOT
     m_Metadata:
       m_Items: []
   m_Metadata:

@@ -10,7 +10,7 @@ public class EquipementItemStatus
     public float Stat;
 }
 
-[CreateAssetMenu(menuName = "Item/Equiment")]
+[CreateAssetMenu(menuName = "Item/equipment")]
 public class EquipementData : ItemData
 {
     public override int MaxStackAmount => 1;
@@ -21,8 +21,8 @@ public class EquipementData : ItemData
     [Header("장비 능력치")]
     [SerializeField] private List<EquipementItemStatus> EquipementStatus = new List<EquipementItemStatus>();
 
-    [Header("장비 능력치 자동")]
-    [SerializeField] private float[] stats = new float[System.Enum.GetValues(typeof(ItemStatus)).Length];
+    //[Header("장비 능력치 자동")]
+    //[SerializeField] private float[] stats = new float[System.Enum.GetValues(typeof(ItemStatus)).Length];
 
 
     public List<EquipementItemStatus> GetEquipStats()

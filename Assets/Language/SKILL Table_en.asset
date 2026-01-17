@@ -102,12 +102,14 @@ MonoBehaviour:
       m_Items:
       - rid: 6538062418656100354
   - m_Id: 4332667154432
-    m_Localized: Deals {0} damage to the target.
+    m_Localized: "\rDeals {0%} damage to target."
     m_Metadata:
       m_Items:
       - rid: 6538062418656100354
   - m_Id: 6592230993920
-    m_Localized: Attacks the target {1} times for {0} damage.
+    m_Localized: 'Attacks the target {1} times for {0}% damage.
+
+'
     m_Metadata:
       m_Items:
       - rid: 6538062418656100354
@@ -143,7 +145,7 @@ MonoBehaviour:
       - rid: 6538062418656100354
   - m_Id: 15877816070144
     m_Localized: 'Requested level: {0}, Requested skill point: {1}, reuse waiting
-      time: {2}, skill damage: {3}'
+      time: {2}, skill damage: {3}%'
     m_Metadata:
       m_Items:
       - rid: 6538062418656100354

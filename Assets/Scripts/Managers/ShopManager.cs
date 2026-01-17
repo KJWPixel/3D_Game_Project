@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Localization.Settings;
+using UnityEngine.Playables;
 
 public class ShopManager : MonoBehaviour
 {
     public static ShopManager Instance;
 
     [SerializeField] private GameObject shopPanel; //UICanvas 자식의 ShopPanel
+    [SerializeField] private GameObject itemDetailPaenl;
     [SerializeField] private Transform itemListParent;
     [SerializeField] private GameObject itemSlotPrefab; // 아이템 슬롯 
     [SerializeField] private TextMeshProUGUI itemNameText; // 오른쪽 아아템 툴팁: 이름
@@ -16,10 +19,12 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI itemPriceText; //가격
     [SerializeField] private Image itemIconImage; // 아이템 아이콘
     [SerializeField] private Button buyButton; //구매 버튼
+    [SerializeField] private Button sellButton; //구매 버튼
 
     private List<ItemData> currentShopItems; // 현재 NPC의 상점 아이템 목록
     private ItemData selectItem; // 선택한 아이템
     private DialogNPC currentNPC; // 현재 상점 NPC
+    private const string TABLE = "ITEM Table";
 
     private void Awake()
     {
@@ -32,8 +37,11 @@ public class ShopManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        shopPanel.SetActive(false);
+        if(shopPanel != null ) shopPanel.SetActive(false);
+        if(itemDetailPaenl != null ) itemDetailPaenl.SetActive(false);
+
         buyButton.onClick.AddListener(OnBuyButtonClicked);
+        sellButton.onClick.AddListener(OnSellButtonClicked);
     }
 
     private void Update()
@@ -50,6 +58,8 @@ public class ShopManager : MonoBehaviour
         currentNPC = npc;
         currentShopItems = LoadShopItems(npc); //NPC별 아이템 목록 로드
         shopPanel.SetActive(true);
+
+        if(itemDetailPaenl != null) itemDetailPaenl.SetActive(false);
         PopulateItemList(); // 왼쪽 목록 채우기
         ClearItemDetail();  // 오륹쪽 초기화
     }
@@ -87,7 +97,7 @@ public class ShopManager : MonoBehaviour
             TextMeshProUGUI nameText = slot.GetComponentInChildren<TextMeshProUGUI>();
             if (nameText != null)
             {
-                nameText.text = item.ItemName;
+                nameText.text = LocalizationSettings.StringDatabase.GetLocalizedString(TABLE, item.Itemkey);
             }
             else
             {
@@ -120,12 +130,24 @@ public class ShopManager : MonoBehaviour
     private void SelectItem(ItemData item)
     {
         selectItem = item;
-        itemNameText.text = item.name;
-        itemDescriptionText.text = item.Description;
-        itemPriceText.text = $"가격: {item.Price} Gold";
+
+        if(itemDetailPaenl != null) itemDetailPaenl.SetActive(true);
+
+        // 아이템 이름 로컬라이제이션
+        itemNameText.text = LocalizationSettings.StringDatabase.GetLocalizedString(TABLE, item.Itemkey);
+        //itemNameText.text = item.name;
+
+        // 아이템 설명 로칼리이제이션
+        itemDescriptionText.text = LocalizationSettings.StringDatabase.GetLocalizedString(TABLE, item.DescKey);
+        //itemDescriptionText.text = item.Description;
+
+        // 아이템 가격
+        string priceLabel = LocalizationSettings.StringDatabase.GetLocalizedString("UI Table", "UI_PRICE");
+        string goldLabel = LocalizationSettings.StringDatabase.GetLocalizedString("UI Table", "UI_GOLD");
+        itemPriceText.text = $"{priceLabel} {item.Price} {goldLabel}";
+
         itemIconImage.sprite = item.Icon;
         itemIconImage.enabled = true;
-
         buyButton.interactable = true; // 구매 가능
     }
 
@@ -133,12 +155,14 @@ public class ShopManager : MonoBehaviour
     private void ClearItemDetail()
     {
         selectItem = null;
+
+        if (itemDetailPaenl != null) itemDetailPaenl.SetActive(false);
         itemNameText.text = null;
         itemDescriptionText.text = null;
         itemPriceText.text = null;
         itemIconImage.sprite = null;
-        buyButton.interactable = false;
 
+        buyButton.interactable = false;
         itemIconImage.enabled = false;
     }
 
@@ -147,16 +171,18 @@ public class ShopManager : MonoBehaviour
     {
         if(selectItem == null) return;
 
-        //플레이어 금액 확인
+        // 플레이어 Gold가 충분한지 ㅎ롹인
         if(PlayerStat.Instance.Gold < selectItem.Price)
         {
             Debug.Log("금액 부족");
             return;
         }
 
-        //인벤토리 추가 (기존 InventoryManager 사용)
+        // 인벤토리 추가 시도 (AddItem 내부에서 슬롯 꽉 참 여부 체크)
+        // AddItem이 true를 반환하면성공, false면 슬롯 부족
         if(InventoryManager.Instance.AddItem(selectItem, 1))
         {
+            // 추가에 성공했을 때만 돈을 차감
             PlayerStat.Instance.Gold -= selectItem.Price; // 금액 차감
             Debug.Log($"{selectItem.name} 구매 완료");
             //필요 시 UI 업데이트 또는 사운드
@@ -164,6 +190,33 @@ public class ShopManager : MonoBehaviour
         else
         {
             Debug.Log("구매 실패 (인벤토리 부족 등)");
+        }
+    }
+
+    private void OnSellButtonClicked()
+    {
+        if (selectItem == null) return;
+
+        // 장착 중인지 확인
+        if(InventoryManager.Instance.IsItemEquipped(selectItem))
+        {
+            Debug.Log("장착 중인 아이템은 판매할 수 없습니다.");
+            return;
+        }
+
+        // 인벤토리에서 제거 시도
+        if(InventoryManager.Instance.RemoveItem(selectItem, 1))
+        {
+            // 판매 가격 계산 또는 ItemData.SellPrice 정의
+            int sellPrice = Mathf.FloorToInt(selectItem.Price * 0.5f);
+            PlayerStat.Instance.Gold += sellPrice;
+
+            //SFX 돈 소리 추가 
+            Debug.Log($"{selectItem} 판매완료 + {sellPrice} 골드");
+        }
+        else
+        {
+            Debug.Log("판매 실패: 인벤토리에 해당 아이템이 없습니다.");
         }
     }
 

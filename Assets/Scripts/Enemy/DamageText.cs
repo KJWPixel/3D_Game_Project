@@ -28,26 +28,26 @@ public class DamageText : MonoBehaviour
         Destroy(gameObject, TextDestroyTime);
     }
 
-    void Update()
-    {
-          
-    }
-
     void LateUpdate()
     {
         transform.forward = MainCamera.transform.forward;
-
     }
 
-    public void SetDamageText(float _Damage, bool _IsCritical)
+    public void SetDamageText(float damage, bool isCritical)
     {
-        Text.text = _Damage.ToString();
-        Text.color = Color.white;
-        if(_IsCritical)
+        Text.text = damage.ToString();
+      
+        if(isCritical)
         {
-            Text.color += Color.red;
+            Text.color = Color.red;
+            Text.fontSize *= 1.2f;
+            Text.text += "\nCritical";
+        }
+        else
+        {
+            Text.color = Color.white;
         }
 
-        Animator.SetTrigger("TextPlay");    
+        Animator.SetTrigger("TextPlay");
     }
 }

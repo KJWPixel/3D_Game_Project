@@ -129,7 +129,7 @@ public class PlayerStat : MonoBehaviour
         set => crit = value;
     }
 
-    public float CirtDmg
+    public float CritDmg
     {
         get => critDmg;
         set => critDmg = value;
@@ -180,9 +180,6 @@ public class PlayerStat : MonoBehaviour
         StatInit();
         PostProcessInit();
     }
-
-
-
     void Update()
     {    
         NaturalRecovery();
@@ -218,7 +215,7 @@ public class PlayerStat : MonoBehaviour
     private void NaturalRecovery()
     {
         //HP, MP, Stemina 자동회복
-        if (CurrentMp < MaxHp)
+        if (CurrentMp < MaxMp)
         {
             CurrentMp += 0.1f * Time.deltaTime;
         }
@@ -285,7 +282,7 @@ public class PlayerStat : MonoBehaviour
                 Crit += _Value;
                 break;
             case ItemStatus.CritDmg:
-                CirtDmg += _Value;  
+                CritDmg += _Value;  
                 break;
         }
     }
@@ -304,9 +301,26 @@ public class PlayerStat : MonoBehaviour
                 Crit -= _Value;
                 break;
             case ItemStatus.CritDmg:
-                CirtDmg -= _Value;
+                CritDmg -= _Value;
                 break;
         }
+    }
+
+    public (float damage, bool isCrit) CalculateFianlDamage(float skillPower, float targetDef)
+    {
+        // 크리티컬 판정
+        bool isCrit = Random.value <= this.crit;
+
+        // 데미지 계산
+        float baseDamage = this.atk * skillPower;
+
+        // 크리티컬 데미지 계산
+        if (isCrit) baseDamage *= this.critDmg;
+
+        // 방어력 적용
+        float finalDamage = Mathf.Max(1, baseDamage - targetDef);
+
+        return (finalDamage, isCrit);
     }
 
     public void TakeDamage(float _Damage)

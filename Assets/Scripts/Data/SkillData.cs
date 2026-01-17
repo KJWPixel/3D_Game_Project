@@ -70,6 +70,8 @@ public class SkillEffect
 {
     public SkillEffectType EffectType;
     public float Power;    //데미지, 회복 수치
+    // 연산 최적화를 위한 런타임 전용 프로퍼티 (곱하기 정뇽)
+    public float PowerMultiplier => Power * 0.01f;
     public int HitCount;
     public float Duration; //버프, 디버프, CC기 지속시간
     public float Distance; //거리

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 
 public class InventoryItemTooltip : MonoBehaviour
@@ -14,6 +16,9 @@ public class InventoryItemTooltip : MonoBehaviour
     [SerializeField] private Image ItemIcon;
     [SerializeField] private GameObject Button;
     private Button UseButton;
+
+    private const string UITable = "UI Table";
+    private const string ITEMTable = "ITEM Table";
 
     private void Awake()
     {
@@ -34,9 +39,11 @@ public class InventoryItemTooltip : MonoBehaviour
     public void ItemTooltipSetup(InventoryItem _InventoryItem)
     {
         //인벤토리아이템클래스 데이터에서 툴팁에 데이터 참조
-        ItemName.text = _InventoryItem.ItemData.ItemName;
+        
+        //로컬라이제이션 ItemKey, DescKey
+        //ItemName.text = _InventoryItem.ItemData.ItemName;
         ItemQuantity.text = "x"+_InventoryItem.Quantity.ToString();
-        ItemDescription.text = _InventoryItem.ItemData.Description;
+        ItemDescription.text = LocalizationSettings.StringDatabase.GetLocalizedString(ITEMTable, _InventoryItem.ItemData.DescKey);
         ItemIcon.sprite = _InventoryItem.ItemData.Icon;
 
         var GradeIndex = (int)_InventoryItem.ItemData.Grade;
@@ -89,7 +96,7 @@ public class InventoryItemTooltip : MonoBehaviour
                             InventoryManager.Instance.UnequipItem(_InventoryItem);
                             Debug.Log($"{_InventoryItem.ItemData.name} 해제");
                             break;
-                        case EquipmentType.Head:
+                        case EquipmentType.Helmet:
                             InventoryManager.Instance.UnequipItem(_InventoryItem);
                             Debug.Log($"{_InventoryItem.ItemData.name} 해제");
                             break;
@@ -118,7 +125,7 @@ public class InventoryItemTooltip : MonoBehaviour
                             InventoryManager.Instance.EquipItem(_InventoryItem);
                             Debug.Log($"{_InventoryItem.ItemData.name} 장착");
                             break;
-                        case EquipmentType.Head:
+                        case EquipmentType.Helmet:
                             InventoryManager.Instance.EquipItem(_InventoryItem);
                             Debug.Log($"{_InventoryItem.ItemData.name} 장착");
                             break;
@@ -157,12 +164,12 @@ public class InventoryItemTooltip : MonoBehaviour
 
         if(_Item.ItemData.Type == ItemType.Consumable)
         {
-            ButtonText.text = "등록";
+            ButtonText.text = LocalizationSettings.StringDatabase.GetLocalizedString(UITable, "UI_EQUIPSLOT");
         }
         else if(_Item.ItemData.Type == ItemType.Equipment)
         {
-            string buttonText = _Item.IsEquipped ? "해제" : "착용";
-            ButtonText.text = buttonText;
+            string key = _Item.IsEquipped ? "UI_UNEQUIP" : "UI_EQUIP";
+            ButtonText.text = LocalizationSettings.StringDatabase.GetLocalizedString(UITable, key);
         }
     }
 }

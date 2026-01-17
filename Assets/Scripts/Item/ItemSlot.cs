@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 
 public class ItemSlot : MonoBehaviour
@@ -33,7 +34,7 @@ public class ItemSlot : MonoBehaviour
 
         if(_Item.IsEquipped)
         {
-            EquipText.text = "ÀåÂø";
+            EquipText.text = LocalizationSettings.StringDatabase.GetLocalizedString("UI Table", "UI_EQUIP");
         }
         else
         {

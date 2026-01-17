@@ -53,6 +53,10 @@ PrefabInstance:
       value: Warrok
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 99f778195265cc54caf8f8f67f430a6a, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 99f778195265cc54caf8f8f67f430a6a, type: 3}
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
@@ -158,7 +162,6 @@ MonoBehaviour:
   DropItems:
   - ItemData: {fileID: 11400000, guid: 8d4bc0d871a94f04aa9383f5e81fe43b, type: 2}
     DropProbability: 0.3
-  RandomNumber: 0
 --- !u!136 &6493194886934575626
 CapsuleCollider:
   m_ObjectHideFlags: 0

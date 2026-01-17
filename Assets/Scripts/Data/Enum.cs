@@ -48,10 +48,10 @@ public enum ConsumableType
 public enum EquipmentType
 {
     Weapon,
-    Head,
+    Helmet,
     Armor,
     Glove,
-    Shoes,    
+    Shoes,
 }
 
 public enum ItemStatus

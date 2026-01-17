@@ -186,11 +186,10 @@ public class Enemy : EnemyCharacter
         }
     }
 
-    public override void TakeDamage(float damage)
+    public override void TakeDamage(float finalDamage, bool isCritical)
     {
         if (IsDie) return;
 
-        float finalDamage = Def >= damage ? 1f : damage - def;
         CurHp -= finalDamage;
 
         if(CurHp <= 0)
@@ -204,11 +203,11 @@ public class Enemy : EnemyCharacter
 
         if(CurHp > 0 )
         {
-            ShowDamageText(finalDamage);
-        }    
+            ShowDamageText(finalDamage, isCritical);
+        }
     }
 
-    public override void ShowDamageText(float _Damage)
+    public override void ShowDamageText(float damage, bool isCritical)
     {
         Vector3 spawnPosition = transform.position + Vector3.up * 2f;
 
@@ -218,7 +217,7 @@ public class Enemy : EnemyCharacter
 
         if (DamageText != null)
         {
-            DamageText.SetDamageText(_Damage, false);
+            DamageText.SetDamageText(damage, isCritical);
         }
     }
 

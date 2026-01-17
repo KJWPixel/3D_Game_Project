@@ -8,6 +8,7 @@ TagManager:
   - Monster
   - Enemy
   - Portal
+  - NPC
   layers:
   - Default
   - TransparentFX

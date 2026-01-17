@@ -102,12 +102,12 @@ MonoBehaviour:
       m_Items:
       - rid: 6538062418656100355
   - m_Id: 4332667154432
-    m_Localized: "\uB300\uC0C1\uC5D0\uC11C {0}\uC758 \uB370\uBBF8\uC9C0\uB97C \uC785\uD799\uB2C8\uB2E4."
+    m_Localized: "\uB300\uC0C1\uC5D0\uC11C {0%}\uC758 \uB370\uBBF8\uC9C0\uB97C \uC785\uD799\uB2C8\uB2E4."
     m_Metadata:
       m_Items:
       - rid: 6538062418656100355
   - m_Id: 6592230993920
-    m_Localized: "\uB300\uC0C1\uC5D0\uC11C {0}\uC758 \uB370\uBBF8\uC9C0\uB85C {1}\uBC88
+    m_Localized: "\uB300\uC0C1\uC5D0\uC11C {0}%\uC758 \uB370\uBBF8\uC9C0\uB85C {1}\uBC88
       \uACF5\uACA9\uD569\uB2C8\uB2E4."
     m_Metadata:
       m_Items:
@@ -150,7 +150,7 @@ MonoBehaviour:
   - m_Id: 15877816070144
     m_Localized: "\uC694\uAD6C \uB808\uBCA8: {0}, \uC694\uAD6C \uC2A4\uD0AC\uD3EC\uC778\uD2B8:
       {1}, \uC7AC\uC0AC\uC6A9 \uB300\uAE30\uC2DC\uAC04: {2}, \uC2A4\uD0AC \uB370\uBBF8\uC9C0:
-      {3} "
+      {3}%"
     m_Metadata:
       m_Items:
       - rid: 6538062418656100355

@@ -28,7 +28,7 @@ MonoBehaviour:
   CastSFX: {fileID: 8300000, guid: b29cacd6057ed934bb5d0ea63fba15ca, type: 3}
   HitSFX: {fileID: 0}
   Effects:
-  - EffectType: 4
+  - EffectType: 5
     Power: 30
     HitCount: 0
     Duration: 0

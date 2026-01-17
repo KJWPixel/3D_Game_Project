@@ -29,7 +29,7 @@ MonoBehaviour:
   HitSFX: {fileID: 0}
   Effects:
   - EffectType: 1
-    Power: 15
+    Power: 150
     HitCount: 5
     Duration: 0
     Distance: 5

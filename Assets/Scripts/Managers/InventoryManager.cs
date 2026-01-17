@@ -133,11 +133,11 @@ public class InventoryManager : MonoBehaviour
         return true;
     }
     
-    public void EquipItem(InventoryItem _Item)
+    public void EquipItem(InventoryItem item)
     {
-        if (_Item.ItemData.Type != ItemType.Equipment) return;
+        if (item.ItemData.Type != ItemType.Equipment) return;
       
-        EquipementData Equip = _Item.ItemData as EquipementData; //(EquipementData)ItemData;
+        EquipementData Equip = item.ItemData as EquipementData; //(EquipementData)ItemData;
         EquipmentType Type = Equip.EquipmentType;
 
         if (EquipmentItems.TryGetValue(Type, out InventoryItem EquippedItem))
@@ -145,8 +145,8 @@ public class InventoryManager : MonoBehaviour
             UnequipItem(EquippedItem);
         }
 
-        EquipmentItems[Type] = _Item;
-        _Item.IsEquipped = true;
+        EquipmentItems[Type] = item;
+        item.IsEquipped = true;
 
         if (Equip != null)
         {
@@ -158,19 +158,30 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public void UnequipItem(InventoryItem _Item)
+    public bool IsItemEquipped(ItemData itemdata)
     {
-        if (_Item.ItemData.Type != ItemType.Equipment) return;
+        if (itemdata == null || itemdata.Type != ItemType.Equipment) return false;
 
-        EquipementData Equip = _Item.ItemData as EquipementData;
+        var TypeList = ItemByType[ItemType.Equipment];
+
+        InventoryItem item = TypeList.Find(i => i.ItemData.ID == itemdata.ID && i.IsEquipped);
+
+        return item != null;
+    }
+
+    public void UnequipItem(InventoryItem item)
+    {
+        if (item.ItemData.Type != ItemType.Equipment) return;
+
+        EquipementData Equip = item.ItemData as EquipementData;
         EquipmentType Type = Equip.EquipmentType;
 
-        if(EquipmentItems.ContainsKey(Type) && EquipmentItems[Type] == _Item)
+        if(EquipmentItems.ContainsKey(Type) && EquipmentItems[Type] == item)
         {
             EquipmentItems.Remove(Type);
         }
 
-        _Item.IsEquipped = false;
+        item.IsEquipped = false;
 
         if (Equip != null)
         {
