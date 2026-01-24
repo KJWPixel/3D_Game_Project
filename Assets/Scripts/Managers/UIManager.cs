@@ -55,8 +55,12 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Button SkillTreeButton;
     [SerializeField] private Button QuestButton;
     [SerializeField] private Button MenuButton;
+
+    [Header("º¸½º UI")]
+    [SerializeField] private GameObject BossUIPanel;
      
     private QuestData CurrentQuestData;
+    private UI_Status uiStatus;
     private void Awake()
     {
         if(Instance == null)
@@ -71,6 +75,7 @@ public class UIManager : MonoBehaviour
         }
 
         InitializeUI();
+        uiStatus = GetComponent<UI_Status>();
     }
 
     private void Start()
@@ -338,5 +343,15 @@ public class UIManager : MonoBehaviour
     //    }
     //}
     #endregion 
+
+    public void ShowBossHealth(string name, float current, float max)
+    {
+        uiStatus.SetBossUI(name, current, max);
+    }
+
+    public void UpdateBossHealth(float current, float max)
+    {
+        uiStatus.UpdateBossHp(current, max);
+    }
 
 }

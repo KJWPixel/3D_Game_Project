@@ -42,13 +42,15 @@ public class AttackFrameStrategy : IBossAttack
             }
         }
 
+        Vector3 spawnPosition = boss.transform.position + boss.transform.forward * 4f;
         Quaternion effectRot = boss.transform.rotation * Quaternion.Euler(0, -90f, 0);
 
         // 4. 이펙트 생성 (보스 정면 위치)
         GameObject prefab = boss.GetFrameExplosion(); // ScreamAttackPrefab 참조
         if (prefab != null)
         {
-            EffectManager.Instance.Spawn(prefab, boss.transform.forward * 4f, effectRot, Vector3.one, 2.0f);
+            EffectManager.Instance.Spawn(prefab, spawnPosition, effectRot, Vector3.one, 2.0f);
+            Debug.Log("FramePrefab 생성");
         }
 
         yield return new WaitForSeconds(1.0f); // 후딜레이

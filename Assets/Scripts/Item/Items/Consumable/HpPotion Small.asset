@@ -12,12 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 778a775f023cd0748a5c4262fa864209, type: 3}
   m_Name: HpPotion Small
   m_EditorClassIdentifier: 
-  id: 1
+  id: 1001
   itemKey: ITEM_HP_POTION_SMALL
-  itemName: 
   grade: 0
   descKey: ITEM_HP_POTION_SMALL_DESC
-  description: "Hp\uB97C 75 \uD68C\uBCF5\uC2DC\uD0A8\uB2E4"
   price: 100
   icon: {fileID: 21300000, guid: c7e4be0e47d40a947b3e8e549e5c4b03, type: 3}
   maxStackAmount: 99

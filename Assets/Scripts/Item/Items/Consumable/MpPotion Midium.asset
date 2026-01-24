@@ -12,12 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 778a775f023cd0748a5c4262fa864209, type: 3}
   m_Name: MpPotion Midium
   m_EditorClassIdentifier: 
-  id: 2
+  id: 1002
   itemKey: ITEM_MP_POTION_MIDIUM
-  itemName: 
   grade: 0
   descKey: ITEM_MP_POTION_MIDIUM_DESC
-  description: "Mp\uB97C 250 \uD68C\uBCF5\uC2DC\uD0A8\uB2E4"
   price: 200
   icon: {fileID: 21300000, guid: 3645f5f204693904c8873726e1a5b269, type: 3}
   maxStackAmount: 99

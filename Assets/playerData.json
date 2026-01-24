@@ -2,14 +2,14 @@
     "UserName": "Player",
     "Level": 100,
     "CurrentExp": 100.0,
-    "SkillPoint": 8885,
+    "SkillPoint": 8785,
     "Gold": 1750,
-    "CurrentHp": 96.0,
-    "CurrentMp": 3.8991191387176515,
+    "CurrentHp": 150.0,
+    "CurrentMp": 500.0,
     "Atk": 70.0,
     "Def": 16.0,
     "Critical": 0.5,
-    "PosX": 399.7539978027344,
-    "PosY": 30.081647872924806,
-    "PosZ": 100.71929931640625
+    "PosX": 398.9266662597656,
+    "PosY": 30.081649780273439,
+    "PosZ": 105.9455795288086
 }

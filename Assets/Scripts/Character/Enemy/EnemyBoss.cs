@@ -9,6 +9,8 @@ public class EnemyBoss : EnemyCharacter
     public BossState CurrentState = BossState.IDLE;
     public LayerMask PlayerLayer;
     public float AttackRange;
+    public bool isPlayerInRange = false;
+    public float detectionRange = 50f;
 
     [Header("Boss Phase 2 Loop Settings")]
     [SerializeField] public float flyCoolTime = 30f;
@@ -54,8 +56,7 @@ public class EnemyBoss : EnemyCharacter
     public override void Init()
     {
         CurHp = MaxHp;
-        player = GameObject.FindWithTag("Player").transform;
-        
+        player = GameObject.FindWithTag("Player").transform;      
     }
 
     private void InitAttacks()
@@ -71,8 +72,36 @@ public class EnemyBoss : EnemyCharacter
         aerialAttacks.Add(new AttackFlyFlameStrategy());
     }
 
+    private void Start()
+    {
+
+    }
+
     private void Update()
     {
+        if (player == null) return;
+
+        float distance = Vector3.Distance(transform.position, player.position);
+
+        bool wasInRange = isPlayerInRange; // wasInRange는 false
+        isPlayerInRange = distance <= detectionRange;
+
+        if (isPlayerInRange != wasInRange) // isPlayerInRange가 true가 된다면 시네머신
+        {
+            if (isPlayerInRange)
+            {
+                // 플레이어 감지 범위 진입
+                // 예: 시네머신 트리거, 첫 인사 대사, BGM 변경 등
+                // CinemachineVirtualCamera.Priority = 10;  // 예시
+            }
+            else
+            {
+                // 플레이어 감지 범위 이탈
+                // 예: 시네머신 복귀, 상태 초기화 등
+                ChangeState(BossState.IDLE);
+            }
+        }
+
         if (IsDie || CurrentState == BossState.PHASE_TRANSITION) return;
 
         if(isPhase2Active &&  CurrentState != BossState.PHASE_TRANSITION)
@@ -188,8 +217,9 @@ public class EnemyBoss : EnemyCharacter
         if (IsDie) return;
         CurHp -= fianldamage;
 
+        
         // 페이즈 전환 체크 (HP 50%미만)
-        if(!hasPhaseChanged && CurHp < MaxHp * 0.5f)
+        if (!hasPhaseChanged && CurHp < MaxHp * 0.5f)
         {
             Debug.Log("TakeDamage: 페이즈 전환");
             hasPhaseChanged = true;

@@ -307,7 +307,7 @@ public class PlayerStat : MonoBehaviour
         }
     }
 
-    public (float damage, bool isCrit) CalculateFianlDamage(float skillPower, float targetDef)
+    public (float damage, bool isCrit) CalculateFinalDamage(float skillPower, float targetDef)
     {
         // 크리티컬 판정
         bool isCrit = Random.value <= this.crit;

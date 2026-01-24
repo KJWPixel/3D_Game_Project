@@ -49,7 +49,7 @@ public class RayDamageSkillStrategy : ISkillBehaviorStrategy
                     if (enemy != null)
                     {
                         // 플레이어에서 계산한 결과르 받아오기
-                        var result = PlayerStat.Instance.CalculateFianlDamage(effect.PowerMultiplier, enemy.Def);
+                        var result = PlayerStat.Instance.CalculateFinalDamage(effect.PowerMultiplier, enemy.Def);
 
                         // 적에게 최종 결과 전달
                         enemy.TakeDamage(result.damage, result.isCrit);

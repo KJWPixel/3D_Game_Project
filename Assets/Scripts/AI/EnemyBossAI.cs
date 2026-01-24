@@ -21,8 +21,16 @@ public class EnemyBossAI : AIBase
 
     private void Update()
     {
+
         // 보스가 죽거나 isActionRunning, 페이즈 전환하면 리턴
-        if (boss.IsDie || boss.isActionRunning) return;  
+        if (boss.IsDie || boss.isActionRunning || boss.CurrentState == BossState.PHASE_TRANSITION) return;
+
+        // 100m 밖 → IDLE 강제 유지
+        if (!boss.isPlayerInRange)
+        {
+            boss.ChangeState(BossState.IDLE);
+            return;
+        }
 
         float distance = Vector3.Distance(transform.position, player.position);
 

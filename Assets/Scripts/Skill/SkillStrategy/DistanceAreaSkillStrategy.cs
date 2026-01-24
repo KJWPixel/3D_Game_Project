@@ -72,7 +72,7 @@ public class DistanceAreaSkillStrategy : ISkillBehaviorStrategy
                 if(enemy == null || enemy.IsDie) continue;
 
                 // 플레이어에서 계산한 결과르 받아오기
-                var result = PlayerStat.Instance.CalculateFianlDamage(power, enemy.Def);
+                var result = PlayerStat.Instance.CalculateFinalDamage(power, enemy.Def);
 
                 // 적에게 최종 결과 전달
                 enemy.TakeDamage(result.damage, result.isCrit);
