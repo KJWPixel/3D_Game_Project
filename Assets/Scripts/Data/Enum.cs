@@ -116,6 +116,42 @@ public enum AI
     AI_RESET,
 }
 
+public enum BossAI
+{
+    // 공통 상태
+    IDLE, CHASE, DEAD,
+
+    // 보스 전용 상태
+    PHASE_TRANSITION, //페이즈 전환 (지상 -> 공중)
+
+    //공격 패턴
+    ATTACK_MOUTH,
+    ATTACK_HAND,
+    ATTACK_FLAME,
+    ATTACK_SCREAM,
+    FLY_FLAME,
+    FLY_ATTACK_FRAME,
+}
+
+public enum BossState 
+{   
+    IDLE = 1, 
+    CHASE = 2,
+    DEAD = 3,
+    GETHIT = 4,
+    ATTACK = 5,
+    ATTACK_MOUTH = 6,
+    ATTACK_HAND = 7,
+    ATTACK_FRAME = 8,
+    ATTACK_SCREAM = 9,
+    PHASE_TRANSITION = 10,
+    ATTACK_FLYSCREAM = 11,
+    ATTACK_FLYFRAME = 12,
+    LAND = 13,    
+}
+
+
+
 //퀘스트
 public enum QuestClass
 {
@@ -172,6 +208,8 @@ public enum IndicatorType
     LineArea,
     DistanceArea,
     FanArea,
+    CircleArea,
+    BoxArea,
 }
 
 public enum IndicatorShape

@@ -23,7 +23,7 @@ MonoBehaviour:
   Cooldown: 5
   CastPrefabDuration: 0
   HitPrefabDuration: 1
-  CastEffectPrefab: {fileID: 0}
+  CastEffectPrefab: {fileID: 1171201465392465800, guid: a7726cfe74e039e4592cced4972e3c38, type: 3}
   HitEffectPrefab: {fileID: 3367314013316085171, guid: 8b20002c2b69a9d44ab5bae8e1d923cd, type: 3}
   CastSFX: {fileID: 8300000, guid: 05448b5c80701864d8e324a0c104eb46, type: 3}
   HitSFX: {fileID: 0}

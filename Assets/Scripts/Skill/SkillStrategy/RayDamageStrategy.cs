@@ -44,7 +44,7 @@ public class RayDamageSkillStrategy : ISkillBehaviorStrategy
             {
                 if(Hit.collider.CompareTag("Enemy"))
                 {
-                    Enemy enemy = Hit.collider.gameObject.GetComponent<Enemy>();
+                    EnemyCharacter enemy = Hit.collider.gameObject.GetComponent<EnemyCharacter>();
 
                     if (enemy != null)
                     {

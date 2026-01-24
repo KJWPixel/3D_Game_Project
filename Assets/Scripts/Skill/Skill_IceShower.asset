@@ -34,8 +34,8 @@ MonoBehaviour:
     Duration: 0
     Distance: 5
     Radius: 0
-    Length: 5
-    Width: 5
+    Length: 12
+    Width: 12
     Angle: 0
     DelayTime: 0.3
     MaxTarget: 15

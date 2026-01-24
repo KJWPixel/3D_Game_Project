@@ -20,17 +20,16 @@ public class LineAreaDamageStrategy : ISkillBehaviorStrategy
             EffectManager.Instance.Spawn(_SkillData.CastEffectPrefab, center, rotation, _SkillData.CastPrefabDuration);
 
             // OverlapSphera(center, radius) 사용하려면, 가벼운 판정을 위해 Box사용
-            Collider[] hits = Physics.OverlapBox(center, halfExtents, rotation);
+            Collider[] hits = Physics.OverlapBox(center, halfExtents, rotation,LayerMask.GetMask("Enemy"));
 
             List<Collider> EnemyList = new List<Collider>();
 
             foreach (var col in hits)
             {
-                //Overlap에서 감지된 colliders를 col로 담음
-                if(col.CompareTag("Enemy"))
+                if (col.CompareTag("Enemy"))
                 {
                     EnemyList.Add(col);
-                }           
+                }
             }
 
             //람다식을 이용한 비교(Player위치와 비교)
@@ -56,7 +55,7 @@ public class LineAreaDamageStrategy : ISkillBehaviorStrategy
 
                     if(col.CompareTag("Enemy"))
                     {
-                        Enemy enemy = col.GetComponent<Enemy>();
+                        EnemyCharacter enemy = col.GetComponent<EnemyCharacter>();
                         if(enemy != null)
                         {
                             // 플레이어에서 계산한 결과르 받아오기

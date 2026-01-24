@@ -14,6 +14,7 @@ public class Status
 public class PlayerStat : MonoBehaviour
 {
     public static PlayerStat Instance;
+    [SerializeField] bool test = false;
 
     [Header("Status")]
     [SerializeField] private string userName;
@@ -325,6 +326,7 @@ public class PlayerStat : MonoBehaviour
 
     public void TakeDamage(float _Damage)
     {
+        if (test) return;
         if (_Damage <= Def) return;
 
         CurrentHp -= (_Damage - Def);

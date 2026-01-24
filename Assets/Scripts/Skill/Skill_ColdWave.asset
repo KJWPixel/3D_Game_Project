@@ -32,10 +32,10 @@ MonoBehaviour:
     Power: 150
     HitCount: 5
     Duration: 0
-    Distance: 5
+    Distance: 3
     Radius: 0
-    Length: 3
-    Width: 3
+    Length: 10
+    Width: 10
     Angle: 0
     DelayTime: 0.3
     MaxTarget: 10

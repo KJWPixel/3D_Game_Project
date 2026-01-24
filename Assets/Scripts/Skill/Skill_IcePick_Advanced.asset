@@ -29,11 +29,11 @@ MonoBehaviour:
   HitSFX: {fileID: 0}
   Effects:
   - EffectType: 3
-    Power: 135
+    Power: 145
     HitCount: 8
     Duration: 0
-    Distance: 7
-    Radius: 5
+    Distance: 5
+    Radius: 12
     Length: 0
     Width: 0
     Angle: 0

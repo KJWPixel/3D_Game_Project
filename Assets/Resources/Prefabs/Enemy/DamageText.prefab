@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9012239952074341020}
   - component: {fileID: 8810436543838639946}
   - component: {fileID: 8897294675284621175}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: DamageText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81,7 +81,7 @@ GameObject:
   - component: {fileID: 5332212561524948629}
   - component: {fileID: 761757188086341317}
   - component: {fileID: 6858058142824701869}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -198,8 +198,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 4
-  m_fontSizeBase: 4
+  m_fontSize: 8
+  m_fontSizeBase: 8
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

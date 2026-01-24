@@ -33,7 +33,7 @@ MonoBehaviour:
     HitCount: 1
     Duration: 0
     Distance: 5
-    Radius: 5
+    Radius: 12
     Length: 0
     Width: 0
     Angle: 0

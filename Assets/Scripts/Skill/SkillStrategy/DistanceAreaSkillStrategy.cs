@@ -7,7 +7,7 @@ using UnityEngine.Playables;
 
 public class DistanceAreaSkillStrategy : ISkillBehaviorStrategy
 {
-    List<Enemy> EnemyList = new List<Enemy>();
+    List<EnemyCharacter> EnemyList = new List<EnemyCharacter>();
     public void Execute(PlayerController _Player, PlayerStat _PlayerStat, SkillData _SkillData, Transform _Target)
     {
         EnemyList.Clear();
@@ -29,14 +29,14 @@ public class DistanceAreaSkillStrategy : ISkillBehaviorStrategy
 
             //Enemy를 넣을 배열, 스킬범위 안 EnemyList               
             GameObject[] EnemyGo = GameObject.FindGameObjectsWithTag("Enemy");
-            Enemy[] Enemys = new Enemy[EnemyGo.Length];
+            EnemyCharacter[] Enemys = new EnemyCharacter[EnemyGo.Length];
  
             for (int i = 0; i < EnemyGo.Length; i++)
             {
-                Enemys[i] = EnemyGo[i].GetComponent<Enemy>();
+                Enemys[i] = EnemyGo[i].GetComponent<EnemyCharacter>();
             }
 
-            foreach(Enemy enemy in Enemys)
+            foreach(EnemyCharacter enemy in Enemys)
             {
                 float TargetDis = Vector3.SqrMagnitude(enemy.transform.position - Origin);
                 if(TargetDis < RadiusSqr)//스킬범위 안이라면
@@ -63,11 +63,11 @@ public class DistanceAreaSkillStrategy : ISkillBehaviorStrategy
 
     IEnumerator DamageAttack(PlayerStat playerStat, float power, int hitCount, float delayTime, SkillData data)
     {
-        List<Enemy> targets = new List<Enemy>(EnemyList);
+        List<EnemyCharacter> targets = new List<EnemyCharacter>(EnemyList);
 
         for (int i = 0; i < hitCount; i++)
         {
-            foreach (Enemy enemy in targets)
+            foreach (EnemyCharacter enemy in targets)
             {
                 if(enemy == null || enemy.IsDie) continue;
 

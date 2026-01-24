@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Dynamic;
 using UnityEngine;
+using UnityEngine.Localization;
+using UnityEngine.UIElements;
 
 public class EffectManager : MonoBehaviour
 {
@@ -34,4 +36,18 @@ public class EffectManager : MonoBehaviour
         return Prefab;
     }
 
+    public GameObject Spawn(GameObject prefab, Vector3 pos, Quaternion rotation, Vector3 scale, float duration)
+    {
+        if (prefab == null) return null;
+
+        // 1. 지정된 위치, 회전값으로 생성
+        var instance = Instantiate(prefab, pos, rotation, DynamicObject.transform);
+
+        // 크기 설정
+        instance.transform.localScale = scale;
+
+        // 파괴 예약
+        Destroy(instance, duration);
+        return instance;
+    }
 }
