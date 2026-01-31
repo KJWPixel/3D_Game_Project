@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: KillQuest_Vampire
   m_EditorClassIdentifier: 
   questId: 2
-  questName: "Vampire \uD1A0\uBC8C"
-  questTip: "\uBC40\uD30C\uC774\uC5B4 10\uB9C8\uB9AC \uC0AC\uB0E5"
-  questDescription: "Vampire \uCD9C\uD604\uC9C0\uC5ED\uC5D0\uC11C \uBC40\uD30C\uC774\uC5B4
-    10\uB9C8\uB9AC \uC0AC\uB0E5"
+  questNameKey: QUEST_NAME_0002
+  questDescriptionKey: QUEST_DESC_0002
+  questTipKey: QUEST_TIP_0002
+  questClassKey: QUEST_MAIN
   targetId: 2
   amount: 5
   questLevel: 1
@@ -25,6 +25,6 @@ MonoBehaviour:
   questClassification: 1
   questClass: 0
   questCondition: 0
-  goldReward: 150
-  expReward: 150
+  goldReward: 2000
+  expReward: 5000
   itemReward: {fileID: 0}

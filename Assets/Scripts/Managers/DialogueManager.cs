@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -20,7 +20,9 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private float typingDelay = 0.03f;
     public DialogNPC CurrentNPC;
 
-    // ´ëÈ­ ÁßÀÎÁö ¿ÜºÎ¿¡¼­ È®ÀÎ
+    private QuestData currentTalkQuest;
+
+    // ëŒ€í™” ì¤‘ì¸ì§€ ì™¸ë¶€ì—ì„œ í™•ì¸
     public bool IsDialogueActive => UIManager.Instance.DialoguePanel.activeInHierarchy;
     private void Awake()
     {
@@ -35,7 +37,7 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    //±âÁ¸ string[] 
+    //ê¸°ì¡´ string[] 
     public void StartDialogue(string _Name, string[] _DialogueLine)
     {
         StartDialogue(null, _Name, (IEnumerable<string>)_DialogueLine, InteractionType.None);
@@ -51,54 +53,73 @@ public class DialogueManager : MonoBehaviour
         CurrentNPC = _NPC;
         CurrentInteraction = _Type;
 
-        // ¾ÈÀüÇÏ°Ô ³»ºÎ ¸®½ºÆ®·Î º¹»ç (¿øº» º¯°æ ±İÁö)
+        // ì•ˆì „í•˜ê²Œ ë‚´ë¶€ ë¦¬ìŠ¤íŠ¸ë¡œ ë³µì‚¬ (ì›ë³¸ ë³€ê²½ ê¸ˆì§€)
         Sentences.Clear();
 
-        // Àü´Ş¹ŞÀº ´ë»çµé ¾ÈÀüÇÏ°Ô º¹»ç (¿øº» List º¸È£)
+        // ì „ë‹¬ë°›ì€ ëŒ€ì‚¬ë“¤ ì•ˆì „í•˜ê²Œ ë³µì‚¬ (ì›ë³¸ List ë³´í˜¸)
         if (_DialogueLines != null)
         {
             Sentences.AddRange(_DialogueLines);
         }
             
-        // Äù½ºÆ® NPCÀÌ°í, Äù½ºÆ® Å¸ÀÔÀÌ¸é ¸¶Áö¸· 
-        if (_NPC != null && _NPC.QuestData != null && _Type == InteractionType.Quest)
+        // í€˜ìŠ¤íŠ¸ NPCì´ê³ , í€˜ìŠ¤íŠ¸ íƒ€ì…ì´ë©´ ë§ˆì§€ë§‰ 
+        if (_NPC != null && _NPC.questList != null && _Type == InteractionType.Quest)
         {
-            Sentences.Add("Äù½ºÆ®°¡ ÀÖ½À´Ï´Ù. ¼ö¶ôÇÏ½Ã°Ú½À´Ï±î?");
+            Sentences.Add("í€˜ìŠ¤íŠ¸ê°€ ìˆìŠµë‹ˆë‹¤. ìˆ˜ë½í•˜ì‹œê² ìŠµë‹ˆê¹Œ?");
         }
 
-        Index = 0; // ¹İµµ½Ã ÀÎµ¦½º ÃÊ±âÈ­
+        Index = 0; // ë°˜ë„ì‹œ ì¸ë±ìŠ¤ ì´ˆê¸°í™”
 
-        // UI ¼¼ÆÃ
+        // UI ì„¸íŒ…
         UIManager.Instance.DialoguePanel.SetActive(true);
         UIManager.Instance.NameText.text = _Name;
 
-        // Ã¹ ¹®Àå Ç¥½Ã
+        // ì²« ë¬¸ì¥ í‘œì‹œ
         ShowTextSentence();
     }
 
-    // ID ¹üÀ§¸¦ ÀÌ¿ëÇØ ´ëÈ­¸¦ ½ÃÀÛÇÏ´Â ÇÔ¼ö Ãß°¡
+    // ID ë²”ìœ„ë¥¼ ì´ìš©í•´ ëŒ€í™”ë¥¼ ì‹œì‘í•˜ëŠ” í•¨ìˆ˜ ì¶”ê°€
     public void StartDialogueWithLocalization(DialogNPC _NPC, InteractionType type)
     {
         CurrentNPC = _NPC;
         CurrentInteraction = type;
         Sentences.Clear();
+        currentTalkQuest = null;
 
-        // 1. NPC ÀÌ¸§ ¹ø¿ª
-        string translatedName = LocalizationSettings.StringDatabase.GetLocalizedString(TableName, _NPC.npcNameKey);
+    // 1. NPC ì´ë¦„ ë²ˆì—­
+    string translatedName = LocalizationSettings.StringDatabase.GetLocalizedString(TableName, _NPC.npcNameKey);
         UIManager.Instance.NameText.text = translatedName;
 
-        // 2. ´ë»ç ¸®½ºÆ® ¹ø¿ª ¹× ÇÒ´ç
+        // 2. ëŒ€ì‚¬ ë¦¬ìŠ¤íŠ¸ ë²ˆì—­ ë° í• ë‹¹
         foreach (string key in _NPC.dialogueKeys)
         {
             string translatedLine = LocalizationSettings.StringDatabase.GetLocalizedString(TableName, key);
             Sentences.Add(translatedLine);
         }
 
-        // 3. Äù½ºÆ® ¹®±¸ (½Ã½ºÅÛ Å×ÀÌºíÀÌ³ª °øÅë Å° È°¿ë)
-        if(_NPC.QuestData != null && type == InteractionType.Quest)
+        // 3. í€˜ìŠ¤íŠ¸ ë¬¸êµ¬ (ì‹œìŠ¤í…œ í…Œì´ë¸”ì´ë‚˜ ê³µí†µ í‚¤ í™œìš©)
+        if (type == InteractionType.Quest)
         {
-            string questAsk = LocalizationSettings.StringDatabase.GetLocalizedString(TableName, "NPC_Quest_Accept");
-            Sentences.Add(questAsk);
+            currentTalkQuest = _NPC.GetAvailableQuest(); // NPCë¡œë¶€í„° ë‹¤ìŒ í€˜ìŠ¤íŠ¸ë¥¼ ê°€ì ¸ì˜´
+
+            if (currentTalkQuest != null)
+            {
+                // ì„ í–‰ í€˜ìŠ¤íŠ¸ ì¡°ê±´ ì²´í¬
+                if (currentTalkQuest.PrerequisiteQuest != null &&
+                    !QuestManager.Instance.ClearQuests.Contains(currentTalkQuest.PrerequisiteQuest.QuestId))
+                {
+                    // ì„ í–‰ í€˜ìŠ¤íŠ¸ë¥¼ ì•ˆ ê¹¼ì„ ë•Œ: ë¬¸êµ¬ ì¶”ê°€ ë° ì¸í„°ë™ì…˜ íƒ€ì… ë³€ê²½ (ë²„íŠ¼ ì•ˆ ë‚˜ì˜¤ê²Œ)
+                    string prereqMsg = LocalizationSettings.StringDatabase.GetLocalizedString(TableName, "NPC_Quest_Prerequisite_NotMet");
+                    Sentences.Add(prereqMsg);
+                    CurrentInteraction = InteractionType.None; // ì¤‘ìš”: EndDialogueì—ì„œ ë²„íŠ¼ì´ ì•ˆ ëœ¨ê²Œ í•¨
+                }
+                else
+                {
+                    // ì„ í–‰ í€˜ìŠ¤íŠ¸ë¥¼ ê¹¼ì„ ë•Œ: ìˆ˜ë½ ë¬¸êµ¬ ì¶”ê°€
+                    string questAsk = LocalizationSettings.StringDatabase.GetLocalizedString(TableName, "NPC_Quest_Accept");
+                    Sentences.Add(questAsk);
+                }
+            }
         }
 
         Index = 0;
@@ -109,14 +130,14 @@ public class DialogueManager : MonoBehaviour
 
     private void ShowTextSentence()
     {
-        // ¸ğµç ¹®Àå ³¡ -> ´ëÈ­Á¾·á
+        // ëª¨ë“  ë¬¸ì¥ ë -> ëŒ€í™”ì¢…ë£Œ
         if (Index >= Sentences.Count)
         {
             EndDialogue();
             return;
         }
 
-        // Å¸ÀÌÇÎ ÁßÀÎµ¥ ÇÃ·¹ÀÌ¾û°¡ ÀÔ·ÂÇÏ¸é Áï½Ã ÀüÃ¼ Ç¥½Ã
+        // íƒ€ì´í•‘ ì¤‘ì¸ë° í”Œë ˆì´ì—‰ê°€ ì…ë ¥í•˜ë©´ ì¦‰ì‹œ ì „ì²´ í‘œì‹œ
         if(IsTyping)
         {
             if(TypingCoroutine != null)
@@ -131,7 +152,7 @@ public class DialogueManager : MonoBehaviour
 
         TypingCoroutine = StartCoroutine(TextCoroutine());
 
-        //if (Index < Sentences.Count) // Lenght -> Count·Î º¯°æ (List)
+        //if (Index < Sentences.Count) // Lenght -> Countë¡œ ë³€ê²½ (List)
         //{
         //    if (TypingCoroutine != null)
         //    {
@@ -148,12 +169,12 @@ public class DialogueManager : MonoBehaviour
         //}
     }
 
-    IEnumerator TextCoroutine() // Å¸ÀÌÇÎ ÄÚ·çÆ¾ 
+    IEnumerator TextCoroutine() // íƒ€ì´í•‘ ì½”ë£¨í‹´ 
     {
         IsTyping = true;
         UIManager.Instance.DialogueText.text = "";
 
-        // Index´Â ¾ÆÁö°¡ Áõ°¡ ÀüÀÌ¾î¾ß ÇÏ¹Ç·Î, ¿©±â¼­ ÇöÀç ¹®Àå »ç¿ë
+        // IndexëŠ” ì•„ì§€ê°€ ì¦ê°€ ì „ì´ì–´ì•¼ í•˜ë¯€ë¡œ, ì—¬ê¸°ì„œ í˜„ì¬ ë¬¸ì¥ ì‚¬ìš©
         string currnetSentence = Sentences[Index];
 
         foreach (char c in Sentences[Index])
@@ -162,7 +183,7 @@ public class DialogueManager : MonoBehaviour
             yield return new WaitForSeconds(typingDelay);
         }
 
-        // ´õ ÀÌ»ó ¹®ÀåÀÌ ¾øÀ¸¸é Á¾·ù
+        // ë” ì´ìƒ ë¬¸ì¥ì´ ì—†ìœ¼ë©´ ì¢…ë¥˜
         //if (Index >= Sentences.Count)
         //{
         //    EndDialogue();
@@ -178,7 +199,7 @@ public class DialogueManager : MonoBehaviour
 
         if (IsTyping)
         {
-            // Å¸ÀÌÇÎ Áß ¡æ Áï½Ã ¿Ï·á
+            // íƒ€ì´í•‘ ì¤‘ â†’ ì¦‰ì‹œ ì™„ë£Œ
             if (TypingCoroutine != null)
             {
                 StopCoroutine(TypingCoroutine);
@@ -189,9 +210,9 @@ public class DialogueManager : MonoBehaviour
         }
         else
         {
-            // Å¸ÀÌÇÎ ³¡ ¡æ ´ÙÀ½ ¹®Àå
+            // íƒ€ì´í•‘ ë â†’ ë‹¤ìŒ ë¬¸ì¥
             Index++;
-            ShowTextSentence();  // ¹®Àå ´Ù ³¡³ª¸é ¿©±â¼­ EndDialogue() ÀÚµ¿ È£ÃâµÊ
+            ShowTextSentence();  // ë¬¸ì¥ ë‹¤ ëë‚˜ë©´ ì—¬ê¸°ì„œ EndDialogue() ìë™ í˜¸ì¶œë¨
         }
     }
 
@@ -207,10 +228,17 @@ public class DialogueManager : MonoBehaviour
                 UIManager.Instance.DialoguePanel.SetActive(false);
                 break;
             case InteractionType.Quest:
-                UIManager.Instance.ChoiceYes.SetActive(true);
-                UIManager.Instance.ChoiceNo.SetActive(true);
-                UIManager.Instance.SetupQuestButton(CurrentNPC.QuestData);
-                // QuestData¸¦ ¹öÆ° Å¬¸¯ ÀÌº¥Æ®¿¡ Àü´Ş             
+                if (currentTalkQuest != null)
+                {
+                    // â— ì¤‘ìš”: NPC.QuestDataê°€ ì•„ë‹ˆë¼ ì—¬ê¸°ì„œ í™•ì •ëœ currentTalkQuestë¥¼ ì „ë‹¬í•©ë‹ˆë‹¤.
+                    UIManager.Instance.SetupQuestButton(currentTalkQuest);
+                    UIManager.Instance.ChoiceYes.SetActive(true);
+                    UIManager.Instance.ChoiceNo.SetActive(true);
+                }
+                else
+                {
+                    UIManager.Instance.DialoguePanel.SetActive(false);
+                }
                 break;
             default:
                 UIManager.Instance.DialoguePanel.SetActive(false);

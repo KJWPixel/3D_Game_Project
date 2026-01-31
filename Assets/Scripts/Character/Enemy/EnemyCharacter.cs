@@ -15,6 +15,7 @@ public abstract class EnemyCharacter : CharacterBase
     [SerializeField] protected float atk;
     [SerializeField] protected float def;
     [SerializeField] protected float attackRange;
+    [SerializeField] protected int gainGold;
     [SerializeField] protected float gainExp;
 
     [Header("행동 체크")]
@@ -70,6 +71,12 @@ public abstract class EnemyCharacter : CharacterBase
     {
         get => attackRange;
         set => attackRange = value;
+    }
+
+    public int GainGold
+    { 
+        get => gainGold;
+        set => gainGold = value;
     }
 
     public float GainExp

@@ -19,7 +19,7 @@ public class PlayerStat : MonoBehaviour
     [Header("Status")]
     [SerializeField] private string userName;
     [SerializeField] private int level = 1;
-    [SerializeField] private float maxExp = 0f;
+    [SerializeField] private float maxExp = 1000f;
     [SerializeField] private float currentExp = 0f;
     [SerializeField] private int skillPoint = 0; 
 
@@ -35,7 +35,7 @@ public class PlayerStat : MonoBehaviour
     [SerializeField] private float crit = 0f;
     [SerializeField] private float critDmg = 0f;
 
-    [SerializeField] private int gold;
+    [SerializeField] private int currentgold;
     [SerializeField] private PostProcessVolume postProcessVolume;
     [SerializeField] private Vignette vignette;
 
@@ -138,8 +138,8 @@ public class PlayerStat : MonoBehaviour
 
     public int Gold
     {
-        get => gold;
-        set => gold = value;
+        get => currentgold;
+        set => currentgold = value;
     }
 
 
@@ -327,11 +327,13 @@ public class PlayerStat : MonoBehaviour
     public void TakeDamage(float _Damage)
     {
         if (test) return;
-        if (_Damage <= Def) return;
 
-        CurrentHp -= (_Damage - Def);
+        // 계산된 데미지가 1보다 작으면 1로 고정
+        float finalDamage = Mathf.Max(1f, _Damage - Def);
 
-        if(vignette != null)// Post-Processing Vignette 효과 
+        CurrentHp -= finalDamage;
+
+        if (vignette != null) // Post-Processing Vignette 효과 
         {
             vignette.roundness.value = 0.85f;
         }
@@ -374,14 +376,19 @@ public class PlayerStat : MonoBehaviour
         playerAniController.PlayerDieAnimation(false);
     }
 
-    public void AddExp(float _Exp)
+    public void AddGold(int gold)
     {
-        CurrentExp += _Exp;
+        currentgold += gold;
+    }
 
-        if (CurrentExp > MaxExp)
+    public void AddExp(float exp)
+    {
+        CurrentExp += exp;
+
+        // if 대신 while을 사용하여 연속 레벨업 가능하게 수정
+        while (CurrentExp >= MaxExp)
         {
-            float overExp = CurrentHp - MaxExp;
-            CurrentHp = overExp;
+            CurrentExp -= MaxExp; // 초과 경험치 보존
             LevelUp();
         }
     }
@@ -389,11 +396,20 @@ public class PlayerStat : MonoBehaviour
     private void LevelUp()
     {
         Level++;
-        MaxExp *= 1.2f;
+
+        // 능력치 상승 로직
+        MaxExp *= 1.15f;
         MaxHp *= 1.1f;
         MaxMp *= 1.4f;
         Atk *= 1.1f;
         Def++;
+
+        // 레벨업 시 체력/마나 회복 (선택 사항)
+        CurrentHp = MaxHp;
+        CurrentMp = MaxMp;
+
         SoundManager.Instance.PlaySFX(SFXType.LevelUp);
+
+        Debug.Log($"레벨업! 현재 레벨: {Level}");
     }
 }

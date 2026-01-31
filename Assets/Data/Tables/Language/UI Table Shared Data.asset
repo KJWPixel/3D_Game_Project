@@ -147,6 +147,26 @@ MonoBehaviour:
     m_Key: UI_EQUIPSLOT
     m_Metadata:
       m_Items: []
+  - m_Id: 10139863493259264
+    m_Key: UI_SKILL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10140402935279616
+    m_Key: UI_SKILLPOINT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10146753392553984
+    m_Key: UI_QUESTCLEAR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10147014232125440
+    m_Key: UI_QUESTREWORD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10154587823943680
+    m_Key: UI_EXP
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

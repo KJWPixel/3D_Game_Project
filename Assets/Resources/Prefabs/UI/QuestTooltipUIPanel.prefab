@@ -55,7 +55,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c5bb85b20153214b884a5e336b42f09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  QuestTitleText: {fileID: 5939516857431232149}
+  UITABLE: UI Table
+  QUESTTABLE: QUEST Table
+  QuestNameText: {fileID: 5939516857431232149}
   QuestDescriptionText: {fileID: 7775092558170207965}
   QuestRewordText: {fileID: 7535346906809073509}
   TrackingButton: {fileID: 5924012396764835428}

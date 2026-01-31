@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 
 public class QuestUI : MonoBehaviour
 {
@@ -52,7 +53,9 @@ public class QuestUI : MonoBehaviour
         if (QuestManager.Instance != null)
         {
             QuestManager.Instance.QuestCleared += ShowQuestClearUI;
-        }           
+        }
+
+        LocalizationSettings.SelectedLocaleChanged += OnLocaleChanged;
     }
 
     private void OnDisable()
@@ -65,7 +68,8 @@ public class QuestUI : MonoBehaviour
         {
             QuestManager.Instance.QuestCleared -= ShowQuestClearUI;
         }
-            
+
+        LocalizationSettings.SelectedLocaleChanged -= OnLocaleChanged;
     }
     private void TryInitialize()
     {
@@ -79,7 +83,6 @@ public class QuestUI : MonoBehaviour
         // QuestManager 정보로 풀링 시작
         pool = QuestManager.Instance.MaxQuestList;
         CreatePool(pool);
-
         isInitialized = true;
     }
     public void CreatePool(int _Count)
@@ -150,10 +153,14 @@ public class QuestUI : MonoBehaviour
         
     }
 
-
-
     private void ShowQuestClearUI(QuestInstance _Quest)
     {
         QuestClear.ShowClearUI(_Quest);
+    }
+
+    private void OnLocaleChanged(UnityEngine.Localization.Locale locale)
+    {
+        // 언어가 바뀌면 현재 퀘스트 리스트를 다시 그립니다.
+        RefreshQuest();
     }
 }

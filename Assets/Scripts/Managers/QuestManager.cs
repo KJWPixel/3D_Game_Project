@@ -80,8 +80,12 @@ public class QuestManager : MonoBehaviour
 
         if (_Quest.PrerequisiteQuest != null)
         {
-            Debug.Log("선행 퀘스트가 완료되지 않았습니다.");
-            if (!ClearQuests.Contains(_Quest.QuestId)) return;
+            // 내 ID가 아니라 '선행 퀘스트의 ID'가 ClearQuests에 있는지 확인해야 함
+            if (!ClearQuests.Contains(_Quest.PrerequisiteQuest.QuestId))
+            {
+                Debug.Log("선행 퀘스트가 완료되지 않았습니다.");
+                return;
+            }
         }
 
         if (ActiveQuests.Exists(q => q.Data.QuestId == _Quest.QuestId))

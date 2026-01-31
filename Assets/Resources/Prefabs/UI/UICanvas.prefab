@@ -5263,7 +5263,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.0002746582}
+  m_AnchoredPosition: {x: 0, y: 0.000006657193}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &5386848523819289373
@@ -8446,6 +8446,8 @@ MonoBehaviour:
   - {fileID: 3736988045838712824}
   InventoryPanel: {fileID: 9002925449699865248}
   IsInventoryOpen: 0
+  StatusPanel: {fileID: 0}
+  IsStatusOpen: 0
   QuestPanel: {fileID: 5658140446281436638}
   QuestToolTipPanel: {fileID: 142117906486364369}
   QuestGuidePanel: {fileID: 3894412169412222891}
@@ -8459,6 +8461,7 @@ MonoBehaviour:
   SkillTreeButton: {fileID: 7851422374144612091}
   QuestButton: {fileID: 2452831267549332052}
   MenuButton: {fileID: 4750919230398036468}
+  BossUIPanel: {fileID: 0}
 --- !u!114 &6448967814447771648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8479,6 +8482,14 @@ MonoBehaviour:
   SteminaImage: {fileID: 4643283130133773065}
   SteminaBackGround: {fileID: 5823778867469872889}
   EffectTime: 2
+  BossNameText: {fileID: 0}
+  BossHpEffectImage: {fileID: 0}
+  BossHpImage: {fileID: 0}
+  BossHpBackGround: {fileID: 0}
+  BossHpText: {fileID: 0}
+  BossUIPanel: {fileID: 0}
+  BossUIDesign: {fileID: 0}
+  BossEffectTime: 0.5
 --- !u!223 &5065189069335960168
 Canvas:
   m_ObjectHideFlags: 0
@@ -12434,7 +12445,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -598.9996, y: 440.00006}
+  m_AnchoredPosition: {x: -598.9996, y: 439.99973}
   m_SizeDelta: {x: 100, y: 4700}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &9218664611403583356
@@ -14178,16 +14189,16 @@ RectTransform:
   - {fileID: 2159085474482405002}
   - {fileID: 1171770694562013112}
   - {fileID: 6257611001892925959}
+  - {fileID: 6248127575966534462}
+  - {fileID: 8094462823980197184}
   - {fileID: 5912484660181092852}
   - {fileID: 1718639394938867665}
   - {fileID: 2298975156501649980}
   - {fileID: 2256959218155383047}
-  - {fileID: 6248127575966534462}
   - {fileID: 5170712816899531037}
   - {fileID: 4584666247429931072}
   - {fileID: 3442244041899500254}
   - {fileID: 6686337855254624631}
-  - {fileID: 8094462823980197184}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

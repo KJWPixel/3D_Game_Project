@@ -8,7 +8,7 @@ public class DialogNPC : NPCCharacter
 {
     [Header("NPC 대화 옵션")]
     public InteractionType interactionType;
-    public QuestData QuestData;
+    public List<QuestData> questList = new List<QuestData>();
     public Transform TargetTrs;
 
     [Header("퀘스트마커")]
@@ -79,7 +79,6 @@ public class DialogNPC : NPCCharacter
             EventQuestMarker.SetActive(false);
         }
         
-
         if (NPCText != null)
         {
             NPCText.text = NpcName;
@@ -90,28 +89,20 @@ public class DialogNPC : NPCCharacter
             NPCMark.gameObject.SetActive(false);
         }
 
-        if(QuestData != null)
+        QuestData priorityQuest = GetPriorityQuest();
+
+        if (priorityQuest != null)
         {
-            switch (QuestData.QuestClass)
+            switch (priorityQuest.QuestClass)
             {
-                case QuestClass.Main:
-                    currentQuestMarker = MainQuestMarker;
-                    break;
-                case QuestClass.Sub:
-                    currentQuestMarker = SideQuestMarker;
-                    break;
-                case QuestClass.Repeat:
-                    currentQuestMarker = RepeatQuestMarker;
-                    break;
-                case QuestClass.Event:
-                    currentQuestMarker = EventQuestMarker;
-                    break;
-                default:
-                    break;
+                case QuestClass.Main: currentQuestMarker = MainQuestMarker; break;
+                case QuestClass.Sub: currentQuestMarker = SideQuestMarker; break;
+                case QuestClass.Repeat: currentQuestMarker = RepeatQuestMarker; break;
+                case QuestClass.Event: currentQuestMarker = EventQuestMarker; break;
             }
-        } 
-        
-        if(currentQuestMarker != null)
+        }
+
+        if (currentQuestMarker != null)
         {
             currentQuestMarker.SetActive(true);
             currentQuestMarker.transform.localPosition = new Vector3(0, 3, 0);
@@ -178,6 +169,33 @@ public class DialogNPC : NPCCharacter
         }
 
         currentQuestMarker.SetActive(active);
+    }
+
+    public QuestData GetPriorityQuest()
+    {
+        foreach (var quest in questList)
+        {
+            // 이미 완료한 퀘스트가 아니고, 현재 진행 중인 퀘스트도 아닐 때
+            if (!QuestManager.Instance.ClearQuests.Contains(quest.QuestId) &&
+                !QuestManager.Instance.ActiveQuests.Exists(q => q.Data.QuestId == quest.QuestId))
+            {
+                return quest; // 우선순위대로 첫 번째 퀘스트 반환
+            }
+        }
+        return null;
+    }
+
+    public QuestData GetAvailableQuest()
+    {
+        foreach (var quest in questList)
+        {
+            // 아직 클리어하지 않았고, 현재 진행 중도 아닌 퀘스트 반환
+            bool isCleared = QuestManager.Instance.ClearQuests.Contains(quest.QuestId);
+            bool isActive = QuestManager.Instance.ActiveQuests.Exists(q => q.Data.QuestId == quest.QuestId);
+
+            if (!isCleared && !isActive) return quest;
+        }
+        return null;
     }
 
     private void Interact()

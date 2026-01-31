@@ -1,30 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.PackageManager.Requests;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 
 public class QuestItemUI : MonoBehaviour
 {
-    [SerializeField] private TMP_Text QuestTitleText;
-    [SerializeField] private TMP_Text QuestExplanationText;
+    [SerializeField] private string UITABLE = "UI Table";
+    [SerializeField] private string QUESTTABLE = "QUEST Table";
+
+    [SerializeField] private TMP_Text QuestNameText;
+    [SerializeField] private TMP_Text QuestDescriptionText;
     [SerializeField] private Image QuestClassImage;
     [SerializeField] private Button QuestToolTipButton;
     
     private QuestInstance CurrentQuest;
     private QuestUI QuestUI;
 
-    public void Setup(QuestInstance _Quest, QuestUI _QuestUI)
+    public void Setup(QuestInstance quest, QuestUI questUI)
     {
-        CurrentQuest = _Quest;
-        QuestUI = _QuestUI;
+        CurrentQuest = quest;
+        QuestUI = questUI;
 
-        QuestTitleText.text = _Quest.Data.QuestName;
-        QuestExplanationText.text = _Quest.Data.QuestDescription;
+        QuestNameText.text = LocalizationSettings.StringDatabase.GetLocalizedString(QUESTTABLE, quest.Data.QuestName);
+        QuestDescriptionText.text = LocalizationSettings.StringDatabase.GetLocalizedString(QUESTTABLE, quest.Data.QuestDescription);
 
         //퀘스트 이미지는 퀘스트클래스에 따라 이미지 변경
-        switch (_Quest.Data.QuestClass)
+        switch (quest.Data.QuestClass)
         {
             case QuestClass.Main:
                 QuestClassImage.color = Color.cyan;

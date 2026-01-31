@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Localization.Settings;
 
 public class QuestToolTip : MonoBehaviour
 {
-    [SerializeField] private TMP_Text QuestTitleText;
+    [SerializeField] private string UITABLE = "UI Table";
+    [SerializeField] private string QUESTTABLE = "QUEST Table";
+
+    [SerializeField] private TMP_Text QuestNameText;
     [SerializeField] private TMP_Text QuestDescriptionText;
     [SerializeField] private TMP_Text QuestRewordText;
     [SerializeField] private Button TrackingButton;
@@ -21,14 +24,15 @@ public class QuestToolTip : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void Setup(QuestInstance _Quest, QuestUI _UI)
+    public void Setup(QuestInstance quest, QuestUI _UI)
     {
-        CurrentQuest = _Quest;
+        CurrentQuest = quest;
         QuestUI = _UI;
 
-        QuestTitleText.text = $"<color=orange>{_Quest.Data.QuestName}</color>";
-        QuestDescriptionText.text = _Quest.Data.QuestDescription;
-        QuestRewordText.text = $"<color=orange>보상: 골드 </color>" + _Quest.Data.GoldRewward + $"<color=orange> / 경험치 </color>" + _Quest.Data.ExpReward;
+        QuestNameText.text = $"<color=orange>{LocalizationSettings.StringDatabase.GetLocalizedString(QUESTTABLE, quest.Data.QuestName)}</color>";
+        QuestDescriptionText.text = LocalizationSettings.StringDatabase.GetLocalizedString(QUESTTABLE, quest.Data.QuestDescription);
+        QuestRewordText.text = $"<color=orange>{LocalizationSettings.StringDatabase.GetLocalizedString(UITABLE, "UI_GOLD")} </color>" + quest.Data.GoldRewward 
+            + $"<color=orange> / {LocalizationSettings.StringDatabase.GetLocalizedString(UITABLE, "UI_EXP")}</color>" + quest.Data.ExpReward;
     }
 
     public void OnClickClose()

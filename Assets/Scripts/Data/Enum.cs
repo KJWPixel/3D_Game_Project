@@ -147,7 +147,8 @@ public enum BossState
     PHASE_TRANSITION = 10,
     ATTACK_FLYSCREAM = 11,
     ATTACK_FLYFRAME = 12,
-    LAND = 13,    
+    LAND = 13,
+    SCREAM = 14,
 }
 
 

@@ -15,24 +15,44 @@ public class SaveManager : MonoBehaviour
     [System.Serializable]
     public class PlayerSaveData
     {
+        //기본 정보 및 스탯
         public string UserName;
         public int Level;
         public float CurrentExp;
+        public float MaxExp;
         public int SkillPoint;
         public int Gold;
 
         public float CurrentHp;
+        public float MaxHp;
         public float CurrentMp;
+        public float MaxMp;
+        public float CurrentStamina;
+        public float MaxStamina;
 
         public float Atk;
         public float Def;
         public float Critical;
-
+        public float CritDmg;
 
         public float PosX;
         public float PosY;
         public float PosZ;
     }
+
+    public class ItemSaveData
+    {
+        public int itemID;
+        public int Quantity;
+        public bool IsEquipped;
+    }
+
+    public class QuickSlotSaveData
+    {
+        public int index;
+    }
+
+
 
     private void Awake()
     {
@@ -47,25 +67,29 @@ public class SaveManager : MonoBehaviour
 
     private void SaveGame()
     {
-        PlayerSaveData playerSaveData = new PlayerSaveData();
+        PlayerSaveData playerData = new PlayerSaveData();
 
-        playerSaveData.UserName = PlayerStat.UserName;
-        playerSaveData.Level = PlayerStat.Level;
-        playerSaveData.CurrentExp = PlayerStat.CurrentExp;
-        playerSaveData.SkillPoint = PlayerStat.SkillPoint;
-        playerSaveData.Gold = PlayerStat.Gold;
-        playerSaveData.CurrentHp = PlayerStat.CurrentHp;
-        playerSaveData.CurrentMp = PlayerStat.CurrentMp;
-        playerSaveData.Atk = PlayerStat.Atk;
-        playerSaveData.Def = PlayerStat.Def;
-        playerSaveData.Critical = PlayerStat.Crit;
+        playerData.UserName = PlayerStat.UserName;
+        playerData.Level = PlayerStat.Level;
+        playerData.CurrentExp = PlayerStat.CurrentExp;
+        playerData.MaxExp = PlayerStat.MaxExp;
+        playerData.SkillPoint = PlayerStat.SkillPoint;
+        playerData.Gold = PlayerStat.Gold;
+        playerData.CurrentHp = PlayerStat.CurrentHp;
+        playerData.MaxHp = PlayerStat.MaxHp;
+        playerData.CurrentMp = PlayerStat.CurrentMp;
+        playerData.MaxMp = PlayerStat.MaxMp;
+        playerData.Atk = PlayerStat.Atk;
+        playerData.Def = PlayerStat.Def;
+        playerData.Critical = PlayerStat.Crit;
+        playerData.CritDmg = PlayerStat.CritDmg;
 
         Vector3 pos = PlayerStat.Instance.transform.position;
-        playerSaveData.PosX = pos.x;
-        playerSaveData.PosY = pos.y;
-        playerSaveData.PosZ = pos.z;
+        playerData.PosX = pos.x;
+        playerData.PosY = pos.y;
+        playerData.PosZ = pos.z;
 
-        string json = JsonUtility.ToJson(playerSaveData, true);
+        string json = JsonUtility.ToJson(playerData, true);
         File.WriteAllText(filePath, json);
         Debug.Log("게임 저장 완료");
     }
@@ -79,21 +103,21 @@ public class SaveManager : MonoBehaviour
         }
 
         string json = File.ReadAllText(filePath);
-        PlayerSaveData playerSaveData = JsonUtility.FromJson<PlayerSaveData>(json);
+        PlayerSaveData playerData = JsonUtility.FromJson<PlayerSaveData>(json);
 
         // 저장된 데이터 → PlayerStats에 적용
-        PlayerStat.UserName = playerSaveData.UserName;
-        PlayerStat.Level = playerSaveData.Level;
-        PlayerStat.SkillPoint = playerSaveData.SkillPoint;
-        PlayerStat.Gold = playerSaveData.Gold;
-        PlayerStat.CurrentExp = playerSaveData.CurrentExp;
-        PlayerStat.CurrentHp = playerSaveData.CurrentHp;
-        PlayerStat.CurrentMp = playerSaveData.CurrentMp;
-        PlayerStat.Atk = playerSaveData.Atk;
-        PlayerStat.Def = playerSaveData.Def;
-        PlayerStat.Crit = playerSaveData.Critical;
+        PlayerStat.UserName = playerData.UserName;
+        PlayerStat.Level = playerData.Level;
+        PlayerStat.SkillPoint = playerData.SkillPoint;
+        PlayerStat.Gold = playerData.Gold;
+        PlayerStat.CurrentExp = playerData.CurrentExp;
+        PlayerStat.CurrentHp = playerData.CurrentHp;
+        PlayerStat.CurrentMp = playerData.CurrentMp;
+        PlayerStat.Atk = playerData.Atk;
+        PlayerStat.Def = playerData.Def;
+        PlayerStat.Crit = playerData.Critical;
 
-        Vector3 loadPos = new Vector3(playerSaveData.PosX, playerSaveData.PosY, playerSaveData.PosZ);
+        Vector3 loadPos = new Vector3(playerData.PosX, playerData.PosY, playerData.PosZ);
         //PlayerStat.Instance.transform.position = loadPos;
 
         PlayerStat.Instance.transform.position = CurrentTrsSave.transform.position;

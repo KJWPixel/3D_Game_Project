@@ -55,6 +55,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-ko
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b038935c0e2516443bc706a930a7ef5a
+    m_Address: ENEMY Table_ko
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b874ef8ca0b87264c8197e23caf59ebd
     m_Address: QUEST Table_ko
     m_ReadOnly: 1

@@ -150,6 +150,26 @@ MonoBehaviour:
     m_Localized: Equip to Slot
     m_Metadata:
       m_Items: []
+  - m_Id: 10139863493259264
+    m_Localized: Skill
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10140402935279616
+    m_Localized: 'SP:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10146753392553984
+    m_Localized: QuestClear
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10147014232125440
+    m_Localized: Quest Reword
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10154587823943680
+    m_Localized: EXP
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.AddressableAssets.HostingServices;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Quest/New Quest")]
@@ -7,9 +8,10 @@ public class QuestData : ScriptableObject
 {
     [Header("Äù½ºÆ® Á¤º¸")]
     [SerializeField] private int questId;
-    [SerializeField] private string questName;
-    [SerializeField] private string questTip;
-    [SerializeField] private string questDescription;
+    [SerializeField] private string questNameKey;
+    [SerializeField] private string questDescriptionKey;
+    [SerializeField] private string questTipKey;
+    [SerializeField] private string questClassKey;
     [SerializeField] private int targetId;
     [SerializeField] private int amount;
     [SerializeField] private int questLevel;
@@ -25,8 +27,10 @@ public class QuestData : ScriptableObject
     [SerializeField] private ItemData itemReward;
 
     public int QuestId => questId;
-    public string QuestName => questName;
-    public string QuestDescription => questDescription;
+    public string QuestName => questNameKey;
+    public string QuestDescription => questDescriptionKey;
+    public string QuestTip => questTipKey;   
+    public string QuestClassKey => questClassKey;
     public int TargetId => targetId;
     public int Amount => amount;
     public int QuestLevel => questLevel;

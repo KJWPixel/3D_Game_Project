@@ -47,6 +47,11 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c911b85e8dbe51840837039e1dc45812
+    m_Address: Assets/Data/Tables/Language/ENEMY Table Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: cc030497c9dd368438148c15ef8c837e
     m_Address: Assets/Language/SKIl Table Shared Data.asset
     m_ReadOnly: 1

@@ -110,7 +110,7 @@ MonoBehaviour:
   atk: 30
   def: 15
   attackRange: 0
-  gainExp: 30
+  gainExp: 850
   IsIdle: 0
   IsWalk: 0
   IsRunning: 0
@@ -160,7 +160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DropItemPrefab: {fileID: 4690846571101904909, guid: 9a10fa2c14be9b94c90e257bf1680c04, type: 3}
   DropItems:
-  - ItemData: {fileID: 11400000, guid: 8d4bc0d871a94f04aa9383f5e81fe43b, type: 2}
+  - ItemData: {fileID: 0}
     DropProbability: 0.3
 --- !u!136 &6493194886934575626
 CapsuleCollider:

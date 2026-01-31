@@ -13,13 +13,15 @@ MonoBehaviour:
   m_Name: NPCTolkQuest
   m_EditorClassIdentifier: 
   questId: 1
-  questName: "NPC0001\uACFC \uB300\uD654\uD558\uAE30"
-  questTip: "NPC0001\uACFC \uB300\uD654"
-  questDescription: "NPC0001\uACFC \uB300\uD654"
+  questNameKey: QUEST_NAME_0001
+  questDescriptionKey: 
+  questTipKey: 
+  questClassKey: QUEST_MAIN
   targetId: 1
   amount: 1
   questLevel: 0
   prerequisiteQuest: {fileID: 0}
+  targetArea: {fileID: 0}
   questClassification: 0
   questClass: 0
   questCondition: 0

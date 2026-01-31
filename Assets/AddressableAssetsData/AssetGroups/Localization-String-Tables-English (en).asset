@@ -36,6 +36,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-en
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7d970156a6301ca4c9e6e437a10743d0
+    m_Address: ENEMY Table_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 83f0b1ea4733ca444a6cd0bb7806b9fd
     m_Address: LOGIN Table_en
     m_ReadOnly: 1

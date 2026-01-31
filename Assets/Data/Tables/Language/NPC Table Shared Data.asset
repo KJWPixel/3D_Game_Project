@@ -67,6 +67,10 @@ MonoBehaviour:
     m_Key: NPC_Smith_Tolk1
     m_Metadata:
       m_Items: []
+  - m_Id: 8629944042532864
+    m_Key: NPC_Quest_Prerequisite_NotMet
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

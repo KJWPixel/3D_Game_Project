@@ -153,7 +153,7 @@ MonoBehaviour:
   atk: 15
   def: 0
   attackRange: 0
-  gainExp: 15
+  gainExp: 850
   IsIdle: 0
   IsWalk: 0
   IsRunning: 0

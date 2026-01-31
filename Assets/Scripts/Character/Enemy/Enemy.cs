@@ -236,7 +236,8 @@ public class Enemy : EnemyCharacter
         // 보상 로직 
         QuestManager.Instance.UpdateQuestPrecess(QuestClassification.Kill, id, 1);
         OnDied?.Invoke(gameObject);
-        PlayerStat.AddExp(GainExp);
+        PlayerStat.AddGold(GainGold);
+        PlayerStat.AddExp(GainExp); 
         ItemDrop.ItemsDrop();
 
         // 즉시 삭제

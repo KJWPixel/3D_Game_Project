@@ -232,7 +232,9 @@ public class EnemyBoss : EnemyCharacter
 
         if(CurHp <= 0) { IsDie = true; Die(); }
 
-        if (CurHp > 0) ShowDamageText(fianldamage, isCritical);
+        UIManager.Instance.UpdateBossHealth(curHp, maxHp);
+
+        ShowDamageText(fianldamage, isCritical);
     }
 
     public override void Chase()

@@ -9,6 +9,8 @@ public class BossCameraControl : MonoBehaviour
     public CinemachineVirtualCamera bossCam;
     public float waitTime = 3f; // 몇 초 동안 보여줄지 설정
 
+    [SerializeField] private GameObject invisableWall;
+
     private EnemyBoss boss;
 
     private void Start()
@@ -31,15 +33,20 @@ public class BossCameraControl : MonoBehaviour
 
             // 일정 시간 후 다시 원래대로 돌려놓는 함수 실행
             Invoke("ReturnCamera", waitTime);
-
+            boss.ChangeState(BossState.SCREAM); //(int) 4
             // 한 번만 발동하도록 트리거를 끕니다.
             GetComponent<Collider>().enabled = false;
         }
     }
 
-    void ReturnCamera()
+    private void ReturnCamera()
     {
         // 우선순위를 낮추면 메인 카메라는 다시 원래(플레이어) 카메라를 쳐다봅니다.
         bossCam.Priority = 5;
+    }
+
+    private void InvisableWallActive()
+    {
+        
     }
 }

@@ -1,46 +1,48 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 
 public class QuestGuideUI : MonoBehaviour
 {
+    [SerializeField] private string QUESTTABLE = "QUEST Table";
+
     [SerializeField] TMP_Text QuestDescriptionText;
     [SerializeField] TMP_Text QuestProgress;
     [SerializeField] TMP_Text QuestDistance;
 
-    private QuestInstance CurrentQuest;
+    private QuestInstance currentQuest;
     private Transform TargetNPC;
 
-    public void Setup(QuestInstance _Quest)
+    public void Setup(QuestInstance quest)
     {
-        CurrentQuest = _Quest;
+        currentQuest = quest;
 
-        QuestDescriptionText.text = _Quest.Data.QuestDescription;
+        QuestDescriptionText.text = LocalizationSettings.StringDatabase.GetLocalizedString(QUESTTABLE, currentQuest.Data.QuestDescription);
 
-        UpdateProgress(CurrentQuest);
-        UpdateDistance(CurrentQuest);
+        UpdateProgress(currentQuest);
+        UpdateDistance(currentQuest);
 
     }
 
     private void Update()
     {
-        if (CurrentQuest == null)
+        if (currentQuest == null)
         {
             ClearText();
             return;
         }
 
-        if (CurrentQuest.Data.QuestCondition == QuestCondition.Completed || QuestManager.Instance.ClearQuests.Contains(CurrentQuest.Data.QuestId))
+        if (currentQuest.Data.QuestCondition == QuestCondition.Completed || QuestManager.Instance.ClearQuests.Contains(currentQuest.Data.QuestId))
         {
             ClearText();
             gameObject.SetActive(false);
             return;
         }
 
-        UpdateProgress(CurrentQuest);
-        UpdateDistance(CurrentQuest);
+        UpdateProgress(currentQuest);
+        UpdateDistance(currentQuest);
     } 
 
     private void UpdateProgress(QuestInstance _Quest)
@@ -48,10 +50,10 @@ public class QuestGuideUI : MonoBehaviour
         switch (_Quest.Data.QuestClassification)
         {
             case QuestClassification.Kill:
-                QuestProgress.text = $"{CurrentQuest.CurrentAmount} / {_Quest.Data.Amount}";
+                QuestProgress.text = $"{currentQuest.CurrentAmount} / {_Quest.Data.Amount}";
                 break;
             case QuestClassification.Collect:
-                QuestProgress.text = $"{CurrentQuest.CurrentAmount} / {_Quest.Data.Amount}";
+                QuestProgress.text = $"{currentQuest.CurrentAmount} / {_Quest.Data.Amount}";
                 break;
             default:
                 QuestProgress.text = string.Empty;
@@ -73,13 +75,13 @@ public class QuestGuideUI : MonoBehaviour
 
     private void UpdateDistance(QuestInstance quest)
     {
-        if (CurrentQuest.Data.QuestClassification == QuestClassification.NpcTolk)
+        if (currentQuest.Data.QuestClassification == QuestClassification.NpcTolk)
         {
             QuestProgress.text = string.Empty;
             if (TargetNPC == null) return;
         }
 
-        if(CurrentQuest.Data.QuestClassification == QuestClassification.Kill)
+        if(currentQuest.Data.QuestClassification == QuestClassification.Kill)
         {
             QuestProgress.text = string.Empty;
             if(quest.Data.TargetArea == null) return;
