@@ -138,7 +138,7 @@ public enum BossState
     IDLE = 1, 
     CHASE = 2,
     DEAD = 3,
-    GETHIT = 4,
+    SCREAM = 4,
     ATTACK = 5,
     ATTACK_MOUTH = 6,
     ATTACK_HAND = 7,
@@ -148,7 +148,7 @@ public enum BossState
     ATTACK_FLYSCREAM = 11,
     ATTACK_FLYFRAME = 12,
     LAND = 13,
-    SCREAM = 14,
+    GETHIT = 14,
 }
 
 

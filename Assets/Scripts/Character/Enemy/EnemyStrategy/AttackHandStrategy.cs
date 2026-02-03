@@ -34,6 +34,9 @@ public class AttackHandStrategy : IBossAttack
 
         yield return new WaitUntil(() => isEventTriggered);
 
+        AudioClip clip = boss.GetAttackHandClip();
+        SoundManager.Instance.PlayBossSFX(clip);
+
         // 손 위치에 맞게 약간 옆으로 오프셋 판정
         Vector3 handPos = boss.transform.position + (boss.transform.forward * 7f);
         Collider[] cols = Physics.OverlapSphere(handPos, 5f, boss.PlayerLayer);

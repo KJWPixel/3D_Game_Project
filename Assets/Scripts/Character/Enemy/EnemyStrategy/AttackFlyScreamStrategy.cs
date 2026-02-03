@@ -59,6 +59,9 @@ public class AttackFlyScreamStrategy : IBossAttack
         // 4. 애니메이션 이벤트 대기 (공중에서 포효하는 애니메이션 타이밍)
         yield return new WaitForSeconds(indicatorDuration);
 
+        AudioClip clip = boss.GetAttackScreamClip();
+        SoundManager.Instance.PlayBossSFX(clip);
+
         // 5. 실제 타격 판정
         foreach (var pos in targetPositions)
         {

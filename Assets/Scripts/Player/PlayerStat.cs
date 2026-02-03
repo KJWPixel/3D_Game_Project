@@ -366,6 +366,7 @@ public class PlayerStat : MonoBehaviour
     public void Die()
     {
         playerAniController.PlayerDieAnimation(true);
+        UIManager.Instance.ShowResurrectionPanel();
         playerController.OnPlayerDie();
     }
 

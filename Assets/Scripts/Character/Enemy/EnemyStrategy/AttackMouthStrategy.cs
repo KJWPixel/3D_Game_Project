@@ -23,6 +23,9 @@ public class AttackMouthStrategy : IBossAttack
         // 근접 공격은 인디케이터 없이 빠른 반응 속도 
         yield return new WaitUntil(() => isEventTriggered);
 
+        AudioClip clip = boss.GetAttackMouthClip();
+        SoundManager.Instance.PlayBossSFX(clip);
+
         //Gizmo 
         Vector3 hitPos = boss.transform.position + boss.transform.forward * 2f;
         float hitRadius = 7.0f;

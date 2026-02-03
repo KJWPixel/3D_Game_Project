@@ -50,6 +50,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] public GameObject ChoiceYes;
     [SerializeField] public GameObject ChoiceNo;
 
+    [Header("부활 UI")]
+    [SerializeField] private GameObject ResurrectionPanel;
+
     [Header("UI 버튼그룹")]
     [SerializeField] private Button InventroyButton;
     [SerializeField] private Button SkillTreeButton;
@@ -177,6 +180,7 @@ public class UIManager : MonoBehaviour
         QuestPanel.SetActive(false);
         QuestToolTipPanel.SetActive(false);
         QuestGuidePanel.SetActive(false);
+        ResurrectionPanel.SetActive(false);
     }
 
     private void Update()
@@ -322,27 +326,30 @@ public class UIManager : MonoBehaviour
         return null;
     }
 
-    //Stack을 이용한 Pop
-    #region
-    //public void OpnePopup()
-    //{
-    //    GameObject Panels = Instantiate(Panel, Parent);
-    //    panelStack.Push(Panels);
-    //}
+    public void ShowResurrectionPanel()
+    {
+        ResurrectionPanel.SetActive(true);
+        Cursor.lockState = CursorLockMode.None; // 커서 활성화
+        Cursor.visible = true;
+    }
 
-    //public void ClosePopup()
-    //{
-    //    if(Input.GetKeyDown(KeyCode.Escape))
-    //    {
-    //        if(panelStack.Count == 0)
-    //        {
-    //            return;
-    //        }
-    //        GameObject ClosePanel = panelStack.Pop();
-    //        Destroy(ClosePanel);
-    //    }
-    //}
-    #endregion 
+    public void HideResurrectionPanel()
+    {
+        ResurrectionPanel.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked; // 커서 다시 잠금
+        Cursor.visible = false;
+    }
+
+    public void OnClickResurrection()
+    {
+        // PlayerController를 찾아 부활 루틴 시작
+        PlayerController player = FindObjectOfType<PlayerController>();
+        if (player != null)
+        {
+            player.StartResurrection();
+            HideResurrectionPanel();    // 패널 닫기
+        }
+    }
 
     public void ShowBossHealth(string name, float current, float max)
     {
@@ -352,6 +359,11 @@ public class UIManager : MonoBehaviour
     public void UpdateBossHealth(float current, float max)
     {
         uiStatus.UpdateBossHp(current, max);
+    }
+
+    public void HideBossHealth()
+    {
+        uiStatus.HideBossUI();
     }
 
 }

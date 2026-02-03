@@ -40,6 +40,9 @@ public class AttackFlyFlameStrategy : IBossAttack
             EffectManager.Instance.Spawn(flamePrefab, spawnPos, Quaternion.identity, Vector3.one, 2.0f);
         }
 
+        AudioClip clip = boss.GetAttackFlyFrameClip();
+        SoundManager.Instance.PlayBossSFX(clip);
+
         // 5. 타격 판정 (해당 좌표 중심 반지름 50 범위 내 플레이어)
         Collider[] cols = Physics.OverlapSphere(spawnPos, attackRadius, boss.PlayerLayer);
         foreach (var col in cols)

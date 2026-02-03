@@ -144,7 +144,11 @@ public class UI_Status : MonoBehaviour
         hpEffectCoroutine = StartCoroutine(SmoothHpEffect(targetFill));
     }
 
-    public void HideBossUI() => BossUIDesign.SetActive(false);
+    public void HideBossUI()
+    {
+        BossUIPanel.SetActive(false);
+        BossUIDesign.SetActive(false);
+    }
 
     private IEnumerator SmoothHpEffect(float targetFill)
     {

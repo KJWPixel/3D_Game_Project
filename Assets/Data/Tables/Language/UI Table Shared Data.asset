@@ -167,6 +167,18 @@ MonoBehaviour:
     m_Key: UI_EXP
     m_Metadata:
       m_Items: []
+  - m_Id: 11376730805157888
+    m_Key: UI_RESURRECTION
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11376917636235264
+    m_Key: UI_RESURRECTION_DESC
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11377235023413248
+    m_Key: UI_RESURRECTION_VILLAGE
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

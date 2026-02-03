@@ -31,6 +31,24 @@ public class EnemyBoss : EnemyCharacter
     public GameObject GetFrameExplosion() => FrameAttackPrefab;
     public GameObject GetFlyFreamExplosion() => FlyFreamAttackPrefab;
 
+    [Header("Boss Audio Clip")]
+    [SerializeField] private AudioClip BossBGMClip;
+    [SerializeField] private AudioClip AttackMouthClip;
+    [SerializeField] private AudioClip AttackHandClip;
+    [SerializeField] private AudioClip AttackFrameClip;
+    [SerializeField] private AudioClip AttackScreamClip; // AttackFlyScream과 동일 클립 사용
+    [SerializeField] private AudioClip AttackFlyFrameClip;
+    [SerializeField] private AudioClip TakeOffClip;
+    [SerializeField] private AudioClip DieClip;
+    [SerializeField] private AudioClip ScreamClip;
+    public AudioClip GetBossBGM() => BossBGMClip;
+    public AudioClip GetAttackMouthClip() => AttackMouthClip;
+    public AudioClip GetAttackHandClip() => AttackHandClip;
+    public AudioClip GetAttackFrameClip() => AttackFrameClip;
+    public AudioClip GetAttackScreamClip() => AttackScreamClip;
+    public AudioClip GetAttackFlyFrameClip() => AttackFlyFrameClip;
+    
+
     [Header("Gizmo Debug")]
     public bool ShowDebugGizmo = true;
     private Color gizmoColor = Color.red;
@@ -107,7 +125,9 @@ public class EnemyBoss : EnemyCharacter
         if(isPhase2Active &&  CurrentState != BossState.PHASE_TRANSITION)
         {
             flyTimer += Time.deltaTime;
-            if(flyTimer >= flyCoolTime)
+
+            // 이륙 조건: 타이머 완료 AND 현재 다른 행동(공격 등)을 하고 있지 않음
+            if (flyTimer >= flyCoolTime && !isActionRunning)
             {
                 StartCoroutine(ProcessTakeOff());
             }
@@ -176,7 +196,7 @@ public class EnemyBoss : EnemyCharacter
 
         // 이륙 상태로 전환
         ChangeState(BossState.PHASE_TRANSITION); // Take Off 애니메이션 실행
-        yield return new WaitForSeconds(10.0f); // 이륙 애니메이션 시간
+        yield return new WaitForSeconds(8.0f); // 이륙 애니메이션 시간
 
         // 이제 StartRandomAttack이 실행될 때 공중 공격을 뽑도록 설정
         foreach (var attackStrategy in aerialAttacks)
@@ -210,6 +230,30 @@ public class EnemyBoss : EnemyCharacter
     public void OnBossAttackHit()
     {
         currentRunningStrategy?.OnEffectEvent();
+    }
+
+    public void ResetBoss()
+    {
+        // 1. 상태 및 변수 초기화
+        StopAllCoroutines(); // 공격 중단
+        isActionRunning = false;
+        isPhase2Active = false;
+        hasPhaseChanged = false;
+        flyTimer = 0f;
+        IsDie = false;
+
+        // 2. 능력치 초기화
+        CurHp = MaxHp;
+        ChangeState(BossState.IDLE);
+
+        // 3. 위치 초기화
+        transform.position = new Vector3(345f, 30f, 90f);
+
+        // 4. 사운드 및 UI 정리
+        SoundManager.Instance.ApplyInGameBGM();
+        UIManager.Instance.HideBossHealth();
+
+        Debug.Log("보스가 초기화되었습니다.");
     }
 
     public override void TakeDamage(float fianldamage, bool isCritical)
@@ -268,7 +312,9 @@ public class EnemyBoss : EnemyCharacter
     public void Die()
     {
         ChangeState(BossState.DEAD);
-        //GetComponent<Collider>().enabled = false;
+
+        SoundManager.Instance.ApplyInGameBGM();
+
         Destroy(gameObject, 10.0f);
     }
 
@@ -301,6 +347,16 @@ public class EnemyBoss : EnemyCharacter
             DamageText.SetDamageText(damage, isCritical);
         }
     }
+
+    public void TriggerScream()
+    {
+        if(animator != null)
+        {
+            animator.SetTrigger("Scream");
+            SoundManager.Instance.PlayBossSFX(ScreamClip);
+        }
+    }
+ 
 
     public void SetGizmoAction(System.Action action)
     {

@@ -27,9 +27,10 @@ public class PlayerController : MonoBehaviour
     public float VerticalVelocity = 0f;
 
     [Header("플레이어 동작 체크")]
-    [SerializeField] public bool IsRunning = false;
-    [SerializeField] public bool IsDashing = false;
-    [SerializeField] public bool IsGround = false;
+    [SerializeField] private bool IsRunning = false;
+    [SerializeField] private bool IsDashing = false;
+    [SerializeField] private bool IsGround = false;
+    [SerializeField] private bool isResurrection = false;
 
     [Header("플레이어 현재 속도측정")]
     [SerializeField] public Vector3 VelocityValue = Vector3.zero;
@@ -284,12 +285,18 @@ public class PlayerController : MonoBehaviour
         SetState(PlayerState.Idle); // 상태를 Idle로 고정
         x = 0; z = 0;
         VelocityValue = Vector3.zero;
+    }
 
+    public void StartResurrection()
+    {
+        if (isResurrection) return;
         StartCoroutine(ResurrectionRoutine());
     }
 
     IEnumerator ResurrectionRoutine()
     {
+        isResurrection = true;
+
         // 1. 애니메이션이 재생될 시간을 기다림 (예: 3초)
         yield return new WaitForSeconds(3.0f);
 
@@ -305,6 +312,21 @@ public class PlayerController : MonoBehaviour
 
         // 3. 스탯 복구 및 애니메이션 리셋
         PlayerStat.Resurrect();
+
+        EnemyBoss boss = FindObjectOfType<EnemyBoss>();
+        if (boss != null)
+        {
+            boss.ResetBoss();
+
+            // 카메라 트리거와 벽도 리셋
+            BossCameraControl trigger = boss.GetComponentInChildren<BossCameraControl>();
+            if (trigger != null)
+            {
+                trigger.SetEncounterActive(true);
+            }
+        }
+
+        isResurrection = false;
 
         Debug.Log("플레이어가 부활했습니다.");
     }

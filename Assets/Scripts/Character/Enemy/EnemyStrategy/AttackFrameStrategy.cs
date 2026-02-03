@@ -24,6 +24,9 @@ public class AttackFrameStrategy : IBossAttack
 
         yield return new WaitUntil(() => isEventTriggered);
 
+        AudioClip clip = boss.GetAttackFrameClip();
+        SoundManager.Instance.PlayBossSFX(clip);
+
         // 3. 실제 타격 판정
         // 먼저 사거리 내에 있는 모든 콜라이더를 가져옵니다.
         Collider[] cols = Physics.OverlapSphere(boss.transform.position, attackRange, boss.PlayerLayer);

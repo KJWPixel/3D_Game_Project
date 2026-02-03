@@ -60,9 +60,12 @@ public class AttackScreamStrategy : IBossAttack
                 Gizmos.DrawWireSphere(pos, attackRadius); // 실제 판정 크기인 6m와 일치시킴
             }
         });
-        // 4. 애니메이션 이벤트 대기
 
+        // 4. 애니메이션 이벤트 대
         yield return new WaitUntil(() => isEventTriggered);
+
+        AudioClip clip = boss.GetAttackScreamClip();
+        SoundManager.Instance.PlayBossSFX(clip);
 
         // 5. 폭발 및 실제 타격 판정
         foreach (var pos in targetPositions)

@@ -170,6 +170,18 @@ MonoBehaviour:
     m_Localized: EXP
     m_Metadata:
       m_Items: []
+  - m_Id: 11376730805157888
+    m_Localized: Resurrection
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11376917636235264
+    m_Localized: The character has died.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11377235023413248
+    m_Localized: Resurrection in town
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

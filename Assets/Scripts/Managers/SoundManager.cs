@@ -19,6 +19,7 @@ public class SoundManager : MonoBehaviour
 
     [Header("SFX")]
     [SerializeField] private AudioSource sfxAudioSource;
+    [SerializeField] private AudioSource sfxBossAudioSource;
 
     [Header("SFX Clip")]
     [SerializeField] private AudioClip walkingClip;
@@ -200,6 +201,26 @@ public class SoundManager : MonoBehaviour
     {
         if (clip == null) return;
         AudioSource.PlayClipAtPoint(clip, position, volume);
+    }
+
+    public void ChangeBGM(AudioClip bossBgmClip)
+    {
+        if (bossBgmClip == null) return;
+        PlayBGM(bossBgmClip); // 기존 로직 활용
+    }
+
+    // 보스 전용 SFX 재생 함수
+    public void PlayBossSFX(AudioClip clip, float volume = 1f)
+    {
+        if (clip == null || sfxBossAudioSource == null) return;
+
+        
+        sfxBossAudioSource.PlayOneShot(clip, volume);
+    }
+
+    public void ApplyInGameBGM()
+    {
+        PlayBGM(inGameBGMClip);
     }
 
     // ===볼륨 적용===

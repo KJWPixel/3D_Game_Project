@@ -28,12 +28,18 @@ public class BossCameraControl : MonoBehaviour
 
             if (boss != null)
             {
+                // 1. UI 표시
                 UIManager.Instance.ShowBossHealth(boss.Name, boss.CurHp, boss.MaxHp);
+
+                // 2. BGM 변경
+                SoundManager.Instance.ChangeBGM(boss.GetBossBGM());
+
+                // 3. 보스 Scream 및 사운드 실행
+                boss.TriggerScream();
             }
 
             // 일정 시간 후 다시 원래대로 돌려놓는 함수 실행
             Invoke("ReturnCamera", waitTime);
-            boss.ChangeState(BossState.SCREAM); //(int) 4
             // 한 번만 발동하도록 트리거를 끕니다.
             GetComponent<Collider>().enabled = false;
         }
@@ -48,5 +54,20 @@ public class BossCameraControl : MonoBehaviour
     private void InvisableWallActive()
     {
         
+    }
+
+    public void SetEncounterActive(bool active)
+    {
+        GetComponent<Collider>().enabled = active;
+
+        if(invisableWall != null)
+        {
+            invisableWall.SetActive(!active); // 진행중이면 키고 아니면 초기화 시엔 꺼짐
+        }
+    }
+
+    public void OnBossDefeated()
+    {
+        invisableWall.SetActive(false);
     }
 }
