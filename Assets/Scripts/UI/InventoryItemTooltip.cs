@@ -8,6 +8,9 @@ using UnityEngine.UI;
 
 public class InventoryItemTooltip : MonoBehaviour
 {
+    private const string UITable = "UI Table";
+    private const string ITEMTable = "ITEM Table";
+
     //아이템이름, 아이템등급 프레임, 아이템아아콘, 아이템수량, 아이템설명, 아이템에 따른 버튼 활성화
     [SerializeField] private TMP_Text ItemName;
     [SerializeField] private TMP_Text ItemQuantity;
@@ -17,17 +20,9 @@ public class InventoryItemTooltip : MonoBehaviour
     [SerializeField] private GameObject Button;
     private Button UseButton;
 
-    private const string UITable = "UI Table";
-    private const string ITEMTable = "ITEM Table";
-
-    private void Awake()
-    {
-        UseButton = Button.GetComponent<Button>();
-    }
-
-
     [Header("아이템 등급 컬러")]
-    [SerializeField] private Color[] GradeColors =
+    [SerializeField]
+    private Color[] GradeColors =
     {
         Color.white,
         Color.green,
@@ -35,6 +30,20 @@ public class InventoryItemTooltip : MonoBehaviour
         new Color(0.6f, 0f, 1f),
         Color.yellow,
     };
+
+
+    private void Awake()
+    {
+        UseButton = Button.GetComponent<Button>();
+        gameObject.SetActive(false);
+    }
+
+    private void OnDisable()
+    {
+        gameObject.SetActive(false);
+    }
+
+
 
     public void ItemTooltipSetup(InventoryItem inventoryItem)
     {

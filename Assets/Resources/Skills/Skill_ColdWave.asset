@@ -10,37 +10,38 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b1aabd643963f6347b205db3c9ff671b, type: 3}
-  m_Name: Skill_MeteorFall
+  m_Name: Skill_ColdWave
   m_EditorClassIdentifier: 
-  SkillID: 11
-  SkillKey: Skill_MeteorFall_Name
+  ID: 9
+  SkillKey: Skill_ColdWave_Name
   SkillDescriptionKey: Skill_MultiHit_Desc
   SkillRequirementsKey: Skill_Attack_Requirements_Desc
-  SkillName: "\uC720\uC131 \uB099\uD558"
-  Icon: {fileID: 21300000, guid: cc16da6188962544787f7f3b5c7f499f, type: 3}
-  Cost: 70
-  CastTime: 5
-  Cooldown: 30
-  CastPrefabDuration: 5
+  SkillName: "\uD55C\uD30C"
+  Icon: {fileID: 21300000, guid: 7e920e169e7d9d24cbe2fac1f4424006, type: 3}
+  Cost: 30
+  CastTime: 1.5
+  Cooldown: 3
+  CastPrefabDuration: 2
   HitPrefabDuration: 1
-  CastEffectPrefab: {fileID: 7957833072274404953, guid: 3355f6bfa6db8b24281b827de929694c, type: 3}
-  HitEffectPrefab: {fileID: 1758473627833946668, guid: 9b21333b068a5084ba09535839bee3c8, type: 3}
-  CastSFX: {fileID: 8300000, guid: 101146547cb2c9448aeb4de4310a4f10, type: 3}
+  CastEffectPrefab: {fileID: 4932088507883938021, guid: 0e5709a7ddb77924090c112cf73bb98a, type: 3}
+  HitEffectPrefab: {fileID: 4924508274929071776, guid: 0edef91621bb6b34384ccc9dbb98729c, type: 3}
+  CastSFX: {fileID: 8300000, guid: 03455008a18a09442aa725030c02e7c3, type: 3}
   HitSFX: {fileID: 0}
   Effects:
   - EffectType: 1
-    Power: 200
-    HitCount: 15
+    Power: 150
+    HitCount: 5
     Duration: 0
-    Distance: 10
+    Distance: 3
     Radius: 0
-    Length: 15
-    Width: 15
+    Length: 10
+    Width: 10
     Angle: 0
     DelayTime: 0.3
-    MaxTarget: 15
-  RequireLevel: 25
-  RequireSP: 30
+    MaxTarget: 10
+  RequireLevel: 10
+  RequireSP: 10
   PrerequisiteSkills: []
+  CurLevel: 0
   MaxLevel: 1
   AnimationName: IsLineAreaDamageSkill

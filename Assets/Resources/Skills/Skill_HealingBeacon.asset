@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1aabd643963f6347b205db3c9ff671b, type: 3}
   m_Name: Skill_HealingBeacon
   m_EditorClassIdentifier: 
-  SkillID: 14
+  ID: 14
   SkillKey: Skill_HealingBeacon_Name
   SkillDescriptionKey: Skill_HealBuff_Desc
   SkillRequirementsKey: Skill_Heal_Requirements_Desc
@@ -43,5 +43,6 @@ MonoBehaviour:
   RequireSP: 15
   PrerequisiteSkills:
   - {fileID: 11400000, guid: 467740ddf6fb43d4fb516f21a06de478, type: 2}
+  CurLevel: 0
   MaxLevel: 1
   AnimationName: IsHeal

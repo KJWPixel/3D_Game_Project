@@ -60,7 +60,7 @@ public class TitleUIController : BaseUI
         //    uiStack.Peek().gameObject.SetActive(false);
         //}
         uiStack.Push(_Ui);
-        _Ui.Opne();
+        _Ui.Open();
         SoundManager.Instance.PlaySFX(SFXType.ButtonClick);
     }
 

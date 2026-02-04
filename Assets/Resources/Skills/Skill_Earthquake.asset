@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1aabd643963f6347b205db3c9ff671b, type: 3}
   m_Name: Skill_Earthquake
   m_EditorClassIdentifier: 
-  SkillID: 6
+  ID: 6
   SkillKey: Skill_Earthquake_Name
   SkillDescriptionKey: Skill_SingleHit_Desc
   SkillRequirementsKey: Skill_Attack_Requirements_Desc
@@ -42,5 +42,6 @@ MonoBehaviour:
   RequireLevel: 5
   RequireSP: 10
   PrerequisiteSkills: []
+  CurLevel: 0
   MaxLevel: 1
   AnimationName: IsDistanceDamageSkill

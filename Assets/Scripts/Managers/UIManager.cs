@@ -53,6 +53,9 @@ public class UIManager : MonoBehaviour
     [Header("부활 UI")]
     [SerializeField] private GameObject ResurrectionPanel;
 
+    [Header("알림 UI")]
+    [SerializeField] private UI_Info uiInfo;
+
     [Header("UI 버튼그룹")]
     [SerializeField] private Button InventroyButton;
     [SerializeField] private Button SkillTreeButton;
@@ -100,6 +103,10 @@ public class UIManager : MonoBehaviour
     {
         isMenuPanel = !isMenuPanel;
         MenuPanel.SetActive(isMenuPanel);
+
+        Time.timeScale = isMenuPanel ? 0f : 1f;
+
+        RefreshCursor();
         SoundManager.Instance.PlaySFX(SFXType.OptionOpen);
     }
 
@@ -107,13 +114,16 @@ public class UIManager : MonoBehaviour
     {
         isOptionPanel = !isOptionPanel;
         OptionPanel.SetActive(isOptionPanel);
+        RefreshCursor();
         SoundManager.Instance.PlaySFX(SFXType.OptionOpen);
     }
 
     private void OnToggleInventory()
     {
         IsInventoryOpen = !IsInventoryOpen;
-        InventoryPanel.SetActive(IsInventoryOpen);      
+        InventoryPanel.SetActive(IsInventoryOpen);
+        RefreshCursor();
+
         if (IsInventoryOpen)
         {
             InventoryUI.Instance.RefreshUI();
@@ -129,6 +139,7 @@ public class UIManager : MonoBehaviour
     {
         IsStatusOpen = !IsStatusOpen;
         StatusPanel.SetActive(IsStatusOpen);
+
         if(IsStatusOpen)
         {
             StatusPanel.GetComponent<UIStatusPanel>().UpdateStatusUI(PlayerStat.Instance);
@@ -144,7 +155,9 @@ public class UIManager : MonoBehaviour
     {
         isSkillTree = !isSkillTree;
         skillTree.SetActive(isSkillTree);
-        if(isSkillTree)
+        RefreshCursor();
+
+        if (isSkillTree)
         {
             SoundManager.Instance.PlaySFX(SFXType.QuestOpen);
         }
@@ -159,7 +172,9 @@ public class UIManager : MonoBehaviour
         IsQuestOpen = !IsQuestOpen;
         QuestPanel.SetActive(IsQuestOpen);
         QuestToolTipPanel.SetActive(IsQuestOpen);
-        if(IsQuestOpen)
+        RefreshCursor();
+
+        if (IsQuestOpen)
         {
             SoundManager.Instance.PlaySFX(SFXType.QuestOpen);
         }
@@ -185,11 +200,11 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-        CursorActive();
+        UpdateCursorState();
     }
 
     //마우스 커서 제어
-    private void CursorActive()
+    private void UpdateCursorState()
     {
         if(Input.GetKeyDown(KeyCode.LeftAlt))
         {
@@ -205,6 +220,21 @@ public class UIManager : MonoBehaviour
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false; 
             }
+        }
+    }
+    public void RefreshCursor()
+    {
+        bool shouldShow = IsInventoryOpen || isSkillTree || IsQuestOpen || isMenuPanel || isOptionPanel || IsActiveCursor;
+
+        if (shouldShow)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
     }
 
@@ -364,6 +394,14 @@ public class UIManager : MonoBehaviour
     public void HideBossHealth()
     {
         uiStatus.HideBossUI();
+    }
+
+    public void ShowInfo(string key)
+    {
+        if(uiInfo)
+        {
+            uiInfo.showInfo(key);
+        }
     }
 
 }

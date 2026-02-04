@@ -10,38 +10,39 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b1aabd643963f6347b205db3c9ff671b, type: 3}
-  m_Name: Skill_Earthquake_Advanced
+  m_Name: Skill_IcePick_Advanced
   m_EditorClassIdentifier: 
-  SkillID: 7
-  SkillKey: Skill_Earthquake:Advanced_Name
-  SkillDescriptionKey: Skill_SingleHit_Desc
+  ID: 5
+  SkillKey: Skill_IcePick:Advanced_Name
+  SkillDescriptionKey: Skill_MultiHit_Desc
   SkillRequirementsKey: Skill_Attack_Requirements_Desc
-  SkillName: "\uAC15 : \uC9C0\uC9C4"
-  Icon: {fileID: 21300000, guid: 3c477ccda59bc504fae19b784b96d25b, type: 3}
-  Cost: 40
+  SkillName: "\uAC15 : \uC5BC\uC74C\uC1A1\uACF3"
+  Icon: {fileID: 21300000, guid: bd5565336885f3446975c585f1b70ddd, type: 3}
+  Cost: 30
   CastTime: 2
-  Cooldown: 14
+  Cooldown: 12
   CastPrefabDuration: 2
   HitPrefabDuration: 1
-  CastEffectPrefab: {fileID: 5034656251238326012, guid: 9de2fa19f0390d44491264d9cab8cec5, type: 3}
-  HitEffectPrefab: {fileID: 1758473627833946668, guid: 9b21333b068a5084ba09535839bee3c8, type: 3}
-  CastSFX: {fileID: 8300000, guid: 8514eaf8f38e19f4abe56b5433459ad8, type: 3}
+  CastEffectPrefab: {fileID: 584207449403360073, guid: b1ae5055f08b8284d9e996465d1d37e3, type: 3}
+  HitEffectPrefab: {fileID: 4924508274929071776, guid: 0edef91621bb6b34384ccc9dbb98729c, type: 3}
+  CastSFX: {fileID: 8300000, guid: 11aa4c12354220a4190f1d6496b99782, type: 3}
   HitSFX: {fileID: 0}
   Effects:
   - EffectType: 3
-    Power: 700
-    HitCount: 1
+    Power: 145
+    HitCount: 8
     Duration: 0
     Distance: 5
     Radius: 12
     Length: 0
     Width: 0
     Angle: 0
-    DelayTime: 0
+    DelayTime: 0.3
     MaxTarget: 12
-  RequireLevel: 15
+  RequireLevel: 10
   RequireSP: 25
   PrerequisiteSkills:
-  - {fileID: 11400000, guid: ccc4f5c52698650419b05ee512415a30, type: 2}
+  - {fileID: 11400000, guid: ef6b016a7eb76284aafba0804024922b, type: 2}
+  CurLevel: 0
   MaxLevel: 1
   AnimationName: IsDistanceDamageSkill

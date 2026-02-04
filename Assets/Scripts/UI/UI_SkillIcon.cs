@@ -29,10 +29,10 @@ public class UI_SkillIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     private void OnEnable()
     {
-        // 1. 언어 설정이 바뀌었을 때 실행될 함수(OnLocaleChanged)를 등록합니다.
+        // 1. 언어 설정이 바뀌었을 때 실행될 함수(OnLocaleChanged) 구독
         LocalizationSettings.SelectedLocaleChanged += OnLocaleChanged;
 
-        // 2. 처음 켰을 때도 한 번은 업데이트 해줘야 합니다.
+        // 2. 스킬트리를 열었을 떄 업데이트 
         UpdateSkillIcon();
     }
 
@@ -58,7 +58,23 @@ public class UI_SkillIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     private void UpdateSkillIcon()
     {
-        SkillName.text = LocalizationSettings.StringDatabase.GetLocalizedString(TableName, SkillData.SkillKey);
+        if(SkillData != null)
+        {
+            SkillName.text = LocalizationSettings.StringDatabase.GetLocalizedString(TableName, SkillData.SkillKey);
+        }
+
+        UpdataLearnedVisual();
+    }
+
+    private void UpdataLearnedVisual()
+    {
+        if (SkillData == null || PlayerSkillBook == null) return;
+
+        bool islearned = PlayerSkillBook.HasSkill(SkillData);
+        if(LearnSkillEffectImage != null)
+        {
+            LearnSkillEffectImage.SetActive(islearned);
+        }
     }
 
     public void OnPointerEnter(PointerEventData _EventData)

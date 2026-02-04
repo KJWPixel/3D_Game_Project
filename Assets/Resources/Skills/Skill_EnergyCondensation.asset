@@ -10,27 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b1aabd643963f6347b205db3c9ff671b, type: 3}
-  m_Name: Skill_FrostBlade
+  m_Name: Skill_EnergyCondensation
   m_EditorClassIdentifier: 
-  SkillID: 8
-  SkillKey: Skill_ForstBlade_Name
+  ID: 12
+  SkillKey: Skill_EnergyCondensation_Name
   SkillDescriptionKey: Skill_MultiHit_Desc
   SkillRequirementsKey: Skill_Attack_Requirements_Desc
-  SkillName: "\uC11C\uB9AC\uCE7C\uB0A0"
-  Icon: {fileID: 21300000, guid: cb025973e7e3f114aa3db0378956aad8, type: 3}
-  Cost: 35
+  SkillName: "\uC5D0\uB108\uC9C0 \uC751\uCD95"
+  Icon: {fileID: 21300000, guid: 6c6aec7a466170a4bad88a7afba35922, type: 3}
+  Cost: 30
   CastTime: 1.5
-  Cooldown: 5
+  Cooldown: 10
   CastPrefabDuration: 2
   HitPrefabDuration: 1
-  CastEffectPrefab: {fileID: 3156866507962234106, guid: 645ebd7cef59b7b40b27c29bf3e99cf2, type: 3}
-  HitEffectPrefab: {fileID: 4924508274929071776, guid: 0edef91621bb6b34384ccc9dbb98729c, type: 3}
-  CastSFX: {fileID: 8300000, guid: 6deb2f905c402f345ad56fd39686a2eb, type: 3}
+  CastEffectPrefab: {fileID: 8378648546881499446, guid: 867c572a5be680d42a042d2349f10143, type: 3}
+  HitEffectPrefab: {fileID: 2965222256817593503, guid: a164e676dbbd6e54587237e619372c98, type: 3}
+  CastSFX: {fileID: 8300000, guid: d65a973fefe58634da3b5a0ed1ca764e, type: 3}
   HitSFX: {fileID: 0}
   Effects:
   - EffectType: 1
-    Power: 150
-    HitCount: 6
+    Power: 200
+    HitCount: 8
     Duration: 0
     Distance: 5
     Radius: 0
@@ -39,8 +39,9 @@ MonoBehaviour:
     Angle: 0
     DelayTime: 0.2
     MaxTarget: 10
-  RequireLevel: 8
-  RequireSP: 10
+  RequireLevel: 20
+  RequireSP: 15
   PrerequisiteSkills: []
+  CurLevel: 0
   MaxLevel: 1
   AnimationName: IsLineAreaDamageSkill

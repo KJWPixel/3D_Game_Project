@@ -35,7 +35,7 @@ public class DamageText : MonoBehaviour
 
     public void SetDamageText(float damage, bool isCritical)
     {
-        Text.text = damage.ToString();
+        Text.text = damage.ToString("F0");
       
         if(isCritical)
         {

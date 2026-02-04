@@ -6,7 +6,7 @@ using UnityEngine;
 public abstract class BaseUI : MonoBehaviour
 {
     public event Action<BaseUI> OnClosed;
-    public virtual void Opne()
+    public virtual void Open()
     {
         SoundManager.Instance.PlaySFX(SFXType.ButtonClick);
         gameObject.SetActive(true);

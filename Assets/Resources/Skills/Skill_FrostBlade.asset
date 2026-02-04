@@ -10,38 +10,38 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b1aabd643963f6347b205db3c9ff671b, type: 3}
-  m_Name: Skill_IceShower
+  m_Name: Skill_FrostBlade
   m_EditorClassIdentifier: 
-  SkillID: 10
-  SkillKey: Skill_IceShower_Name
+  ID: 8
+  SkillKey: Skill_ForstBlade_Name
   SkillDescriptionKey: Skill_MultiHit_Desc
   SkillRequirementsKey: Skill_Attack_Requirements_Desc
-  SkillName: "\uC5BC\uC74C \uC18C\uB098\uAE30"
-  Icon: {fileID: 21300000, guid: 480b6fd098764e244bde8ee6274e6a45, type: 3}
-  Cost: 50
-  CastTime: 3
-  Cooldown: 10
+  SkillName: "\uC11C\uB9AC\uCE7C\uB0A0"
+  Icon: {fileID: 21300000, guid: cb025973e7e3f114aa3db0378956aad8, type: 3}
+  Cost: 35
+  CastTime: 1.5
+  Cooldown: 5
   CastPrefabDuration: 2
   HitPrefabDuration: 1
-  CastEffectPrefab: {fileID: 161766660727748596, guid: 05ce920d629922a4eb4795ef7494ce5c, type: 3}
+  CastEffectPrefab: {fileID: 3156866507962234106, guid: 645ebd7cef59b7b40b27c29bf3e99cf2, type: 3}
   HitEffectPrefab: {fileID: 4924508274929071776, guid: 0edef91621bb6b34384ccc9dbb98729c, type: 3}
-  CastSFX: {fileID: 8300000, guid: e8b9ecc165dace24b95db26aebe6f7a5, type: 3}
+  CastSFX: {fileID: 8300000, guid: 6deb2f905c402f345ad56fd39686a2eb, type: 3}
   HitSFX: {fileID: 0}
   Effects:
   - EffectType: 1
-    Power: 250
-    HitCount: 10
+    Power: 150
+    HitCount: 6
     Duration: 0
     Distance: 5
     Radius: 0
-    Length: 12
-    Width: 12
+    Length: 10
+    Width: 10
     Angle: 0
-    DelayTime: 0.3
-    MaxTarget: 15
-  RequireLevel: 20
-  RequireSP: 30
-  PrerequisiteSkills:
-  - {fileID: 11400000, guid: 019f639c56777bf428e724f3ea71e149, type: 2}
+    DelayTime: 0.2
+    MaxTarget: 10
+  RequireLevel: 8
+  RequireSP: 10
+  PrerequisiteSkills: []
+  CurLevel: 0
   MaxLevel: 1
   AnimationName: IsLineAreaDamageSkill

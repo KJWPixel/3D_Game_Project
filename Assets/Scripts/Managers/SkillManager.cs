@@ -18,7 +18,6 @@ public class SkillManager : MonoBehaviour
     private PlayerAnimationController Anim;
     private BuffController BuffController;
     private SkillIndicatorController skillIndicator;
-    
 
     ISkillBehaviorStrategy ISkillStrategy;
     IBuffBehaviorStrategy IBuffStrategy;

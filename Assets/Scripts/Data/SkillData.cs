@@ -16,7 +16,7 @@ public class SkillData : ScriptableObject
     #endregion
 
     [Header("기본 정보")]
-    public int SkillID;
+    public int ID;
     public string SkillKey;
     public string SkillDescriptionKey;
     public string SkillRequirementsKey;

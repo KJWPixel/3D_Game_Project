@@ -23,10 +23,7 @@ public class CinemachineController : MonoBehaviour
 
     void Update()
     {
-        // 1. UIManager의 커서 활성화 상태 확인
-        bool isCursorActive = UIManager.Instance.IsActiveCursor;
-
-        if (isCursorActive)
+        if (Cursor.visible)
         {
             // --- 마우스 커서가 활성화된 경우 (UI 조작 중) ---
             DisableCameraControl();

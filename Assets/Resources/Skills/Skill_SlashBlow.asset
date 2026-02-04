@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1aabd643963f6347b205db3c9ff671b, type: 3}
   m_Name: Skill_SlashBlow
   m_EditorClassIdentifier: 
-  SkillID: 1
+  ID: 1
   SkillKey: Skill_SlashBlow_Name
   SkillDescriptionKey: Skill_SingleHit_Desc
   SkillRequirementsKey: Skill_Attack_Requirements_Desc
@@ -42,5 +42,6 @@ MonoBehaviour:
   RequireLevel: 1
   RequireSP: 0
   PrerequisiteSkills: []
+  CurLevel: 0
   MaxLevel: 1
   AnimationName: IsRayDamageSkill

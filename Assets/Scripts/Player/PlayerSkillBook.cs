@@ -37,5 +37,19 @@ public class PlayerSkillBook : MonoBehaviour
             SkillLevels[_Skill]++;
         }
     }
-    
+    public void ClearSkillBook()
+    {
+        LearnedSkills.Clear();
+        SkillLevels.Clear();
+    }
+
+    public void LoadSkill(SkillData _skill, int _level)
+    {
+        if (!LearnedSkills.Contains(_skill))
+        {
+            LearnedSkills.Add(_skill);
+        }
+        SkillLevels[_skill] = _level;
+    }
+
 }

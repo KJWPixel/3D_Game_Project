@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1aabd643963f6347b205db3c9ff671b, type: 3}
   m_Name: Skill_MagicShield
   m_EditorClassIdentifier: 
-  SkillID: 18
+  ID: 18
   SkillKey: Skill_MagicShield_Name
   SkillDescriptionKey: Skill_DefBuff_Desc
   SkillRequirementsKey: Skill_Buff_Requirements_Desc
@@ -42,5 +42,6 @@ MonoBehaviour:
   RequireLevel: 1
   RequireSP: 5
   PrerequisiteSkills: []
+  CurLevel: 0
   MaxLevel: 1
   AnimationName: IsBuff

@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
     public float VerticalVelocity = 0f;
 
     [Header("플레이어 동작 체크")]
-    [SerializeField] private bool IsRunning = false;
+    [SerializeField] public bool IsRunning = false;
     [SerializeField] private bool IsDashing = false;
     [SerializeField] private bool IsGround = false;
     [SerializeField] private bool isResurrection = false;
@@ -71,22 +71,6 @@ public class PlayerController : MonoBehaviour
         HandleMoveInput();
         HandleSkillInput();
 
-        // - 캐스팅 상태이면 이동 호출 막음 -
-        //if(CurrentState != PlayerState.Casting || !UIManager.Instance.IsActiveCursor)
-        //{
-        //    if (IMoveStrategy != null)
-        //    {
-        //        IMoveStrategy.Move(this);
-        //    }
-        //}
-        if (CurrentState != PlayerState.Casting && !UIManager.Instance.IsActiveCursor)
-        {
-            if (IMoveStrategy != null)
-            {
-                IMoveStrategy.Move(this);
-            }
-        }
-
         // - 상태에 따라 이동 전략 결정
         switch (CurrentState)
         {
@@ -99,6 +83,14 @@ public class PlayerController : MonoBehaviour
             case PlayerState.Casting:
                 IMoveStrategy = null;
                 break;
+        }
+
+        if (CurrentState != PlayerState.Casting && !UIManager.Instance.IsActiveCursor)
+        {
+            if (IMoveStrategy != null)
+            {
+                IMoveStrategy.Move(this);
+            }
         }
 
         //기본 움직임 동작
@@ -149,7 +141,7 @@ public class PlayerController : MonoBehaviour
         //Player의 입력값을 받아 상태만을 변경
 
         //상태에 따른 리턴조건
-        if (CurrentState == PlayerState.Casting || UIManager.Instance.IsActiveCursor)
+        if (CurrentState == PlayerState.Dead || isResurrection || CurrentState == PlayerState.Casting || UIManager.Instance.IsActiveCursor)
         {
             x = 0f;
             z = 0f;
@@ -282,7 +274,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnPlayerDie()
     {
-        SetState(PlayerState.Idle); // 상태를 Idle로 고정
+        SetState(PlayerState.Dead); // 상태를 Idle로 고정
         x = 0; z = 0;
         VelocityValue = Vector3.zero;
     }
@@ -296,9 +288,9 @@ public class PlayerController : MonoBehaviour
     IEnumerator ResurrectionRoutine()
     {
         isResurrection = true;
-
+        SetState(PlayerState.Dead);
         // 1. 애니메이션이 재생될 시간을 기다림 (예: 3초)
-        yield return new WaitForSeconds(3.0f);
+        yield return new WaitForSeconds(2.0f);
 
         // 2. 포탈 위치로 이동 (포탈 태그나 변수 사용)
         GameObject portal = GameObject.FindGameObjectWithTag("Portal");
@@ -326,6 +318,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        SetState(PlayerState.Idle);
         isResurrection = false;
 
         Debug.Log("플레이어가 부활했습니다.");

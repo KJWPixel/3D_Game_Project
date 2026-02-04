@@ -49,7 +49,6 @@ public class InventoryManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
     public bool AddItem(ItemData _ItemData, int _Amount = 1)
     {
         if (_ItemData == null || _Amount == 0) return false;
@@ -217,5 +216,37 @@ public class InventoryManager : MonoBehaviour
             count += item.Value.Count;
         }
         return count;
+    }
+
+    public void ClearInventory()
+    {
+        foreach (var list in ItemByType.Values)
+        {
+            list.Clear();
+        }
+        EquipmentItems.Clear();
+    }
+
+    // 저장된 데이터를 바탕으로 아이템 생성 및 리스트 추가
+    public void LoadItem(ItemData _data, int _quantity, bool _isEquipped)
+    {
+        InventoryItem newItem = new InventoryItem(_data, _quantity);
+        newItem.IsEquipped = _isEquipped;
+
+        // 해당 타입 리스트에 추가
+        ItemByType[_data.Type].Add(newItem);
+
+        // 장착 상태였다면 장착 딕셔너리에도 등록
+        if (_isEquipped && _data.Type == ItemType.Equipment)
+        {
+            EquipementData equip = _data as EquipementData;
+            if (equip != null)
+            {
+                EquipmentItems[equip.EquipmentType] = newItem;
+                // 스탯 적용이 필요하다면 여기서 호출 가능
+            }
+        }
+
+        OnInventoryChanged?.Invoke();
     }
 }

@@ -89,7 +89,7 @@ public class OptionPanelUI : BaseUI
 
         //게임플레이 옵션 초기화
         LanguageOptions.options.Clear();
-        LanguageOptions.options.Add(new TMP_Dropdown.OptionData("Korean"));
+        LanguageOptions.options.Add(new TMP_Dropdown.OptionData("한국어"));
         LanguageOptions.options.Add(new TMP_Dropdown.OptionData("English"));
 
         LanguageOptions.value = 0;

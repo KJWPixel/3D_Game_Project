@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1aabd643963f6347b205db3c9ff671b, type: 3}
   m_Name: Skill_LighthouseofMagic
   m_EditorClassIdentifier: 
-  SkillID: 15
+  ID: 15
   SkillKey: Skill_LighthouseofMagic_Name
   SkillDescriptionKey: Skill_MpBuff_Desc
   SkillRequirementsKey: Skill_Buff_Requirements_Desc
@@ -42,5 +42,6 @@ MonoBehaviour:
   RequireLevel: 10
   RequireSP: 30
   PrerequisiteSkills: []
+  CurLevel: 0
   MaxLevel: 1
   AnimationName: IsHeal

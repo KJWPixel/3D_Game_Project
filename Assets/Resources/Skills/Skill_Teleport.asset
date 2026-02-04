@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1aabd643963f6347b205db3c9ff671b, type: 3}
   m_Name: Skill_Teleport
   m_EditorClassIdentifier: 
-  SkillID: 19
+  ID: 19
   SkillKey: Skill_Teleport_Name
   SkillDescriptionKey: Skill_Teleport_Desc
   SkillRequirementsKey: Skill_Teleport_Requirements_Desc
@@ -42,5 +42,6 @@ MonoBehaviour:
   RequireLevel: 1
   RequireSP: 25
   PrerequisiteSkills: []
+  CurLevel: 0
   MaxLevel: 1
   AnimationName: IsTeleport
