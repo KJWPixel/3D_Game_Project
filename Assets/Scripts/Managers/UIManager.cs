@@ -92,6 +92,7 @@ public class UIManager : MonoBehaviour
         InputManager.Instance.OnToggleStatus += OnToggleStatus;
         InputManager.Instance.OnToggleSkill += OnToggleSkill;
         InputManager.Instance.OnToggleQuest += OnToggleQuest;
+        
 
         if (InventroyButton != null) InventroyButton.onClick.AddListener(OnToggleInventory);
         if (SkillTreeButton != null) SkillTreeButton.onClick.AddListener(OnToggleSkill);
