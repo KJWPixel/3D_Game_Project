@@ -2,22 +2,22 @@
     "UserName": "Player",
     "Level": 7,
     "CurrentExp": 0.0,
-    "MaxExp": 115.0,
+    "MaxExp": 100.0,
     "SkillPoint": 15,
     "Gold": 3750,
-    "CurrentHp": 165.0,
-    "MaxHp": 165.0,
-    "CurrentMp": 700.0,
-    "MaxMp": 700.0,
+    "CurrentHp": 150.0,
+    "MaxHp": 150.0,
+    "CurrentMp": 500.0,
+    "MaxMp": 500.0,
     "CurrentStamina": 0.0,
     "MaxStamina": 0.0,
     "Atk": 17.71561050415039,
     "Def": 11.0,
-    "Critical": 0.10000000149011612,
-    "CritDmg": 1.4500000476837159,
-    "PosX": 111.68106842041016,
-    "PosY": 0.08714151382446289,
-    "PosZ": 317.2567138671875,
+    "Critical": 0.09999999403953552,
+    "CritDmg": 1.1500000953674317,
+    "PosX": 122.4629898071289,
+    "PosY": 0.08714157342910767,
+    "PosZ": 246.14718627929688,
     "InventoryItems": [
         {
             "id": 2005,
@@ -62,7 +62,7 @@
         {
             "id": 2023,
             "quantity": 1,
-            "isEquipped": true
+            "isEquipped": false
         },
         {
             "id": 2021,

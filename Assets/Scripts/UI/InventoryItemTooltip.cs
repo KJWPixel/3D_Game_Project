@@ -110,7 +110,7 @@ public class InventoryItemTooltip : MonoBehaviour
 
                 if (inventoryItem.IsEquipped )
                 {
-                    InventoryManager.Instance.UnequipItem(inventoryItem);
+                    InventoryManager.Instance.UnequipItem(inventoryItem);                   
                     Debug.Log($"{inventoryItem.ItemData.name} «ÿ¡¶");                
                 }
                 else

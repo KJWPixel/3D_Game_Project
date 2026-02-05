@@ -409,7 +409,7 @@ public class PlayerStat : MonoBehaviour
         CurrentHp = MaxHp;
         CurrentMp = MaxMp;
 
-        SoundManager.Instance.PlaySFX(SFXType.LevelUp);
+        SoundManager.Instance.PlaySystemSFX(SFXType.LevelUp);
 
         Debug.Log($"레벨업! 현재 레벨: {Level}");
     }

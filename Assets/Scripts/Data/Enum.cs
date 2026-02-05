@@ -237,6 +237,7 @@ public enum SFXType
     QuestClose,
     OptionOpen,
     ButtonClick,
+    Equipment,
     SkillSlashBlow,
     SkillChargeSlash,
     SkillSpinningCut,

@@ -20,6 +20,7 @@ public class SoundManager : MonoBehaviour
     [Header("SFX")]
     [SerializeField] private AudioSource sfxAudioSource;
     [SerializeField] private AudioSource sfxBossAudioSource;
+    [SerializeField] private AudioSource sfxSystemAudioSource;
 
     [Header("SFX Clip")]
     [SerializeField] private AudioClip walkingClip;
@@ -34,6 +35,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip questOpenClip;
     [SerializeField] private AudioClip questCloseClip;
     [SerializeField] private AudioClip optionOpenClip;
+    [SerializeField] private AudioClip equipmentClip;
     [SerializeField] private AudioClip buttonClickClip;
     [SerializeField] private AudioClip skillSlashBlowClip;
     [SerializeField] private AudioClip skillChargeSlashClip;
@@ -88,6 +90,7 @@ public class SoundManager : MonoBehaviour
             { SFXType.QuestOpen, questOpenClip},
             { SFXType.QuestClose, questCloseClip},
             { SFXType.OptionOpen, optionOpenClip},
+            { SFXType.Equipment, equipmentClip },
             { SFXType.ButtonClick, buttonClickClip},
             { SFXType.SkillSlashBlow, skillSlashBlowClip},
             { SFXType.SkillChargeSlash, skillChargeSlashClip},
@@ -207,6 +210,17 @@ public class SoundManager : MonoBehaviour
     {
         if (bossBgmClip == null) return;
         PlayBGM(bossBgmClip); // 기존 로직 활용
+    }
+    // 시스템 전용 SFX 재생 함수
+    public void PlaySystemSFX(SFXType type, float volume = 1f)
+    {
+        if (!sfxClips.TryGetValue(type, out AudioClip clip) || clip == null)
+        {
+            Debug.LogWarning($"SFX 클립 없음 {clip}");
+            return;
+        }
+
+        sfxSystemAudioSource.PlayOneShot(clip, volume);
     }
 
     // 보스 전용 SFX 재생 함수

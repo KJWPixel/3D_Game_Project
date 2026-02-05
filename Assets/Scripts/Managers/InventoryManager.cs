@@ -138,6 +138,7 @@ public class InventoryManager : MonoBehaviour
       
         EquipementData Equip = item.ItemData as EquipementData; //(EquipementData)ItemData;
         EquipmentType Type = Equip.EquipmentType;
+        SoundManager.Instance.PlaySystemSFX(SFXType.Equipment);
 
         if (EquipmentItems.TryGetValue(Type, out InventoryItem EquippedItem))
         {
@@ -174,8 +175,9 @@ public class InventoryManager : MonoBehaviour
 
         EquipementData Equip = item.ItemData as EquipementData;
         EquipmentType Type = Equip.EquipmentType;
+        SoundManager.Instance.PlaySystemSFX(SFXType.Equipment);
 
-        if(EquipmentItems.ContainsKey(Type) && EquipmentItems[Type] == item)
+        if (EquipmentItems.ContainsKey(Type) && EquipmentItems[Type] == item)
         {
             EquipmentItems.Remove(Type);
         }
