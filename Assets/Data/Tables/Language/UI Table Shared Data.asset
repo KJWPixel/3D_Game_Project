@@ -179,6 +179,30 @@ MonoBehaviour:
     m_Key: UI_RESURRECTION_VILLAGE
     m_Metadata:
       m_Items: []
+  - m_Id: 12467044705943552
+    m_Key: UI_CONTROLKEY
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12476830428217344
+    m_Key: UI_MOVEKEY
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12477436517728256
+    m_Key: UI_DASHKEY
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12477548862160896
+    m_Key: UI_SKILLKEY
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12477624741314560
+    m_Key: UI_CONSUMKEY
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12477940345913344
+    m_Key: UI_MENUKEY
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

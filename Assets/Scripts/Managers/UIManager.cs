@@ -53,6 +53,9 @@ public class UIManager : MonoBehaviour
     [Header("부활 UI")]
     [SerializeField] private GameObject ResurrectionPanel;
 
+    [Header("조작법 UI")]
+    [SerializeField] private GameObject UI_InfoPanel;
+
     [Header("알림 UI")]
     [SerializeField] private UI_Info uiInfo;
 
@@ -197,6 +200,7 @@ public class UIManager : MonoBehaviour
         QuestToolTipPanel.SetActive(false);
         QuestGuidePanel.SetActive(false);
         ResurrectionPanel.SetActive(false);
+        UI_InfoPanel.SetActive(false);
     }
 
     private void Update()
@@ -292,9 +296,20 @@ public class UIManager : MonoBehaviour
         ExitPanel.SetActive(isExitPanel);
     }
 
+    public void OnClickOpen(GameObject gameObject)
+    {
+        if(gameObject != null)
+        {
+            gameObject.SetActive(true);
+        }
+    }
+
     public void OnClickClose(GameObject gameObject)
     {
-        gameObject.SetActive(false);
+        if(gameObject != null)
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     public void SetupQuestButton(QuestData _Quest)

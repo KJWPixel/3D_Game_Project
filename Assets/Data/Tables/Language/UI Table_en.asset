@@ -182,6 +182,30 @@ MonoBehaviour:
     m_Localized: Resurrection in town
     m_Metadata:
       m_Items: []
+  - m_Id: 12467044705943552
+    m_Localized: Control Key
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12476830428217344
+    m_Localized: Move key
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12477436517728256
+    m_Localized: Dash Key
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12477548862160896
+    m_Localized: Skill Key
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12477624741314560
+    m_Localized: Consumpition Key
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12477940345913344
+    m_Localized: UI Menu Key
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
