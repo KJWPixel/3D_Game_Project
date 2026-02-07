@@ -90,13 +90,13 @@ MonoBehaviour:
     value: 1
   temperature:
     overrideState: 1
-    value: -5
+    value: -20
   tint:
     overrideState: 1
     value: 0
   colorFilter:
-    overrideState: 0
-    value: {r: 1, g: 1, b: 1, a: 1}
+    overrideState: 1
+    value: {r: 0.6299041, g: 0.5802777, b: 0.754717, a: 1}
   hueShift:
     overrideState: 0
     value: 0
@@ -1387,7 +1387,7 @@ MonoBehaviour:
     value: 0.15
   threshold:
     overrideState: 1
-    value: 2
+    value: 45
   softKnee:
     overrideState: 0
     value: 0.5

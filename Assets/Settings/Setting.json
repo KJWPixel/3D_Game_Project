@@ -1,7 +1,7 @@
 {
     "Screen": 1,
     "Resolution": 20,
-    "FrameRate": -1,
+    "FrameRate": 120,
     "MasterVolume": 1.0,
     "EffectVolume": 1.0,
     "BackGroundVolume": 1.0,
