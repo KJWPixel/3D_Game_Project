@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Grass Sprite Atlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 21300000, guid: 97971e7ee3b5bd740b0304c356800a3b, type: 3}
+    - {fileID: 21300000, guid: b832d205947df2045a958a78243c75bd, type: 3}
+    - {fileID: 21300000, guid: ea0e4d4da4797f744805e78ab9124a59, type: 3}
+    - {fileID: 21300000, guid: 4828beb05f3c11e4ba4bcfc981ce4118, type: 3}
+    - {fileID: 21300000, guid: 9cf1db2e760f1b84199803ecee99cd09, type: 3}
+    - {fileID: 21300000, guid: fa9148035f17a6747a6bc8e49350c277, type: 3}
+    - {fileID: 21300000, guid: 56cffb42d0f851844a875c100983d28e, type: 3}
+    - {fileID: 21300000, guid: 948260197d129dd43982bb24962e2a38, type: 3}
+    - {fileID: 21300000, guid: fd44fdcfd92696d4ebde4236907aacc8, type: 3}
+    - {fileID: 21300000, guid: c729ee5a2c624f34c8b6bb2b57ab37f3, type: 3}
+    - {fileID: 21300000, guid: f3a8956340fd5974dbd8b17dcd041bd2, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+    packedSpriteRenderDataKeys:
+    - 4828beb05f3c11e4ba4bcfc981ce4118: 21300000
+    - 56cffb42d0f851844a875c100983d28e: 21300000
+    - fa9148035f17a6747a6bc8e49350c277: 21300000
+    - f3a8956340fd5974dbd8b17dcd041bd2: 21300000
+    - b832d205947df2045a958a78243c75bd: 21300000
+    - 948260197d129dd43982bb24962e2a38: 21300000
+    - c729ee5a2c624f34c8b6bb2b57ab37f3: 21300000
+    - ea0e4d4da4797f744805e78ab9124a59: 21300000
+    - 9cf1db2e760f1b84199803ecee99cd09: 21300000
+    - 97971e7ee3b5bd740b0304c356800a3b: 21300000
+    - fd44fdcfd92696d4ebde4236907aacc8: 21300000
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 4828beb05f3c11e4ba4bcfc981ce4118, type: 3}
+  - {fileID: 21300000, guid: 56cffb42d0f851844a875c100983d28e, type: 3}
+  - {fileID: 21300000, guid: fa9148035f17a6747a6bc8e49350c277, type: 3}
+  - {fileID: 21300000, guid: f3a8956340fd5974dbd8b17dcd041bd2, type: 3}
+  - {fileID: 21300000, guid: b832d205947df2045a958a78243c75bd, type: 3}
+  - {fileID: 21300000, guid: 948260197d129dd43982bb24962e2a38, type: 3}
+  - {fileID: 21300000, guid: c729ee5a2c624f34c8b6bb2b57ab37f3, type: 3}
+  - {fileID: 21300000, guid: ea0e4d4da4797f744805e78ab9124a59, type: 3}
+  - {fileID: 21300000, guid: 9cf1db2e760f1b84199803ecee99cd09, type: 3}
+  - {fileID: 21300000, guid: 97971e7ee3b5bd740b0304c356800a3b, type: 3}
+  - {fileID: 21300000, guid: fd44fdcfd92696d4ebde4236907aacc8, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - grassFlower02
+  - grassFlower06
+  - grassFlower04
+  - grassFlower10
+  - grass02
+  - grassFlower07
+  - grassFlower09
+  - grassFlower01
+  - grassFlower03
+  - grass01
+  - grassFlower08
+  m_RenderDataMap: {}
+  m_Tag: Grass Sprite Atlas
+  m_IsVariant: 0

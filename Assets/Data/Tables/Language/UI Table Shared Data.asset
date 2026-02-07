@@ -203,6 +203,10 @@ MonoBehaviour:
     m_Key: UI_MENUKEY
     m_Metadata:
       m_Items: []
+  - m_Id: 12699446132748288
+    m_Key: UI_ALT
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

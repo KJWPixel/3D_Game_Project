@@ -208,6 +208,10 @@ MonoBehaviour:
     m_Localized: "UI \uD0A4"
     m_Metadata:
       m_Items: []
+  - m_Id: 12699446132748288
+    m_Localized: "\uCEE4\uC11C \uD65C\uC131\uD654 \uD0A4"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

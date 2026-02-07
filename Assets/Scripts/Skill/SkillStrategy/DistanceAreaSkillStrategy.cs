@@ -1,9 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using JetBrains.Annotations;
-using UnityEditor.Animations.Rigging;
 using UnityEngine;
-using UnityEngine.Playables;
 
 public class DistanceAreaSkillStrategy : ISkillBehaviorStrategy
 {

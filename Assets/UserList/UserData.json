@@ -1,39 +1,4 @@
 {
     "Users": [
-        {
-            "username": "asd",
-            "password": "a8bgoSqkJJ2WOsJdA6fuzg==",
-            "level": 0,
-            "golds": 0,
-            "lastSavedAt": ""
-        },
-        {
-            "username": "김종완",
-            "password": "k5xkGeO7WQovnuasl6GOYg==",
-            "level": 0,
-            "golds": 0,
-            "lastSavedAt": ""
-        },
-        {
-            "username": "1234",
-            "password": "k5xkGeO7WQovnuasl6GOYg==",
-            "level": 0,
-            "golds": 0,
-            "lastSavedAt": ""
-        },
-        {
-            "username": "0000",
-            "password": "LGGakPXLhIocGQKWqUCejA==",
-            "level": 0,
-            "golds": 0,
-            "lastSavedAt": ""
-        },
-        {
-            "username": "123",
-            "password": "Huuv3CMxLVHPmWL8UcuI4A==",
-            "level": 0,
-            "golds": 0,
-            "lastSavedAt": ""
-        }
     ]
 }

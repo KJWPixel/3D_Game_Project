@@ -4,14 +4,14 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public class TableBase //: MonoBehaviour
 {
-    string GetTablePath()
-    {
-#if UNITY_EDITOR
-        return Application.dataPath;
-#else
-        return Application.perisientDataPath + "Assets";
-#endif 
-    }
+//    string GetTablePath()
+//    {
+//#if UNITY_EDITOR
+//        return Application.dataPath;
+//#else
+//        return Application.perisientDataPath + "Assets";
+//#endif 
+//    }
 
     protected void Load_Binary<T>(string _Name, ref T _Obj)
     {
@@ -30,15 +30,15 @@ public class TableBase //: MonoBehaviour
 
     protected void Save_Binary(string _Name, object _Obj)
     {
-        string path = GetTablePath() + "/Table/Resources/" + "Table_" + _Name + ".txt";
+        //string path = GetTablePath() + "/Table/Resources/" + "Table_" + _Name + ".txt";
 
-        var b = new BinaryFormatter();
+        //var b = new BinaryFormatter();
 
-        Stream stream = File.Open(path, FileMode.OpenOrCreate, FileAccess.Write);
+        //Stream stream = File.Open(path, FileMode.OpenOrCreate, FileAccess.Write);
 
-        b.Serialize(stream, _Obj);
+        //b.Serialize(stream, _Obj);
 
-        stream.Close();
+        //stream.Close();
     }
 
     protected CSVReader GetCSVReader(string _Name)

@@ -1,159 +1,26 @@
 {
     "UserName": "Player",
-    "Level": 7,
+    "Level": 1,
     "CurrentExp": 0.0,
     "MaxExp": 100.0,
-    "SkillPoint": 15,
-    "Gold": 3750,
+    "SkillPoint": 50,
+    "Gold": 2000,
     "CurrentHp": 150.0,
     "MaxHp": 150.0,
     "CurrentMp": 500.0,
     "MaxMp": 500.0,
     "CurrentStamina": 0.0,
     "MaxStamina": 0.0,
-    "Atk": 17.71561050415039,
-    "Def": 11.0,
-    "Critical": 0.09999999403953552,
-    "CritDmg": 1.1500000953674317,
-    "PosX": 117.84774780273438,
-    "PosY": 0.08714163303375244,
-    "PosZ": 142.78982543945313,
+    "Atk": 10.0,
+    "Def": 5.0,
+    "Critical": 0.10000000149011612,
+    "CritDmg": 1.149999976158142,
+    "PosX": 119.49401092529297,
+    "PosY": 0.08714157342910767,
+    "PosZ": 72.64888763427735,
     "InventoryItems": [
-        {
-            "id": 2005,
-            "quantity": 1,
-            "isEquipped": false
-        },
-        {
-            "id": 2004,
-            "quantity": 1,
-            "isEquipped": false
-        },
-        {
-            "id": 2003,
-            "quantity": 1,
-            "isEquipped": false
-        },
-        {
-            "id": 2002,
-            "quantity": 1,
-            "isEquipped": false
-        },
-        {
-            "id": 2001,
-            "quantity": 1,
-            "isEquipped": false
-        },
-        {
-            "id": 2013,
-            "quantity": 1,
-            "isEquipped": false
-        },
-        {
-            "id": 2007,
-            "quantity": 1,
-            "isEquipped": false
-        },
-        {
-            "id": 2019,
-            "quantity": 1,
-            "isEquipped": false
-        },
-        {
-            "id": 2023,
-            "quantity": 1,
-            "isEquipped": false
-        },
-        {
-            "id": 2021,
-            "quantity": 1,
-            "isEquipped": false
-        },
-        {
-            "id": 2005,
-            "quantity": 1,
-            "isEquipped": false
-        },
-        {
-            "id": 2004,
-            "quantity": 1,
-            "isEquipped": false
-        },
-        {
-            "id": 2003,
-            "quantity": 1,
-            "isEquipped": false
-        },
-        {
-            "id": 2002,
-            "quantity": 1,
-            "isEquipped": false
-        },
-        {
-            "id": 2001,
-            "quantity": 1,
-            "isEquipped": false
-        },
-        {
-            "id": 2013,
-            "quantity": 1,
-            "isEquipped": false
-        },
-        {
-            "id": 2007,
-            "quantity": 1,
-            "isEquipped": false
-        },
-        {
-            "id": 2019,
-            "quantity": 1,
-            "isEquipped": false
-        },
-        {
-            "id": 2023,
-            "quantity": 1,
-            "isEquipped": false
-        },
-        {
-            "id": 2021,
-            "quantity": 1,
-            "isEquipped": false
-        },
-        {
-            "id": 1002,
-            "quantity": 4,
-            "isEquipped": false
-        },
-        {
-            "id": 1001,
-            "quantity": 3,
-            "isEquipped": false
-        },
-        {
-            "id": 1005,
-            "quantity": 4,
-            "isEquipped": false
-        },
-        {
-            "id": 1007,
-            "quantity": 2,
-            "isEquipped": false
-        }
     ],
-    "QuickSlots": [
-        {
-            "slotIndex": 0,
-            "ItemId": 1002
-        }
-    ],
+    "QuickSlots": [],
     "LearnedSkills": [
-        {
-            "id": 3,
-            "level": 1
-        },
-        {
-            "id": 1,
-            "level": 1
-        }
     ]
 }

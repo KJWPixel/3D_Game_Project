@@ -402,8 +402,8 @@ public class PlayerStat : MonoBehaviour
         MaxExp *= 1.15f;
         MaxHp *= 1.1f;
         MaxMp *= 1.4f;
-        Atk *= 1.1f;
-        Def++;
+        Atk += 1;
+        Def += 1;
 
         // 레벨업 시 체력/마나 회복 (선택 사항)
         CurrentHp = MaxHp;
