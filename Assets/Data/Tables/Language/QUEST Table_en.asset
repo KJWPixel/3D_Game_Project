@@ -122,6 +122,18 @@ MonoBehaviour:
     m_Localized: Defeat the Red Dragon
     m_Metadata:
       m_Items: []
+  - m_Id: 13862367823183872
+    m_Localized: Hunting a group of vampires
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13862673969627136
+    m_Localized: Hunting 15 Vampires
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13862606567161856
+    m_Localized: Hunting a group of vampires that pose a constant threat
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -33,7 +33,7 @@ MonoBehaviour:
     HitCount: 8
     Duration: 0
     Distance: 5
-    Radius: 12
+    Radius: 8
     Length: 0
     Width: 0
     Angle: 0
@@ -43,6 +43,5 @@ MonoBehaviour:
   RequireSP: 25
   PrerequisiteSkills:
   - {fileID: 11400000, guid: ef6b016a7eb76284aafba0804024922b, type: 2}
-  CurLevel: 0
   MaxLevel: 1
   AnimationName: IsDistanceDamageSkill

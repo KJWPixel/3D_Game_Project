@@ -83,8 +83,6 @@ public class EnemyAI : AIBase
             case AI.AI_ATTACK:
                 AttackTransition();
                 break;
-            case AI.AI_SKILL:
-                break;
             case AI.AI_DEAD:
                 DeadTransition();
                 break;
@@ -95,7 +93,7 @@ public class EnemyAI : AIBase
 
     private AI GetAIState()//AI의 상태값 리턴
     {
-        Debug.Log($"EenyAI 상태 출력: <b><color=orange>{CurrentAI}</color></b>");
+        //Debug.Log($"EenyAI 상태 출력: <b><color=orange>{CurrentAI}</color></b>");
         return AI;
     }
 

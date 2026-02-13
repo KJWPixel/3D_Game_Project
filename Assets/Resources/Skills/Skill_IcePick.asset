@@ -33,7 +33,7 @@ MonoBehaviour:
     HitCount: 5
     Duration: 0
     Distance: 5
-    Radius: 10
+    Radius: 5
     Length: 0
     Width: 0
     Angle: 0
@@ -42,6 +42,5 @@ MonoBehaviour:
   RequireLevel: 5
   RequireSP: 5
   PrerequisiteSkills: []
-  CurLevel: 0
   MaxLevel: 1
   AnimationName: IsDistanceDamageSkill

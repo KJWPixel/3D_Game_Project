@@ -86,8 +86,8 @@ public class DialogueManager : MonoBehaviour
         Sentences.Clear();
         currentTalkQuest = null;
 
-    // 1. NPC 이름 번역
-    string translatedName = LocalizationSettings.StringDatabase.GetLocalizedString(TableName, _NPC.npcNameKey);
+        // 1. NPC 이름 번역
+        string translatedName = LocalizationSettings.StringDatabase.GetLocalizedString(TableName, _NPC.npcNameKey);
         UIManager.Instance.NameText.text = translatedName;
 
         // 2. 대사 리스트 번역 및 할당

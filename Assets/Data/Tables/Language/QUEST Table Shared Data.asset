@@ -119,6 +119,18 @@ MonoBehaviour:
     m_Key: QUEST_TIP_0005
     m_Metadata:
       m_Items: []
+  - m_Id: 13862367823183872
+    m_Key: QUEST_NAME_0006
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13862606567161856
+    m_Key: QUEST_DESC_0006
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13862673969627136
+    m_Key: QUEST_TIP_0006
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

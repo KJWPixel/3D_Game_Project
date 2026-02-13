@@ -32,6 +32,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip inventoryOpenClip;
     [SerializeField] private AudioClip inventoryCloseClip;
     [SerializeField] private AudioClip shopBuyClip;
+    [SerializeField] private AudioClip shopSellClip;
     [SerializeField] private AudioClip questOpenClip;
     [SerializeField] private AudioClip questCloseClip;
     [SerializeField] private AudioClip optionOpenClip;
@@ -64,14 +65,15 @@ public class SoundManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            SceneManager.sceneLoaded += OnSceneLoaded;
+            SfxClipInit();
         }
         else
         {
-            Destroy(Instance);
-        }
-        
-        SceneManager.sceneLoaded += OnSceneLoaded;
-        SfxClipInit();
+            Debug.LogWarning("중복된 SoundManager가 발견되어 파괴합니다.");
+            Destroy(gameObject);
+            return;
+        }      
     }
 
     private void SfxClipInit()
@@ -87,6 +89,7 @@ public class SoundManager : MonoBehaviour
             { SFXType.InventoryOpen, inventoryOpenClip},
             { SFXType.InventoryClose, inventoryCloseClip},
             { SFXType.ShopBuy, shopBuyClip},
+            { SFXType.ShopSell, shopSellClip},
             { SFXType.QuestOpen, questOpenClip},
             { SFXType.QuestClose, questCloseClip},
             { SFXType.OptionOpen, optionOpenClip},
@@ -130,8 +133,6 @@ public class SoundManager : MonoBehaviour
         if (bgmAudioSource == null || clip == null) return;
 
         if (bgmAudioSource.isPlaying && bgmAudioSource.clip == clip) return; // 이미 재생중이면 무시 
-
-        bgmAudioSource.clip = titleBGMClip;
 
         bgmAudioSource.Stop();
         bgmAudioSource.clip = clip;

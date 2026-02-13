@@ -18,6 +18,7 @@ public class UIManager : MonoBehaviour
     [Header("옵션")]
     [SerializeField] private GameObject OptionPanel;
     [SerializeField] public bool isOptionPanel = false;
+    [SerializeField] private GameObject fpsDisplayObject;
 
     [Header("게임 종료 패널")]
     [SerializeField] private GameObject ExitPanel;
@@ -31,6 +32,7 @@ public class UIManager : MonoBehaviour
 
     [Header("인벤토리 UI")]
     [SerializeField] private GameObject InventoryPanel;
+    [SerializeField] private TextMeshProUGUI goldText;
     [SerializeField] public bool IsInventoryOpen = false;
 
     [Header("능력치 UI")]
@@ -95,12 +97,20 @@ public class UIManager : MonoBehaviour
         InputManager.Instance.OnToggleStatus += OnToggleStatus;
         InputManager.Instance.OnToggleSkill += OnToggleSkill;
         InputManager.Instance.OnToggleQuest += OnToggleQuest;
-        
+
+        if (SettingsManager.Instance != null)
+        {
+            bool savedFPSStatus = SettingsManager.Instance.GetSettings().ShowFPS;
+            ToggleFPS(savedFPSStatus);
+            Debug.Log($"[UIManager] SettingsManager로부터 FPS 상태({savedFPSStatus})를 동기화했습니다.");
+        }
 
         if (InventroyButton != null) InventroyButton.onClick.AddListener(OnToggleInventory);
         if (SkillTreeButton != null) SkillTreeButton.onClick.AddListener(OnToggleSkill);
         if (QuestButton != null) QuestButton.onClick.AddListener(OnToggleQuest);
         if (MenuButton != null) MenuButton.onClick.AddListener(OnToggleMenu);
+
+        
     }
 
     private void OnToggleMenu()
@@ -131,12 +141,19 @@ public class UIManager : MonoBehaviour
         if (IsInventoryOpen)
         {
             InventoryUI.Instance.RefreshUI();
+            UpdateGoldUI();
             SoundManager.Instance.PlaySFX(SFXType.InventoryOpen);
         }
         else
         {
             SoundManager.Instance.PlaySFX(SFXType.InventoryClose);
         }
+    }
+
+    private void UpdateGoldUI()
+    {
+        int currentGold = PlayerStat.Instance.Gold;
+        goldText.text = currentGold.ToString();
     }
 
     private void OnToggleStatus()
@@ -175,7 +192,6 @@ public class UIManager : MonoBehaviour
     {
         IsQuestOpen = !IsQuestOpen;
         QuestPanel.SetActive(IsQuestOpen);
-        QuestToolTipPanel.SetActive(IsQuestOpen);
         RefreshCursor();
 
         if (IsQuestOpen)
@@ -184,6 +200,10 @@ public class UIManager : MonoBehaviour
         }
         else
         {
+            if(QuestToolTipPanel != null && QuestToolTipPanel.activeSelf)
+            {
+                QuestToolTipPanel.SetActive(false);
+            }
             SoundManager.Instance.PlaySFX(SFXType.QuestClose);
         }    
     }
@@ -420,4 +440,11 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void ToggleFPS(bool isOn)
+    {
+        if(fpsDisplayObject != null)
+        {
+            fpsDisplayObject.SetActive(isOn);
+        }
+    }
 }

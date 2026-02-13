@@ -146,13 +146,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Vampire
   id: 2
-  maxHp: 100
-  curHp: 100
+  maxHp: 150
+  curHp: 150
   walkSpeed: 0
   runningSpeed: 0
   atk: 15
-  def: 0
+  def: 5
   attackRange: 0
+  gainGold: 400
   gainExp: 850
   IsIdle: 0
   IsWalk: 0
@@ -207,6 +208,12 @@ MonoBehaviour:
     DropProbability: 0.2
   - ItemData: {fileID: 11400000, guid: 6899c763f2cde6240a48021312f5dc60, type: 2}
     DropProbability: 0.2
+  - ItemData: {fileID: 11400000, guid: 121a653b17c3a5041b51d19570d1dee1, type: 2}
+    DropProbability: 0.05
+  - ItemData: {fileID: 11400000, guid: d07cc7a2c5b5c5342b9e95c785793164, type: 2}
+    DropProbability: 0.05
+  - ItemData: {fileID: 11400000, guid: b21b9c47683e35b4f82f290d4f79d34c, type: 2}
+    DropProbability: 0.05
 --- !u!136 &7100487767561807076
 CapsuleCollider:
   m_ObjectHideFlags: 0

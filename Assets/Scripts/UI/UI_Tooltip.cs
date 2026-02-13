@@ -10,7 +10,6 @@ public class UI_Tooltip : MonoBehaviour
     public static UI_Tooltip Instance;
 
     private const string TableName = "SKILL Table";
-
     [SerializeField] private GameObject SkillTree;
     [SerializeField] private GameObject TooltipPanel;
     [SerializeField] private Image TooltipIcon;           //스킬이미지

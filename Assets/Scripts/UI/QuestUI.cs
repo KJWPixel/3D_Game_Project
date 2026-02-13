@@ -63,13 +63,15 @@ public class QuestUI : MonoBehaviour
         if (QuestManager.Instance != null)
         {
             QuestManager.Instance.QuestListChanged -= RefreshQuest;
-        }           
-        if (QuestManager.Instance != null)
-        {
             QuestManager.Instance.QuestCleared -= ShowQuestClearUI;
-        }
+        }           
 
         LocalizationSettings.SelectedLocaleChanged -= OnLocaleChanged;
+
+        if (QuestTooltip != null)
+        {
+            QuestTooltip.gameObject.SetActive(false);
+        }
     }
     private void TryInitialize()
     {
@@ -134,6 +136,11 @@ public class QuestUI : MonoBehaviour
     public void OnClickClose()
     {
         //gameObject.SetActive(false);
+        if(QuestTooltip != null)
+        {
+            QuestTooltip.gameObject.SetActive(false);
+        }
+
         questPanel.SetActive(false);
     }
 

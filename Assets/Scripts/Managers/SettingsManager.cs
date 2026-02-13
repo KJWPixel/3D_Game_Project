@@ -97,32 +97,67 @@ public class SettingsManager : MonoBehaviour
 
     private void ApplySettings()
     {
-        Resolution[] resolutions = Screen.resolutions;
-        if(gameSettings.Resolution >= 0 && gameSettings.Resolution < resolutions.Length)
+        int width = 1920;
+        int height = 1080;
+
+        switch (gameSettings.Resolution)
         {
-            Resolution targetResolution = resolutions[gameSettings.Resolution];
-            FullScreenMode screenMode = gameSettings.Screen switch
-            {
-                0 => FullScreenMode.ExclusiveFullScreen,
-                1 => FullScreenMode.Windowed,
-                _ => FullScreenMode.ExclusiveFullScreen,
-            };
-            Screen.SetResolution(targetResolution.width, targetResolution.height, screenMode);
-            Application.targetFrameRate = gameSettings.FrameRate;
-            Debug.Log($"설정 적용: 해상도 = {targetResolution.width} x {targetResolution.height}, 화면 모드 = {screenMode}, 프레임레이트 = {gameSettings.FrameRate}");
+            case 0:
+                width = 1280;
+                height = 720;
+                break;
+            case 1:
+                width = 1920;
+                height = 1080;
+                break;
+            case 2:
+                width = 1920;
+                height = 1200;
+                break;
+            case 3:
+                width = 2560;
+                height = 1440;
+                break;
+            default:
+                gameSettings.Resolution = 1;
+                width = 1920;
+                height = 1080;
+                Debug.LogWarning("잘못된 해상도 인덱스 -> 기본 1920 x 1080으로 fallback");
+                break;
+        }
+
+        FullScreenMode screenMode = gameSettings.Screen switch
+        {
+            0 => FullScreenMode.FullScreenWindow,
+            1 => FullScreenMode.Windowed,
+            2 => FullScreenMode.ExclusiveFullScreen,           
+            _ => FullScreenMode.ExclusiveFullScreen,
+        };
+
+        Screen.SetResolution(width, height, screenMode);
+
+        QualitySettings.vSyncCount = 0;
+
+        // 프레임레이트 적용
+        Debug.Log($"ApplySettings 시작 → 현재 gameSettings.FrameRate: {gameSettings.FrameRate}");
+        if (gameSettings.FrameRate == -1)
+        {
+            Application.targetFrameRate = -1;
         }
         else
         {
-            Debug.LogWarning("유효하지 않은 해상도 인덱스, 기본값 적용");
-            gameSettings.Resolution = 0;
-            ApplySettings();
+            Application.targetFrameRate = gameSettings.FrameRate;
         }
+
+        Debug.Log($"설정 적용: 해상도 = {width} x {height}, 화면 모드 = {screenMode}, 프레임레이트 = {gameSettings.FrameRate}");
 
         SoundManager soundManager = FindObjectOfType<SoundManager>();
         if (soundManager != null)
         {
             soundManager.ApplySoundSettings(gameSettings);
         }
+
+        ApplyFPS();
     }
 
     public void ApplyLanguage()
@@ -135,6 +170,27 @@ public class SettingsManager : MonoBehaviour
         };
 
         LocalizationManager.Instance.ChangeLanguage(localeCode);
+    }
+
+    public void SetFPSToggle(bool isOn)
+    {
+        gameSettings.ShowFPS = isOn;
+        SaveSetting();
+        ApplyFPS(); // 즉시 적용
+    }
+
+    private void ApplyFPS()
+    {
+        // UIManager에 만들어둔 ToggleFPS 함수를 호출
+        if (UIManager.Instance != null)
+        {
+            UIManager.Instance.ToggleFPS(gameSettings.ShowFPS);
+            Debug.Log($"[SettingsManager] FPS 표시 적용: {gameSettings.ShowFPS}");
+        }
+        else
+        {
+            Debug.LogWarning("[SettingsManager] UIManager 인스턴스를 찾을 수 없어 FPS 설정을 유예합니다.");
+        }
     }
 
     public GameSettings GetSettings()

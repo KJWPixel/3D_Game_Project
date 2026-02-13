@@ -63,6 +63,26 @@ MonoBehaviour:
     m_Key: LANGUAGE
     m_Metadata:
       m_Items: []
+  - m_Id: 13444203654201344
+    m_Key: FRAMELATE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13502268554395648
+    m_Key: FULLSCREEN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13502373261000704
+    m_Key: WINDOWED
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13502524566323200
+    m_Key: BORDERLASSWINDOWED
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13503296632832000
+    m_Key: UNLIMITED
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

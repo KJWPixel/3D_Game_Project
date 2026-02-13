@@ -168,7 +168,7 @@ MonoBehaviour:
       m_Items:
       - rid: 6538062418656100354
   - m_Id: 1159526482493440
-    m_Localized: Restore {2} physical strength {1} times per second for {0} seconds.
+    m_Localized: '{2} restores mental strength {1} times per second for {0} seconds.'
     m_Metadata:
       m_Items: []
   - m_Id: 1160421676990464

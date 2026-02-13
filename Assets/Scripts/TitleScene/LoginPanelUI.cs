@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem.XR;
+using UnityEngine.UI;
 
 public class LoginPanelUI : BaseUI
 {
     [SerializeField] private LoginManager loginManager;
- 
+    [SerializeField] private TMP_InputField idInputField;
+    [SerializeField] private TMP_InputField pwInputField;
+
     public void OnClickLogin()
     {
         if (loginManager == null)
@@ -16,5 +20,19 @@ public class LoginPanelUI : BaseUI
         }
         SoundManager.Instance.PlaySFX(SFXType.ButtonClick);
         loginManager.TryLogin();
+    }
+
+    public override void Open()
+    {
+        base.Open();
+        ClearFields();
+
+        if (idInputField != null) idInputField.ActivateInputField();
+    }
+
+    public void ClearFields()
+    {
+        if (idInputField != null) idInputField.text = "";
+        if (pwInputField != null) pwInputField.text = "";
     }
 }

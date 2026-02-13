@@ -5,15 +5,24 @@ using UnityEngine;
 
 public class SaveManager : MonoBehaviour
 {
+    [Header("Save Settings")]
+    [SerializeField] private bool useDebugPath = false;
+    [SerializeField] private string debugFileName = "testData.json";
+    [SerializeField] private string SvaeFileName = "playerData.json";
+    [SerializeField] private Vector3 testPlayerCoordinate;
+
+    [Header("Reference")]
     [SerializeField] private PlayerStat playerStat;
     [SerializeField] private PlayerSkillBook skillBook;
     [SerializeField] private Transform CurrentTrsSave;
-    PlayerSaveData playerSaveData;
-    string filePath;
+
 
     [Header("Quick Slots")]
-    [SerializeField] private List<UI_ItemSlot> quickSlotList; 
+    [SerializeField] private List<UI_ItemSlot> quickSlotList;
 
+    private string filePath;
+
+    PlayerSaveData playerSaveData;
     [System.Serializable]
     public class PlayerSaveData
     {
@@ -42,7 +51,7 @@ public class SaveManager : MonoBehaviour
         public float PosZ;
 
         public List<ItemSaveData> InventoryItems = new List<ItemSaveData>();
-        public List<QuickSlotSaveData> QuickSlots = new List<QuickSlotSaveData>();  
+        public List<QuickSlotSaveData> QuickSlots = new List<QuickSlotSaveData>();
         public List<SkillSaveData> LearnedSkills = new List<SkillSaveData>();
     }
 
@@ -70,7 +79,14 @@ public class SaveManager : MonoBehaviour
 
     private void Awake()
     {
-        filePath = Path.Combine(Application.dataPath, "playerData.json");
+        if (useDebugPath && !string.IsNullOrEmpty(debugFileName))
+        {
+            filePath = Path.Combine(Application.dataPath, debugFileName);
+        }
+        else
+        {
+            filePath = Path.Combine(Application.persistentDataPath, SvaeFileName);
+        }
     }
 
     private void Start()
@@ -122,10 +138,10 @@ public class SaveManager : MonoBehaviour
 
         // 퀵슬롯 저장
         playerData.QuickSlots.Clear();
-        for(int i = 0; i < quickSlotList.Count; i++)
+        for (int i = 0; i < quickSlotList.Count; i++)
         {
             var item = quickSlotList[i].GetItemData();
-            if(item != null)
+            if (item != null)
             {
                 playerData.QuickSlots.Add(new QuickSlotSaveData
                 {
@@ -137,7 +153,7 @@ public class SaveManager : MonoBehaviour
 
         // 스킬 저장
         playerData.LearnedSkills.Clear();
-        foreach(var skill in skillBook.LearnedSkills)
+        foreach (var skill in skillBook.LearnedSkills)
         {
             playerData.LearnedSkills.Add(new SkillSaveData
             {
@@ -145,7 +161,7 @@ public class SaveManager : MonoBehaviour
                 level = skill.MaxLevel,
             });
         }
-        
+
 
         // json 저장 
         string json = JsonUtility.ToJson(playerData, true);
@@ -179,8 +195,18 @@ public class SaveManager : MonoBehaviour
         playerStat.CritDmg = playerData.CritDmg;
 
         // 플레이어 위치 세이브 포인트
-        Vector3 loadPos = new Vector3(playerData.PosX, playerData.PosY, playerData.PosZ);
-        PlayerStat.Instance.transform.position = loadPos;
+        if (useDebugPath)
+        {
+            PlayerStat.Instance.transform.position = testPlayerCoordinate;
+            Debug.Log($"<color=yellow>테스트 모드: </color> 인스펙터 좌표 {testPlayerCoordinate}");
+        }
+        else
+        {
+            Vector3 loadPos = new Vector3(playerData.PosX, playerData.PosY, playerData.PosZ);
+            PlayerStat.Instance.transform.position = loadPos;
+        }
+
+
 
         // 인벤토리 아이템 로드
         Debug.Log("----------------인벤토리 로드 시작--------------");
@@ -202,12 +228,12 @@ public class SaveManager : MonoBehaviour
 
         // 인벤토리 퀵슬롯 초기화 후 로드
         Debug.Log("----------------퀵슬롯 로드 시작--------------");
-        foreach(var slot in quickSlotList)
+        foreach (var slot in quickSlotList)
         {
             slot.ClearSlot(); // 퀵슬롯 초기화
         }
 
-        foreach(var qsData in playerData.QuickSlots)
+        foreach (var qsData in playerData.QuickSlots)
         {
             InventoryItem item = InventoryManager.Instance.GetAllItems().Find(i => i.ItemData.ID == qsData.ItemId);
             if (item != null && qsData.slotIndex < quickSlotList.Count)
@@ -226,7 +252,7 @@ public class SaveManager : MonoBehaviour
         foreach (var skillSave in playerData.LearnedSkills)
         {
             SkillData skilldata = GetSkillDataByID(skillSave.id);
-            if(skilldata != null)
+            if (skilldata != null)
             {
                 Debug.Log($"스킬 데이터 로드 완료: {skilldata.name} (ID: {skillSave.id})");
                 skillBook.LoadSkill(skilldata, skillSave.level);
@@ -237,7 +263,7 @@ public class SaveManager : MonoBehaviour
                 Debug.LogError($"SaveManager: ID {skillSave.id}에 해당하는 SkillData를 Resources/Skills에서 찾을 수 없습니다.");
             }
         }
-        
+
         Debug.Log("게임 불러오기 완료");
     }
 

@@ -400,10 +400,11 @@ public class PlayerStat : MonoBehaviour
 
         // 능력치 상승 로직
         MaxExp *= 1.15f;
-        MaxHp *= 1.1f;
-        MaxMp *= 1.4f;
+        MaxHp *= 1.15f;
+        MaxMp *= 1.15f;
         Atk += 1;
         Def += 1;
+        skillPoint += 15;
 
         // 레벨업 시 체력/마나 회복 (선택 사항)
         CurrentHp = MaxHp;

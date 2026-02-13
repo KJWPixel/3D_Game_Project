@@ -198,6 +198,7 @@ public class ShopManager : MonoBehaviour
         {
             // 추가에 성공했을 때만 돈을 차감
             PlayerStat.Instance.Gold -= selectItem.Price; // 금액 차감
+            SoundManager.Instance.PlaySFX(SFXType.ShopBuy);
             Debug.Log($"{selectItem.name} 구매 완료");
             //필요 시 UI 업데이트 또는 사운드
         }
@@ -226,6 +227,7 @@ public class ShopManager : MonoBehaviour
             PlayerStat.Instance.Gold += sellPrice;
 
             //SFX 돈 소리 추가 
+            SoundManager.Instance.PlaySFX(SFXType.ShopSell);
             Debug.Log($"{selectItem} 판매완료 + {sellPrice} 골드");
         }
         else

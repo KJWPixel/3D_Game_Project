@@ -107,13 +107,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Pumpkinhulk
   id: 4
-  maxHp: 300
-  curHp: 300
+  maxHp: 800
+  curHp: 800
   walkSpeed: 0
   runningSpeed: 2
-  atk: 50
-  def: 20
+  atk: 120
+  def: 45
   attackRange: 0
+  gainGold: 700
   gainExp: 850
   IsIdle: 0
   IsWalk: 0
@@ -163,7 +164,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DropItemPrefab: {fileID: 0}
   DropItems:
-  - ItemData: {fileID: 0}
+  - ItemData: {fileID: 11400000, guid: 9ee544135512320478daec06db0ce9a7, type: 2}
+    DropProbability: 0.1
+  - ItemData: {fileID: 11400000, guid: 63d861513a0b187429ef0e8476e6471c, type: 2}
+    DropProbability: 0.2
+  - ItemData: {fileID: 11400000, guid: 4f9c7b3636136744bb560cc392a3045a, type: 2}
+    DropProbability: 0.2
+  - ItemData: {fileID: 11400000, guid: 638e1532e4672fa4ea13e3fe9d6a9d0c, type: 2}
+    DropProbability: 0.1
+  - ItemData: {fileID: 11400000, guid: 07b0ffb7ab960274b99256eaafe6d39c, type: 2}
+    DropProbability: 0.1
+  - ItemData: {fileID: 11400000, guid: 9910d1671c1d9f44383434a89e9ee610, type: 2}
+    DropProbability: 0.1
+  - ItemData: {fileID: 11400000, guid: 5b1953bcc0baec245a79b4ad0a8b8cad, type: 2}
+    DropProbability: 0.1
+  - ItemData: {fileID: 11400000, guid: 07b0ffb7ab960274b99256eaafe6d39c, type: 2}
     DropProbability: 0.1
 --- !u!136 &4211749316706599056
 CapsuleCollider:

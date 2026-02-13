@@ -1,4 +1,11 @@
 {
     "Users": [
+        {
+            "username": "1234",
+            "password": "k5xkGeO7WQovnuasl6GOYg==",
+            "level": 0,
+            "golds": 0,
+            "lastSavedAt": ""
+        }
     ]
 }

@@ -4,7 +4,7 @@
     "CurrentExp": 0.0,
     "MaxExp": 100.0,
     "SkillPoint": 50,
-    "Gold": 2000,
+    "Gold": 1000,
     "CurrentHp": 150.0,
     "MaxHp": 150.0,
     "CurrentMp": 500.0,
@@ -14,13 +14,11 @@
     "Atk": 10.0,
     "Def": 5.0,
     "Critical": 0.10000000149011612,
-    "CritDmg": 1.149999976158142,
-    "PosX": 119.49401092529297,
-    "PosY": 0.08714157342910767,
-    "PosZ": 72.64888763427735,
-    "InventoryItems": [
-    ],
+    "CritDmg": 1.100000023841858,
+    "PosX": 120.0,
+    "PosY": 0.08714151382446289,
+    "PosZ": 71.19999694824219,
+    "InventoryItems": [],
     "QuickSlots": [],
-    "LearnedSkills": [
-    ]
+    "LearnedSkills": []
 }

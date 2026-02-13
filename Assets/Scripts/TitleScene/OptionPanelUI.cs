@@ -1,5 +1,7 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -26,6 +28,10 @@ public class OptionPanelUI : BaseUI
 
     [Header("언어 옵션")]
     [SerializeField] private TMP_Dropdown LanguageOptions;
+    [SerializeField] private Toggle FPSOption;
+
+    [Header("로컬라이제이셔 테이블")]
+    [SerializeField] private const string Table = "OPTION Table";
 
     private void Awake()
     {
@@ -36,6 +42,9 @@ public class OptionPanelUI : BaseUI
     {
         InitializeDropdowns();
         InitializedSliders();
+        IntializeToggle();
+
+        LocalizationSettings.SelectedLocaleChanged += OnLocaleChanged;
     }
     protected override void OnClose()
     {
@@ -46,20 +55,28 @@ public class OptionPanelUI : BaseUI
     {
         //해상도 옵션 초기화
         ResolutionOptions.options.Clear();
-        Resolution[] resolutions = Screen.resolutions;
-        for(int i = 0; i < resolutions.Length; i++)
-        {
-            Resolution res = resolutions[i];
-            ResolutionOptions.options.Add(new TMP_Dropdown.OptionData($"{res.width}x{res.height}"));
-        }
 
-        ResolutionOptions.value = Mathf.Clamp(SettingsManager.Instance.GetSettings().Resolution, 0, resolutions.Length - 1);
+        // 해상도 4개만 추가
+        ResolutionOptions.options.Add(new TMP_Dropdown.OptionData("1280 x 720"));
+        ResolutionOptions.options.Add(new TMP_Dropdown.OptionData("1920 x 1080"));
+        ResolutionOptions.options.Add(new TMP_Dropdown.OptionData("1920 x 1200"));
+        ResolutionOptions.options.Add(new TMP_Dropdown.OptionData("2560 x 1400"));
+
+        //저장된 값 읽어서 선택 
+        int saveResolutionIndex = SettingsManager.Instance.GetSettings().Resolution;
+        ResolutionOptions.value = Mathf.Clamp(saveResolutionIndex, 0, ResolutionOptions.options.Count - 1);
         ResolutionOptions.RefreshShownValue();
 
         //화면 모드 옵션 초기화
         ScreenOptions.options.Clear();
-        ScreenOptions.options.Add(new TMP_Dropdown.OptionData("전체 화면"));
-        ScreenOptions.options.Add(new TMP_Dropdown.OptionData("창 모드"));
+        // 테이블 키 배열 
+        string[] screenModeKeys = { "BORDERLASSWINDOWED","WINDOWED","FULLSCREEN" };
+
+        foreach (string key in screenModeKeys)
+        {
+            var localizedStr = new LocalizedString(Table, key);
+            ScreenOptions.options.Add(new TMP_Dropdown.OptionData(localizedStr.GetLocalizedString()));
+        }
         ScreenOptions.value = Mathf.Clamp(SettingsManager.Instance.GetSettings().Screen, 0, ScreenOptions.options.Count - 1);
         ScreenOptions.RefreshShownValue();
 
@@ -68,23 +85,37 @@ public class OptionPanelUI : BaseUI
         FrameRateOptions.options.Add(new TMP_Dropdown.OptionData("30"));
         FrameRateOptions.options.Add(new TMP_Dropdown.OptionData("60"));
         FrameRateOptions.options.Add(new TMP_Dropdown.OptionData("120"));
-        FrameRateOptions.options.Add(new TMP_Dropdown.OptionData("무한"));
+
+        // 무한 옵션 로컬라이즈
+        var unlimitedLocalized = new LocalizedString(Table, "UNLIMITED");
+        string unlimitedText = unlimitedLocalized.GetLocalizedString();
+        FrameRateOptions.options.Add(new TMP_Dropdown.OptionData(unlimitedText));
 
         //설정에 저장된 값으로 드롭다운 선택
         int savedFrame = SettingsManager.Instance.GetSettings().FrameRate; // -1이면 무한
-        int frameRateIndex = -1;
+        int frameRateIndex;
         //int frameRateIndex = FrameRateOptions.options.FindIndex(opt => opt.text == SettingsManager.Instance.GetSettings().FrameRate.ToString());
         //FrameRateOptions.value = frameRateIndex >= 0 ? frameRateIndex : 1;//기본 60fps
 
-        if(savedFrame == -1)
+        switch (savedFrame)
         {
-            frameRateIndex = FrameRateOptions.options.FindIndex(opt => opt.text == "무한");
+            case 30:
+                frameRateIndex = 0;
+                break;
+            case 60:
+                frameRateIndex = 1;
+                break;
+            case 120:
+                frameRateIndex = 2;
+                break;
+            case -1:
+                frameRateIndex = 3;  // 무한은 항상 마지막 (인덱스 3)
+                break;
+            default:
+                frameRateIndex = 1;  // 기본 60fps
+                break;
         }
-        else
-        {
-            frameRateIndex = FrameRateOptions.options.FindIndex(opt => opt.text == savedFrame.ToString());
-        }
-        FrameRateOptions.value = frameRateIndex >= 0 ? frameRateIndex : 2; // 기본 60fps (index 2)
+        FrameRateOptions.value = frameRateIndex;
         FrameRateOptions.RefreshShownValue();
 
         //게임플레이 옵션 초기화
@@ -92,7 +123,8 @@ public class OptionPanelUI : BaseUI
         LanguageOptions.options.Add(new TMP_Dropdown.OptionData("한국어"));
         LanguageOptions.options.Add(new TMP_Dropdown.OptionData("English"));
 
-        LanguageOptions.value = 0;
+        int savedLanguageIndex = SettingsManager.Instance.LanguageIndex;  // 또는 SettingsManager.Instance.GetSettings().LanguageIndex;
+        LanguageOptions.value = Mathf.Clamp(savedLanguageIndex, 0, LanguageOptions.options.Count - 1);
         LanguageOptions.RefreshShownValue();
     }
 
@@ -106,18 +138,18 @@ public class OptionPanelUI : BaseUI
             BackGroundVolumeSlider.value = settings.BackGroundVolume;
 
             //실시간 적용을 위한 이벤트 연결
-            MasterVolumeSlider.onValueChanged.AddListener((value) => 
-            { 
-                SettingsManager.Instance.SetSoundSettings(value, settings.EffectVolume, settings.BackGroundVolume); 
-            });
-            EffectVolumeSlider.onValueChanged.AddListener(value =>
-            {
-                SettingsManager.Instance.SetSoundSettings(settings.MasterVolume, value, settings.BackGroundVolume);
-            });
-            BackGroundVolumeSlider.onValueChanged.AddListener((value) =>
-            {
-                SettingsManager.Instance.SetSoundSettings(settings.MasterVolume, settings.EffectVolume, value);
-            });
+            //MasterVolumeSlider.onValueChanged.AddListener((value) => 
+            //{ 
+            //    SettingsManager.Instance.SetSoundSettings(value, settings.EffectVolume, settings.BackGroundVolume); 
+            //});
+            //EffectVolumeSlider.onValueChanged.AddListener(value =>
+            //{
+            //    SettingsManager.Instance.SetSoundSettings(settings.MasterVolume, value, settings.BackGroundVolume);
+            //});
+            //BackGroundVolumeSlider.onValueChanged.AddListener((value) =>
+            //{
+            //    SettingsManager.Instance.SetSoundSettings(settings.MasterVolume, settings.EffectVolume, value);
+            //});
 
             //슬라이더 범위 설정
             MasterVolumeSlider.minValue = 0f;
@@ -127,6 +159,33 @@ public class OptionPanelUI : BaseUI
             BackGroundVolumeSlider.minValue = 0f;
             BackGroundVolumeSlider.maxValue = 1f;
         }
+    }
+
+    private void IntializeToggle()
+    {
+        if(FPSOption != null)
+        {
+            FPSOption.isOn = SettingsManager.Instance.GetSettings().ShowFPS;
+
+            //FPSOption.onValueChanged.AddListener((isOn) =>
+            //{
+            //    SettingsManager.Instance.SetFPSToggle(isOn);
+            //    Debug.Log($"FPS 표시 설정 변경: {isOn}");
+            //});
+        }
+    }
+
+    private void OnLocaleChanged(Locale newLocale)
+    {
+        if(gameObject.activeInHierarchy)
+        {
+            InitializeDropdowns();
+        }
+    }
+
+    private void OnDestroy()
+    {
+        LocalizationSettings.SelectedLocaleChanged -= OnLocaleChanged;
     }
 
     public void OnClickGraphicsButton()
@@ -161,18 +220,24 @@ public class OptionPanelUI : BaseUI
 
             // FrameRate 처리: "무한"이면 -1 아니면 int.Parse
             //int frameRate = int.Parse(FrameRateOptions.options[FrameRateOptions.value].text);
-            string selectedFrameText = FrameRateOptions.options[FrameRateOptions.value].text;
+            int selectedIndex = FrameRateOptions.value;  // 드롭다운 인덱스 가져오기
             int frameRate;
-            if (selectedFrameText == "무한")
+
+            if (selectedIndex == 3)  // 무한은 항상 4번째 옵션(인덱스 3)
             {
                 frameRate = -1;
             }
             else
             {
-                // 안전하게 파싱 (예외 방지)
+                string selectedFrameText = FrameRateOptions.options[selectedIndex].text;
                 if (!int.TryParse(selectedFrameText, out frameRate))
+                {
                     frameRate = 60; // fallback
+                }
             }
+
+            // 로그 추가 (테스트용, 나중에 제거 가능)
+            Debug.Log($"Apply 클릭 → 선택 인덱스: {selectedIndex}, 프레임레이트 변환값: {frameRate}");
 
             SettingsManager.Instance.SetGraphicsSettings(screenIndex, resolutionIndex, frameRate);
             Debug.Log($"그래픽 설정 적용: 해상도 인덱스 = {resolutionIndex}, 화면모드 = {ScreenOptions.options[screenIndex].text}, 프레임레이트 = {frameRate}");
@@ -200,6 +265,12 @@ public class OptionPanelUI : BaseUI
             int languageIndex = LanguageOptions.value;
             SettingsManager.Instance.SetLanguage(languageIndex);
             SettingsManager.Instance.ApplyLanguage(); // 새로 만들 함수
+        }
+
+        if(FPSOption != null)
+        {
+            bool currentToggleState = FPSOption.isOn;
+            SettingsManager.Instance.SetFPSToggle(currentToggleState);
         }
     }
 

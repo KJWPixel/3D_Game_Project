@@ -111,7 +111,6 @@ public enum AI
     AI_CHASE,
     AI_FLEE,
     AI_ATTACK,
-    AI_SKILL,
     AI_DEAD,
     AI_RESET,
 }
@@ -233,6 +232,7 @@ public enum SFXType
     InventoryOpen,
     InventoryClose,
     ShopBuy,
+    ShopSell,
     QuestOpen,
     QuestClose,
     OptionOpen,

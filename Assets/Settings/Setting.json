@@ -1,9 +1,10 @@
 {
-    "Screen": 1,
+    "Screen": 0,
     "Resolution": 0,
-    "FrameRate": -1,
+    "FrameRate": 60,
     "MasterVolume": 1.0,
     "EffectVolume": 1.0,
     "BackGroundVolume": 1.0,
-    "LanguageIndex": 0
+    "LanguageIndex": 0,
+    "ShowFPS": false
 }

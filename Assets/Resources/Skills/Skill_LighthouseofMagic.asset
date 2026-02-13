@@ -28,7 +28,7 @@ MonoBehaviour:
   CastSFX: {fileID: 8300000, guid: 53c802b86fac780458b92d4af5052374, type: 3}
   HitSFX: {fileID: 0}
   Effects:
-  - EffectType: 10
+  - EffectType: 11
     Power: 50
     HitCount: 1
     Duration: 60
@@ -42,6 +42,5 @@ MonoBehaviour:
   RequireLevel: 10
   RequireSP: 30
   PrerequisiteSkills: []
-  CurLevel: 0
   MaxLevel: 1
   AnimationName: IsHeal

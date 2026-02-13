@@ -32,7 +32,7 @@ MonoBehaviour:
     Power: 250
     HitCount: 10
     Duration: 0
-    Distance: 5
+    Distance: 3
     Radius: 0
     Length: 12
     Width: 12
@@ -43,6 +43,5 @@ MonoBehaviour:
   RequireSP: 30
   PrerequisiteSkills:
   - {fileID: 11400000, guid: 019f639c56777bf428e724f3ea71e149, type: 2}
-  CurLevel: 0
   MaxLevel: 1
   AnimationName: IsLineAreaDamageSkill

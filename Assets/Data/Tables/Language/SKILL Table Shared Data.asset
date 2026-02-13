@@ -140,9 +140,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1159526482493440
-    m_Key: 'Skill_MpBuff_Desc
-
-'
+    m_Key: Skill_MpBuff_Desc
     m_Metadata:
       m_Items: []
   - m_Id: 1160421676990464

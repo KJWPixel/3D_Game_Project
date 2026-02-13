@@ -68,6 +68,18 @@ public class BossCameraControl : MonoBehaviour
 
     public void OnBossDefeated()
     {
-        invisableWall.SetActive(false);
+        if (invisableWall != null)
+        {
+            invisableWall.SetActive(false);
+        }
+            
+
+        // 2. BGM을 다시 인게임용으로 변경 (추가)
+        if (SoundManager.Instance != null)
+        {
+            SoundManager.Instance.ApplyInGameBGM();
+        }
+
+        Debug.Log("보스 처치: BGM이 원래대로 복구됩니다.");
     }
 }

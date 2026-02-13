@@ -31,9 +31,9 @@ public class TitleUIController : BaseUI
         OptionUI = OptionPanel.GetComponent<OptionPanelUI>();
         ExitUI = ExitPanel.GetComponent<ExitPanelUI>();
 
-        LoginUI.Close();
-        OptionUI.Close();
-        ExitUI.Close();
+        LoginPanel.SetActive(false);
+        OptionPanel.SetActive(false);
+        ExitPanel.SetActive(false);
     }
 
     private void Update()
@@ -54,14 +54,20 @@ public class TitleUIController : BaseUI
     private void OpenUI(BaseUI _Ui)
     {
         if (_Ui == null) return;
-        //활성화되여있는 UI를 닫을려면
-        //if(uiStack.Count > 0)
-        //{
-        //    uiStack.Peek().gameObject.SetActive(false);
-        //}
+
         uiStack.Push(_Ui);
         _Ui.Open();
         SoundManager.Instance.PlaySFX(SFXType.ButtonClick);
+    }
+
+    public void OnClickStartButton()
+    {
+        if(LoginUI != null)
+        {
+            SoundManager.Instance.PlaySFX(SFXType.ButtonClick);
+
+            OpenUI(LoginUI);
+        }
     }
 
     public void OnClickCloseTopUI()

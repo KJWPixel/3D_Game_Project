@@ -11,11 +11,11 @@ public class GameSettings
     public float BackGroundVolume;
     //게임플레이 언어
     public int LanguageIndex;
-
+    public bool ShowFPS = false;
     public GameSettings()
     {
         Screen = 0; // Index
-        Resolution = 0; // Index
+        Resolution = 1; // Index
         FrameRate = 60;
         MasterVolume = 1f;
         EffectVolume = 1f;

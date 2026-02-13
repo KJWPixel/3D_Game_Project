@@ -310,9 +310,21 @@ public class EnemyBoss : EnemyCharacter
     }
     public void Die()
     {
+        if (CurrentState == BossState.DEAD) return;
+
         ChangeState(BossState.DEAD);
 
-        SoundManager.Instance.ApplyInGameBGM();
+        // [추가] 보스 체력바 숨기기
+        UIManager.Instance.HideBossHealth();
+
+        // [추가] BGM 복구
+        if (SoundManager.Instance != null)
+        {
+            SoundManager.Instance.ApplyInGameBGM();
+        }
+
+        // [추가] 투명벽 제거 등 이벤트 처리 (CameraControl에 알림)
+        GetComponentInChildren<BossCameraControl>()?.OnBossDefeated();
 
         Destroy(gameObject, 10.0f);
     }

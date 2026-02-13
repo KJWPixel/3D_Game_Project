@@ -32,7 +32,7 @@ MonoBehaviour:
     Power: 0
     HitCount: 0
     Duration: 0
-    Distance: 10
+    Distance: 15
     Radius: 0
     Length: 0
     Width: 0
@@ -42,6 +42,5 @@ MonoBehaviour:
   RequireLevel: 1
   RequireSP: 25
   PrerequisiteSkills: []
-  CurLevel: 0
   MaxLevel: 1
   AnimationName: IsTeleport

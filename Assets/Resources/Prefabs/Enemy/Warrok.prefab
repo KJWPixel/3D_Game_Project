@@ -103,13 +103,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Warrok
   id: 3
-  maxHp: 200
-  curHp: 200
+  maxHp: 359
+  curHp: 359
   walkSpeed: 0
   runningSpeed: 0
-  atk: 30
-  def: 15
+  atk: 55
+  def: 20
   attackRange: 0
+  gainGold: 500
   gainExp: 850
   IsIdle: 0
   IsWalk: 0
@@ -160,8 +161,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DropItemPrefab: {fileID: 4690846571101904909, guid: 9a10fa2c14be9b94c90e257bf1680c04, type: 3}
   DropItems:
-  - ItemData: {fileID: 0}
-    DropProbability: 0.3
+  - ItemData: {fileID: 11400000, guid: f472ccb34f29b4848b72e8a7be922984, type: 2}
+    DropProbability: 0.2
+  - ItemData: {fileID: 11400000, guid: f472ccb34f29b4848b72e8a7be922984, type: 2}
+    DropProbability: 0.2
+  - ItemData: {fileID: 11400000, guid: 38bfd37490e0bc742a278e83ce586752, type: 2}
+    DropProbability: 0.05
+  - ItemData: {fileID: 11400000, guid: 28ca3ff8da221e84d9f2f395178ad011, type: 2}
+    DropProbability: 0.05
+  - ItemData: {fileID: 11400000, guid: 9d294591c3810fb48bf2502b6c45bff3, type: 2}
+    DropProbability: 0.05
 --- !u!136 &6493194886934575626
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -21,7 +21,7 @@ MonoBehaviour:
   amount: 5
   questLevel: 1
   prerequisiteQuest: {fileID: 0}
-  targetArea: {fileID: 3798744142922605340, guid: 36061f78a76c2e042bcb40f47f22c16e, type: 3}
+  targetArea: {fileID: 915119919106572904, guid: 36061f78a76c2e042bcb40f47f22c16e, type: 3}
   questClassification: 1
   questClass: 0
   questCondition: 0

@@ -66,6 +66,26 @@ MonoBehaviour:
     m_Localized: Language
     m_Metadata:
       m_Items: []
+  - m_Id: 13444203654201344
+    m_Localized: Displaying the Frame
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13502268554395648
+    m_Localized: Full Screen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13502373261000704
+    m_Localized: Windowed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13502524566323200
+    m_Localized: Borderless
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13503296632832000
+    m_Localized: Unlimited
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

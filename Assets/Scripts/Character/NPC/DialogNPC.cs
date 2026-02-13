@@ -18,17 +18,23 @@ public class DialogNPC : NPCCharacter
     [SerializeField] public GameObject EventQuestMarker;
     [SerializeField] private GameObject currentQuestMarker;
 
+    [Header("Marker/Name Settings")]
+    [SerializeField] private float questVisibleDistance = 20f;
+    [SerializeField] private float nameVisibleDistance = 10f;
+    [SerializeField] private float checkInterval = 0.2f;
+
     [Header("상점 아이템 목록")]
     [SerializeField] public List<ItemData> itemDatas = new List<ItemData>();
 
+    private bool isAnyVisible = false;
+    private float sqrQuestDistance;
+    private float sqrNameDistance;
+
     private Camera MainCamera;
-
-    private bool isShowingMarker = false;
-    private float sqrNameDistance;        // Awake()에서 미리 제곱
-
     private void Awake()
     {
-        sqrNameDistance = NameDistance * NameDistance; 
+        sqrNameDistance = nameVisibleDistance * nameVisibleDistance;
+        sqrQuestDistance = questVisibleDistance * questVisibleDistance;
     }
 
     private void Start()
@@ -47,17 +53,30 @@ public class DialogNPC : NPCCharacter
 
 
         NPCSetup();
+
+        StartCoroutine(CheckDistanceRoutine());
     }
     private void Update()
     {
         Interact();
-        UpdateShowMarker();
+        //UpdateShowMarker(); //코루틴으로 처리
     }
 
     private void LateUpdate()
     {
-        //NPCNameOn();
-        //UpdateShowMarker();
+        if(isAnyVisible)
+        {
+            UpdateBillborad();
+        }
+    }
+
+    private IEnumerator CheckDistanceRoutine()
+    {
+        while (true)
+        {
+            UpdateShowMarker();
+            yield return new WaitForSeconds(checkInterval); 
+        }
     }
 
     private void NPCSetup()
@@ -129,34 +148,57 @@ public class DialogNPC : NPCCharacter
     {
         if(Player == null)
         {
-            if(isShowingMarker)
+            if(isAnyVisible)
             {
-                isShowingMarker = false;
+                DisableAllMarker();
+                return;
             }
             return;
         }
 
         float sqrDist = (transform.position - Player.transform.position).sqrMagnitude;
-        bool shouldShow = sqrDist < sqrNameDistance;
 
-        if(shouldShow != isShowingMarker)
+        // 각각 독립적으로 거리 계산
+        bool showQuest = currentQuestMarker != null && sqrDist < sqrQuestDistance;
+        bool showName = NPCMark != null && sqrDist < sqrNameDistance;
+
+        if (currentQuestMarker != null) currentQuestMarker.SetActive(showQuest);
+        if (NPCMark != null) NPCMark.SetActive(showName);
+
+        // 하나라도 켜져 있다면 LateUpdate에서 회전 처리를 하기 위해 기록
+        isAnyVisible = showQuest || showName;
+    }
+
+    private void UpdateBillborad()
+    {
+        if (MainCamera == null) return;
+
+        Quaternion targetRot = MainCamera.transform.rotation;
+
+        if(NPCMark != null && NPCMark.activeSelf)
         {
-            SetMarkerActive(shouldShow);
-            isShowingMarker = shouldShow; 
-        }   
-
-        // 회전은 네임, 마커가 보일 떄만
-        if(shouldShow)
-        {
-            NPCMark.transform.LookAt(MainCamera.transform);
-            NPCMark.transform.Rotate(0, 180, 0); //앞면으로 필요 시
-
-            if (currentQuestMarker != null)
-            {
-                currentQuestMarker.transform.LookAt(MainCamera.transform);
-                currentQuestMarker.transform.Rotate(0, 180, 0);
-            }           
+            NPCMark.transform.rotation = targetRot;
         }
+
+        if(currentQuestMarker != null && currentQuestMarker.activeSelf)
+        {
+            currentQuestMarker.transform.rotation = targetRot;
+        }
+    }
+
+    private void DisableAllMarker()
+    {
+        if (NPCMark != null)
+        {
+            NPCMark.SetActive(false);
+        }
+
+        if (currentQuestMarker != null)
+        {
+            currentQuestMarker.SetActive(false);
+        }
+
+        isAnyVisible = false;          
     }
 
     private void SetMarkerActive(bool active)

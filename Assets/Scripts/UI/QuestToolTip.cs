@@ -21,7 +21,7 @@ public class QuestToolTip : MonoBehaviour
 
     private void OnDisable()
     {
-        gameObject.SetActive(false);
+        ClearTooltip();
     }
 
     public void Setup(QuestInstance quest, QuestUI _UI)
@@ -44,5 +44,15 @@ public class QuestToolTip : MonoBehaviour
     public void OnClickQuestTracking()
     {
         QuestUI.OnClickTrackQuest(CurrentQuest);
+    }
+
+    public void ClearTooltip()
+    {
+        //텍스트를 빈 값으로 변경
+        QuestNameText.text = string.Empty;
+        QuestDescriptionText.text = string.Empty;
+        QuestRewordText.text += string.Empty;
+
+        CurrentQuest = null;
     }
 }
